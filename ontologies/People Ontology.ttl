@@ -486,7 +486,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :Corporation rdf:type owl:Class ;
              rdfs:subClassOf :Organization ;
              <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
-             <http://purl.org/dc/terms/created> "2025-03-11T15:20:49Z"^^xsd:dateTime .
+             <http://purl.org/dc/terms/created> "2025-03-11T15:20:49Z"^^xsd:dateTime ;
+             rdfs:label "Corporation" .
 
 
 ###  http://michaeldebellis.com/people/Daisys_Husband
@@ -681,7 +682,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :Organization rdf:type owl:Class ;
               rdfs:subClassOf :Agent ;
               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
-              <http://purl.org/dc/terms/created> "2025-03-11T15:20:16Z"^^xsd:dateTime .
+              <http://purl.org/dc/terms/created> "2025-03-11T15:20:16Z"^^xsd:dateTime ;
+              rdfs:label "Organization" .
 
 
 ###  http://michaeldebellis.com/people/Parent
@@ -762,7 +764,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :Research_Institute rdf:type owl:Class ;
                     rdfs:subClassOf :Organization ;
                     <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
-                    <http://purl.org/dc/terms/created> "2025-03-11T15:56:11Z"^^xsd:dateTime .
+                    <http://purl.org/dc/terms/created> "2025-03-11T15:56:11Z"^^xsd:dateTime ;
+                    rdfs:label "Research Institute" .
 
 
 ###  http://michaeldebellis.com/people/Rose
@@ -973,7 +976,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                         :has_Employer :Max_Planck_Institute_for_Infection_Biology ;
                         :nobel_Prize_Winner "true"^^xsd:boolean ;
                         <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
-                        <http://purl.org/dc/terms/created> "2025-03-11T15:56:58Z"^^xsd:dateTime .
+                        <http://purl.org/dc/terms/created> "2025-03-11T15:56:58Z"^^xsd:dateTime ;
+                        rdfs:label "Emmanuelle Charpentier" .
 
 
 ###  http://michaeldebellis.com/people/Eric_The_Fish
@@ -1064,7 +1068,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/Institute_For_Advanced_Study
 :Institute_For_Advanced_Study rdf:type owl:NamedIndividual ,
-                                       :University ;
+                                       :Research_Institute ;
                               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                               <http://purl.org/dc/terms/created> "2025-03-11T14:54:11Z"^^xsd:dateTime ;
                               rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Institute_for_Advanced_Study> ;
@@ -1195,7 +1199,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :Max_Planck_Institute_for_Infection_Biology rdf:type owl:NamedIndividual ,
                                                      :Research_Institute ;
                                             <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
-                                            <http://purl.org/dc/terms/created> "2025-03-11T15:56:34Z"^^xsd:dateTime .
+                                            <http://purl.org/dc/terms/created> "2025-03-11T15:56:34Z"^^xsd:dateTime ;
+                                            rdfs:label "Max Planck Institute for Infection Biology" .
 
 
 ###  http://michaeldebellis.com/people/Medium_Speed
@@ -1265,7 +1270,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :Rex rdf:type owl:NamedIndividual ,
               :Dog ;
      <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
-     <http://purl.org/dc/terms/created> "2025-03-11T16:00:25Z"^^xsd:dateTime .
+     <http://purl.org/dc/terms/created> "2025-03-11T16:00:25Z"^^xsd:dateTime ;
+     rdfs:label "Rex" .
 
 
 ###  http://michaeldebellis.com/people/Rosalind_Franklin
@@ -1347,7 +1353,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                 :Cat ;
        :has_Movement_Speed :Fast ;
        <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
-       <http://purl.org/dc/terms/created> "2025-03-11T15:59:59Z"^^xsd:dateTime .
+       <http://purl.org/dc/terms/created> "2025-03-11T15:59:59Z"^^xsd:dateTime ;
+       rdfs:label "Tiger" .
 
 
 ###  http://michaeldebellis.com/people/Tom_Buchanan

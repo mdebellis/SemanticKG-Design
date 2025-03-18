@@ -68,7 +68,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/has_Aunt
 :has_Aunt rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :has_Social_Relation_With ;
+          rdfs:subPropertyOf :has_Family_Relationship ;
+          owl:inverseOf :is_Aunt_Of ;
           rdfs:label "has aunt" .
 
 
@@ -84,7 +85,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/has_Child
 :has_Child rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :has_Social_Relation_With ;
+           rdfs:subPropertyOf :has_Family_Relationship ;
            owl:inverseOf :has_Parent ;
            rdfs:label "has child" .
 
@@ -98,12 +99,21 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
           rdfs:label "has city" .
 
 
+###  http://michaeldebellis.com/people/has_Colleague
+:has_Colleague rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :has_Social_Relationship ;
+               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+               <http://purl.org/dc/terms/created> "2025-03-17T23:00:55Z"^^xsd:dateTime ;
+               rdfs:label "has colleague" .
+
+
 ###  http://michaeldebellis.com/people/has_Daughter
 :has_Daughter rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf :has_Child ;
-              rdfs:range [ rdf:type owl:Restriction ;
-                           owl:onProperty :has_Gender ;
-                           owl:hasValue :Female
+              rdfs:range [ rdf:type owl:Class ;
+                           owl:unionOf ( :Girl
+                                         :Woman
+                                       )
                          ] ;
               rdfs:label "has daughter" .
 
@@ -118,6 +128,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
               rdfs:label "has employer" .
 
 
+###  http://michaeldebellis.com/people/has_Family_Relationship
+:has_Family_Relationship rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf :has_Social_Relationship ;
+                         <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                         <http://purl.org/dc/terms/created> "2025-03-17T23:13:04Z"^^xsd:dateTime ;
+                         rdfs:label "has family relationship" .
+
+
 ###  http://michaeldebellis.com/people/has_Father
 :has_Father rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :has_Parent ;
@@ -127,7 +145,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/has_Friend
 :has_Friend rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :has_Social_Relation_With ;
+            rdfs:subPropertyOf :has_Social_Relationship ;
             rdf:type owl:SymmetricProperty ;
             rdfs:label "has friend" .
 
@@ -143,11 +161,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/has_Husband
 :has_Husband rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :has_Spouse ;
-             owl:inverseOf :has_Wife ;
-             rdfs:range [ rdf:type owl:Restriction ;
-                          owl:onProperty :has_Gender ;
-                          owl:hasValue :Male
-                        ] ;
+             rdfs:range :Man ;
              rdfs:label "has husband" .
 
 
@@ -179,7 +193,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/has_Parent
 :has_Parent rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :has_Social_Relation_With ;
+            rdfs:subPropertyOf :has_Family_Relationship ;
             rdfs:label "has parent" .
 
 
@@ -193,7 +207,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/has_Sibling
 :has_Sibling rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :has_Social_Relation_With ;
+             rdfs:subPropertyOf :has_Family_Relationship ;
              rdf:type owl:SymmetricProperty ;
              rdfs:label "has sibling" .
 
@@ -208,27 +222,28 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
             rdfs:label "has sister" .
 
 
-###  http://michaeldebellis.com/people/has_Social_Relation_With
-:has_Social_Relation_With rdf:type owl:ObjectProperty ,
-                                   owl:SymmetricProperty ;
-                          rdfs:domain :Person ;
-                          rdfs:range :Person ;
-                          rdfs:label "has social relation with" .
+###  http://michaeldebellis.com/people/has_Social_Relationship
+:has_Social_Relationship rdf:type owl:ObjectProperty ,
+                                  owl:SymmetricProperty ;
+                         rdfs:domain :Person ;
+                         rdfs:range :Person ;
+                         rdfs:label "has social relationship" .
 
 
 ###  http://michaeldebellis.com/people/has_Son
 :has_Son rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :has_Child ;
-         rdfs:range [ rdf:type owl:Restriction ;
-                      owl:onProperty :has_Gender ;
-                      owl:hasValue :Male
+         rdfs:range [ rdf:type owl:Class ;
+                      owl:unionOf ( :Boy
+                                    :Man
+                                  )
                     ] ;
          rdfs:label "has son" .
 
 
 ###  http://michaeldebellis.com/people/has_Spouse
 :has_Spouse rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :has_Social_Relation_With ;
+            rdfs:subPropertyOf :has_Family_Relationship ;
             rdf:type owl:FunctionalProperty ,
                      owl:SymmetricProperty ;
             rdfs:domain :Adult ;
@@ -247,17 +262,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/has_Uncle
 :has_Uncle rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :has_Social_Relation_With ;
+           rdfs:subPropertyOf :has_Family_Relationship ;
+           owl:inverseOf :is_Uncle_Of ;
            rdfs:label "has uncle" .
 
 
 ###  http://michaeldebellis.com/people/has_Wife
 :has_Wife rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :has_Spouse ;
-          rdfs:range [ rdf:type owl:Restriction ;
-                       owl:onProperty :has_Gender ;
-                       owl:hasValue :Female
-                     ] ;
+          rdfs:range :Woman ;
           rdfs:label "has wife" .
 
 
@@ -266,6 +279,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                 <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                 <http://purl.org/dc/terms/created> "2025-03-07T04:52:50Z"^^xsd:dateTime ;
                 rdfs:label "is address for" .
+
+
+###  http://michaeldebellis.com/people/is_Aunt_Of
+:is_Aunt_Of rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :has_Family_Relationship ;
+            <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+            <http://purl.org/dc/terms/created> "2025-03-17T18:34:26Z"^^xsd:dateTime ;
+            rdfs:label "is aunt of" .
 
 
 ###  http://michaeldebellis.com/people/is_Contained_In
@@ -316,6 +337,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                 <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                 <http://purl.org/dc/terms/created> "2025-03-08T03:30:19Z"^^xsd:dateTime ;
                 rdfs:label "is slower than" .
+
+
+###  http://michaeldebellis.com/people/is_Uncle_Of
+:is_Uncle_Of rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :has_Family_Relationship ;
+             <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+             <http://purl.org/dc/terms/created> "2025-03-17T18:33:39Z"^^xsd:dateTime ;
+             rdfs:label "is uncle of" .
 
 
 #################################################################
@@ -592,7 +621,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :Hermit rdf:type owl:Class ;
         owl:equivalentClass [ owl:intersectionOf ( :Person
                                                    [ rdf:type owl:Restriction ;
-                                                     owl:onProperty :has_Social_Relation_With ;
+                                                     owl:onProperty :has_Social_Relationship ;
                                                      owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
                                                      owl:onClass :Person
                                                    ]
@@ -780,7 +809,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :Social_Person rdf:type owl:Class ;
                owl:equivalentClass [ owl:intersectionOf ( :Person
                                                           [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :has_Social_Relation_With ;
+                                                            owl:onProperty :has_Social_Relationship ;
                                                             owl:minQualifiedCardinality "5"^^xsd:nonNegativeInteger ;
                                                             owl:onClass :Person
                                                           ]
@@ -838,6 +867,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 #################################################################
 #    Individuals
 #################################################################
+
+###  http://michaeldebellis.com/people/Adam
+:Adam rdf:type owl:NamedIndividual ,
+               :Man ;
+      :has_Husband :Steve ;
+      <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+      <http://purl.org/dc/terms/created> "2025-03-14T23:02:03Z"^^xsd:dateTime .
+
 
 ###  http://michaeldebellis.com/people/Address_Of_Marlow_Detective_Agency
 :Address_Of_Marlow_Detective_Agency rdf:type owl:NamedIndividual ,
@@ -954,7 +991,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :Daisy_Buchanan rdf:type owl:NamedIndividual ,
                          :Person ;
                 :has_Friend :John_Doe ;
-                :has_Gender :Female ;
                 :age 32 ;
                 rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
                 rdfs:label "Daisy Buchanan" .
@@ -1083,6 +1119,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                                                 rdfs:label "James Gatz." .
 
 
+###  http://michaeldebellis.com/people/Jane_Smith
+:Jane_Smith rdf:type owl:NamedIndividual ,
+                     :Person ;
+            <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+            <http://purl.org/dc/terms/created> "2025-03-17T18:58:03Z"^^xsd:dateTime ;
+            rdfs:label "Jane Smith" .
+
+
 ###  http://michaeldebellis.com/people/Jay_Gatsby
 :Jay_Gatsby rdf:type owl:NamedIndividual ,
                      :Man ;
@@ -1102,6 +1146,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                  rdfs:label "Jennifer Doudna" .
 
 
+###  http://michaeldebellis.com/people/Jim_Doe
+:Jim_Doe rdf:type owl:NamedIndividual ,
+                  :Person ;
+         :has_Gender :Male ;
+         <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+         <http://purl.org/dc/terms/created> "2025-03-17T23:30:41Z"^^xsd:dateTime ;
+         rdfs:label "Jim Doe" .
+
+
 ###  http://michaeldebellis.com/people/John
 :John rdf:type owl:NamedIndividual ,
                :Human ;
@@ -1118,6 +1171,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
           :has_Daughter :Mary_Doe ;
           :has_Friend :John_Smith ;
           :has_Sister :Sarah_Doe ;
+          :has_Son :Jim_Doe ;
+          :has_Wife :Jane_Smith ;
           :age 34 ;
           rdfs:label "John Doe" .
 
@@ -1181,6 +1236,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/Mary_Doe
 :Mary_Doe rdf:type owl:NamedIndividual ,
                    :Person ;
+          :has_Mother :Jane_Smith ;
           :has_Sister :Susan_Doe ;
           rdfs:label "Mary Doe" .
 
@@ -1334,6 +1390,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
             rdfs:label "Stationary" .
 
 
+###  http://michaeldebellis.com/people/Steve
+:Steve rdf:type owl:NamedIndividual ,
+                :Man ;
+       <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+       <http://purl.org/dc/terms/created> "2025-03-14T23:02:09Z"^^xsd:dateTime .
+
+
 ###  http://michaeldebellis.com/people/Susan_Doe
 :Susan_Doe rdf:type owl:NamedIndividual ,
                     :Person ;
@@ -1444,7 +1507,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 <http://www.semanticweb.org/mdebe/ontologies/example#c> rdf:type swrl:Variable .
 
-<http://www.semanticweb.org/mdebe/ontologies/example#s> rdf:type swrl:Variable .
+:p rdf:type swrl:Variable .
+
+:c rdf:type swrl:Variable .
+
+:s rdf:type swrl:Variable .
 
 :address rdf:type swrl:Variable .
 
@@ -1486,14 +1553,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
    swrl:body [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate :has_Child ;
-                           swrl:argument1 <http://www.semanticweb.org/mdebe/ontologies/example#p> ;
-                           swrl:argument2 <http://www.semanticweb.org/mdebe/ontologies/example#c>
+                           swrl:argument1 :p ;
+                           swrl:argument2 :c
                          ] ;
                rdf:rest [ rdf:type swrl:AtomList ;
                           rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                                       swrl:propertyPredicate :has_Sister ;
-                                      swrl:argument1 <http://www.semanticweb.org/mdebe/ontologies/example#p> ;
-                                      swrl:argument2 <http://www.semanticweb.org/mdebe/ontologies/example#s>
+                                      swrl:argument1 :p ;
+                                      swrl:argument2 :s
                                     ] ;
                           rdf:rest rdf:nil
                         ]
@@ -1501,8 +1568,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
    swrl:head [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate :has_Aunt ;
-                           swrl:argument1 <http://www.semanticweb.org/mdebe/ontologies/example#c> ;
-                           swrl:argument2 <http://www.semanticweb.org/mdebe/ontologies/example#s>
+                           swrl:argument1 :c ;
+                           swrl:argument2 :s
                          ] ;
                rdf:rest rdf:nil
              ]

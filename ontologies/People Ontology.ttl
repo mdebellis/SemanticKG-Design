@@ -102,6 +102,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/has_Colleague
 :has_Colleague rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :has_Social_Relationship ;
+               rdf:type owl:SymmetricProperty ;
                <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                <http://purl.org/dc/terms/created> "2025-03-17T23:00:55Z"^^xsd:dateTime ;
                rdfs:label "has colleague" .
@@ -913,8 +914,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/Albert_Einstein
 :Albert_Einstein rdf:type owl:NamedIndividual ,
                           :Man ;
+                 :has_Colleague :Emmy_Noether ,
+                                :John_von_Neumann ;
                  :has_Employer :Institute_For_Advanced_Study ;
                  :has_Movement_Speed :Slow ;
+                 :has_Wife :Elsa_Einstein ;
                  :nobel_Prize_Winner "true"^^xsd:boolean ;
                  <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                  <http://purl.org/dc/terms/created> "2025-03-11T14:55:40Z"^^xsd:dateTime ;
@@ -1006,6 +1010,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                   rdfs:label "Dinsdale Piranha" .
 
 
+###  http://michaeldebellis.com/people/Elsa_Einstein
+:Elsa_Einstein rdf:type owl:NamedIndividual ,
+                        :Woman ;
+               :has_Husband :Albert_Einstein ;
+               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+               <http://purl.org/dc/terms/created> "2025-03-19T04:52:46Z"^^xsd:dateTime ;
+               rdfs:label "Elsa Einstein" .
+
+
 ###  http://michaeldebellis.com/people/Emmanuelle_Charpentier
 :Emmanuelle_Charpentier rdf:type owl:NamedIndividual ,
                                  :Woman ;
@@ -1014,6 +1027,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                         <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                         <http://purl.org/dc/terms/created> "2025-03-11T15:56:58Z"^^xsd:dateTime ;
                         rdfs:label "Emmanuelle Charpentier" .
+
+
+###  http://michaeldebellis.com/people/Emmy_Noether
+:Emmy_Noether rdf:type owl:NamedIndividual ,
+                       :Woman ;
+              :has_Friend :Albert_Einstein ;
+              <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+              <http://purl.org/dc/terms/created> "2025-03-19T04:49:57Z"^^xsd:dateTime ;
+              rdfs:label "Emmy Noether" .
 
 
 ###  http://michaeldebellis.com/people/Eric_The_Fish
@@ -1202,6 +1224,25 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                rdfs:label "Kings College" .
 
 
+###  http://michaeldebellis.com/people/Kurt_Godel
+:Kurt_Godel rdf:type owl:NamedIndividual ,
+                     :Man ;
+            :has_Colleague :Albert_Einstein ;
+            :has_Friend :Albert_Einstein ;
+            <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+            <http://purl.org/dc/terms/created> "2025-03-19T04:55:33Z"^^xsd:dateTime ;
+            rdfs:label "Kurt Gödel" .
+
+
+###  http://michaeldebellis.com/people/Lise_Meitner
+:Lise_Meitner rdf:type owl:NamedIndividual ,
+                       :Woman ;
+              :has_Colleague :Albert_Einstein ;
+              <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+              <http://purl.org/dc/terms/created> "2025-03-19T04:51:32Z"^^xsd:dateTime ;
+              rdfs:label "Lise Meitner" .
+
+
 ###  http://michaeldebellis.com/people/Los_Angeles
 :Los_Angeles rdf:type owl:NamedIndividual ,
                       :City ;
@@ -1276,6 +1317,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
          <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
          <http://purl.org/dc/terms/created> "2025-03-11T13:32:38Z"^^xsd:dateTime ;
          rdfs:label "Michael" .
+
+
+###  http://michaeldebellis.com/people/Michele_Besso
+:Michele_Besso rdf:type owl:NamedIndividual ,
+                        :Man ;
+               :has_Friend :Albert_Einstein ;
+               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+               <http://purl.org/dc/terms/created> "2025-03-19T04:57:07Z"^^xsd:dateTime ;
+               rdfs:label "Michele Besso" .
 
 
 ###  http://michaeldebellis.com/people/Miss_Havisham

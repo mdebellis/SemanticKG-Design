@@ -16,6 +16,13 @@
 #    Annotation properties
 #################################################################
 
+###  http://michaeldebellis.com/people/wikidata
+:wikidata rdf:type owl:AnnotationProperty ;
+          <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+          <http://purl.org/dc/terms/created> "2025-03-25T23:12:15Z"^^xsd:dateTime ;
+          rdfs:range xsd:anyURI .
+
+
 ###  http://purl.org/dc/terms/contributor
 <http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty .
 
@@ -76,9 +83,10 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/has_Brother
 :has_Brother rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :has_Sibling ;
-             rdfs:range [ rdf:type owl:Restriction ;
-                          owl:onProperty :has_Gender ;
-                          owl:hasValue :Male
+             rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( :Boy
+                                        :Man
+                                      )
                         ] ;
              rdfs:label "has brother" .
 
@@ -141,6 +149,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :has_Father rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :has_Parent ;
             rdfs:range :Man ;
+            :wikidata <https://www.wikidata.org/wiki/Q7565> ;
             rdfs:label "has father" .
 
 
@@ -152,8 +161,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 
 ###  http://michaeldebellis.com/people/has_Gender
-:has_Gender rdf:type owl:ObjectProperty ,
-                     owl:FunctionalProperty ;
+:has_Gender rdf:type owl:ObjectProperty ;
             rdfs:domain :Animal ;
             rdfs:range :Gender ;
             rdfs:label "has gender" .
@@ -180,6 +188,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :has_Mother rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :has_Parent ;
             rdfs:range :Woman ;
+            :wikidata <https://www.wikidata.org/wiki/Q7560> ;
             rdfs:label "has mother" .
 
 
@@ -261,6 +270,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
            rdfs:label "has state" .
 
 
+###  http://michaeldebellis.com/people/has_Subsidiary
+:has_Subsidiary rdf:type owl:ObjectProperty ;
+                owl:inverseOf :is_Subsidary_Of ;
+                <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                <http://purl.org/dc/terms/created> "2025-03-27T03:44:01Z"^^xsd:dateTime ;
+                rdfs:label "has subsidiary" .
+
+
 ###  http://michaeldebellis.com/people/has_Uncle
 :has_Uncle rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :has_Family_Relationship ;
@@ -340,6 +357,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                 rdfs:label "is slower than" .
 
 
+###  http://michaeldebellis.com/people/is_Subsidary_Of
+:is_Subsidary_Of rdf:type owl:ObjectProperty ;
+                 <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                 <http://purl.org/dc/terms/created> "2025-03-27T03:44:16Z"^^xsd:dateTime ;
+                 rdfs:label "is subsidary of" .
+
+
 ###  http://michaeldebellis.com/people/is_Uncle_Of
 :is_Uncle_Of rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :has_Family_Relationship ;
@@ -360,6 +384,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
      rdfs:label "age" ;
      skos:example 12 ,
                   32 .
+
+
+###  http://michaeldebellis.com/people/birth_Date
+:birth_Date rdf:type owl:DatatypeProperty ;
+            <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+            <http://purl.org/dc/terms/created> "2025-03-25T03:27:38Z"^^xsd:dateTime ;
+            rdfs:label "birth date" .
 
 
 ###  http://michaeldebellis.com/people/nobel_Prize_Winner
@@ -479,7 +510,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/Cat
 :Cat rdf:type owl:Class ;
      rdfs:subClassOf :Mammal ;
-     owl:disjointWith :Hedgehog ;
      <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
      <http://purl.org/dc/terms/created> "2025-03-08T03:21:56Z"^^xsd:dateTime ;
      rdfs:label "Cat" .
@@ -512,6 +542,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
       rdfs:label "City" .
 
 
+###  http://michaeldebellis.com/people/Continent
+:Continent rdf:type owl:Class ;
+           rdfs:subClassOf :Place ;
+           <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+           <http://purl.org/dc/terms/created> "2025-03-24T16:58:34Z"^^xsd:dateTime ;
+           rdfs:label "Continent" .
+
+
 ###  http://michaeldebellis.com/people/Corporation
 :Corporation rdf:type owl:Class ;
              rdfs:subClassOf :Organization ;
@@ -520,28 +558,33 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
              rdfs:label "Corporation" .
 
 
-###  http://michaeldebellis.com/people/Daisys_Husband
-:Daisys_Husband rdf:type owl:Class ;
-                owl:equivalentClass [ owl:intersectionOf ( :Man
-                                                           [ rdf:type owl:Restriction ;
-                                                             owl:onProperty :has_Wife ;
-                                                             owl:hasValue :Daisy_Buchanan
-                                                           ]
-                                                         ) ;
-                                      rdf:type owl:Class
-                                    ] ;
-                rdfs:subClassOf :Man ;
-                rdfs:label "Daisys Husband" .
+###  http://michaeldebellis.com/people/Division
+:Division rdf:type owl:Class ;
+          rdfs:subClassOf :Operating_Unit ;
+          <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+          <http://purl.org/dc/terms/created> "2025-03-27T03:36:43Z"^^xsd:dateTime ;
+          rdfs:label "Division" .
 
 
 ###  http://michaeldebellis.com/people/Dog
 :Dog rdf:type owl:Class ;
      rdfs:subClassOf :Mammal ;
-     owl:disjointWith :Fish ,
-                      :Hedgehog ;
      <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
      <http://purl.org/dc/terms/created> "2025-03-08T03:21:56Z"^^xsd:dateTime ;
      rdfs:label "Dog" .
+
+
+###  http://michaeldebellis.com/people/Einsteins_Wife
+:Einsteins_Wife rdf:type owl:Class ;
+                owl:equivalentClass [ owl:intersectionOf ( :Woman
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :has_Husband ;
+                                                             owl:hasValue :Albert_Einstein
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ;
+                rdfs:label "Einstein's Wife" .
 
 
 ###  http://michaeldebellis.com/people/Fish
@@ -659,7 +702,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/Living_Thing
 :Living_Thing rdf:type owl:Class ;
-              owl:disjointWith :Movement_Speed ;
               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
               <http://purl.org/dc/terms/created> "2025-03-08T03:19:49Z"^^xsd:dateTime ;
               rdfs:label "Living Thing" .
@@ -708,9 +750,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
         rdfs:label "Nation" .
 
 
+###  http://michaeldebellis.com/people/Operating_Unit
+:Operating_Unit rdf:type owl:Class ;
+                rdfs:subClassOf :Organization ;
+                <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                <http://purl.org/dc/terms/created> "2025-03-27T03:40:50Z"^^xsd:dateTime ;
+                rdfs:label "Operating Unit" .
+
+
 ###  http://michaeldebellis.com/people/Organization
 :Organization rdf:type owl:Class ;
               rdfs:subClassOf :Agent ;
+              :wikidata <https://www.wikidata.org/wiki/Q43229> ;
               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
               <http://purl.org/dc/terms/created> "2025-03-11T15:20:16Z"^^xsd:dateTime ;
               rdfs:label "Organization" .
@@ -782,6 +833,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
           rdfs:label "Province" .
 
 
+###  http://michaeldebellis.com/people/Region
+:Region rdf:type owl:Class ;
+        rdfs:subClassOf :Operating_Unit ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :is_Subsidary_Of ;
+                          owl:allValuesFrom :Operating_Unit
+                        ] ;
+        <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+        <http://purl.org/dc/terms/created> "2025-03-27T03:36:43Z"^^xsd:dateTime ;
+        rdfs:label "Region" .
+
+
 ###  http://michaeldebellis.com/people/Reptile
 :Reptile rdf:type owl:Class ;
          rdfs:subClassOf :Vertebrate ;
@@ -804,6 +867,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
       <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
       <http://purl.org/dc/terms/created> "2025-03-08T03:58:51Z"^^xsd:dateTime ;
       rdfs:label "Rose" .
+
+
+###  http://michaeldebellis.com/people/Sales_Office
+:Sales_Office rdf:type owl:Class ;
+              rdfs:subClassOf :Operating_Unit ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :is_Subsidary_Of ;
+                                owl:allValuesFrom :Division
+                              ] ;
+              <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+              <http://purl.org/dc/terms/created> "2025-03-27T03:36:43Z"^^xsd:dateTime ;
+              rdfs:label "Sales Office" .
 
 
 ###  http://michaeldebellis.com/people/Social_Person
@@ -890,6 +965,16 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                                     rdfs:label "Address Of Marlow Detective Agency" .
 
 
+###  http://michaeldebellis.com/people/Address_Of_Sherlock_Holmes
+:Address_Of_Sherlock_Holmes rdf:type owl:NamedIndividual ,
+                                     :Address ;
+                            :has_City :London ;
+                            :street "221B Baker Street" ;
+                            <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                            <http://purl.org/dc/terms/created> "2025-03-24T17:13:56Z"^^xsd:dateTime ;
+                            rdfs:label "Address Of Sherlock Holmes" .
+
+
 ###  http://michaeldebellis.com/people/Address_Of_Spade_Detective_Agency
 :Address_Of_Spade_Detective_Agency rdf:type owl:NamedIndividual ,
                                             :Address ;
@@ -900,6 +985,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                                    <http://purl.org/dc/terms/created> "2025-03-08T04:51:02Z"^^xsd:dateTime ;
                                    rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Maltese_Falcon_(novel)> ;
                                    rdfs:label "Address Of Spade Detective Agency" .
+
+
+###  http://michaeldebellis.com/people/Africa
+:Africa rdf:type owl:NamedIndividual ,
+                 :Continent ;
+        <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+        <http://purl.org/dc/terms/created> "2025-03-24T17:06:51Z"^^xsd:dateTime .
 
 
 ###  http://michaeldebellis.com/people/Alan_Turing
@@ -920,6 +1012,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                  :has_Movement_Speed :Slow ;
                  :has_Wife :Elsa_Einstein ;
                  :nobel_Prize_Winner "true"^^xsd:boolean ;
+                 :wikidata <https://www.wikidata.org/wiki/Q937> ;
                  <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                  <http://purl.org/dc/terms/created> "2025-03-11T14:55:40Z"^^xsd:dateTime ;
                  rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Albert_Einstein> ;
@@ -936,6 +1029,22 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
          rdfs:label "Allison" .
 
 
+###  http://michaeldebellis.com/people/Alma_Mahler
+:Alma_Mahler rdf:type owl:NamedIndividual ,
+                      :Woman ;
+             <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+             <http://purl.org/dc/terms/created> "2025-03-22T02:44:36Z"^^xsd:dateTime ;
+             rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Alma_Mahler> ;
+             rdfs:label "Alma Mahler" .
+
+
+###  http://michaeldebellis.com/people/Antarctica
+:Antarctica rdf:type owl:NamedIndividual ,
+                     :Continent ;
+            <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+            <http://purl.org/dc/terms/created> "2025-03-24T17:00:17Z"^^xsd:dateTime .
+
+
 ###  http://michaeldebellis.com/people/Ash
 :Ash rdf:type owl:NamedIndividual ,
               :Cat ;
@@ -945,6 +1054,39 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
      rdfs:label "Ash" .
 
 
+###  http://michaeldebellis.com/people/Asia
+:Asia rdf:type owl:NamedIndividual ,
+               :Continent ;
+      <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+      <http://purl.org/dc/terms/created> "2025-03-24T17:00:24Z"^^xsd:dateTime .
+
+
+###  http://michaeldebellis.com/people/Australia
+:Australia rdf:type owl:NamedIndividual ,
+                    :Continent ;
+           <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+           <http://purl.org/dc/terms/created> "2025-03-24T16:59:21Z"^^xsd:dateTime .
+
+
+###  http://michaeldebellis.com/people/Aviva_Chomsky
+:Aviva_Chomsky rdf:type owl:NamedIndividual ,
+                        :Woman ;
+               :has_Father :Noam_Chomsky ;
+               :birth_Date "1957-04-20T00:00:00Z"^^xsd:dateTimeStamp ;
+               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+               <http://purl.org/dc/terms/created> "2025-03-25T03:26:11Z"^^xsd:dateTime ;
+               rdfs:label "Aviva Chomsky" .
+
+
+###  http://michaeldebellis.com/people/Baha_ud-Din_Walad
+:Baha_ud-Din_Walad rdf:type owl:NamedIndividual ,
+                            :Man ;
+                   :has_Son :Rumi ;
+                   <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                   <http://purl.org/dc/terms/created> "2025-03-25T15:25:43Z"^^xsd:dateTime ;
+                   rdfs:label "Baha ud-Din Walad" .
+
+
 ###  http://michaeldebellis.com/people/Bell_Labs
 :Bell_Labs rdf:type owl:NamedIndividual ,
                     :Corporation ;
@@ -952,6 +1094,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
            <http://purl.org/dc/terms/created> "2025-03-11T14:58:47Z"^^xsd:dateTime ;
            rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Bell_Labs> ;
            rdfs:label "Bell Labs" .
+
+
+###  http://michaeldebellis.com/people/Brazil
+:Brazil rdf:type owl:NamedIndividual ,
+                 :Nation ;
+        <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+        <http://purl.org/dc/terms/created> "2025-03-24T17:07:41Z"^^xsd:dateTime .
 
 
 ###  http://michaeldebellis.com/people/Buddy
@@ -991,10 +1140,19 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                 rdfs:label "Claude Shannon" .
 
 
+###  http://michaeldebellis.com/people/Confucius
+:Confucius rdf:type owl:NamedIndividual ,
+                    :Man ;
+           :wikidata <https://www.wikidata.org/wiki/Q21189283> ;
+           <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+           <http://purl.org/dc/terms/created> "2025-03-25T15:28:18Z"^^xsd:dateTime .
+
+
 ###  http://michaeldebellis.com/people/Daisy_Buchanan
 :Daisy_Buchanan rdf:type owl:NamedIndividual ,
                          :Person ;
                 :has_Friend :John_Doe ;
+                :has_Husband :Tom_Buchanan ;
                 :age 32 ;
                 rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
                 rdfs:label "Daisy Buchanan" .
@@ -1008,6 +1166,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                   <http://purl.org/dc/terms/created> "2025-03-11T13:52:22Z"^^xsd:dateTime ;
                   rdfs:isDefinedBy <https://www.youtube.com/watch?v=8ZkWL-XvO0U> ;
                   rdfs:label "Dinsdale Piranha" .
+
+
+###  http://michaeldebellis.com/people/Ellis_Arthur_Franklin
+:Ellis_Arthur_Franklin rdf:type owl:NamedIndividual ,
+                                :Man ;
+                       <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                       <http://purl.org/dc/terms/created> "2025-03-22T02:59:19Z"^^xsd:dateTime ;
+                       rdfs:label "Ellis Arthur Franklin" .
 
 
 ###  http://michaeldebellis.com/people/Elsa_Einstein
@@ -1047,6 +1213,23 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                rdfs:label "Eric The Fish" .
 
 
+###  http://michaeldebellis.com/people/Europe
+:Europe rdf:type owl:NamedIndividual ,
+                 :Continent ;
+        :contains :United_Kingdom ;
+        <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+        <http://purl.org/dc/terms/created> "2025-03-24T16:58:55Z"^^xsd:dateTime .
+
+
+###  http://michaeldebellis.com/people/Evelyn_Mase
+:Evelyn_Mase rdf:type owl:NamedIndividual ,
+                      :Woman ;
+             :has_Husband :Nelson_Mandela ;
+             <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+             <http://purl.org/dc/terms/created> "2025-03-25T15:24:05Z"^^xsd:dateTime ;
+             rdfs:label "Evelyn Mase" .
+
+
 ###  http://michaeldebellis.com/people/Fast
 :Fast rdf:type owl:NamedIndividual ,
                :Movement_Speed ;
@@ -1077,6 +1260,16 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
               <http://purl.org/dc/terms/created> "2025-03-11T15:31:53Z"^^xsd:dateTime ;
               rdfs:label "Grace Hopper" .
+
+
+###  http://michaeldebellis.com/people/Gustav_Mahler
+:Gustav_Mahler rdf:type owl:NamedIndividual ,
+                        :Man ;
+               :has_Wife :Alma_Mahler ;
+               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+               <http://purl.org/dc/terms/created> "2025-03-22T02:46:03Z"^^xsd:dateTime ;
+               rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Gustav_Mahler> ;
+               rdfs:label "Gustav Mahler" .
 
 
 ###  http://michaeldebellis.com/people/Harvard_University
@@ -1135,10 +1328,22 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/James_Gatz.
 <http://michaeldebellis.com/people/James_Gatz.> rdf:type owl:NamedIndividual ;
+                                                owl:sameAs :Jay_Gatsby ;
+                                                :has_Father :HenryCGatz ;
                                                 <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                                                 <http://purl.org/dc/terms/created> "2024-11-05T01:13:42Z"^^xsd:dateTime ;
                                                 rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
                                                 rdfs:label "James Gatz." .
+
+
+###  http://michaeldebellis.com/people/Jay_Gatsby
+
+###  http://michaeldebellis.com/people/Janaki_Ammal
+:Janaki_Ammal rdf:type owl:NamedIndividual ,
+                       :Woman ;
+              <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+              <http://purl.org/dc/terms/created> "2025-03-25T03:30:00Z"^^xsd:dateTime ;
+              rdfs:label "Janaki Ammal" .
 
 
 ###  http://michaeldebellis.com/people/Jane_Smith
@@ -1152,6 +1357,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/Jay_Gatsby
 :Jay_Gatsby rdf:type owl:NamedIndividual ,
                      :Man ;
+            :has_Friend :Nick_Carraway ;
+            :wikidata <https://www.wikidata.org/wiki/Q7048121> ;
             <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
             <http://purl.org/dc/terms/created> "2025-03-08T05:21:37Z"^^xsd:dateTime ;
             rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
@@ -1224,6 +1431,16 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                rdfs:label "Kings College" .
 
 
+###  http://michaeldebellis.com/people/Kong_Li
+:Kong_Li rdf:type owl:NamedIndividual ,
+                  :Man ;
+         :has_Father :Confucius ;
+         :wikidata <https://www.wikidata.org/wiki/Q7240164> ;
+         <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+         <http://purl.org/dc/terms/created> "2025-03-25T15:28:41Z"^^xsd:dateTime ;
+         rdfs:label "Kong Li" .
+
+
 ###  http://michaeldebellis.com/people/Kurt_Godel
 :Kurt_Godel rdf:type owl:NamedIndividual ,
                      :Man ;
@@ -1241,6 +1458,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
               <http://purl.org/dc/terms/created> "2025-03-19T04:51:32Z"^^xsd:dateTime ;
               rdfs:label "Lise Meitner" .
+
+
+###  http://michaeldebellis.com/people/London
+:London rdf:type owl:NamedIndividual ,
+                 :City ;
+        <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+        <http://purl.org/dc/terms/created> "2025-03-24T17:15:32Z"^^xsd:dateTime .
 
 
 ###  http://michaeldebellis.com/people/Los_Angeles
@@ -1337,6 +1561,24 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                rdfs:label "Miss Havisham" .
 
 
+###  http://michaeldebellis.com/people/Muriel_Frances_Waley
+:Muriel_Frances_Waley rdf:type owl:NamedIndividual ,
+                               :Woman ;
+                      :has_Daughter :Rosalind_Franklin ;
+                      :has_Husband :Ellis_Arthur_Franklin ;
+                      <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                      <http://purl.org/dc/terms/created> "2025-03-22T02:58:03Z"^^xsd:dateTime ;
+                      rdfs:label "Muriel Frances Waley" .
+
+
+###  http://michaeldebellis.com/people/Nelson_Mandela
+:Nelson_Mandela rdf:type owl:NamedIndividual ,
+                         :Man ;
+                <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                <http://purl.org/dc/terms/created> "2025-03-25T15:23:15Z"^^xsd:dateTime ;
+                rdfs:label "Nelson Mandela" .
+
+
 ###  http://michaeldebellis.com/people/Nick_Carraway
 :Nick_Carraway rdf:type owl:NamedIndividual ,
                         :Person ;
@@ -1348,6 +1590,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/Noam_Chomsky
 :Noam_Chomsky rdf:type owl:NamedIndividual ,
                        :Man ;
+              :age 96 ;
+              :wikidata <https://www.wikidata.org/wiki/Q112150900> ;
               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
               <http://purl.org/dc/terms/created> "2025-03-11T15:06:08Z"^^xsd:dateTime ;
               rdfs:isDefinedBy <https://chomsky.info/> ;
@@ -1360,6 +1604,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
             <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
             <http://purl.org/dc/terms/created> "2025-03-07T00:28:05Z"^^xsd:dateTime ;
             rdfs:label "Non Binary" .
+
+
+###  http://michaeldebellis.com/people/North_America
+:North_America rdf:type owl:NamedIndividual ,
+                        :Continent ;
+               :contains :USA ;
+               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+               <http://purl.org/dc/terms/created> "2025-03-24T16:59:03Z"^^xsd:dateTime ;
+               rdfs:label "North America" .
 
 
 ###  http://michaeldebellis.com/people/Philip_Marlowe
@@ -1385,7 +1638,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                             :Woman ;
                    <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                    <http://purl.org/dc/terms/created> "2025-03-11T15:43:01Z"^^xsd:dateTime ;
+                   rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Rosalind_Franklin> ;
                    rdfs:label "Rosalind Franklin" .
+
+
+###  http://michaeldebellis.com/people/Rumi
+:Rumi rdf:type owl:NamedIndividual ,
+               :Man ;
+      <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+      <http://purl.org/dc/terms/created> "2025-03-25T15:27:17Z"^^xsd:dateTime .
 
 
 ###  http://michaeldebellis.com/people/Sam_Spade
@@ -1413,6 +1674,16 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
            rdfs:label "Sarah Doe" .
 
 
+###  http://michaeldebellis.com/people/Sherlock_Holmes
+:Sherlock_Holmes rdf:type owl:NamedIndividual ,
+                          :Man ;
+                 :has_Address :Address_Of_Sherlock_Holmes ;
+                 :wikidata <https://www.wikidata.org/wiki/Q3481944> ;
+                 <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                 <http://purl.org/dc/terms/created> "2025-03-25T23:27:23Z"^^xsd:dateTime ;
+                 rdfs:label "Sherlock Holmes" .
+
+
 ###  http://michaeldebellis.com/people/Slow
 :Slow rdf:type owl:NamedIndividual ,
                :Movement_Speed ;
@@ -1422,14 +1693,32 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
       rdfs:label "Slow" .
 
 
+###  http://michaeldebellis.com/people/South_America
+:South_America rdf:type owl:NamedIndividual ,
+                        :Continent ;
+               :contains :Brazil ;
+               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+               <http://purl.org/dc/terms/created> "2025-03-24T16:59:13Z"^^xsd:dateTime ;
+               rdfs:label "South America" .
+
+
 ###  http://michaeldebellis.com/people/Spiny_Norman
 :Spiny_Norman rdf:type owl:NamedIndividual ,
                        :Hedgehog ;
               :has_Movement_Speed :Medium_Speed ;
+              :wikidata <https://www.wikidata.org/wiki/Q7569306> ;
               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
               <http://purl.org/dc/terms/created> "2025-03-08T03:39:55Z"^^xsd:dateTime ;
               rdfs:isDefinedBy <https://www.youtube.com/watch?v=8ZkWL-XvO0U> ;
               rdfs:label "Spiny Norman" .
+
+
+###  http://michaeldebellis.com/people/Srinivasa_Ramanujan
+:Srinivasa_Ramanujan rdf:type owl:NamedIndividual ,
+                              :Man ;
+                     <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                     <http://purl.org/dc/terms/created> "2025-03-25T03:30:48Z"^^xsd:dateTime ;
+                     rdfs:label "Srinivasa Ramanujan" .
 
 
 ###  http://michaeldebellis.com/people/Stationary
@@ -1488,9 +1777,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
               :Nation ;
      :contains :California ,
                :Illinois ;
+     :wikidata <https://www.wikidata.org/wiki/Q30> ;
      <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
      <http://purl.org/dc/terms/created> "2025-03-08T04:32:02Z"^^xsd:dateTime ;
      rdfs:label "USA" .
+
+
+###  http://michaeldebellis.com/people/United_Kingdom
+:United_Kingdom rdf:type owl:NamedIndividual ,
+                         :Nation ;
+                :contains :London ;
+                <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+                <http://purl.org/dc/terms/created> "2025-03-24T17:07:25Z"^^xsd:dateTime .
 
 
 ###  http://michaeldebellis.com/people/University_of_California_Berkeley
@@ -1511,6 +1809,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                           rdfs:label "University of Manchester" .
 
 
+###  http://michaeldebellis.com/people/Whiskers
+:Whiskers rdf:type owl:NamedIndividual ,
+                   :Cat ,
+                   :Pet ;
+          <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+          <http://purl.org/dc/terms/created> "2025-03-24T19:22:52Z"^^xsd:dateTime .
+
+
 #################################################################
 #    Annotations
 #################################################################
@@ -1523,7 +1829,17 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Agent
+                :Gender
+                :Movement_Speed
+                :Place
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
   owl:members ( :Bird
+                :Fish
                 :Mammal
                 :Reptile
               )
@@ -1533,6 +1849,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( :Cat
                 :Dog
+                :Hedgehog
                 :Human
               )
 ] .
@@ -1543,6 +1860,17 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                 :Nation
                 :Province
                 :State
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Corporation
+                :Division
+                :Region
+                :Research_Institute
+                :Sales_Office
+                :University
               )
 ] .
 

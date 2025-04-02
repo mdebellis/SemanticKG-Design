@@ -23,12 +23,41 @@
           rdfs:range xsd:anyURI .
 
 
+###  http://purl.org/dc/terms/abstract
+<http://purl.org/dc/terms/abstract> rdf:type owl:AnnotationProperty ;
+                                    rdfs:label "abstract" ;
+                                    skos:definition "A summary of the resource." .
+
+
 ###  http://purl.org/dc/terms/contributor
-<http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty .
+<http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty ;
+                                       rdfs:comment "The guidelines for using names of persons or organizations as creators apply to contributors." ;
+                                       rdfs:label "contributor" ;
+                                       skos:definition "An entity responsible for making contributions to the resource." .
 
 
 ###  http://purl.org/dc/terms/created
 <http://purl.org/dc/terms/created> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty ;
+                                   rdfs:comment "Recommended practice is to identify the creator with a URI. If this is not possible or feasible, a literal value that identifies the creator may be provided." ;
+                                   rdfs:label "creator" ;
+                                   skos:definition "An entity responsible for making the resource." .
+
+
+###  http://purl.org/dc/terms/subject
+<http://purl.org/dc/terms/subject> rdf:type owl:AnnotationProperty ;
+                                   rdfs:comment "Recommended practice is to refer to the subject with a URI. If this is not possible or feasible, a literal value that identifies the subject may be provided. Both should preferably refer to a subject in a controlled vocabulary." ;
+                                   rdfs:label "subject" ;
+                                   skos:definition "A topic of the resource." .
+
+
+###  http://purl.org/dc/terms/title
+<http://purl.org/dc/terms/title> rdf:type owl:AnnotationProperty ;
+                                 rdfs:label "title" ;
+                                 skos:definition "A name given to the resource." .
 
 
 ###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
@@ -36,15 +65,49 @@ swrla:isRuleEnabled rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.w3.org/2004/02/skos/core#altLabel
-skos:altLabel rdf:type owl:AnnotationProperty .
+skos:altLabel rdf:type owl:AnnotationProperty ;
+              rdfs:isDefinedBy <https://www.w3.org/2012/09/odrl/semantic/draft/doco/http___www.w3.org_2004_02_skos_core.html> ;
+              rdfs:label "alternative label"@en ;
+              skos:definition "An alternative lexical label for a resource." ;
+              skos:example "Acronyms, abbreviations, spelling variants, and irregular plural/singular forms may be included among the alternative labels for a concept. Mis-spelled terms are normally included as hidden labels (see skos:hiddenLabel)." ;
+              rdfs:subPropertyOf rdfs:label .
+
+
+###  http://www.w3.org/2004/02/skos/core#changeNote
+skos:changeNote rdf:type owl:AnnotationProperty ;
+                rdfs:label "change note"@en ;
+                skos:definition "A note about a modification to a concept." ;
+                rdfs:subPropertyOf skos:note .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty ;
+                rdfs:label "definition"@en ;
+                skos:definition "A statement or formal explanation of the meaning of a concept." ;
+                rdfs:subPropertyOf skos:note .
 
 
 ###  http://www.w3.org/2004/02/skos/core#example
-skos:example rdf:type owl:AnnotationProperty .
+skos:example rdf:type owl:AnnotationProperty ;
+             rdfs:label "example"@en ;
+             skos:definition "An example of the use of a concept." ;
+             rdfs:subPropertyOf skos:note .
+
+
+###  http://www.w3.org/2004/02/skos/core#note
+skos:note rdf:type owl:AnnotationProperty ;
+          rdfs:isDefinedBy <https://www.w3.org/2012/09/odrl/semantic/draft/doco/http___www.w3.org_2004_02_skos_core.html> ;
+          rdfs:label "note"@en ;
+          skos:definition "A general note, for any purpose."@en .
 
 
 ###  http://www.w3.org/2004/02/skos/core#prefLabel
-skos:prefLabel rdf:type owl:AnnotationProperty .
+skos:prefLabel rdf:type owl:AnnotationProperty ;
+               rdfs:comment "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise disjoint properties.	The range of skos:prefLabel is the class of RDF plain literals. A resource has no more than one value of skos:prefLabel per language tag." ;
+               rdfs:isDefinedBy <https://www.w3.org/2012/09/odrl/semantic/draft/doco/http___www.w3.org_2004_02_skos_core.html> ;
+               rdfs:label "preferred label"@en ;
+               skos:definition "The preferred lexical label for a resource, in a given language." ;
+               rdfs:subPropertyOf rdfs:label .
 
 
 #################################################################
@@ -979,7 +1042,9 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/Adam
 :Adam rdf:type owl:NamedIndividual ,
                :Man ;
+      owl:differentFrom :Steve ;
       :has_Husband :Steve ;
+      :age 23 ;
       <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
       <http://purl.org/dc/terms/created> "2025-03-14T23:02:03Z"^^xsd:dateTime ;
       rdfs:label "Adam" .
@@ -1042,9 +1107,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                           :Man ;
                  :has_Colleague :Emmy_Noether ,
                                 :John_von_Neumann ;
-                 :has_Employer :Institute_For_Advanced_Study ;
                  :has_Movement_Speed :Slow ;
-                 :has_Wife :Elsa_Einstein ;
                  :nobel_Prize_Winner "true"^^xsd:boolean ;
                  :wikidata <https://www.wikidata.org/wiki/Q937> ;
                  <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
@@ -1055,9 +1118,10 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/Allison
 :Allison rdf:type owl:NamedIndividual ,
-                  :Human ,
-                  :Woman ;
+                  :Human ;
+         :has_Gender :Female ;
          :has_Pet :Ash ;
+         :age 28 ;
          <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
          <http://purl.org/dc/terms/created> "2025-03-08T03:40:51Z"^^xsd:dateTime ;
          rdfs:label "Allison" .
@@ -1325,7 +1389,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :HenryCGatz rdf:type owl:NamedIndividual ,
                      :Man ;
             :has_Pet :Fido ;
-            :has_Son <http://michaeldebellis.com/people/James_Gatz.> ;
             <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
             <http://purl.org/dc/terms/created> "2024-11-05T01:14:38Z"^^xsd:dateTime ;
             rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
@@ -1361,20 +1424,20 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/Institute_For_Advanced_Study
 :Institute_For_Advanced_Study rdf:type owl:NamedIndividual ,
                                        :Research_Institute ;
+                              :is_Employer_Of :Albert_Einstein ;
                               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                               <http://purl.org/dc/terms/created> "2025-03-11T14:54:11Z"^^xsd:dateTime ;
                               rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Institute_for_Advanced_Study> ;
                               rdfs:label "Institute For Advanced Study" .
 
 
-###  http://michaeldebellis.com/people/James_Gatz.
-<http://michaeldebellis.com/people/James_Gatz.> rdf:type owl:NamedIndividual ;
-                                                owl:sameAs :Jay_Gatsby ;
-                                                :has_Father :HenryCGatz ;
-                                                <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
-                                                <http://purl.org/dc/terms/created> "2024-11-05T01:13:42Z"^^xsd:dateTime ;
-                                                rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
-                                                rdfs:label "James Gatz." .
+###  http://michaeldebellis.com/people/James_Gatz
+:James_Gatz rdf:type owl:NamedIndividual ;
+            owl:sameAs :Jay_Gatsby ;
+            :has_Father :HenryCGatz ;
+            <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+            <http://purl.org/dc/terms/created> "2025-04-01T23:13:11Z"^^xsd:dateTime ;
+            rdfs:label "James Gatz" .
 
 
 ###  http://michaeldebellis.com/people/Jay_Gatsby
@@ -1398,7 +1461,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 ###  http://michaeldebellis.com/people/Jay_Gatsby
 :Jay_Gatsby rdf:type owl:NamedIndividual ,
                      :Man ;
+            owl:differentFrom :Jordan_Baker ;
             :has_Friend :Nick_Carraway ;
+            :has_Social_Relationship :Daisy_Buchanan ,
+                                     :Jordan_Baker ,
+                                     :Tom_Buchanan ;
             :wikidata <https://www.wikidata.org/wiki/Q7048121> ;
             <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
             <http://purl.org/dc/terms/created> "2025-03-08T05:21:37Z"^^xsd:dateTime ;
@@ -1420,6 +1487,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 :Jim_Doe rdf:type owl:NamedIndividual ,
                   :Person ;
          :has_Gender :Male ;
+         :age 12 ;
          <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
          <http://purl.org/dc/terms/created> "2025-03-17T23:30:41Z"^^xsd:dateTime ;
          rdfs:label "Jim Doe" .
@@ -1462,6 +1530,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                   <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                   <http://purl.org/dc/terms/created> "2025-03-11T15:28:44Z"^^xsd:dateTime ;
                   rdfs:label "John von Neumann" .
+
+
+###  http://michaeldebellis.com/people/Jordan_Baker
+:Jordan_Baker rdf:type owl:NamedIndividual ,
+                       :Person ;
+              :has_Friend :Daisy_Buchanan ;
+              <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
+              <http://purl.org/dc/terms/created> "2025-04-02T01:26:00Z"^^xsd:dateTime .
 
 
 ###  http://michaeldebellis.com/people/Kings_College
@@ -1545,6 +1621,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                    :Person ;
           :has_Mother :Jane_Smith ;
           :has_Sister :Susan_Doe ;
+          :age 16 ;
           rdfs:label "Mary Doe" .
 
 
@@ -1631,7 +1708,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 ###  http://michaeldebellis.com/people/Noam_Chomsky
 :Noam_Chomsky rdf:type owl:NamedIndividual ,
-                       :Man ;
+                       :Person ;
               :age 96 ;
               :wikidata <https://www.wikidata.org/wiki/Q112150900> ;
               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
@@ -1918,6 +1995,39 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
                 :Sales_Office
                 :University
               )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :Albert_Einstein
+                        :Elsa_Einstein
+                        :Emmy_Noether
+                        :Kurt_Godel
+                        :Lise_Meitner
+                        :Michele_Besso
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :Daisy_Buchanan
+                        :Jane_Smith
+                        :John_Doe
+                        :John_Smith
+                        :Mary_Doe
+                        :Sarah_Doe
+                        :Susan_Doe
+                        :Tom_Doe
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :Daisy_Buchanan
+                        :Jay_Gatsby
+                        :Nick_Carraway
+                        :Tom_Buchanan
+                      )
 ] .
 
 

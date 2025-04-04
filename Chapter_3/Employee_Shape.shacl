@@ -11,7 +11,7 @@
     sh:property [              # _:b0
         sh:path :employee_id ;       # Employee must have exactly 1 employee_id
         sh:maxCount 1 ;
-		sh:minCount 1 ;
+	sh:minCount 1 ;
     ] ;
     sh:property [              # _:b1
         sh:path :employee_id ;       # Defines the datatype and pattern for employee_id

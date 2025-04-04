@@ -22,7 +22,7 @@
 	sh:property [              # _:b2
         sh:path :hired_on_date ;       # Employee must have exactly 1 hired_on_date
         sh:maxCount 1 ;
-		sh:minCount 1 ;
+	sh:minCount 1 ;
     ] ;
 	sh:property [              # _:b3
         sh:path :hired_on_date ;       # Defines the datatype for hired_on_date

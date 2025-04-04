@@ -1352,6 +1352,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                         :has_Colleague :Jennifer_Doudna ;
                         :has_Employer :Max_Planck_Institute_for_Infection_Biology ;
                         :employee_id "000-99-4321" ;
+                        :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
                         :nobel_Prize_Winner "true"^^xsd:boolean ;
                         <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
                         <http://purl.org/dc/terms/created> "2025-03-11T15:56:58Z"^^xsd:dateTime ;

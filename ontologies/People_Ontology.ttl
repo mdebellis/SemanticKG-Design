@@ -2028,15 +2028,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :City
-                :Nation
-                :Province
-                :State
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
   owl:members ( :Corporation
                 :Division
                 :Region

@@ -541,7 +541,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                                     owl:onProperty :has_age ;
                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
                                                                          owl:onDatatype xsd:integer ;
-                                                                         owl:withRestrictions ( [ xsd:minExclusive 18
+                                                                         owl:withRestrictions ( [ xsd:minInclusive 18
                                                                                                 ]
                                                                                               )
                                                                        ]

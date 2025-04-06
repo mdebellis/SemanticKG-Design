@@ -10,7 +10,11 @@
 @prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
 @base <http://michaeldebellis.com/people/> .
 
-<http://michaeldebellis.com/people> rdf:type owl:Ontology .
+<http://michaeldebellis.com/people> rdf:type owl:Ontology ;
+                                     <http://purl.org/dc/terms/creator> """Michael DeBellis
+Orcid ID: 0000-0002-8824-9577""" ;
+                                     <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/legalcode](https://creativecommons.org/licenses/by/4.0/legalcode> ;
+                                     skos:definition "An example ontology of People, Organizations, and Animals to illustrate basic Semantic Web concepts from RDF, RDFS, OWL, SPARQL and SHACL" .
 
 #################################################################
 #    Annotation properties
@@ -45,6 +49,10 @@
                                    rdfs:comment "Recommended practice is to identify the creator with a URI. If this is not possible or feasible, a literal value that identifies the creator may be provided." ;
                                    rdfs:label "creator" ;
                                    skos:definition "An entity responsible for making the resource." .
+
+
+###  http://purl.org/dc/terms/license
+<http://purl.org/dc/terms/license> rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/dc/terms/subject
@@ -436,17 +444,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 #    Data properties
 #################################################################
 
-###  http://michaeldebellis.com/people/age
-:age rdf:type owl:DatatypeProperty ,
-              owl:FunctionalProperty ;
-     rdfs:domain :Person ;
-     rdfs:range xsd:integer ;
-     rdfs:label "age" ;
-     skos:example 12 ,
-                  32 ;
-     skos:prefLabel "has age" .
-
-
 ###  http://michaeldebellis.com/people/birth_Date
 :birth_Date rdf:type owl:DatatypeProperty ;
             <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
@@ -460,6 +457,17 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
              <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
              <http://purl.org/dc/terms/created> "2025-04-02T22:31:16Z"^^xsd:dateTime ;
              rdfs:label "employee id" .
+
+
+###  http://michaeldebellis.com/people/has_age
+:has_age rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Person ;
+         rdfs:range xsd:integer ;
+         rdfs:label "age" ;
+         skos:example 12 ,
+                      32 ;
+         skos:prefLabel "has age" .
 
 
 ###  http://michaeldebellis.com/people/hired_on_date
@@ -530,7 +538,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Adult rdf:type owl:Class ;
        owl:equivalentClass [ owl:intersectionOf ( :Person
                                                   [ rdf:type owl:Restriction ;
-                                                    owl:onProperty :age ;
+                                                    owl:onProperty :has_age ;
                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
                                                                          owl:onDatatype xsd:integer ;
                                                                          owl:withRestrictions ( [ xsd:minExclusive 18
@@ -600,7 +608,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Child rdf:type owl:Class ;
        owl:equivalentClass [ owl:intersectionOf ( :Person
                                                   [ rdf:type owl:Restriction ;
-                                                    owl:onProperty :age ;
+                                                    owl:onProperty :has_age ;
                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
                                                                          owl:onDatatype xsd:integer ;
                                                                          owl:withRestrictions ( [ xsd:maxExclusive 18
@@ -1053,7 +1061,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                :Man ;
       owl:differentFrom :Steve ;
       :has_Husband :Steve ;
-      :age 23 ;
+      :has_age 23 ;
       <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
       <http://purl.org/dc/terms/created> "2025-03-14T23:02:03Z"^^xsd:dateTime ;
       rdfs:label "Adam" .
@@ -1134,7 +1142,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
          :has_Friend :Michael ;
          :has_Gender :Female ;
          :has_Pet :Ash ;
-         :age 28 ;
+         :has_age 28 ;
          <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
          <http://purl.org/dc/terms/created> "2025-03-08T03:40:51Z"^^xsd:dateTime ;
          rdfs:label "Allison" .
@@ -1306,7 +1314,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                          :Person ;
                 :has_Friend :John_Doe ;
                 :has_Husband :Tom_Buchanan ;
-                :age 32 ;
+                :has_age 32 ;
                 rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
                 rdfs:label "Daisy Buchanan" .
 
@@ -1550,7 +1558,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Jim_Doe rdf:type owl:NamedIndividual ,
                   :Person ;
          :has_Gender :Male ;
-         :age 12 ;
+         :has_age 12 ;
          <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;
          <http://purl.org/dc/terms/created> "2025-03-17T23:30:41Z"^^xsd:dateTime ;
          rdfs:label "Jim Doe" .
@@ -1574,14 +1582,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
           :has_Sister :Sarah_Doe ;
           :has_Son :Jim_Doe ;
           :has_Wife :Jane_Smith ;
-          :age 34 ;
+          :has_age 34 ;
           rdfs:label "John Doe" .
 
 
 ###  http://michaeldebellis.com/people/John_Smith
 :John_Smith rdf:type owl:NamedIndividual ,
                      :Person ;
-            :age 43 ;
+            :has_age 43 ;
             rdfs:label "John Smith" .
 
 
@@ -1688,7 +1696,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                    :Person ;
           :has_Mother :Jane_Smith ;
           :has_Sister :Susan_Doe ;
-          :age 16 ;
+          :has_age 16 ;
           rdfs:label "Mary Doe" .
 
 
@@ -1732,7 +1740,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Miss_Havisham rdf:type owl:NamedIndividual ,
                         :Person ;
                :has_Gender :Female ;
-               :age 65 ;
+               :has_age 65 ;
                rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Miss_Havisham> ;
                rdfs:label "Miss Havisham" .
 
@@ -1758,7 +1766,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Nick_Carraway
 :Nick_Carraway rdf:type owl:NamedIndividual ,
                         :Person ;
-               :age 28 ;
+               :has_age 28 ;
                rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
                rdfs:label "Nick Carraway" .
 
@@ -1766,8 +1774,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Noam_Chomsky
 :Noam_Chomsky rdf:type owl:NamedIndividual ,
                        :Person ;
-              :age 96 ;
               :employee_id "MIT-1953" ;
+              :has_age 96 ;
               :hired_on_date "1955-01-01T00:00:00"^^xsd:dateTime ;
               :wikidata <https://www.wikidata.org/wiki/Q112150900> ;
               <http://purl.org/dc/terms/contributor> <https://orcid.org/0000-0002-8824-9577> ;

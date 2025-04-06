@@ -8,27 +8,21 @@
 :Employee_Shape
     a sh:NodeShape ;
     sh:targetClass :Employee ; # Applies to all employees
-    sh:property [              # _:b0
+    sh:property [              # _:blank node 0
         sh:path :employee_id ;       # Employee must have exactly 1 employee_id
         sh:maxCount 1 ;
-	sh:minCount 1 ;
-    ] ;
-    sh:property [              # _:b1
+	sh:minCount 1 ;] ;
+    sh:property [              # _:blank node 1
         sh:path :employee_id ;       # Defines the datatype and pattern for employee_id
         sh:datatype xsd:string ;
         sh:pattern "^\\d{3}-\\d{2}-\\d{4}$" ;
-        sh:severity sh:Warning ;
-    ] ;
-	sh:property [              # _:b2
+        sh:severity sh:Warning ;] ;
+	sh:property [              # _:blank node 2
         sh:path :hired_on_date ;       # Employee must have exactly 1 hired_on_date
         sh:maxCount 1 ;
-	sh:minCount 1 ;
-    ] ;
-	sh:property [              # _:b3
+	sh:minCount 1 ;] ;
+	sh:property [              # _:blank node 3
         sh:path :hired_on_date ;       # Defines the datatype for hired_on_date
         sh:datatype xsd:dateTime ;
-        sh:severity sh:Warning ;
-    ] ;
-
-    sh:ignoredProperties ( rdf:type owl:topDataProperty owl:topObjectProperty ) ;
-    .
+        sh:severity sh:Warning ;] ;
+    sh:ignoredProperties ( rdf:type owl:topDataProperty owl:topObjectProperty ) .

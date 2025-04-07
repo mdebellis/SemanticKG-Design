@@ -120,7 +120,10 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 
 ###  http://michaeldebellis.com/people/eats
-:eats rdf:type owl:ObjectProperty .
+:eats rdf:type owl:ObjectProperty ;
+      rdfs:domain :Animal ;
+      rdfs:range :Living_Thing ;
+      rdfs:label "eats" .
 
 
 ###  http://michaeldebellis.com/people/has_Address
@@ -184,7 +187,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/has_Employer
 :has_Employer rdf:type owl:ObjectProperty ;
               owl:inverseOf :is_Employer_Of ;
-              rdfs:domain :Person ;
+              rdfs:domain :Employee ;
               rdfs:range :Agent ;
               rdfs:label "has employer" .
 
@@ -239,12 +242,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
             rdfs:range :Woman ;
             :wikidata <https://www.wikidata.org/wiki/Q7560> ;
             rdfs:label "has mother" .
-
-
-###  http://michaeldebellis.com/people/has_Movement_Speed
-:has_Movement_Speed rdf:type owl:ObjectProperty ;
-                    rdfs:domain :Living_Thing ;
-                    rdfs:label "has movement speed" .
 
 
 ###  http://michaeldebellis.com/people/has_Parent
@@ -321,6 +318,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/has_Subsidiary
 :has_Subsidiary rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf :has_Part ;
+                owl:inverseOf :is_subsidiary_of ;
                 rdfs:domain :Organization ;
                 rdfs:range :Orgonization_Component ;
                 rdfs:label "has subsidiary" .
@@ -364,6 +362,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/is_Member_Of
 :is_Member_Of rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :is_Part_Of ;
               rdfs:label "is member of" .
 
 
@@ -383,6 +382,12 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :is_Uncle_Of rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :has_Family_Relationship ;
              rdfs:label "is uncle of" .
+
+
+###  http://michaeldebellis.com/people/is_subsidiary_of
+:is_subsidiary_of rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :is_Part_Of ;
+                  rdfs:label "is subsidiary of" .
 
 
 #################################################################

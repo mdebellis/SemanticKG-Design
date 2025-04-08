@@ -1,5 +1,37 @@
-#Example 1 SPARQL query to list all classes
+#Example SPARQL query to list all classes
 PREFIX owl:  <http://www.w3.org/2002/07/owl#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX :  <http://michaeldebellis.com/people/>
 SELECT *
   WHERE {?class rdf:type owl:Class}
+
+# List all classes with their labels. Order by label
+# Remember to leave the PREFIX statements from the first query for the rest  
+SELECT *
+  WHERE {?class rdf:type owl:Class;
+    rdfs:label ?class_label.} ORDER BY ?class_label
+
+# List all the instances of Person who have an age, order by age.
+SELECT ?person_label?age
+WHERE {?person rdf:type :Person;
+               rdfs:label ?person_label;
+		   :age ?age.} ORDER BY ?age
+	
+# List all the instances of Person. Include their age if available. Order by Person label. 	
+SELECT ?person_label ?age
+WHERE {?person rdf:type :Person;
+               rdfs:label ?person_label.
+	OPTIONAL {?person :age ?age}} ORDER BY ?person_label
+	
+# List all people with a birthdate
+SELECT *
+WHERE {?person :birth_Date ?birth_day} ORDER BY ?birth_day
+
+# List all the instances of Person. Include their birth day if available. Order by Person label. 	
+SELECT ?person_label ?birth_day
+WHERE {?person rdf:type :Person;
+               rdfs:label ?person_label.
+	OPTIONAL {?person :birth_Date ?birth_day}} ORDER BY ?person_label
+
+
+

@@ -132,6 +132,11 @@
           rdfs:subClassOf :Place .
 
 
+###  http://michaeldebellis.com/pattern_examples/Division
+:Division rdf:type owl:Class ;
+          rdfs:subClassOf :Organization .
+
+
 ###  http://michaeldebellis.com/pattern_examples/Municipality
 :Municipality rdf:type owl:Class ;
               rdfs:subClassOf :Place .
@@ -140,6 +145,11 @@
 ###  http://michaeldebellis.com/pattern_examples/Nation
 :Nation rdf:type owl:Class ;
         rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/Operating_Unit
+:Operating_Unit rdf:type owl:Class ;
+                rdfs:subClassOf :Organization .
 
 
 ###  http://michaeldebellis.com/pattern_examples/Organization
@@ -159,6 +169,16 @@
 ###  http://michaeldebellis.com/pattern_examples/Province
 :Province rdf:type owl:Class ;
           rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/Region
+:Region rdf:type owl:Class ;
+        rdfs:subClassOf :Organization .
+
+
+###  http://michaeldebellis.com/pattern_examples/Sales_Office
+:Sales_Office rdf:type owl:Class ;
+              rdfs:subClassOf :Organization .
 
 
 ###  http://michaeldebellis.com/pattern_examples/State

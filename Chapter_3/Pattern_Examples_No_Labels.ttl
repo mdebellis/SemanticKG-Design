@@ -1,0 +1,300 @@
+@prefix : <http://michaeldebellis.com/pattern_examples/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://michaeldebellis.com/pattern_examples/> .
+
+<http://michaeldebellis.com/pattern_examples> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://michaeldebellis.com/pattern_examples/birth_Place
+:birth_Place rdf:type owl:ObjectProperty ;
+             rdfs:domain :Person ;
+             rdfs:range :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/contains
+:contains rdf:type owl:ObjectProperty ;
+          owl:inverseOf :is_Contained_In ;
+          rdf:type owl:TransitiveProperty ;
+          rdfs:domain :Place ;
+          rdfs:range :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/has_Address
+:has_Address rdf:type owl:ObjectProperty ;
+             owl:inverseOf :is_Address_For ;
+             rdfs:domain :Agent ;
+             rdfs:range :Address .
+
+
+###  http://michaeldebellis.com/pattern_examples/has_City
+:has_City rdf:type owl:ObjectProperty ;
+          rdfs:domain :Address ;
+          rdfs:range :City .
+
+
+###  http://michaeldebellis.com/pattern_examples/has_State
+:has_State rdf:type owl:ObjectProperty ;
+           rdfs:domain :Address ;
+           rdfs:range :State .
+
+
+###  http://michaeldebellis.com/pattern_examples/is_Address_For
+:is_Address_For rdf:type owl:ObjectProperty .
+
+
+###  http://michaeldebellis.com/pattern_examples/is_Contained_In
+:is_Contained_In rdf:type owl:ObjectProperty ,
+                          owl:TransitiveProperty .
+
+
+###  http://michaeldebellis.com/pattern_examples/parent
+:parent rdf:type owl:ObjectProperty ;
+        owl:inverseOf :subsidiary ;
+        rdfs:domain :Organization ;
+        rdfs:range :Organization .
+
+
+###  http://michaeldebellis.com/pattern_examples/subsidiary
+:subsidiary rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://michaeldebellis.com/pattern_examples/email
+:email rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Agent .
+
+
+###  http://michaeldebellis.com/pattern_examples/first_Name
+:first_Name rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Person .
+
+
+###  http://michaeldebellis.com/pattern_examples/last_Name
+:last_Name rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Person .
+
+
+###  http://michaeldebellis.com/pattern_examples/phone_Number
+:phone_Number rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Agent .
+
+
+###  http://michaeldebellis.com/pattern_examples/street
+:street rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Address .
+
+
+###  http://michaeldebellis.com/pattern_examples/zip_Code
+:zip_Code rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Address .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://michaeldebellis.com/pattern_examples/Address
+:Address rdf:type owl:Class ;
+         rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/Agent
+:Agent rdf:type owl:Class .
+
+
+###  http://michaeldebellis.com/pattern_examples/City
+:City rdf:type owl:Class ;
+      rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/Continent
+:Continent rdf:type owl:Class ;
+           rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/County
+:County rdf:type owl:Class ;
+        rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/District
+:District rdf:type owl:Class ;
+          rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/Municipality
+:Municipality rdf:type owl:Class ;
+              rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/Nation
+:Nation rdf:type owl:Class ;
+        rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/Organization
+:Organization rdf:type owl:Class ;
+              rdfs:subClassOf :Agent .
+
+
+###  http://michaeldebellis.com/pattern_examples/Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf :Agent .
+
+
+###  http://michaeldebellis.com/pattern_examples/Place
+:Place rdf:type owl:Class .
+
+
+###  http://michaeldebellis.com/pattern_examples/Province
+:Province rdf:type owl:Class ;
+          rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/State
+:State rdf:type owl:Class ;
+       rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/Town
+:Town rdf:type owl:Class ;
+      rdfs:subClassOf :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/Village
+:Village rdf:type owl:Class ;
+         rdfs:subClassOf :Place .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://michaeldebellis.com/pattern_examples/Africa
+:Africa rdf:type owl:NamedIndividual ,
+                 :Continent ;
+        :contains :South_Africa .
+
+
+###  http://michaeldebellis.com/pattern_examples/Antarctica
+:Antarctica rdf:type owl:NamedIndividual ,
+                     :Continent .
+
+
+###  http://michaeldebellis.com/pattern_examples/Asia
+:Asia rdf:type owl:NamedIndividual ,
+               :Continent .
+
+
+###  http://michaeldebellis.com/pattern_examples/Australia
+:Australia rdf:type owl:NamedIndividual ,
+                    :Continent .
+
+
+###  http://michaeldebellis.com/pattern_examples/British_Columbia
+:British_Columbia rdf:type owl:NamedIndividual ,
+                           :Province ;
+                  :contains :Vancouver .
+
+
+###  http://michaeldebellis.com/pattern_examples/California
+:California rdf:type owl:NamedIndividual ,
+                     :State ;
+            :contains :Los_Angeles ,
+                      :San_Francisco .
+
+
+###  http://michaeldebellis.com/pattern_examples/Canada
+:Canada rdf:type owl:NamedIndividual ,
+                 :Nation ;
+        :contains :British_Columbia .
+
+
+###  http://michaeldebellis.com/pattern_examples/Eastern_Cape
+:Eastern_Cape rdf:type owl:NamedIndividual ,
+                       :Province ;
+              :contains :Mthatha .
+
+
+###  http://michaeldebellis.com/pattern_examples/Europe
+:Europe rdf:type owl:NamedIndividual ,
+                 :Continent .
+
+
+###  http://michaeldebellis.com/pattern_examples/King_Sabata_Dalindyebo_Local_Municipality
+:King_Sabata_Dalindyebo_Local_Municipality rdf:type owl:NamedIndividual ,
+                                                    :Municipality .
+
+
+###  http://michaeldebellis.com/pattern_examples/Los_Angeles
+:Los_Angeles rdf:type owl:NamedIndividual ,
+                      :City .
+
+
+###  http://michaeldebellis.com/pattern_examples/Mthatha
+:Mthatha rdf:type owl:NamedIndividual ,
+                  :City .
+
+
+###  http://michaeldebellis.com/pattern_examples/Nelson_Mandela
+:Nelson_Mandela rdf:type owl:NamedIndividual ,
+                         :Person ;
+                :birth_Place :Mthatha .
+
+
+###  http://michaeldebellis.com/pattern_examples/New_York_City
+:New_York_City rdf:type owl:NamedIndividual ,
+                        :City .
+
+
+###  http://michaeldebellis.com/pattern_examples/New_York_State
+:New_York_State rdf:type owl:NamedIndividual ,
+                         :State .
+
+
+###  http://michaeldebellis.com/pattern_examples/North_America
+:North_America rdf:type owl:NamedIndividual ,
+                        :Continent ;
+               :contains :Canada ,
+                         :United_States .
+
+
+###  http://michaeldebellis.com/pattern_examples/San_Francisco
+:San_Francisco rdf:type owl:NamedIndividual ,
+                        :City .
+
+
+###  http://michaeldebellis.com/pattern_examples/South_Africa
+:South_Africa rdf:type owl:NamedIndividual ,
+                       :Nation ;
+              :contains :Eastern_Cape .
+
+
+###  http://michaeldebellis.com/pattern_examples/South_America
+:South_America rdf:type owl:NamedIndividual ,
+                        :Continent .
+
+
+###  http://michaeldebellis.com/pattern_examples/United_States
+:United_States rdf:type owl:NamedIndividual ,
+                        :Nation ;
+               :contains :California ,
+                         :New_York_State .
+
+
+###  http://michaeldebellis.com/pattern_examples/Vancouver
+:Vancouver rdf:type owl:NamedIndividual ,
+                    :City .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

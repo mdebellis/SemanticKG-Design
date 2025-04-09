@@ -39,10 +39,26 @@
           rdfs:range :City .
 
 
+###  http://michaeldebellis.com/pattern_examples/has_Location
+:has_Location rdf:type owl:ObjectProperty ;
+              rdfs:range :Place .
+
+
+###  http://michaeldebellis.com/pattern_examples/has_Parent
+:has_Parent rdf:type owl:ObjectProperty ;
+            owl:inverseOf :has_Subsidiary ;
+            rdfs:domain :Organization ;
+            rdfs:range :Organization .
+
+
 ###  http://michaeldebellis.com/pattern_examples/has_State
 :has_State rdf:type owl:ObjectProperty ;
            rdfs:domain :Address ;
            rdfs:range :State .
+
+
+###  http://michaeldebellis.com/pattern_examples/has_Subsidiary
+:has_Subsidiary rdf:type owl:ObjectProperty .
 
 
 ###  http://michaeldebellis.com/pattern_examples/is_Address_For
@@ -52,17 +68,6 @@
 ###  http://michaeldebellis.com/pattern_examples/is_Contained_In
 :is_Contained_In rdf:type owl:ObjectProperty ,
                           owl:TransitiveProperty .
-
-
-###  http://michaeldebellis.com/pattern_examples/parent
-:parent rdf:type owl:ObjectProperty ;
-        owl:inverseOf :subsidiary ;
-        rdfs:domain :Organization ;
-        rdfs:range :Organization .
-
-
-###  http://michaeldebellis.com/pattern_examples/subsidiary
-:subsidiary rdf:type owl:ObjectProperty .
 
 
 #################################################################
@@ -134,7 +139,11 @@
 
 ###  http://michaeldebellis.com/pattern_examples/Division
 :Division rdf:type owl:Class ;
-          rdfs:subClassOf :Organization .
+          rdfs:subClassOf :Organization ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :has_Parent ;
+                            owl:allValuesFrom :Region
+                          ] .
 
 
 ###  http://michaeldebellis.com/pattern_examples/Municipality
@@ -173,12 +182,20 @@
 
 ###  http://michaeldebellis.com/pattern_examples/Region
 :Region rdf:type owl:Class ;
-        rdfs:subClassOf :Organization .
+        rdfs:subClassOf :Organization ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :has_Parent ;
+                          owl:allValuesFrom :Operating_Unit
+                        ] .
 
 
 ###  http://michaeldebellis.com/pattern_examples/Sales_Office
 :Sales_Office rdf:type owl:Class ;
-              rdfs:subClassOf :Organization .
+              rdfs:subClassOf :Organization ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :has_Parent ;
+                                owl:allValuesFrom :Division
+                              ] .
 
 
 ###  http://michaeldebellis.com/pattern_examples/State
@@ -199,6 +216,30 @@
 #################################################################
 #    Individuals
 #################################################################
+
+###  http://michaeldebellis.com/pattern_examples/Acme
+:Acme rdf:type owl:NamedIndividual ,
+               :Organization ;
+      :has_Subsidiary :Acme_Widgets .
+
+
+###  http://michaeldebellis.com/pattern_examples/Acme_American_Widgets
+:Acme_American_Widgets rdf:type owl:NamedIndividual ,
+                                :Region ;
+                       :has_Subsidiary :Acme_Widgets_NY_Sales .
+
+
+###  http://michaeldebellis.com/pattern_examples/Acme_Widgets
+:Acme_Widgets rdf:type owl:NamedIndividual ,
+                       :Operating_Unit ;
+              :has_Subsidiary :Acme_American_Widgets .
+
+
+###  http://michaeldebellis.com/pattern_examples/Acme_Widgets_NY_Sales
+:Acme_Widgets_NY_Sales rdf:type owl:NamedIndividual ,
+                                :Sales_Office ;
+                       :has_Location :New_York_City .
+
 
 ###  http://michaeldebellis.com/pattern_examples/Africa
 :Africa rdf:type owl:NamedIndividual ,

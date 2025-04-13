@@ -27,4 +27,20 @@
       sh:path :hired_on_date ; # Defines the datatype for hired_on_date
       sh:datatype xsd:dateTime ;
       sh:severity sh:Warning ;] .
+	  
+:Employee_Contact_Shape
+  a sh:NodeShape ;
+  sh:targetClass :Employee ;
+  sh:or ([ sh:property [
+        sh:path :email ;
+        sh:minCount 1 ;
+        sh:message "Each employee must have either an email or a phone number." ;
+      ] ]
+    [ sh:property [
+        sh:path :phone ;
+        sh:minCount 1 ;
+        sh:message "Each employee must have either an email or a phone number." ;] ] ) ;
+  sh:message "Each employee must have either an email or a phone number." .
+
+
 

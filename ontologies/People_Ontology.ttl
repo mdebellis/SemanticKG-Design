@@ -399,6 +399,10 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
             rdfs:label "birth date" .
 
 
+###  http://michaeldebellis.com/people/email
+:email rdf:type owl:DatatypeProperty .
+
+
 ###  http://michaeldebellis.com/people/employee_id
 :employee_id rdf:type owl:DatatypeProperty ;
              rdfs:domain :Employee ;
@@ -436,6 +440,10 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                             rdfs:domain :Person ;
                             rdfs:range xsd:integer ;
                             rdfs:label "number of social relations" .
+
+
+###  http://michaeldebellis.com/people/phone
+:phone rdf:type owl:DatatypeProperty .
 
 
 ###  http://michaeldebellis.com/people/street
@@ -972,6 +980,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                  :employee_id "999-99-1234" ;
                  :hired_on_date "1933-10-01T00:00:00"^^xsd:dateTime ;
                  :nobel_Prize_Winner "true"^^xsd:boolean ;
+                 :phone "+1 (609) 555-1234" ;
                  :wikidata <https://www.wikidata.org/wiki/Q937> ;
                  rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Albert_Einstein> ;
                  rdfs:label "Albert Einstein" .
@@ -1095,6 +1104,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                 :birth_Date "1916-04-30T00:00:00Z"^^xsd:dateTimeStamp ;
                 :employee_id "abc-de-fghi" ;
                 :hired_on_date "1941-01-01T00:00:00"^^xsd:dateTime ;
+                :phone "+1 (609) 555-6789" ;
                 rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Claude_Shannon> ;
                 rdfs:label "Claude Shannon" .
 

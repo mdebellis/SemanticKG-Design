@@ -1514,6 +1514,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Noam_Chomsky rdf:type owl:NamedIndividual ,
                        :Person ;
               :birth_Date "1928-12-07T00:00:00Z"^^xsd:dateTimeStamp ;
+              :email "chomsky@mit.edu" ;
               :employee_id "MIT-1953" ;
               :has_age 96 ;
               :hired_on_date "1955-01-01T00:00:00"^^xsd:dateTime ;
@@ -1568,6 +1569,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                     :Man ;
            :has_Address :Address_Of_Spade_Detective_Agency ;
            :has_Employer :Sam_Spade ;
+           :phone "(415) 555-1212" ;
            rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Maltese_Falcon_(novel)> ;
            rdfs:label "Sam Spade" .
 

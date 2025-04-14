@@ -1,29 +1,39 @@
-#Example SPARQL query to list all classes
 PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX :  <http://michaeldebellis.com/people/>
-SELECT *
-  WHERE {?class rdf:type owl:Class}
 
-# List all classes with their labels. Order by label
-# Remember to leave the PREFIX statements from the first query for the rest  
+#Important: First paste the PREFIX statements at the very top at the top of your
+#SPARQL query. Then reove any existing query and paste each of the following
+#Remember to always leave the PREFIX statements in place
+#Note: these queries should all work in Snap SPARQL, but many SPARQL queries won't
+#Example SPARQL query to list all classes
 SELECT *
-  WHERE {?class rdf:type owl:Class;
-    rdfs:label ?class_label.} ORDER BY ?class_label
+WHERE {?class rdfs:subClassOf owl:Thing}
+
+#List all class labels, ordered by label
+SELECT ?label  
+WHERE {?class rdfs:subClassOf owl:Thing;
+			  rdfs:label ?label} ORDER BY ?label
+
+#List all object property labels			
+SELECT ?label  
+WHERE {?object_property rdf:type owl:ObjectProperty;
+				        rdfs:label ?label} ORDER BY ?label
 
 # List all the instances of Person who have an age, order by age.
 SELECT ?person_label?age
 WHERE {?person rdf:type :Person;
                rdfs:label ?person_label;
-		   :age ?age.} ORDER BY ?age
+		       :has_age ?age.} ORDER BY ?age
 	
 # List all the instances of Person. Include their age if available. Order by Person label. 	
 SELECT ?person_label ?age
 WHERE {?person rdf:type :Person;
                rdfs:label ?person_label.
-	OPTIONAL {?person :age ?age}} ORDER BY ?person_label
+	OPTIONAL {?person :has_age ?age}} ORDER BY ?person_label
 	
-# List all people with a birthdate
+# List all people with a birthdate (exclude people with no birthdate)
 SELECT *
 WHERE {?person :birth_Date ?birth_day} ORDER BY ?birth_day
 
@@ -31,7 +41,7 @@ WHERE {?person :birth_Date ?birth_day} ORDER BY ?birth_day
 SELECT ?person_label ?birth_day
 WHERE {?person rdf:type :Person;
                rdfs:label ?person_label.
-	OPTIONAL {?person :birth_Date ?birth_day}} ORDER BY ?person_label
+OPTIONAL {?person :birth_Date ?birth_day}} ORDER BY ?person_label
 
 
 

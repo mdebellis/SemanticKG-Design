@@ -4,6 +4,8 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX :  <http://michaeldebellis.com/pattern_examples/>
 
+#Important: the following four queries will work for Snap SPARQL in Protege
+#If you are using any other SPARQL tool replace the CONSTRUCT statement with an INSERT
 #Create labels for all Classes that don't already have them
 #Make sure to never change owl:Nothing nor owl:Thing 
 CONSTRUCT {?class rdfs:label ?lblname.}

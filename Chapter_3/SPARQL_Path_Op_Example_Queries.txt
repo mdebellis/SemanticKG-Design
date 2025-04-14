@@ -1,0 +1,27 @@
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX :  <http://michaeldebellis.com/people/>
+
+#Important: THESE QUERIES WILL NOT WORK IN SNAP SPARQL. You need to use AllegroGrap, GraphDB, Stardog
+#or some other tool that supports the full SPARQL specification
+# These queries show examples of using some of the SPARQL Path Operators such as +
+# List all people that Einstein has a social relationship with
+SELECT *
+WHERE {:Albert_Einstein :has_Social_Relationship ?person}
+
+#Lists the people that Einstein has a social relation with
+#The * path operator includes people who have a social relation with Einstein's social relations
+SELECT *
+WHERE {:Albert_Einstein :has_Social_Relationship* ?person}
+
+#Lists all the places that contain another place. 
+SELECT *
+WHERE {?place1 :contains ?place2}
+
+#Lists all the places that directly contains another place. 
+#E.g., for :North_America :contains :Canada :contains :British_Columbia :contains Vancover 
+#Using the plus path operator means we will only see :North_America :contains :Canada
+#And :Canada :contains :British_Columbia not that :North_America :contain :British_Columbia
+SELECT *
+WHERE {?place1 :contains+ ?place2}

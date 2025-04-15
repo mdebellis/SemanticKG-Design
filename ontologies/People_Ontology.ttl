@@ -1003,6 +1003,12 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
              rdfs:label "Alma Mahler" .
 
 
+###  http://michaeldebellis.com/people/Alonzo_Church
+:Alonzo_Church rdf:type owl:NamedIndividual ,
+                        :Man ;
+               :has_Colleague :Alan_Turing .
+
+
 ###  http://michaeldebellis.com/people/Antarctica
 :Antarctica rdf:type owl:NamedIndividual ,
                      :Continent ;
@@ -1353,6 +1359,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
           rdfs:label "John Doe" .
 
 
+###  http://michaeldebellis.com/people/John_G_Kemeny
+:John_G_Kemeny rdf:type owl:NamedIndividual ,
+                        :Man ;
+               :has_Colleague :John_von_Neumann ;
+               rdfs:label "John G. Kemeny" .
+
+
 ###  http://michaeldebellis.com/people/John_Smith
 :John_Smith rdf:type owl:NamedIndividual ,
                      :Person ;
@@ -1383,6 +1396,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Kings_College rdf:type owl:NamedIndividual ,
                         :University ;
                rdfs:label "Kings College" .
+
+
+###  http://michaeldebellis.com/people/Klara_Dan_Von_Neumann
+:Klara_Dan_Von_Neumann rdf:type owl:NamedIndividual ,
+                                :Woman ;
+                       :has_Husband :John_von_Neumann ;
+                       rdfs:label "Klára Dán von Neumann" .
 
 
 ###  http://michaeldebellis.com/people/Kong_Li
@@ -1535,6 +1555,12 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                :contains :Canada ,
                          :USA ;
                rdfs:label "North America" .
+
+
+###  http://michaeldebellis.com/people/Oskar_Morgenstern
+:Oskar_Morgenstern rdf:type owl:NamedIndividual ,
+                            :Man ;
+                   :has_Colleague :John_von_Neumann .
 
 
 ###  http://michaeldebellis.com/people/Philip_Marlowe

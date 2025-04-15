@@ -5,6 +5,9 @@
 @prefix :    <http://michaeldebellis.com/people/> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 
+#Paste the prefixes above into SHACL4Protege. As with SPARQL queries leave the prefixes in place.
+#First paste the :Employee_Shape into SHACL4Protege and select Validate. Then delete this shape
+#and paste the :Employee_Contact_Shape
 :Employee_Shape
     a sh:NodeShape ;
     sh:targetClass :Employee ; # Applies to all employees

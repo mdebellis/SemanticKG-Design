@@ -15,7 +15,7 @@
                                      dct:creator """Michael DeBellis
 Orcid ID: 0000-0002-8824-9577""" ;
                                      dct:license <https://creativecommons.org/licenses/by/4.0/legalcode](https://creativecommons.org/licenses/by/4.0/legalcode> ;
-                                     skos:definition "An example ontology of People, Organizations, and Animals to illustrate basic Semantic Web concepts from RDF, RDFS, OWL, SPARQL and SHACL" .
+                                     skos:definition "A simple example ontology of People, Organizations, Places, and Animals to illustrate basic Semantic Web concepts from RDF, RDFS, OWL, SPARQL and SHACL" .
 
 #################################################################
 #    Annotation properties

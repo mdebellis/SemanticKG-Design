@@ -9,7 +9,7 @@ PREFIX :  <http://michaeldebellis.com/people/>
 #Note: these queries should all work in Snap SPARQL, but many SPARQL queries won't
 #Example SPARQL query to list all classes
 SELECT *
-WHERE {?class rdfs:subClassOf owl:Thing}
+WHERE {?class rdf:type owl:Class}
 
 #List all class labels, ordered by label
 SELECT ?label  
@@ -23,9 +23,7 @@ WHERE {?object_property rdf:type owl:ObjectProperty;
 
 # List all the instances of Person who have an age, order by age.
 SELECT ?person_label?age
-WHERE {?person rdf:type :Person;
-               rdfs:label ?person_label;
-		       :has_age ?age.} ORDER BY ?age
+WHERE {?person :has_age ?age.} ORDER BY ?age
 	
 # List all the instances of Person. Include their age if available. Order by Person label. 	
 SELECT ?person_label ?age

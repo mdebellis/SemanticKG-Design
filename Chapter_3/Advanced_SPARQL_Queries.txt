@@ -5,6 +5,16 @@ PREFIX :  <http://michaeldebellis.com/people/>
 
 #Important: THESE QUERIES WILL NOT WORK IN SNAP SPARQL. You need to use AllegroGrap, GraphDB, Stardog
 #or some other tool that supports the full SPARQL specification
+#First, some fairly simple queries that aren't supported in Snap SPARQL. 
+
+#Find all the predicates that connect Einstein and Godel
+SELECT *
+WHERE {:Albert_Einstein ?p :Kurt_Godel}
+
+#Find all the predicates that connect Einstein to anything
+SELECT *
+WHERE {:Albert_Einstein ?p ?o}
+
 # These queries show examples of using some of the SPARQL Path Operators such as +
 # List all people that Einstein has a social relationship with
 SELECT *

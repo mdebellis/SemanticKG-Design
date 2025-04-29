@@ -579,7 +579,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
      rdfs:subClassOf :Mammal ,
                      [ rdf:type owl:Restriction ;
                        owl:onProperty :eats ;
-                       owl:allValuesFrom :Plant
+                       owl:allValuesFrom :Grass
                      ] .
 
 
@@ -663,6 +663,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Gold_Fish rdf:type owl:Class ;
            rdfs:subClassOf :Fish ;
            rdfs:label "Gold Fish" .
+
+
+###  http://michaeldebellis.com/people/Grass
+:Grass rdf:type owl:Class ;
+       rdfs:subClassOf :Plant .
 
 
 ###  http://michaeldebellis.com/people/Haddock
@@ -860,6 +865,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Sales_Office rdf:type owl:Class ;
               rdfs:subClassOf :Orgonization_Component ;
               rdfs:label "Sales Office" .
+
+
+###  http://michaeldebellis.com/people/Self_Employee
+:Self_Employee rdf:type owl:Class ;
+               rdfs:subClassOf :Employee .
 
 
 ###  http://michaeldebellis.com/people/Social_Person
@@ -1557,6 +1567,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                rdfs:label "North America" .
 
 
+###  http://michaeldebellis.com/people/Oriana
+:Oriana rdf:type owl:NamedIndividual ,
+                 :Person ;
+        :has_Gender :Female ;
+        :has_age 14 .
+
+
 ###  http://michaeldebellis.com/people/Oskar_Morgenstern
 :Oskar_Morgenstern rdf:type owl:NamedIndividual ,
                             :Man ;
@@ -1632,7 +1649,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Spiny_Norman rdf:type owl:NamedIndividual ,
                        :Hedgehog ;
               :wikidata <https://www.wikidata.org/wiki/Q7569306> ;
-              rdfs:isDefinedBy <https://www.youtube.com/watch?v=8ZkWL-XvO0U> ;
+              rdfs:isDefinedBy <https://www.youtube.com/watch?v=C-FDW1shmqA> ;
               rdfs:label "Spiny Norman" .
 
 
@@ -1718,8 +1735,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/Whiskers
 :Whiskers rdf:type owl:NamedIndividual ,
-                   :Cat ,
-                   :Pet ;
+                   :Cat ;
+          :is_Pet_Of :Oriana ;
           rdfs:label "Whiskers" .
 
 

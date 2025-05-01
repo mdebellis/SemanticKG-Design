@@ -112,11 +112,17 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/contains
 :contains rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :contains_transitive ;
           owl:inverseOf :is_Contained_In ;
-          rdf:type owl:TransitiveProperty ;
           rdfs:domain :Place ;
           rdfs:range :Place ;
           rdfs:label "contains" .
+
+
+###  http://michaeldebellis.com/people/contains_transitive
+:contains_transitive rdf:type owl:ObjectProperty ,
+                              owl:TransitiveProperty ;
+                     rdfs:label "contains transitive" .
 
 
 ###  http://michaeldebellis.com/people/eats
@@ -358,6 +364,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/is_Contained_In
 :is_Contained_In rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :is_contained_in_transitive ;
                  rdfs:label "is contained in" .
 
 
@@ -388,6 +395,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :is_Uncle_Of rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf :has_Family_Relationship ;
              rdfs:label "is uncle of" .
+
+
+###  http://michaeldebellis.com/people/is_contained_in_transitive
+:is_contained_in_transitive rdf:type owl:ObjectProperty ;
+                            rdfs:label "is contained in transitive" .
 
 
 ###  http://michaeldebellis.com/people/is_subsidiary_of

@@ -6,12 +6,15 @@ PREFIX :  <http://michaeldebellis.com/people/>
 #Additional SPARQL queries to see examples of integration between ontology and data
 #Important: THESE QUERIES WILL NOT WORK IN SNAP SPARQL. You need to use AllegroGrap, GraphDB, Stardog
 #or some other tool that supports the full SPARQL specification
-#These queries in particular are designed for use with Gruff or a similar SPARQL visualization tool. 
+#These queries in particular are designed for use with Gruff or a similar SPARQL visualization tool.
+#The file is called Graph Queries. Of course all SPARQL queries are Graph Queries but these are 
+#designed to show interesting features combining SPARQL with a graph visualization tool like Gruff. 
 
 
 SELECT  *
 WHERE {?person1 :has_Colleague ?person2.
-OPTIONAL {?person1 :has_Employer ?employer}}
+OPTIONAL {?person1 :has_Employer ?employer1}
+OPTIONAL {?person2 :has_Employer ?employer2}}
 
 SELECT *
 WHERE {?person1 :has_Social_Relationship ?person2}

@@ -42,3 +42,11 @@ WHERE {?p a owl:DatatypeProperty.
 	BIND(LCASE(REPLACE(?name,"_", " " )) as ?lblname)		
 	OPTIONAL{?p rdfs:label ?elbl.}
 	FILTER(?p != owl:topDataProperty && "" != ?lblname && !BOUND(?elbl))}	
+
+#This is a useful query if you forget to add language tags
+#It replaces all existing labels with labels with English tags	
+DELETE {?s rdfs:label ?label.}
+INSERT {?s rdfs:label ?newLabel.}
+WHERE {?s rdfs:label ?label.
+  FILTER (lang(?label) = "" && !isLiteral(?label) || datatype(?label) = xsd:string)
+  BIND (STR(?label)@en AS ?newLabel)}

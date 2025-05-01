@@ -1259,7 +1259,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Europe
 :Europe rdf:type owl:NamedIndividual ,
                  :Continent ;
-        :contains :United_Kingdom ;
+        :contains :Germany ,
+                  :United_Kingdom ;
         rdfs:label "Europe" .
 
 
@@ -1615,6 +1616,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/New_Jersey
 :New_Jersey rdf:type owl:NamedIndividual ,
                      :State ;
+            :contains :Princeton ;
             rdfs:label "New Jersey" .
 
 

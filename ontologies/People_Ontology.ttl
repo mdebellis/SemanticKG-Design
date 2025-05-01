@@ -128,6 +128,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_Address
 :has_Address rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :has_Location ;
              owl:inverseOf :is_Address_For ;
              rdfs:domain :Agent ;
              rdfs:range :Address ;
@@ -161,6 +162,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_City
 :has_City rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :has_Location ;
           rdfs:domain :Address ;
           rdfs:range :City ;
           rdfs:label "has city" .
@@ -225,6 +227,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
              rdfs:subPropertyOf :has_Spouse ;
              rdfs:range :Man ;
              rdfs:label "has husband" .
+
+
+###  http://michaeldebellis.com/people/has_Location
+:has_Location rdf:type owl:ObjectProperty ;
+              rdfs:range :Place .
 
 
 ###  http://michaeldebellis.com/people/has_Member
@@ -310,6 +317,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_State
 :has_State rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :has_Location ;
            rdfs:domain :Address ;
            rdfs:range :State ;
            rdfs:label "has state" .
@@ -825,6 +833,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
        rdfs:label "Place" .
 
 
+###  http://michaeldebellis.com/people/Planet
+:Planet rdf:type owl:Class ;
+        rdfs:subClassOf :Place .
+
+
 ###  http://michaeldebellis.com/people/Plant
 :Plant rdf:type owl:Class ;
        rdfs:subClassOf :Living_Thing ;
@@ -1065,6 +1078,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
            rdfs:label "Bell Labs" .
 
 
+###  http://michaeldebellis.com/people/Berkeley
+:Berkeley rdf:type owl:NamedIndividual ,
+                   :City .
+
+
 ###  http://michaeldebellis.com/people/Brazil
 :Brazil rdf:type owl:NamedIndividual ,
                  :Nation ;
@@ -1087,9 +1105,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/California
 :California rdf:type owl:NamedIndividual ,
                      :State ;
-            :contains :Los_Angeles ,
+            :contains :Berkeley ,
+                      :Los_Angeles ,
                       :San_Francisco ;
             rdfs:label "California" .
+
+
+###  http://michaeldebellis.com/people/Cambridge
+:Cambridge rdf:type owl:NamedIndividual ,
+                    :City .
 
 
 ###  http://michaeldebellis.com/people/Canada
@@ -1161,6 +1185,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Doctor_Watson rdf:type owl:NamedIndividual ,
                         :Person ;
                rdfs:label "Doctor Watson" .
+
+
+###  http://michaeldebellis.com/people/Earth
+:Earth rdf:type owl:NamedIndividual ,
+                :Planet ;
+       :contains :Africa ,
+                 :Antarctica ,
+                 :Asia ,
+                 :Australia ,
+                 :Europe ,
+                 :North_America ,
+                 :South_America .
 
 
 ###  http://michaeldebellis.com/people/Ellis_Arthur_Franklin
@@ -1249,6 +1285,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Harvard_University
 :Harvard_University rdf:type owl:NamedIndividual ,
                              :University ;
+                    :has_City :Cambridge ;
                     rdfs:label "Harvard University" .
 
 
@@ -1405,6 +1442,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Kings_College
 :Kings_College rdf:type owl:NamedIndividual ,
                         :University ;
+               :has_City :London ;
+               :is_Employer_Of :Alan_Turing ;
                rdfs:label "Kings College" .
 
 
@@ -1456,6 +1495,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
       rdfs:label "Male" .
 
 
+###  http://michaeldebellis.com/people/Manchester
+:Manchester rdf:type owl:NamedIndividual ,
+                     :City .
+
+
 ###  http://michaeldebellis.com/people/Marcel
 :Marcel rdf:type owl:NamedIndividual ,
                  :Haddock ;
@@ -1480,9 +1524,17 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
           rdfs:label "Mary Doe" .
 
 
+###  http://michaeldebellis.com/people/Massachusetts
+:Massachusetts rdf:type owl:NamedIndividual ,
+                        :State ;
+               :contains :Cambridge ;
+               rdfs:label "Massachusetts" .
+
+
 ###  http://michaeldebellis.com/people/Massachusetts_Institute_of_Technology
 :Massachusetts_Institute_of_Technology rdf:type owl:NamedIndividual ,
                                                 :University ;
+                                       :has_City :Cambridge ;
                                        :is_Employer_Of :Noam_Chomsky ;
                                        rdfs:isDefinedBy <https://web.mit.edu/> ;
                                        rdfs:label "Massachusetts Institute of Technology" .
@@ -1497,6 +1549,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Michael
 :Michael rdf:type owl:NamedIndividual ,
                   :Man ;
+         :has_Colleague :Noam_Chomsky ;
+         :has_Daughter :Oriana ;
          :has_Pet :Buddy ;
          rdfs:label "Michael" .
 
@@ -1571,7 +1625,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Oriana rdf:type owl:NamedIndividual ,
                  :Person ;
         :has_Gender :Female ;
-        :has_age 14 .
+        :has_age 14 ;
+        rdfs:label "Oriana" .
 
 
 ###  http://michaeldebellis.com/people/Oskar_Morgenstern
@@ -1701,7 +1756,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :USA rdf:type owl:NamedIndividual ,
               :Nation ;
      :contains :California ,
-               :Illinois ;
+               :Illinois ,
+               :Massachusetts ;
      :wikidata <https://www.wikidata.org/wiki/Q30> ;
      rdfs:label "USA" .
 
@@ -1709,13 +1765,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/United_Kingdom
 :United_Kingdom rdf:type owl:NamedIndividual ,
                          :Nation ;
-                :contains :London ;
+                :contains :London ,
+                          :Manchester ;
                 rdfs:label "United Kingdom" .
 
 
 ###  http://michaeldebellis.com/people/University_of_California_Berkeley
 :University_of_California_Berkeley rdf:type owl:NamedIndividual ,
                                             :University ;
+                                   :has_City :Berkeley ;
                                    rdfs:isDefinedBy <https://www.berkeley.edu/> ;
                                    rdfs:label "University of California Berkeley" .
 

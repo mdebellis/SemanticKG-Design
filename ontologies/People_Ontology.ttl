@@ -163,7 +163,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/has_City
 :has_City rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :has_Location ;
-          rdfs:domain :Address ;
           rdfs:range :City ;
           rdfs:label "has city" .
 
@@ -231,7 +230,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_Location
 :has_Location rdf:type owl:ObjectProperty ;
-              rdfs:range :Place .
+              rdfs:range :Place ;
+              rdfs:label "has location" .
 
 
 ###  http://michaeldebellis.com/people/has_Member
@@ -318,7 +318,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/has_State
 :has_State rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :has_Location ;
-           rdfs:domain :Address ;
            rdfs:range :State ;
            rdfs:label "has state" .
 
@@ -358,8 +357,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 
 ###  http://michaeldebellis.com/people/is_Contained_In
-:is_Contained_In rdf:type owl:ObjectProperty ,
-                          owl:TransitiveProperty ;
+:is_Contained_In rdf:type owl:ObjectProperty ;
                  rdfs:label "is contained in" .
 
 
@@ -408,7 +406,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 
 ###  http://michaeldebellis.com/people/email
-:email rdf:type owl:DatatypeProperty .
+:email rdf:type owl:DatatypeProperty ;
+       rdfs:label "email" .
 
 
 ###  http://michaeldebellis.com/people/employee_id
@@ -451,7 +450,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 
 ###  http://michaeldebellis.com/people/phone
-:phone rdf:type owl:DatatypeProperty .
+:phone rdf:type owl:DatatypeProperty ;
+       rdfs:label "phone" .
 
 
 ###  http://michaeldebellis.com/people/street
@@ -588,7 +588,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                      [ rdf:type owl:Restriction ;
                        owl:onProperty :eats ;
                        owl:allValuesFrom :Grass
-                     ] .
+                     ] ;
+     rdfs:label "Cow" .
 
 
 ###  http://michaeldebellis.com/people/Division
@@ -626,7 +627,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                                    ) ;
                                 rdf:type owl:Class
                               ] ;
-          rdfs:subClassOf :Person .
+          rdfs:subClassOf :Person ;
+          rdfs:label "Employee" .
 
 
 ###  http://michaeldebellis.com/people/Fish
@@ -675,7 +677,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/Grass
 :Grass rdf:type owl:Class ;
-       rdfs:subClassOf :Plant .
+       rdfs:subClassOf :Plant ;
+       rdfs:label "Grass" .
 
 
 ###  http://michaeldebellis.com/people/Haddock
@@ -706,7 +709,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                                     ) ;
                                  rdf:type owl:Class
                                ] ;
-           rdfs:subClassOf :Animal .
+           rdfs:subClassOf :Animal ;
+           rdfs:label "Herbivore" .
 
 
 ###  http://michaeldebellis.com/people/Hermit
@@ -835,7 +839,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/Planet
 :Planet rdf:type owl:Class ;
-        rdfs:subClassOf :Place .
+        rdfs:subClassOf :Place ;
+        rdfs:label "Planet" .
 
 
 ###  http://michaeldebellis.com/people/Plant
@@ -882,7 +887,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/Self_Employee
 :Self_Employee rdf:type owl:Class ;
-               rdfs:subClassOf :Employee .
+               rdfs:subClassOf :Employee ;
+               rdfs:label "Self Employee" .
 
 
 ###  http://michaeldebellis.com/people/Social_Person
@@ -1029,7 +1035,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Alonzo_Church
 :Alonzo_Church rdf:type owl:NamedIndividual ,
                         :Man ;
-               :has_Colleague :Alan_Turing .
+               :has_Colleague :Alan_Turing ;
+               rdfs:label "Alonzo Church" .
 
 
 ###  http://michaeldebellis.com/people/Antarctica
@@ -1080,7 +1087,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/Berkeley
 :Berkeley rdf:type owl:NamedIndividual ,
-                   :City .
+                   :City ;
+          rdfs:label "Berkeley" .
+
+
+###  http://michaeldebellis.com/people/Berlin
+:Berlin rdf:type owl:NamedIndividual ,
+                 :City ;
+        rdfs:label "Berlin" .
 
 
 ###  http://michaeldebellis.com/people/Brazil
@@ -1113,7 +1127,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/Cambridge
 :Cambridge rdf:type owl:NamedIndividual ,
-                    :City .
+                    :City ;
+           rdfs:label "Cambridge" .
 
 
 ###  http://michaeldebellis.com/people/Canada
@@ -1196,7 +1211,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                  :Australia ,
                  :Europe ,
                  :North_America ,
-                 :South_America .
+                 :South_America ;
+       rdfs:label "Earth" .
 
 
 ###  http://michaeldebellis.com/people/Ellis_Arthur_Franklin
@@ -1217,7 +1233,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Emmanuelle_Charpentier rdf:type owl:NamedIndividual ,
                                  :Woman ;
                         :has_Colleague :Jennifer_Doudna ;
-                        :has_Employer :Max_Planck_Institute_for_Infection_Biology ;
+                        :has_Employer :Max_Planck_Unit_for_the_Science_of_Pathogens ;
                         :birth_Date "1968-12-11T00:00:00Z"^^xsd:dateTimeStamp ;
                         :employee_id "000-99-4321" ;
                         :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
@@ -1264,6 +1280,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Fido rdf:type owl:NamedIndividual ,
                :Dog ;
       rdfs:label "Fido" .
+
+
+###  http://michaeldebellis.com/people/Germany
+:Germany rdf:type owl:NamedIndividual ,
+                  :Nation ;
+         :contains :Berlin ;
+         rdfs:label "Germany" .
 
 
 ###  http://michaeldebellis.com/people/Grace_Hopper
@@ -1327,6 +1350,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Institute_For_Advanced_Study
 :Institute_For_Advanced_Study rdf:type owl:NamedIndividual ,
                                        :Research_Institute ;
+                              :has_City :Princeton ;
                               :is_Employer_Of :Albert_Einstein ;
                               rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Institute_for_Advanced_Study> ;
                               rdfs:label "Institute For Advanced Study" .
@@ -1497,7 +1521,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/Manchester
 :Manchester rdf:type owl:NamedIndividual ,
-                     :City .
+                     :City ;
+            rdfs:label "Manchester" .
 
 
 ###  http://michaeldebellis.com/people/Marcel
@@ -1540,10 +1565,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                        rdfs:label "Massachusetts Institute of Technology" .
 
 
-###  http://michaeldebellis.com/people/Max_Planck_Institute_for_Infection_Biology
-:Max_Planck_Institute_for_Infection_Biology rdf:type owl:NamedIndividual ,
-                                                     :Research_Institute ;
-                                            rdfs:label "Max Planck Institute for Infection Biology" .
+###  http://michaeldebellis.com/people/Max_Planck_Unit_for_the_Science_of_Pathogens
+:Max_Planck_Unit_for_the_Science_of_Pathogens rdf:type owl:NamedIndividual ,
+                                                       :Research_Institute ;
+                                              :has_City :Berlin ;
+                                              rdfs:label "Max Planck Institute for Infection Biology" .
 
 
 ###  http://michaeldebellis.com/people/Michael
@@ -1584,6 +1610,12 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Nelson_Mandela rdf:type owl:NamedIndividual ,
                          :Man ;
                 rdfs:label "Nelson Mandela" .
+
+
+###  http://michaeldebellis.com/people/New_Jersey
+:New_Jersey rdf:type owl:NamedIndividual ,
+                     :State ;
+            rdfs:label "New Jersey" .
 
 
 ###  http://michaeldebellis.com/people/Nick_Carraway
@@ -1632,7 +1664,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Oskar_Morgenstern
 :Oskar_Morgenstern rdf:type owl:NamedIndividual ,
                             :Man ;
-                   :has_Colleague :John_von_Neumann .
+                   :has_Colleague :John_von_Neumann ;
+                   rdfs:label "Oskar Morgenstern" .
 
 
 ###  http://michaeldebellis.com/people/Philip_Marlowe
@@ -1640,6 +1673,12 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                          :Man ;
                 rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Big_Sleep> ;
                 rdfs:label "Philip Marlowe" .
+
+
+###  http://michaeldebellis.com/people/Princeton
+:Princeton rdf:type owl:NamedIndividual ,
+                    :City ;
+           rdfs:label "Princeton" .
 
 
 ###  http://michaeldebellis.com/people/Rex
@@ -1781,6 +1820,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/University_of_Manchester
 :University_of_Manchester rdf:type owl:NamedIndividual ,
                                    :University ;
+                          :has_City :Manchester ;
                           :is_Employer_Of :Alan_Turing ;
                           rdfs:label "University of Manchester" .
 
@@ -1803,6 +1843,9 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 #################################################################
 
 :Fluffy rdfs:label "Fluffy" .
+
+
+:Max_Planck_Institute_for_Infection_Biology rdfs:label "Max Planck Institute for Infection Biology" .
 
 
 #################################################################

@@ -1810,7 +1810,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
               :Nation ;
      :contains :California ,
                :Illinois ,
-               :Massachusetts ;
+               :Massachusetts ,
+               :New_Jersey ;
      :wikidata <https://www.wikidata.org/wiki/Q30> ;
      rdfs:label "USA" .
 

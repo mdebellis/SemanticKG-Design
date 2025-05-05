@@ -23,11 +23,11 @@ WHERE {?person1 :has_Social_Relationship ?person2}
 #Find all the contains relations inferred by the reasoner
 #This will be a messy graph
 SELECT *
-WHERE {?place1 :contains_transitive ?place2.}
+WHERE {?place1 :contains ?place2.}
 
 #This uses the non-transitive sub-property contains. It gives a much cleaner graph 
 SELECT *
-WHERE {?place1 :contains ?place2.}
+WHERE {?place1 :contains_Direct ?place2.}
 
 #This shows how the ontology definitions are also graphs. In this case we graph all the
 #properties that have the :Employee class as their domain, as well as other properties of that property

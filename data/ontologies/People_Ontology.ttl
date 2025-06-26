@@ -192,14 +192,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
               rdfs:label "has daughter" .
 
 
-###  http://michaeldebellis.com/people/has_Employer
-:has_Employer rdf:type owl:ObjectProperty ;
-              owl:inverseOf :is_Employer_Of ;
-              rdfs:domain :Employee ;
-              rdfs:range :Agent ;
-              rdfs:label "has employer" .
-
-
 ###  http://michaeldebellis.com/people/has_Family_Relationship
 :has_Family_Relationship rdf:type owl:ObjectProperty ;
                          rdfs:subPropertyOf :has_Social_Relationship ;
@@ -350,6 +342,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
           rdfs:subPropertyOf :has_Spouse ;
           rdfs:range :Woman ;
           rdfs:label "has wife" .
+
+
+###  http://michaeldebellis.com/people/has_employer
+:has_employer rdf:type owl:ObjectProperty ;
+              owl:inverseOf :is_Employer_Of ;
+              rdfs:domain :Employee ;
+              rdfs:range :Agent ;
+              rdfs:label "has employer" .
 
 
 ###  http://michaeldebellis.com/people/is_Address_For
@@ -636,7 +636,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Employee rdf:type owl:Class ;
           owl:equivalentClass [ owl:intersectionOf ( :Person
                                                      [ rdf:type owl:Restriction ;
-                                                       owl:onProperty :has_Employer ;
+                                                       owl:onProperty :has_employer ;
                                                        owl:someValuesFrom :Agent
                                                      ]
                                                    ) ;
@@ -1170,7 +1170,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Claude_Shannon rdf:type owl:NamedIndividual ,
                          :Man ;
                 :has_Colleague :Alan_Turing ;
-                :has_Employer :Bell_Labs ;
+                :has_employer :Bell_Labs ;
                 :birth_date "1916-04-30T00:00:00Z"^^xsd:dateTimeStamp ;
                 :employee_id "abc-de-fghi" ;
                 :hired_on_date "1941-01-01T00:00:00"^^xsd:dateTime ;
@@ -1248,7 +1248,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Emmanuelle_Charpentier rdf:type owl:NamedIndividual ,
                                  :Woman ;
                         :has_Colleague :Jennifer_Doudna ;
-                        :has_Employer :Max_Planck_Unit_for_the_Science_of_Pathogens ;
+                        :has_employer :Max_Planck_Unit_for_the_Science_of_Pathogens ;
                         :birth_date "1968-12-11T00:00:00Z"^^xsd:dateTimeStamp ;
                         :employee_id "000-99-4321" ;
                         :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
@@ -1308,7 +1308,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Grace_Hopper
 :Grace_Hopper rdf:type owl:NamedIndividual ,
                        :Woman ;
-              :has_Employer :Harvard_University ;
+              :has_employer :Harvard_University ;
               :birth_date "1906-12-09T00:00:00Z"^^xsd:dateTimeStamp ;
               rdfs:label "Grace Hopper" .
 
@@ -1410,7 +1410,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Jennifer_Doudna
 :Jennifer_Doudna rdf:type owl:NamedIndividual ,
                           :Woman ;
-                 :has_Employer :University_of_California_Berkeley ;
+                 :has_employer :University_of_California_Berkeley ;
                  :birth_date "1964-02-19T00:00:00Z"^^xsd:dateTimeStamp ;
                  :employee_id "ucb-bio-1234" ;
                  :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
@@ -1463,7 +1463,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/John_von_Neumann
 :John_von_Neumann rdf:type owl:NamedIndividual ,
                            :Person ;
-                  :has_Employer :IBM ,
+                  :has_employer :IBM ,
                                 :Institute_For_Advanced_Study ;
                   :birth_date "1903-12-28T00:00:00Z"^^xsd:dateTimeStamp ;
                   :employee_id "999-00-1234" ,
@@ -1722,7 +1722,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Sam_Spade rdf:type owl:NamedIndividual ,
                     :Man ;
            :has_Address :Address_Of_Spade_Detective_Agency ;
-           :has_Employer :Sam_Spade ;
+           :has_employer :Sam_Spade ;
            :phone "(415) 555-1212" ;
            rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Maltese_Falcon_(novel)> ;
            rdfs:label "Sam Spade" .

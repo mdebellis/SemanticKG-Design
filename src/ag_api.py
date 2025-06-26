@@ -7,7 +7,7 @@ from franz.openrdf.vocabulary import RDF
 # However functions to create objects and set values assume all new objects go in
 # the main ontology so only need to pass them the last part of the IRI and they complete the
 # iri in the function using make_ontology_iri
-conn = ag_connect('Climate_Obstruction_Demo', host='localhost', port=10035, user='mdebellis', password='df1559')
+conn = ag_connect('People', host='localhost', port=10035, user='mdebellis', password='df1559')
 
 owl_named_individual = conn.createURI("http://www.w3.org/2002/07/owl#NamedIndividual")
 owl_datatype_property = conn.createURI("http://www.w3.org/2002/07/owl#DatatypeProperty")
@@ -17,7 +17,8 @@ owl_class = conn.createURI("http://www.w3.org/2002/07/owl#Class")
 rdfs_label_property = conn.createURI("http://www.w3.org/2000/01/rdf-schema#label")
 rdfs_is_defined_by_property = conn.createURI("http://www.w3.org/2000/01/rdf-schema#isDefinedBy")
 skos_pref_label_property = conn.createURI("http://www.w3.org/2004/02/skos/core#prefLabel")
-ontology_string = "https://www.michaeldebellis.com/climate_obstruction/"
+rdf_type_property = conn.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+ontology_string = "http://michaeldebellis.com/people/"
 gist_string = "https://w3id.org/semanticarts/ns/ontology/gist/"
 
 # Given the last part of an IRI will return the full IRI string
@@ -64,6 +65,8 @@ def find_property(prop_str):
     if prop == skos_pref_label_property:
         return prop
     if prop == rdfs_is_defined_by_property:
+        return prop
+    if prop == rdf_type_property:
         return prop
     for _ in conn.getStatements(prop, RDF.TYPE, owl_datatype_property):
         return prop

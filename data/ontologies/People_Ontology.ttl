@@ -1060,6 +1060,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
             rdfs:label "Antarctica" .
 
 
+###  http://michaeldebellis.com/people/Apple_Inc
+:Apple_Inc rdf:type owl:NamedIndividual ,
+                    :Corporation .
+
+
 ###  http://michaeldebellis.com/people/Ash
 :Ash rdf:type owl:NamedIndividual ,
               :Cat ;
@@ -1776,6 +1781,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
        rdfs:label "Steve" .
 
 
+###  http://michaeldebellis.com/people/Sun_Microsystems
+:Sun_Microsystems rdf:type owl:NamedIndividual ,
+                           :Corporation .
+
+
 ###  http://michaeldebellis.com/people/Susan_Doe
 :Susan_Doe rdf:type owl:NamedIndividual ,
                     :Person ;
@@ -1854,6 +1864,11 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                    :Cat ;
           :is_Pet_Of :Oriana ;
           rdfs:label "Whiskers" .
+
+
+###  http://michaeldebellis.com/people/Xerox_PARC
+:Xerox_PARC rdf:type owl:NamedIndividual ,
+                     :Research_Institute .
 
 
 #################################################################

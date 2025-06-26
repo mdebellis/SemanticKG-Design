@@ -1,10 +1,10 @@
-http://www.w3.org/1999/02/22-rdf-syntax-ns#type,http://michaeldebellis.com/people/birth_date,http://www.w3.org/2000/01/rdf-schema#label,http://michaeldebellis.com/people/has_employer,http://michaeldebellis.com/people/hired_on_date
-http://michaeldebellis.com/people/Man,1901-01-14T00:00:00,Alfred Tarski,http://michaeldebellis.com/people/University_of_California_Berkeley,1921-06-11T00:00:00
-http://michaeldebellis.com/people/Man,1940-01-01T00:00:00,John Sowa,http://michaeldebellis.com/people/IBM,1971-09-02T00:00:00
-http://michaeldebellis.com/people/Woman,1941-09-09T00:00:00,Dennis Ritchie,http://michaeldebellis.com/people/University_of_California_Berkeley,1977-09-21T00:00:00
-http://michaeldebellis.com/people/Woman,1925-01-30T00:00:00,Douglas Engelbart,http://michaeldebellis.com/people/University_of_California_Berkeley,1965-12-06T00:00:00
-http://michaeldebellis.com/people/Man,1940-05-17T00:00:00,Alan Kay,http://michaeldebellis.com/people/IBM,1962-02-17T00:00:00
-http://michaeldebellis.com/people/Man,1955-02-24T00:00:00,Steve Jobs,http://michaeldebellis.com/people/Apple_Inc,1987-08-14T00:00:00
-http://michaeldebellis.com/people/Woman,1950-08-11T00:00:00,Steve Wozniak,http://michaeldebellis.com/people/Apple_Inc,1975-03-23T00:00:00
-http://michaeldebellis.com/people/Man,1954-11-13T00:00:00,Scott McNealy,http://michaeldebellis.com/people/Sun_Microsystems,1976-11-02T00:00:00
-http://michaeldebellis.com/people/Man,1954-11-08T00:00:00,Bill Joy,http://michaeldebellis.com/people/Sun_Microsystems,1991-03-15T00:00:00
+http://www.w3.org/1999/02/22-rdf-syntax-ns#type,http://michaeldebellis.com/people/birth_date,http://www.w3.org/2000/01/rdf-schema#label,http://michaeldebellis.com/people/has_employer,http://michaeldebellis.com/people/hired_on_date,http://michaeldebellis.com/people/employee_id
+http://michaeldebellis.com/people/Man,1901-01-14T00:00:00,Alfred Tarski,http://michaeldebellis.com/people/University_of_California_Berkeley,1921-06-11T00:00:00,123-54-1234
+http://michaeldebellis.com/people/Man,1940-01-01T00:00:00,John Sowa,http://michaeldebellis.com/people/IBM,1971-09-02T00:00:00,312-99-1234
+http://michaeldebellis.com/people/Woman,1941-09-09T00:00:00,Dennis Ritchie,http://michaeldebellis.com/people/University_of_California_Berkeley,1977-09-21T00:00:00,
+http://michaeldebellis.com/people/Woman,1925-01-30T00:00:00,Douglas Engelbart,http://michaeldebellis.com/people/University_of_California_Berkeley,1965-12-06T00:00:00,abc-23-1234
+http://michaeldebellis.com/people/Man,1940-05-17T00:00:00,Alan Kay,http://michaeldebellis.com/people/IBM,1962-02-17T00:00:00,PARC OOP
+http://michaeldebellis.com/people/Man,1955-02-24T00:00:00,Steve Jobs,http://michaeldebellis.com/people/Apple_Inc,1987-08-14T00:00:00,321-54-12-6543
+http://michaeldebellis.com/people/Woman,1950-08-11T00:00:00,Steve Wozniak,http://michaeldebellis.com/people/Apple_Inc,1975-03-23T00:00:00,111-22-3333
+http://michaeldebellis.com/people/Man,1954-11-13T00:00:00,Scott McNealy,http://michaeldebellis.com/people/Sun_Microsystems,1976-11-02T00:00:00,222-33-1234
+http://michaeldebellis.com/people/Man,1954-11-08T00:00:00,Bill Joy,http://michaeldebellis.com/people/Sun_Microsystems,1991-03-15T00:00:00,333-44-4321

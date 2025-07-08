@@ -7,6 +7,14 @@ from franz.openrdf.vocabulary import RDF, OWL
 from franz.openrdf.vocabulary import RDF, RDFS
 from franz.openrdf.model import URI, Literal
 
+
+csv_path = r"C:\Users\mdebe\Documents\GitHub\SemanticKG-Design\data\data_for_pipeline\test_data_pipeline.csv"
+# file_class is the IRI for the class that the properties in the csv file apply to. I.e.,
+# when parsing the file, the system will search for an instance of that class and if one is
+# not found, then it will be created.
+file_class_str = "https://www.michaeldebellis.com/climate_obstruction/Report"
+file_class = conn.createURI(file_class_str)
+
 def get_expected_datatype(prop_iri):
     """
     Returns the expected datatype (as a URI) for a property if it's an owl:DatatypeProperty
@@ -20,14 +28,6 @@ def get_expected_datatype(prop_iri):
             return stmt.getObject()
 
     return None  # Means it's either an object property or no range declared
-
-
-csv_path = r"C:\Users\mdebe\Documents\GitHub\SemanticKG-Design\data\data_for_pipeline\test_data_pipeline.csv"
-# file_class is the IRI for the class that the properties in the csv file apply to. I.e.,
-# when parsing the file, the system will search for an instance of that class and if one is
-# not found, then it will be created.
-file_class_str = "https://www.michaeldebellis.com/climate_obstruction/Report"
-file_class = conn.createURI(file_class_str)
 
 def is_object_property(prop_iri):
     """

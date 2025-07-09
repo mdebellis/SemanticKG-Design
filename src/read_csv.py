@@ -97,7 +97,7 @@ def read_csv(path):
                 print(f'New Object Line {line_count}')
                 new_iri = conn.createURI(
                     ontology_string + str(uuid.uuid4()))
-                # conn.add(new_iri, RDF.TYPE, file_class)
+                # conn.add(new_iri, RDF.TYPE, file_class). Commented this out because the type is now a column in the CSV.
                 conn.add(new_iri, RDF.TYPE, owl_named_individual)
                 print(f'New individual {new_iri}')
                 while i < row_count:

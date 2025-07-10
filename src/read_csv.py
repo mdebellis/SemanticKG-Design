@@ -8,7 +8,7 @@ from franz.openrdf.vocabulary import RDF, RDFS
 from franz.openrdf.model import URI, Literal
 
 
-csv_path = r"C:\Users\mdebe\Documents\GitHub\SemanticKG-Design\data\data_for_pipeline\test_data_pipeline_2.csv"
+csv_path = r"C:\Users\mdebe\Documents\GitHub\SemanticKG-Design\data\data_for_pipeline\test_data_pipeline.csv"
 # file_class is the IRI for the class that the properties in the csv file apply to. I.e.,
 # when parsing the file, the system will search for an instance of that class and if one is
 # not found, then it will be created.

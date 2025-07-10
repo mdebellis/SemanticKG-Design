@@ -1,6 +1,6 @@
 http://www.w3.org/1999/02/22-rdf-syntax-ns#type,http://michaeldebellis.com/people/birth_date,http://www.w3.org/2000/01/rdf-schema#label,http://michaeldebellis.com/people/has_employer,http://michaeldebellis.com/people/hired_on_date
-http://michaeldebellis.com/people/Man,"""1901-01-14T00:00:00""^^xsd:dateTime",Alfred Tarski,http://michaeldebellis.com/people/University_of_California_Berkeley,1935-07-13T00:00:00
-http://michaeldebellis.com/people/Man,"""1940-01-01T00:00:00""^^xsd:dateTime",John Sowa,http://michaeldebellis.com/people/IBM,1968-07-24T00:00:00
+http://michaeldebellis.com/people/Man,1901-01-14T00:00:00,Alfred Tarski,http://michaeldebellis.com/people/University_of_California_Berkeley,1935-07-13T00:00:00
+http://michaeldebellis.com/people/Man,1940-01-01T00:00:00,John Sowa,http://michaeldebellis.com/people/IBM,1968-07-24T00:00:00
 http://michaeldebellis.com/people/Man,1941-09-09T00:00:00,Dennis Ritchie,http://michaeldebellis.com/people/University_of_California_Berkeley,1974-11-12T00:00:00
 http://michaeldebellis.com/people/Man,1925-01-30T00:00:00,Douglas Engelbart,http://michaeldebellis.com/people/University_of_California_Berkeley,1956-08-10T00:00:00
 http://michaeldebellis.com/people/Man,1940-05-17T00:00:00,Alan Kay,http://michaeldebellis.com/people/IBM,1972-11-06T00:00:00

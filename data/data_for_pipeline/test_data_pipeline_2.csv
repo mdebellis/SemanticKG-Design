@@ -1,0 +1,4 @@
+http://www.w3.org/1999/02/22-rdf-syntax-ns#type,http://www.w3.org/2000/01/rdf-schema#label,http://michaeldebellis.com/people/has_city,http://www.w3.org/2000/01/rdf-schema#isDefinedBy
+http://michaeldebellis.com/people/University,University of Illinois at Chicago,http://michaeldebellis.com/people/Chicago,https://www.uic.edu/
+http://michaeldebellis.com/people/University,University of California at Los Angeles (UCLA),http://michaeldebellis.com/people/Los_Angeles,https://www.ucla.edu/
+http://michaeldebellis.com/people/University,University of Chicago,http://michaeldebellis.com/people/Chicago,https://www.uchicago.edu/

@@ -167,13 +167,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
            rdfs:label "has child" .
 
 
-###  http://michaeldebellis.com/people/has_City
-:has_City rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :has_Location ;
-          rdfs:range :City ;
-          rdfs:label "has city" .
-
-
 ###  http://michaeldebellis.com/people/has_Colleague
 :has_Colleague rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :has_Social_Relationship ;
@@ -342,6 +335,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
           rdfs:subPropertyOf :has_Spouse ;
           rdfs:range :Woman ;
           rdfs:label "has wife" .
+
+
+###  http://michaeldebellis.com/people/has_city
+:has_city rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :has_Location ;
+          rdfs:range :City ;
+          rdfs:label "has city" .
 
 
 ###  http://michaeldebellis.com/people/has_employer
@@ -975,8 +975,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Address_Of_Marlow_Detective_Agency
 :Address_Of_Marlow_Detective_Agency rdf:type owl:NamedIndividual ,
                                              :Address ;
-                                    :has_City :Los_Angeles ;
                                     :has_State :California ;
+                                    :has_city :Los_Angeles ;
                                     :street "Hollywood Blvd." ,
                                             "the Cahuenga Building" ;
                                     rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Big_Sleep> ;
@@ -986,7 +986,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Address_Of_Sherlock_Holmes
 :Address_Of_Sherlock_Holmes rdf:type owl:NamedIndividual ,
                                      :Address ;
-                            :has_City :London ;
+                            :has_city :London ;
                             :street "221B Baker Street" ;
                             rdfs:label "Address Of Sherlock Holmes" .
 
@@ -994,8 +994,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Address_Of_Spade_Detective_Agency
 :Address_Of_Spade_Detective_Agency rdf:type owl:NamedIndividual ,
                                             :Address ;
-                                   :has_City :San_Francisco ;
                                    :has_State :California ;
+                                   :has_city :San_Francisco ;
                                    :street "617 Bush Street" ;
                                    rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Maltese_Falcon_(novel)> ;
                                    rdfs:label "Address Of Spade Detective Agency" .
@@ -1331,7 +1331,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Harvard_University
 :Harvard_University rdf:type owl:NamedIndividual ,
                              :University ;
-                    :has_City :Cambridge ;
+                    :has_city :Cambridge ;
                     rdfs:label "Harvard University" .
 
 
@@ -1373,7 +1373,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Institute_For_Advanced_Study
 :Institute_For_Advanced_Study rdf:type owl:NamedIndividual ,
                                        :Research_Institute ;
-                              :has_City :Princeton ;
+                              :has_city :Princeton ;
                               :is_Employer_Of :Albert_Einstein ;
                               rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Institute_for_Advanced_Study> ;
                               rdfs:label "Institute For Advanced Study" .
@@ -1489,7 +1489,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Kings_College
 :Kings_College rdf:type owl:NamedIndividual ,
                         :University ;
-               :has_City :London ;
+               :has_city :London ;
                :is_Employer_Of :Alan_Turing ;
                rdfs:label "Kings College" .
 
@@ -1582,7 +1582,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Massachusetts_Institute_of_Technology
 :Massachusetts_Institute_of_Technology rdf:type owl:NamedIndividual ,
                                                 :University ;
-                                       :has_City :Cambridge ;
+                                       :has_city :Cambridge ;
                                        :is_Employer_Of :Noam_Chomsky ;
                                        rdfs:isDefinedBy <https://web.mit.edu/> ;
                                        rdfs:label "Massachusetts Institute of Technology" .
@@ -1591,7 +1591,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/Max_Planck_Unit_for_the_Science_of_Pathogens
 :Max_Planck_Unit_for_the_Science_of_Pathogens rdf:type owl:NamedIndividual ,
                                                        :Research_Institute ;
-                                              :has_City :Berlin ;
+                                              :has_city :Berlin ;
                                               rdfs:label "Max Planck Institute for Infection Biology" .
 
 
@@ -1843,7 +1843,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/University_of_California_Berkeley
 :University_of_California_Berkeley rdf:type owl:NamedIndividual ,
                                             :University ;
-                                   :has_City :Berkeley ;
+                                   :has_city :Berkeley ;
                                    rdfs:isDefinedBy <https://www.berkeley.edu/> ;
                                    rdfs:label "University of California Berkeley" .
 
@@ -1851,7 +1851,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/University_of_Manchester
 :University_of_Manchester rdf:type owl:NamedIndividual ,
                                    :University ;
-                          :has_City :Manchester ;
+                          :has_city :Manchester ;
                           :is_Employer_Of :Alan_Turing ;
                           rdfs:label "University of Manchester" .
 
@@ -2051,7 +2051,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
    rdf:type swrl:Imp ;
    swrl:body [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
-                           swrl:propertyPredicate :has_City ;
+                           swrl:propertyPredicate :has_city ;
                            swrl:argument1 :address ;
                            swrl:argument2 :city
                          ] ;

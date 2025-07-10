@@ -39,3 +39,5 @@ people:EmployeeShape
         sh:datatype xsd:dateTime ;
         sh:minCount 1 ;
         sh:maxCount 1 ;] .
+
+# Load into graph: <http://michaeldebellis.com/people/test/> 

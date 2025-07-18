@@ -4,8 +4,19 @@ import os
 import shutil
 from src.read_csv import read_csv, conn
 import glob
+from prefect.schedules import CronSchedule
 
-# Define the source and destination directories
+
+def close_connection_hook(flow, flow_run, state):
+    """
+    A hook to close the database connection after the flow run completes.
+    """
+    from src.read_csv import conn
+    conn.close()
+    logger = prefect.get_run_logger()
+    logger.info("Database connection closed.")
+
+
 source_dir = 'data/data_for_pipeline'
 dest_dir = 'data/processed_data'
 
@@ -19,7 +30,6 @@ def process_csv_file(file_path):
         logger.info(f"Processing file: {file_path}")
         read_csv(file_path)
         
-        # Move the processed file to the destination directory
         file_name = os.path.basename(file_path)
         dest_path = os.path.join(dest_dir, file_name)
         shutil.move(file_path, dest_path)
@@ -28,7 +38,7 @@ def process_csv_file(file_path):
         logger.error(f"Failed to process file {file_path}: {e}")
         raise
 
-@flow(name="CSV Processing Pipeline")
+@flow(name="CSV Processing Pipeline", on_completion=[close_connection_hook])
 def csv_processing_pipeline():
     """
     A Prefect pipeline to process CSV files from a source directory
@@ -36,10 +46,9 @@ def csv_processing_pipeline():
     """
     logger = prefect.get_run_logger()
     
-    # Ensure the destination directory exists
+
     os.makedirs(dest_dir, exist_ok=True)
 
-    # Find all CSV files in the source directory
     csv_files = glob.glob(os.path.join(source_dir, '*.csv'))
     
     if not csv_files:
@@ -52,6 +61,7 @@ def csv_processing_pipeline():
         process_csv_file.submit(csv_file)
 
 if __name__ == "__main__":
-    csv_processing_pipeline()
-    # Close the AllegroGraph connection
-    conn.close() 
+    csv_processing_pipeline.serve(
+        name="daily-csv-processing-9am",
+        schedule=CronSchedule(cron="0 9 * * *", timezone="UTC"),
+    ) 

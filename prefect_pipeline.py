@@ -65,3 +65,4 @@ if __name__ == "__main__":
         name="daily-csv-processing-9am",
         schedule=CronSchedule(cron="0 9 * * *", timezone="UTC"),
     ) 
+    csv_processing_pipeline.visualize(filename="csv_pipeline_dag.png")

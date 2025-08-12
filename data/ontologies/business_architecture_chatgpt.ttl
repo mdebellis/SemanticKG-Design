@@ -1,0 +1,209 @@
+@prefix base: <http://michaeldebellis.com/business_architecture/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+base:accrues_into a owl:ObjectProperty ;
+    rdfs:label "accrues into" ;
+    rdfs:domain base:Value_Item ;
+    rdfs:range base:Value_Proposition .
+
+base:achieves a owl:ObjectProperty ;
+    rdfs:label "achieves" ;
+    rdfs:domain base:Capability,
+        base:Strategy ;
+    rdfs:range base:Objective,
+        base:Outcome .
+
+base:adopts a owl:ObjectProperty ;
+    rdfs:label "adopts" ;
+    rdfs:domain base:Business_Unit ;
+    rdfs:range base:Strategy .
+
+base:assigned_to a owl:ObjectProperty ;
+    rdfs:label "assigned to" ;
+    rdfs:domain base:Value_Item ;
+    rdfs:range base:Outcome .
+
+base:belongs_to a owl:ObjectProperty ;
+    rdfs:label "belongs to" ;
+    rdfs:domain base:Organization ;
+    rdfs:range base:Business_Unit .
+
+base:contains a owl:ObjectProperty ;
+    rdfs:label "contains" ;
+    rdfs:domain base:Value_Stream ;
+    rdfs:range base:Value_Stream_Stage .
+
+base:conveys_value_to a owl:ObjectProperty ;
+    rdfs:label "conveys value to" ;
+    rdfs:domain base:Value_Proposition ;
+    rdfs:range base:Stakeholder .
+
+base:decomposes_into a owl:ObjectProperty ;
+    rdfs:label "decomposes into" ;
+    rdfs:domain base:Capability ;
+    rdfs:range base:Capability .
+
+base:defines a owl:ObjectProperty ;
+    rdfs:label "defines" ;
+    rdfs:domain base:Stakeholder ;
+    rdfs:range base:Information_Concept .
+
+base:delivers a owl:ObjectProperty ;
+    rdfs:label "delivers" ;
+    rdfs:domain base:Business_Unit,
+        base:Organization,
+        base:Value_Stream ;
+    rdfs:range base:Product,
+        base:Value_Proposition .
+
+base:enables a owl:ObjectProperty ;
+    rdfs:label "enables" ;
+    rdfs:domain base:Capability,
+        base:Product ;
+    rdfs:range base:Capability,
+        base:Outcome .
+
+base:experienced_through a owl:ObjectProperty ;
+    rdfs:label "experienced through" ;
+    rdfs:domain base:Value_Stream_Stage ;
+    rdfs:range base:Value_Item .
+
+base:fulfills a owl:ObjectProperty ;
+    rdfs:label "fulfills" ;
+    rdfs:domain base:Value_Stream ;
+    rdfs:range base:Objective .
+
+base:guides a owl:ObjectProperty ;
+    rdfs:label "guides" ;
+    rdfs:domain base:Policy ;
+    rdfs:range base:Objective .
+
+base:impacts a owl:ObjectProperty ;
+    rdfs:label "impacts" ;
+    rdfs:domain base:Initiative,
+        base:Outcome,
+        base:Strategy ;
+    rdfs:range base:Objective,
+        base:Product .
+
+base:influences a owl:ObjectProperty ;
+    rdfs:label "influences" ;
+    rdfs:domain base:Policy ;
+    rdfs:range base:Organization,
+        base:Strategy .
+
+base:is_aligned_with a owl:ObjectProperty ;
+    rdfs:label "is aligned with" ;
+    rdfs:domain base:Strategy ;
+    rdfs:range base:Objective .
+
+base:is_associated_with a owl:ObjectProperty ;
+    rdfs:label "is associated with" ;
+    rdfs:domain base:Policy ;
+    rdfs:range base:Organization .
+
+base:modifies a owl:ObjectProperty ;
+    rdfs:label "modifies" ;
+    rdfs:domain base:Information_Concept ;
+    rdfs:range base:Capability .
+
+base:motivates a owl:ObjectProperty ;
+    rdfs:label "motivates" ;
+    rdfs:domain base:Policy ;
+    rdfs:range base:Initiative .
+
+base:owns a owl:ObjectProperty ;
+    rdfs:label "owns" ;
+    rdfs:domain base:Business_Unit,
+        base:Stakeholder ;
+    rdfs:range base:Product,
+        base:Strategy .
+
+base:participates_in a owl:ObjectProperty ;
+    rdfs:label "participates in" ;
+    rdfs:domain base:Stakeholder ;
+    rdfs:range base:Value_Stream_Stage .
+
+base:pursues a owl:ObjectProperty ;
+    rdfs:label "pursues" ;
+    rdfs:domain base:Organization ;
+    rdfs:range base:Objective .
+
+base:relates_to a owl:ObjectProperty ;
+    rdfs:label "relates to" ;
+    rdfs:domain base:Information_Concept,
+        base:Product ;
+    rdfs:range base:Capability,
+        base:Information_Concept .
+
+base:sets_direction_in a owl:ObjectProperty ;
+    rdfs:label "sets direction in" ;
+    rdfs:domain base:Policy ;
+    rdfs:range base:Objective .
+
+base:sponsors a owl:ObjectProperty ;
+    rdfs:label "sponsors" ;
+    rdfs:domain base:Business_Unit ;
+    rdfs:range base:Initiative .
+
+base:targets a owl:ObjectProperty ;
+    rdfs:label "targets" ;
+    rdfs:domain base:Value_Proposition ;
+    rdfs:range base:Outcome .
+
+base:triggers a owl:ObjectProperty ;
+    rdfs:label "triggers" ;
+    rdfs:domain base:Value_Stream ;
+    rdfs:range base:Stakeholder .
+
+base:uses a owl:ObjectProperty ;
+    rdfs:label "uses" ;
+    rdfs:domain base:Information_Concept ;
+    rdfs:range base:Capability .
+
+base:Initiative a owl:Class ;
+    rdfs:label "Initiative" .
+
+base:Value_Item a owl:Class ;
+    rdfs:label "Value Item" .
+
+base:Value_Stream_Stage a owl:Class ;
+    rdfs:label "Value Stream Stage" .
+
+base:Value_Proposition a owl:Class ;
+    rdfs:label "Value Proposition" .
+
+base:Value_Stream a owl:Class ;
+    rdfs:label "Value Stream" .
+
+base:Business_Unit a owl:Class ;
+    rdfs:label "Business Unit" .
+
+base:Information_Concept a owl:Class ;
+    rdfs:label "Information Concept" .
+
+base:Organization a owl:Class ;
+    rdfs:label "Organization" .
+
+base:Outcome a owl:Class ;
+    rdfs:label "Outcome" .
+
+base:Policy a owl:Class ;
+    rdfs:label "Policy" .
+
+base:Product a owl:Class ;
+    rdfs:label "Product" .
+
+base:Stakeholder a owl:Class ;
+    rdfs:label "Stakeholder" .
+
+base:Strategy a owl:Class ;
+    rdfs:label "Strategy" .
+
+base:Objective a owl:Class ;
+    rdfs:label "Objective" .
+
+base:Capability a owl:Class ;
+    rdfs:label "Capability" .
+

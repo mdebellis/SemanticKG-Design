@@ -89,13 +89,64 @@ gist:rangeIncludes rdf:type owl:AnnotationProperty ;
 
 
 #################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#duration
+xsd:duration rdf:type rdfs:Datatype .
+
+
+#################################################################
 #    Object Properties
 #################################################################
+
+###  https://michaeldebellis.com/GistWithKafka/commits_offset
+<https://michaeldebellis.com/GistWithKafka/commits_offset> rdf:type owl:ObjectProperty ;
+                                                           rdfs:domain <https://michaeldebellis.com/GistWithKafka/Consumer_Group> ;
+                                                           rdfs:range <https://michaeldebellis.com/GistWithKafka/Offset_Commit> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/conforms_to_schema
+<https://michaeldebellis.com/GistWithKafka/conforms_to_schema> rdf:type owl:ObjectProperty ;
+                                                               rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                               rdfs:range <https://michaeldebellis.com/GistWithKafka/Serialization_Schema> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/consumed_by
+<https://michaeldebellis.com/GistWithKafka/consumed_by> rdf:type owl:ObjectProperty ;
+                                                        rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                        rdfs:range <https://michaeldebellis.com/GistWithKafka/Consumer> .
+
 
 ###  https://michaeldebellis.com/GistWithKafka/has_broker
 <https://michaeldebellis.com/GistWithKafka/has_broker> rdf:type owl:ObjectProperty ;
                                                        rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Cluster> ;
                                                        rdfs:range <https://michaeldebellis.com/GistWithKafka/Event_Broker> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/has_header
+<https://michaeldebellis.com/GistWithKafka/has_header> rdf:type owl:ObjectProperty ;
+                                                       rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                       rdfs:range <https://michaeldebellis.com/GistWithKafka/Header> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/has_key
+<https://michaeldebellis.com/GistWithKafka/has_key> rdf:type owl:ObjectProperty ;
+                                                    rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                    rdfs:range <https://michaeldebellis.com/GistWithKafka/Key> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/has_leader_broker
+<https://michaeldebellis.com/GistWithKafka/has_leader_broker> rdf:type owl:ObjectProperty ,
+                                                                       owl:FunctionalProperty ;
+                                                              rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Partition> ;
+                                                              rdfs:range <https://michaeldebellis.com/GistWithKafka/Event_Broker> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/has_member
+<https://michaeldebellis.com/GistWithKafka/has_member> rdf:type owl:ObjectProperty ;
+                                                       rdfs:domain <https://michaeldebellis.com/GistWithKafka/Consumer_Group> ;
+                                                       rdfs:range <https://michaeldebellis.com/GistWithKafka/Consumer> .
 
 
 ###  https://michaeldebellis.com/GistWithKafka/has_partition
@@ -105,8 +156,51 @@ gist:rangeIncludes rdf:type owl:AnnotationProperty ;
                                                           rdfs:range <https://michaeldebellis.com/GistWithKafka/Event_Partition> .
 
 
+###  https://michaeldebellis.com/GistWithKafka/has_replica_broker
+<https://michaeldebellis.com/GistWithKafka/has_replica_broker> rdf:type owl:ObjectProperty ;
+                                                               rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Partition> ;
+                                                               rdfs:range <https://michaeldebellis.com/GistWithKafka/Event_Broker> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/in_cluster
+<https://michaeldebellis.com/GistWithKafka/in_cluster> rdf:type owl:ObjectProperty ;
+                                                       rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_System> ;
+                                                       rdfs:range <https://michaeldebellis.com/GistWithKafka/Event_Cluster> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/in_partition
+<https://michaeldebellis.com/GistWithKafka/in_partition> rdf:type owl:ObjectProperty ,
+                                                                  owl:FunctionalProperty ;
+                                                         rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                         rdfs:range <https://michaeldebellis.com/GistWithKafka/Event_Partition> .
+
+
 ###  https://michaeldebellis.com/GistWithKafka/is_partition_of
 <https://michaeldebellis.com/GistWithKafka/is_partition_of> rdf:type owl:ObjectProperty .
+
+
+###  https://michaeldebellis.com/GistWithKafka/on_partition
+<https://michaeldebellis.com/GistWithKafka/on_partition> rdf:type owl:ObjectProperty ;
+                                                         rdfs:domain <https://michaeldebellis.com/GistWithKafka/Offset_Commit> ;
+                                                         rdfs:range <https://michaeldebellis.com/GistWithKafka/Event_Partition> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/produced_by
+<https://michaeldebellis.com/GistWithKafka/produced_by> rdf:type owl:ObjectProperty ;
+                                                        rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                        rdfs:range <https://michaeldebellis.com/GistWithKafka/Producer> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/published_to_topic
+<https://michaeldebellis.com/GistWithKafka/published_to_topic> rdf:type owl:ObjectProperty ;
+                                                               rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                               rdfs:range <https://michaeldebellis.com/GistWithKafka/Event_Topic> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/subscribes_to_topic
+<https://michaeldebellis.com/GistWithKafka/subscribes_to_topic> rdf:type owl:ObjectProperty ;
+                                                                rdfs:domain <https://michaeldebellis.com/GistWithKafka/Consumer_Group> ;
+                                                                rdfs:range <https://michaeldebellis.com/GistWithKafka/Event_Topic> .
 
 
 ###  https://w3id.org/semanticarts/ns/ontology/gist/accepts
@@ -644,11 +738,139 @@ gist:requires rdf:type owl:ObjectProperty ;
 #    Data properties
 #################################################################
 
+###  https://michaeldebellis.com/GistWithKafka/broker_id
+<https://michaeldebellis.com/GistWithKafka/broker_id> rdf:type owl:DatatypeProperty ;
+                                                      rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Broker> ;
+                                                      rdfs:range xsd:nonNegativeInteger .
+
+
+###  https://michaeldebellis.com/GistWithKafka/cleanup_policy
+<https://michaeldebellis.com/GistWithKafka/cleanup_policy> rdf:type owl:DatatypeProperty ;
+                                                           rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Topic> ;
+                                                           rdfs:range xsd:string .
+
+
+###  https://michaeldebellis.com/GistWithKafka/commit_offset_value
+<https://michaeldebellis.com/GistWithKafka/commit_offset_value> rdf:type owl:DatatypeProperty ;
+                                                                rdfs:domain <https://michaeldebellis.com/GistWithKafka/Offset_Commit> ;
+                                                                rdfs:range xsd:nonNegativeInteger .
+
+
+###  https://michaeldebellis.com/GistWithKafka/commit_time
+<https://michaeldebellis.com/GistWithKafka/commit_time> rdf:type owl:DatatypeProperty ;
+                                                        rdfs:domain <https://michaeldebellis.com/GistWithKafka/Offset_Commit> ;
+                                                        rdfs:range xsd:dateTime .
+
+
+###  https://michaeldebellis.com/GistWithKafka/event_key_bytes
+<https://michaeldebellis.com/GistWithKafka/event_key_bytes> rdf:type owl:DatatypeProperty ;
+                                                            rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                            rdfs:range xsd:base64Binary .
+
+
+###  https://michaeldebellis.com/GistWithKafka/event_key_string
+<https://michaeldebellis.com/GistWithKafka/event_key_string> rdf:type owl:DatatypeProperty ;
+                                                             rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                             rdfs:range xsd:string .
+
+
+###  https://michaeldebellis.com/GistWithKafka/event_offset
+<https://michaeldebellis.com/GistWithKafka/event_offset> rdf:type owl:DatatypeProperty ,
+                                                                  owl:FunctionalProperty ;
+                                                         rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                         rdfs:range xsd:nonNegativeInteger ;
+                                                         rdfs:label "event_offset (ordering key within a partition)" .
+
+
+###  https://michaeldebellis.com/GistWithKafka/event_timestamp
+<https://michaeldebellis.com/GistWithKafka/event_timestamp> rdf:type owl:DatatypeProperty ;
+                                                            rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                            rdfs:range xsd:dateTime .
+
+
+###  https://michaeldebellis.com/GistWithKafka/header_name
+<https://michaeldebellis.com/GistWithKafka/header_name> rdf:type owl:DatatypeProperty ;
+                                                        rdfs:domain <https://michaeldebellis.com/GistWithKafka/Header> ;
+                                                        rdfs:range xsd:string .
+
+
+###  https://michaeldebellis.com/GistWithKafka/header_value_bytes
+<https://michaeldebellis.com/GistWithKafka/header_value_bytes> rdf:type owl:DatatypeProperty ;
+                                                               rdfs:domain <https://michaeldebellis.com/GistWithKafka/Header> ;
+                                                               rdfs:range xsd:base64Binary .
+
+
+###  https://michaeldebellis.com/GistWithKafka/header_value_string
+<https://michaeldebellis.com/GistWithKafka/header_value_string> rdf:type owl:DatatypeProperty ;
+                                                                rdfs:domain <https://michaeldebellis.com/GistWithKafka/Header> ;
+                                                                rdfs:range xsd:string .
+
+
+###  https://michaeldebellis.com/GistWithKafka/listener_address
+<https://michaeldebellis.com/GistWithKafka/listener_address> rdf:type owl:DatatypeProperty ;
+                                                             rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Broker> ;
+                                                             rdfs:range xsd:string .
+
+
+###  https://michaeldebellis.com/GistWithKafka/message_size_bytes
+<https://michaeldebellis.com/GistWithKafka/message_size_bytes> rdf:type owl:DatatypeProperty ;
+                                                               rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                               rdfs:range xsd:nonNegativeInteger .
+
+
+###  https://michaeldebellis.com/GistWithKafka/min_insync_replicas
+<https://michaeldebellis.com/GistWithKafka/min_insync_replicas> rdf:type owl:DatatypeProperty ;
+                                                                rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Topic> ;
+                                                                rdfs:range xsd:integer .
+
+
 ###  https://michaeldebellis.com/GistWithKafka/parition_number
 <https://michaeldebellis.com/GistWithKafka/parition_number> rdf:type owl:DatatypeProperty ,
                                                                      owl:FunctionalProperty ;
                                                             rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Partition> ;
                                                             rdfs:range xsd:integer .
+
+
+###  https://michaeldebellis.com/GistWithKafka/partition_id
+<https://michaeldebellis.com/GistWithKafka/partition_id> rdf:type owl:DatatypeProperty ;
+                                                         rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Partition> ;
+                                                         rdfs:range xsd:nonNegativeInteger .
+
+
+###  https://michaeldebellis.com/GistWithKafka/replication_factor
+<https://michaeldebellis.com/GistWithKafka/replication_factor> rdf:type owl:DatatypeProperty ;
+                                                               rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Topic> ;
+                                                               rdfs:range xsd:integer .
+
+
+###  https://michaeldebellis.com/GistWithKafka/retention_period
+<https://michaeldebellis.com/GistWithKafka/retention_period> rdf:type owl:DatatypeProperty ;
+                                                             rdfs:domain <https://michaeldebellis.com/GistWithKafka/Event_Topic> ;
+                                                             rdfs:range xsd:duration .
+
+
+###  https://michaeldebellis.com/GistWithKafka/schema_iri
+<https://michaeldebellis.com/GistWithKafka/schema_iri> rdf:type owl:DatatypeProperty ;
+                                                       rdfs:domain <https://michaeldebellis.com/GistWithKafka/Serialization_Schema> ;
+                                                       rdfs:range xsd:anyURI .
+
+
+###  https://michaeldebellis.com/GistWithKafka/schema_type
+<https://michaeldebellis.com/GistWithKafka/schema_type> rdf:type owl:DatatypeProperty ;
+                                                        rdfs:domain <https://michaeldebellis.com/GistWithKafka/Serialization_Schema> ;
+                                                        rdfs:range xsd:string .
+
+
+###  https://michaeldebellis.com/GistWithKafka/schema_version
+<https://michaeldebellis.com/GistWithKafka/schema_version> rdf:type owl:DatatypeProperty ;
+                                                           rdfs:domain <https://michaeldebellis.com/GistWithKafka/Serialization_Schema> ;
+                                                           rdfs:range xsd:string .
+
+
+###  https://michaeldebellis.com/GistWithKafka/value_bytes
+<https://michaeldebellis.com/GistWithKafka/value_bytes> rdf:type owl:DatatypeProperty ;
+                                                        rdfs:domain <https://michaeldebellis.com/GistWithKafka/Microservice_Event> ;
+                                                        rdfs:range xsd:base64Binary .
 
 
 ###  https://w3id.org/semanticarts/ns/ontology/gist/actualEndDate
@@ -1338,9 +1560,16 @@ gist:uniqueText rdf:type owl:DatatypeProperty ;
                                                      rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_Agent> .
 
 
+###  https://michaeldebellis.com/GistWithKafka/Consumer_Group
+<https://michaeldebellis.com/GistWithKafka/Consumer_Group> rdf:type owl:Class ;
+                                                           rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_System> ,
+                                                                           gist:Collection .
+
+
 ###  https://michaeldebellis.com/GistWithKafka/Event_Agent
 <https://michaeldebellis.com/GistWithKafka/Event_Agent> rdf:type owl:Class ;
-                                                        rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Software_Agent> .
+                                                        rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_System> ,
+                                                                        <https://michaeldebellis.com/GistWithKafka/Software_Agent> .
 
 
 ###  https://michaeldebellis.com/GistWithKafka/Event_Broker
@@ -1368,15 +1597,39 @@ gist:uniqueText rdf:type owl:DatatypeProperty ;
                                                         rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_System> .
 
 
+###  https://michaeldebellis.com/GistWithKafka/Header
+<https://michaeldebellis.com/GistWithKafka/Header> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_System> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/Key
+<https://michaeldebellis.com/GistWithKafka/Key> rdf:type owl:Class ;
+                                                rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_System> .
+
+
 ###  https://michaeldebellis.com/GistWithKafka/Microservice_Event
 <https://michaeldebellis.com/GistWithKafka/Microservice_Event> rdf:type owl:Class ;
                                                                rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_System> ,
-                                                                               gist:Event .
+                                                                               gist:Task ;
+                                                               owl:hasKey ( <https://michaeldebellis.com/GistWithKafka/event_offset>
+                                                                            <https://michaeldebellis.com/GistWithKafka/in_partition>
+                                                                          ) .
+
+
+###  https://michaeldebellis.com/GistWithKafka/Offset_Commit
+<https://michaeldebellis.com/GistWithKafka/Offset_Commit> rdf:type owl:Class ;
+                                                          rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_System> ,
+                                                                          gist:Task .
 
 
 ###  https://michaeldebellis.com/GistWithKafka/Producer
 <https://michaeldebellis.com/GistWithKafka/Producer> rdf:type owl:Class ;
                                                      rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_Agent> .
+
+
+###  https://michaeldebellis.com/GistWithKafka/Serialization_Schema
+<https://michaeldebellis.com/GistWithKafka/Serialization_Schema> rdf:type owl:Class ;
+                                                                 rdfs:subClassOf <https://michaeldebellis.com/GistWithKafka/Event_System> .
 
 
 ###  https://michaeldebellis.com/GistWithKafka/Software_Agent

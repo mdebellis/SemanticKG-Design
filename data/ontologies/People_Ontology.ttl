@@ -280,7 +280,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_Social_Relationship
 :has_Social_Relationship rdf:type owl:ObjectProperty ,
-                                  owl:SymmetricProperty ;
+                                  owl:SymmetricProperty ,
+                                  owl:IrreflexiveProperty ;
                          rdfs:domain :Person ;
                          rdfs:range :Person ;
                          rdfs:label "has social relationship" .

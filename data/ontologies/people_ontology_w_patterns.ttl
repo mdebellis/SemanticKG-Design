@@ -247,6 +247,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_Member
 :has_Member rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :has_Part ;
             owl:inverseOf :is_Member_Of ;
             rdfs:domain :Organization ;
             rdfs:range :Agent ;
@@ -267,6 +268,12 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
             rdfs:subPropertyOf :has_Family_Relationship ;
             rdf:type owl:IrreflexiveProperty ;
             rdfs:label "has parent" .
+
+
+###  http://michaeldebellis.com/people/has_Part
+:has_Part rdf:type owl:ObjectProperty ;
+          owl:inverseOf :is_Part_Of ;
+          rdfs:label "has part" .
 
 
 ###  http://michaeldebellis.com/people/has_Pet
@@ -328,13 +335,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/has_State
 :has_State rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf :has_Location ;
-           rdfs:domain :Address ;
            rdfs:range :State ;
            rdfs:label "has state" .
 
 
 ###  http://michaeldebellis.com/people/has_Subsidiary
 :has_Subsidiary rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :has_Part ;
                 owl:inverseOf :is_subsidiary_of ;
                 rdfs:domain :Organization ;
                 rdfs:range :Orgonization_Component ;
@@ -360,42 +367,24 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/has_city
 :has_city rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :has_Location ;
-          rdfs:domain :Address ;
           rdfs:range :City ;
           rdfs:label "has city" .
-
-
-###  http://michaeldebellis.com/people/has_component
-:has_component rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf :has_component_transitive ;
-               owl:inverseOf :is_component_of ;
-               dct:contributor "Michael DeBellis" ;
-               dct:created "2025-09-19T15:34:11Z"^^xsd:dateTime ;
-               rdfs:label "has component" .
-
-
-###  http://michaeldebellis.com/people/has_component_transitive
-:has_component_transitive rdf:type owl:ObjectProperty ,
-                                   owl:TransitiveProperty ;
-                          rdfs:label "has component transitive" .
 
 
 ###  http://michaeldebellis.com/people/has_employer
 :has_employer rdf:type owl:ObjectProperty ;
               owl:inverseOf :is_Employer_Of ;
-              rdfs:domain :Employee ;
+              rdfs:domain :Employment ;
               rdfs:range :Agent ;
               rdfs:label "has employer" .
 
 
-###  http://michaeldebellis.com/people/has_nation
-:has_nation rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :has_Location ;
-            rdfs:domain :Address ;
-            rdfs:range :Nation ;
-            dct:contributor "Michael DeBellis" ;
-            dct:created "2025-09-20T06:32:11Z"^^xsd:dateTime ;
-            rdfs:label "has nation" .
+###  http://michaeldebellis.com/people/has_employment
+:has_employment rdf:type owl:ObjectProperty ;
+                owl:inverseOf :is_employment_for ;
+                dct:contributor "Michael DeBellis" ;
+                dct:created "2025-09-16T20:09:05Z"^^xsd:dateTime ;
+                rdfs:label "has employment" .
 
 
 ###  http://michaeldebellis.com/people/is_Address_For
@@ -417,7 +406,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/is_Member_Of
 :is_Member_Of rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :is_Part_Of ;
               rdfs:label "is member of" .
+
+
+###  http://michaeldebellis.com/people/is_Part_Of
+:is_Part_Of rdf:type owl:ObjectProperty ;
+            rdfs:label "is part of" .
 
 
 ###  http://michaeldebellis.com/people/is_Pet_Of
@@ -434,22 +429,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
              rdfs:label "is uncle of" .
 
 
-###  http://michaeldebellis.com/people/is_component_of
-:is_component_of rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :is_component_of_transitive ;
-                 dct:contributor "Michael DeBellis" ;
-                 dct:created "2025-09-19T15:34:38Z"^^xsd:dateTime ;
-                 rdfs:label "is component of" .
-
-
-###  http://michaeldebellis.com/people/is_component_of_transitive
-:is_component_of_transitive rdf:type owl:ObjectProperty ,
-                                     owl:TransitiveProperty ;
-                            dct:contributor "Michael DeBellis" ;
-                            dct:created "2025-09-19T16:36:13Z"^^xsd:dateTime ;
-                            rdfs:label "is component of transitive" .
-
-
 ###  http://michaeldebellis.com/people/is_contained_in
 :is_contained_in rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf :is_contained_in_transitive ;
@@ -463,8 +442,16 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                             rdfs:label "is contained in transitive" .
 
 
+###  http://michaeldebellis.com/people/is_employment_for
+:is_employment_for rdf:type owl:ObjectProperty ;
+                   dct:contributor "Michael DeBellis" ;
+                   dct:created "2025-09-16T21:19:45Z"^^xsd:dateTime ;
+                   rdfs:label "is employment for" .
+
+
 ###  http://michaeldebellis.com/people/is_subsidiary_of
 :is_subsidiary_of rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :is_Part_Of ;
                   rdfs:label "is subsidiary of" .
 
 
@@ -475,7 +462,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/birth_date
 :birth_date rdf:type owl:DatatypeProperty ,
                      owl:FunctionalProperty ;
-            rdfs:domain :Agent ;
+            rdfs:domain :Living_Thing ;
             rdfs:range xsd:dateTime ;
             rdfs:label "birth date" .
 
@@ -483,13 +470,12 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/email
 :email rdf:type owl:DatatypeProperty ;
        rdfs:domain :Agent ;
-       rdfs:range xsd:anyURI ;
        rdfs:label "email" .
 
 
 ###  http://michaeldebellis.com/people/employee_id
 :employee_id rdf:type owl:DatatypeProperty ;
-             rdfs:domain :Employee ;
+             rdfs:domain :Employment ;
              rdfs:range rdfs:Literal ;
              rdfs:label "employee id" .
 
@@ -505,9 +491,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
          skos:prefLabel "has age" .
 
 
+###  http://michaeldebellis.com/people/has_title
+:has_title rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Employment ;
+           rdfs:range rdfs:Literal ;
+           dct:contributor "Michael DeBellis" ;
+           dct:created "2025-09-16T20:18:42Z"^^xsd:dateTime ;
+           rdfs:label "has title" .
+
+
 ###  http://michaeldebellis.com/people/hired_on_date
 :hired_on_date rdf:type owl:DatatypeProperty ;
-               rdfs:domain :Employee ;
+               rdfs:domain :Employment ;
                rdfs:range xsd:dateTime ;
                rdfs:label "hired on date" .
 
@@ -554,7 +549,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/zip
 :zip rdf:type owl:DatatypeProperty ;
      rdfs:domain :Address ;
-     rdfs:range rdfs:Literal ;
+     rdfs:range xsd:integer ;
      rdfs:label "zip" .
 
 
@@ -623,20 +618,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
      rdfs:label "Boy" .
 
 
-###  http://michaeldebellis.com/people/Bus
-:Bus rdf:type owl:Class ;
-     rdfs:subClassOf :Computer_Component ;
-     dct:contributor "Michael DeBellis" ;
-     dct:created "2025-09-19T15:38:27Z"^^xsd:dateTime .
-
-
-###  http://michaeldebellis.com/people/CPU
-:CPU rdf:type owl:Class ;
-     rdfs:subClassOf :Computer_Component ;
-     dct:contributor "Michael DeBellis" ;
-     dct:created "2025-09-19T15:38:27Z"^^xsd:dateTime .
-
-
 ###  http://michaeldebellis.com/people/Cat
 :Cat rdf:type owl:Class ;
      rdfs:subClassOf :Mammal ;
@@ -666,21 +647,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :City rdf:type owl:Class ;
       rdfs:subClassOf :Place ;
       rdfs:label "City" .
-
-
-###  http://michaeldebellis.com/people/Computer
-:Computer rdf:type owl:Class ;
-          rdfs:subClassOf :Product ;
-          dct:contributor "Michael DeBellis" ;
-          dct:created "2025-09-19T15:36:18Z"^^xsd:dateTime .
-
-
-###  http://michaeldebellis.com/people/Computer_Component
-:Computer_Component rdf:type owl:Class ;
-                    rdfs:subClassOf :Product ;
-                    dct:contributor "Michael DeBellis" ;
-                    dct:created "2025-09-19T15:37:18Z"^^xsd:dateTime ;
-                    rdfs:label "Computer Component" .
 
 
 ###  http://michaeldebellis.com/people/Continent
@@ -734,14 +700,22 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Employee rdf:type owl:Class ;
           owl:equivalentClass [ owl:intersectionOf ( :Person
                                                      [ rdf:type owl:Restriction ;
-                                                       owl:onProperty :has_employer ;
-                                                       owl:someValuesFrom :Agent
+                                                       owl:onProperty :has_employment ;
+                                                       owl:someValuesFrom :Employment
                                                      ]
                                                    ) ;
                                 rdf:type owl:Class
                               ] ;
           rdfs:subClassOf :Person ;
           rdfs:label "Employee" .
+
+
+###  http://michaeldebellis.com/people/Employment
+:Employment rdf:type owl:Class ;
+            rdfs:subClassOf :Relation ;
+            dct:contributor "Michael DeBellis" ;
+            dct:created "2025-09-16T20:09:25Z"^^xsd:dateTime ;
+            rdfs:label "Employment" .
 
 
 ###  http://michaeldebellis.com/people/Fish
@@ -853,13 +827,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
         rdfs:label "Insect" .
 
 
-###  http://michaeldebellis.com/people/Keyboard
-:Keyboard rdf:type owl:Class ;
-          rdfs:subClassOf :Computer_Component ;
-          dct:contributor "Michael DeBellis" ;
-          dct:created "2025-09-19T15:38:27Z"^^xsd:dateTime .
-
-
 ###  http://michaeldebellis.com/people/Larch
 :Larch rdf:type owl:Class ;
        rdfs:subClassOf :Tree ;
@@ -888,20 +855,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                            rdf:type owl:Class
                          ] ;
      rdfs:label "Man" .
-
-
-###  http://michaeldebellis.com/people/Monitor
-:Monitor rdf:type owl:Class ;
-         rdfs:subClassOf :Computer_Component ;
-         dct:contributor "Michael DeBellis" ;
-         dct:created "2025-09-19T15:38:27Z"^^xsd:dateTime .
-
-
-###  http://michaeldebellis.com/people/Motherboard
-:Motherboard rdf:type owl:Class ;
-             rdfs:subClassOf :Computer_Component ;
-             dct:contributor "Michael DeBellis" ;
-             dct:created "2025-09-19T15:38:27Z"^^xsd:dateTime .
 
 
 ###  http://michaeldebellis.com/people/Nation
@@ -966,12 +919,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
      rdfs:label "Pet" .
 
 
-###  http://michaeldebellis.com/people/Physical_Thing
-:Physical_Thing rdf:type owl:Class ;
-                dct:contributor "Michael DeBellis" ;
-                dct:created "2025-09-19T15:35:56Z"^^xsd:dateTime .
-
-
 ###  http://michaeldebellis.com/people/Place
 :Place rdf:type owl:Class ;
        rdfs:label "Place" .
@@ -989,30 +936,23 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
        rdfs:label "Plant" .
 
 
-###  http://michaeldebellis.com/people/Product
-:Product rdf:type owl:Class ;
-         rdfs:subClassOf :Physical_Thing ;
-         dct:contributor "Michael DeBellis" ;
-         dct:created "2025-09-19T18:40:21Z"^^xsd:dateTime .
-
-
 ###  http://michaeldebellis.com/people/Province
 :Province rdf:type owl:Class ;
           rdfs:subClassOf :Place ;
           rdfs:label "Province" .
 
 
-###  http://michaeldebellis.com/people/RAM
-:RAM rdf:type owl:Class ;
-     rdfs:subClassOf :Computer_Component ;
-     dct:contributor "Michael DeBellis" ;
-     dct:created "2025-09-19T15:38:27Z"^^xsd:dateTime .
-
-
 ###  http://michaeldebellis.com/people/Region
 :Region rdf:type owl:Class ;
         rdfs:subClassOf :Orgonization_Component ;
         rdfs:label "Region" .
+
+
+###  http://michaeldebellis.com/people/Relation
+:Relation rdf:type owl:Class ;
+          dct:contributor "Michael DeBellis" ;
+          dct:created "2025-09-16T20:09:47Z"^^xsd:dateTime ;
+          rdfs:label "Relation" .
 
 
 ###  http://michaeldebellis.com/people/Reptile
@@ -1148,8 +1088,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Alan_Turing rdf:type owl:NamedIndividual ,
                       :Man ;
              :has_Colleague :John_von_Neumann ;
-             :birth_date "1912-06-23T00:00:00Z"^^xsd:dateTime ;
-             :employee_id "999-99-9999" ;
              rdfs:label "Alan Turing" .
 
 
@@ -1159,8 +1097,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                  :has_Colleague :Emmy_Noether ,
                                 :John_von_Neumann ;
                  :birth_date "1879-03-14T00:00:00Z"^^xsd:dateTime ;
-                 :employee_id "999-99-1234" ;
-                 :hired_on_date "1933-10-01T00:00:00"^^xsd:dateTime ;
                  :nobel_prize_winner "true"^^xsd:boolean ;
                  :phone "+1 (609) 555-1234" ;
                  :wikidata <https://www.wikidata.org/wiki/Q937> ;
@@ -1244,6 +1180,16 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
            rdfs:label "Bell Labs" .
 
 
+###  http://michaeldebellis.com/people/Bell_Labs_Employment
+:Bell_Labs_Employment rdf:type owl:NamedIndividual ,
+                               :Employment ;
+                      :has_employer :Bell_Labs ;
+                      :is_employment_for :Claude_Shannon ;
+                      dct:contributor "Michael DeBellis" ;
+                      dct:created "2025-09-16T21:22:21Z"^^xsd:dateTime ;
+                      rdfs:label "Bell Labs Employment" .
+
+
 ###  http://michaeldebellis.com/people/Berkeley
 :Berkeley rdf:type owl:NamedIndividual ,
                    :City ;
@@ -1273,38 +1219,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Buddy rdf:type owl:NamedIndividual ,
                 :Dog ;
        rdfs:label "Buddy" .
-
-
-###  http://michaeldebellis.com/people/Bus1
-:Bus1 rdf:type owl:NamedIndividual ,
-               :Bus ;
-      dct:contributor "Michael DeBellis" ;
-      dct:created "2025-09-19T15:40:00Z"^^xsd:dateTime ;
-      rdfs:label "Bus1" .
-
-
-###  http://michaeldebellis.com/people/Bus2
-:Bus2 rdf:type owl:NamedIndividual ,
-               :Bus ;
-      dct:contributor "Michael DeBellis" ;
-      dct:created "2025-09-19T15:49:17Z"^^xsd:dateTime ;
-      rdfs:label "Bus2" .
-
-
-###  http://michaeldebellis.com/people/CPU1
-:CPU1 rdf:type owl:NamedIndividual ,
-               :CPU ;
-      dct:contributor "Michael DeBellis" ;
-      dct:created "2025-09-19T15:38:56Z"^^xsd:dateTime ;
-      rdfs:label "CPU1" .
-
-
-###  http://michaeldebellis.com/people/CPU2
-:CPU2 rdf:type owl:NamedIndividual ,
-               :CPU ;
-      dct:contributor "Michael DeBellis" ;
-      dct:created "2025-09-19T15:39:03Z"^^xsd:dateTime ;
-      rdfs:label "CPU2" .
 
 
 ###  http://michaeldebellis.com/people/California
@@ -1348,8 +1262,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                 :has_Colleague :Alan_Turing ;
                 :has_employer :Bell_Labs ;
                 :birth_date "1916-04-30T00:00:00Z"^^xsd:dateTime ;
-                :employee_id "abc-de-fghi" ;
-                :hired_on_date "1941-01-01T00:00:00"^^xsd:dateTime ;
                 :phone "+1 (609) 555-6789" ;
                 rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Claude_Shannon> ;
                 rdfs:label "Claude Shannon" .
@@ -1426,8 +1338,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                         :has_Colleague :Jennifer_Doudna ;
                         :has_employer :Max_Planck_Unit_for_the_Science_of_Pathogens ;
                         :birth_date "1968-12-11T00:00:00Z"^^xsd:dateTime ;
-                        :employee_id "000-99-4321" ;
-                        :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
                         :nobel_prize_winner "true"^^xsd:boolean ;
                         rdfs:label "Emmanuelle Charpentier" .
 
@@ -1497,6 +1407,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                rdfs:label "Gustav Mahler" .
 
 
+###  http://michaeldebellis.com/people/Harvard_Employment
+:Harvard_Employment rdf:type owl:NamedIndividual ,
+                             :Employment ;
+                    :is_employment_for :Grace_Hopper ;
+                    dct:contributor "Michael DeBellis" ;
+                    dct:created "2025-09-16T21:25:44Z"^^xsd:dateTime ;
+                    rdfs:label "Harvard Employment" .
+
+
 ###  http://michaeldebellis.com/people/Harvard_University
 :Harvard_University rdf:type owl:NamedIndividual ,
                              :University ;
@@ -1526,6 +1445,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
      rdfs:label "IBM" .
 
 
+###  http://michaeldebellis.com/people/IBM_Employment
+:IBM_Employment rdf:type owl:NamedIndividual ,
+                         :Employment ;
+                :has_employer :IBM ;
+                :is_employment_for :John_von_Neumann ;
+                :employee_id "999-00-4321" ;
+                :hired_on_date "1954-01-01T00:00:00"^^xsd:dateTime ;
+                dct:contributor "Michael DeBellis" ;
+                dct:created "2025-09-16T21:26:57Z"^^xsd:dateTime ;
+                rdfs:label "IBM Employment" .
+
+
 ###  http://michaeldebellis.com/people/Illinois
 :Illinois rdf:type owl:NamedIndividual ,
                    :State ;
@@ -1539,6 +1470,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
        rdfs:label "India" .
 
 
+###  http://michaeldebellis.com/people/Instititute_For_Advanced_Study_Employment_Einstein
+:Instititute_For_Advanced_Study_Employment_Einstein rdf:type owl:NamedIndividual ,
+                                                             :Employment ;
+                                                    :has_employer :Institute_For_Advanced_Study ;
+                                                    :is_employment_for :Albert_Einstein ;
+                                                    :employee_id "999-99-1234" ;
+                                                    :hired_on_date "1933-10-01T00:00:00"^^xsd:dateTime ;
+                                                    dct:contributor "Michael DeBellis" ;
+                                                    dct:created "2025-09-16T21:21:17Z"^^xsd:dateTime ;
+                                                    rdfs:label "Instititute For Advanced Study Employment Einstein" .
+
+
 ###  http://michaeldebellis.com/people/Institute_For_Advanced_Study
 :Institute_For_Advanced_Study rdf:type owl:NamedIndividual ,
                                        :Research_Institute ;
@@ -1546,6 +1489,17 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                               :is_Employer_Of :Albert_Einstein ;
                               rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Institute_for_Advanced_Study> ;
                               rdfs:label "Institute For Advanced Study" .
+
+
+###  http://michaeldebellis.com/people/Institute_For_Advanced_Study_Von_Neumann
+:Institute_For_Advanced_Study_Von_Neumann rdf:type owl:NamedIndividual ,
+                                                   :Employment ;
+                                          :has_employer :Institute_For_Advanced_Study ;
+                                          :is_employment_for :John_von_Neumann ;
+                                          :employee_id "999-00-1234" ;
+                                          dct:contributor "Michael DeBellis" ;
+                                          dct:created "2025-09-16T21:38:46Z"^^xsd:dateTime ;
+                                          rdfs:label "Institute For Advanced Study Von Neumann" .
 
 
 ###  http://michaeldebellis.com/people/James_Gatz
@@ -1588,8 +1542,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                           :Woman ;
                  :has_employer :University_of_California_Berkeley ;
                  :birth_date "1964-02-19T00:00:00Z"^^xsd:dateTime ;
-                 :employee_id "ucb-bio-1234" ;
-                 :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
                  :nobel_prize_winner "true"^^xsd:boolean ;
                  rdfs:label "Jennifer Doudna" .
 
@@ -1639,11 +1591,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/John_von_Neumann
 :John_von_Neumann rdf:type owl:NamedIndividual ,
                            :Person ;
-                  :has_employer :IBM ,
-                                :Institute_For_Advanced_Study ;
+                  :has_employer :IBM ;
                   :birth_date "1903-12-28T00:00:00Z"^^xsd:dateTime ;
-                  :employee_id "999-00-1234" ,
-                               "999-00-4321" ;
                   :hired_on_date "1954-01-01T00:00:00"^^xsd:dateTime ;
                   rdfs:label "John von Neumann" .
 
@@ -1655,28 +1604,21 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
               rdfs:label "Jordan Baker" .
 
 
-###  http://michaeldebellis.com/people/Keyboard1
-:Keyboard1 rdf:type owl:NamedIndividual ,
-                    :Keyboard ;
-           dct:contributor "Michael DeBellis" ;
-           dct:created "2025-09-19T15:39:18Z"^^xsd:dateTime ;
-           rdfs:label "Keyboard1" .
-
-
-###  http://michaeldebellis.com/people/Keyboard2
-:Keyboard2 rdf:type owl:NamedIndividual ,
-                    :Keyboard ;
-           dct:contributor "Michael DeBellis" ;
-           dct:created "2025-09-19T15:39:28Z"^^xsd:dateTime ;
-           rdfs:label "Keyboard2" .
-
-
 ###  http://michaeldebellis.com/people/Kings_College
 :Kings_College rdf:type owl:NamedIndividual ,
                         :University ;
                :has_city :London ;
                :is_Employer_Of :Alan_Turing ;
                rdfs:label "Kings College" .
+
+
+###  http://michaeldebellis.com/people/Kings_College_Employment
+:Kings_College_Employment rdf:type owl:NamedIndividual ,
+                                   :Employment ;
+                          :is_employment_for :Alan_Turing ;
+                          dct:contributor "Michael DeBellis" ;
+                          dct:created "2025-09-16T21:17:34Z"^^xsd:dateTime ;
+                          rdfs:label "Kings College Employment" .
 
 
 ###  http://michaeldebellis.com/people/Klara_Dan_Von_Neumann
@@ -1720,6 +1662,30 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Los_Angeles rdf:type owl:NamedIndividual ,
                       :City ;
              rdfs:label "Los Angeles" .
+
+
+###  http://michaeldebellis.com/people/MIT_Employment
+:MIT_Employment rdf:type owl:NamedIndividual ,
+                         :Employment ;
+                :has_employer :Massachusetts_Institute_of_Technology ;
+                :is_employment_for :Noam_Chomsky ;
+                :employee_id "MIT-1953" ;
+                :hired_on_date "1955-01-01T00:00:00"^^xsd:dateTime ;
+                dct:contributor "Michael DeBellis" ;
+                dct:created "2025-09-16T21:27:49Z"^^xsd:dateTime ;
+                rdfs:label "MIT Employment" .
+
+
+###  http://michaeldebellis.com/people/MP_Employment
+:MP_Employment rdf:type owl:NamedIndividual ,
+                        :Employment ;
+               :has_employer :Max_Planck_Unit_for_the_Science_of_Pathogens ;
+               :is_employment_for :Emmanuelle_Charpentier ;
+               :employee_id "000-99-4321" ;
+               :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
+               dct:contributor "Michael DeBellis" ;
+               dct:created "2025-09-16T21:24:27Z"^^xsd:dateTime ;
+               rdfs:label "MP Employment" .
 
 
 ###  http://michaeldebellis.com/people/Male
@@ -1806,44 +1772,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                rdfs:label "Miss Havisham" .
 
 
-###  http://michaeldebellis.com/people/Monitor1
-:Monitor1 rdf:type owl:NamedIndividual ,
-                   :Monitor ;
-          dct:contributor "Michael DeBellis" ;
-          dct:created "2025-09-19T15:50:25Z"^^xsd:dateTime ;
-          rdfs:label "Monitor1" .
-
-
-###  http://michaeldebellis.com/people/Monitor2
-:Monitor2 rdf:type owl:NamedIndividual ,
-                   :Monitor ;
-          dct:contributor "Michael DeBellis" ;
-          dct:created "2025-09-19T15:50:33Z"^^xsd:dateTime ;
-          rdfs:label "Monitor2" .
-
-
-###  http://michaeldebellis.com/people/Motherboard1
-:Motherboard1 rdf:type owl:NamedIndividual ,
-                       :Motherboard ;
-              :has_component :Bus1 ,
-                             :CPU1 ,
-                             :RAM1 ;
-              dct:contributor "Michael DeBellis" ;
-              dct:created "2025-09-19T15:39:40Z"^^xsd:dateTime ;
-              rdfs:label "Motherboard1" .
-
-
-###  http://michaeldebellis.com/people/Motherboard2
-:Motherboard2 rdf:type owl:NamedIndividual ,
-                       :Motherboard ;
-              :has_component :Bus2 ,
-                             :CPU2 ,
-                             :RAM2 ;
-              dct:contributor "Michael DeBellis" ;
-              dct:created "2025-09-19T15:39:49Z"^^xsd:dateTime ;
-              rdfs:label "Motherboard2" .
-
-
 ###  http://michaeldebellis.com/people/Muriel_Frances_Waley
 :Muriel_Frances_Waley rdf:type owl:NamedIndividual ,
                                :Woman ;
@@ -1878,9 +1806,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                        :Person ;
               :birth_date "1928-12-07T00:00:00Z"^^xsd:dateTime ;
               :email "chomsky@mit.edu"^^xsd:anyURI ;
-              :employee_id "MIT-1953" ;
               :has_age 96 ;
-              :hired_on_date "1955-01-01T00:00:00"^^xsd:dateTime ;
               :wikidata <https://www.wikidata.org/wiki/Q112150900> ;
               rdfs:isDefinedBy <https://chomsky.info/> ;
               rdfs:label "Noam Chomsky" .
@@ -1915,28 +1841,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                    rdfs:label "Oskar Morgenstern" .
 
 
-###  http://michaeldebellis.com/people/PC1
-:PC1 rdf:type owl:NamedIndividual ,
-              :Computer ;
-     :has_component :Keyboard1 ,
-                    :Monitor1 ,
-                    :Motherboard1 ;
-     dct:contributor "Michael DeBellis" ;
-     dct:created "2025-09-19T15:36:37Z"^^xsd:dateTime ;
-     rdfs:label "PC1" .
-
-
-###  http://michaeldebellis.com/people/PC2
-:PC2 rdf:type owl:NamedIndividual ,
-              :Computer ;
-     :has_component :Keyboard2 ,
-                    :Monitor2 ,
-                    :Motherboard2 ;
-     dct:contributor "Michael DeBellis" ;
-     dct:created "2025-09-19T15:37:03Z"^^xsd:dateTime ;
-     rdfs:label "PC2" .
-
-
 ###  http://michaeldebellis.com/people/Philip_Marlowe
 :Philip_Marlowe rdf:type owl:NamedIndividual ,
                          :Man ;
@@ -1948,22 +1852,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Princeton rdf:type owl:NamedIndividual ,
                     :City ;
            rdfs:label "Princeton" .
-
-
-###  http://michaeldebellis.com/people/RAM1
-:RAM1 rdf:type owl:NamedIndividual ,
-               :RAM ;
-      dct:contributor "Michael DeBellis" ;
-      dct:created "2025-09-19T15:49:39Z"^^xsd:dateTime ;
-      rdfs:label "RAM1" .
-
-
-###  http://michaeldebellis.com/people/RAM2
-:RAM2 rdf:type owl:NamedIndividual ,
-               :RAM ;
-      dct:contributor "Michael DeBellis" ;
-      dct:created "2025-09-19T15:50:00Z"^^xsd:dateTime ;
-      rdfs:label "RAM2" .
 
 
 ###  http://michaeldebellis.com/people/Rex
@@ -1994,6 +1882,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
            :phone "(415) 555-1212" ;
            rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Maltese_Falcon_(novel)> ;
            rdfs:label "Sam Spade" .
+
+
+###  http://michaeldebellis.com/people/Sam_Spade_Employment
+:Sam_Spade_Employment rdf:type owl:NamedIndividual ,
+                               :Employment ;
+                      :is_employment_for :Sam_Spade ;
+                      dct:contributor "Michael DeBellis" ;
+                      dct:created "2025-09-16T21:29:37Z"^^xsd:dateTime ;
+                      rdfs:label "Sam Spade Employment" .
 
 
 ###  http://michaeldebellis.com/people/San_Francisco
@@ -2082,6 +1979,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
          rdfs:label "Tom Doe" .
 
 
+###  http://michaeldebellis.com/people/UCB_Employment
+:UCB_Employment rdf:type owl:NamedIndividual ,
+                         :Employment ;
+                :has_employer :University_of_California_Berkeley ;
+                :is_employment_for :Jennifer_Doudna ;
+                :employee_id "ucb-bio-1234" ;
+                :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
+                dct:contributor "Michael DeBellis" ;
+                dct:created "2025-09-16T21:26:24Z"^^xsd:dateTime ;
+                rdfs:label "UCB Employment" .
+
+
 ###  http://michaeldebellis.com/people/USA
 :USA rdf:type owl:NamedIndividual ,
               :Nation ;
@@ -2155,17 +2064,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                 :Fish
                 :Mammal
                 :Reptile
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Bus
-                :CPU
-                :Keyboard
-                :Monitor
-                :Motherboard
-                :RAM
               )
 ] .
 

@@ -500,13 +500,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
            rdfs:label "has title" .
 
 
-###  http://michaeldebellis.com/people/hired_on_date
-:hired_on_date rdf:type owl:DatatypeProperty ;
-               rdfs:domain :Employment ;
-               rdfs:range xsd:dateTime ;
-               rdfs:label "hired on date" .
-
-
 ###  http://michaeldebellis.com/people/nobel_prize_winner
 :nobel_prize_winner rdf:type owl:DatatypeProperty ,
                              owl:FunctionalProperty ;
@@ -528,6 +521,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
        rdfs:domain :Agent ;
        rdfs:range rdfs:Literal ;
        rdfs:label "phone" .
+
+
+###  http://michaeldebellis.com/people/start_date
+:start_date rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Employment ;
+            rdfs:range xsd:dateTime ;
+            rdfs:label "start date" .
 
 
 ###  http://michaeldebellis.com/people/street
@@ -1450,8 +1450,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                          :Employment ;
                 :has_employer :IBM ;
                 :is_employment_for :John_von_Neumann ;
-                :employee_id "999-00-4321" ;
-                :hired_on_date "1954-01-01T00:00:00"^^xsd:dateTime ;
+                :employee_id "999-00-1234" ;
+                :start_date "1954-01-01T00:00:00"^^xsd:dateTime ;
                 dct:contributor "Michael DeBellis" ;
                 dct:created "2025-09-16T21:26:57Z"^^xsd:dateTime ;
                 rdfs:label "IBM Employment" .
@@ -1476,7 +1476,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                                     :has_employer :Institute_For_Advanced_Study ;
                                                     :is_employment_for :Albert_Einstein ;
                                                     :employee_id "999-99-1234" ;
-                                                    :hired_on_date "1933-10-01T00:00:00"^^xsd:dateTime ;
+                                                    :start_date "1933-10-01T00:00:00"^^xsd:dateTime ;
                                                     dct:contributor "Michael DeBellis" ;
                                                     dct:created "2025-09-16T21:21:17Z"^^xsd:dateTime ;
                                                     rdfs:label "Instititute For Advanced Study Employment Einstein" .
@@ -1497,9 +1497,10 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                           :has_employer :Institute_For_Advanced_Study ;
                                           :is_employment_for :John_von_Neumann ;
                                           :employee_id "999-00-1234" ;
+                                          :start_date "1933-01-01T00:00:00"^^xsd:dateTime ;
                                           dct:contributor "Michael DeBellis" ;
                                           dct:created "2025-09-16T21:38:46Z"^^xsd:dateTime ;
-                                          rdfs:label "Institute For Advanced Study Von Neumann" .
+                                          rdfs:label "Institute For Advanced Study Employment Von Neumann" .
 
 
 ###  http://michaeldebellis.com/people/James_Gatz
@@ -1593,8 +1594,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                            :Person ;
                   :has_employer :IBM ;
                   :birth_date "1903-12-28T00:00:00Z"^^xsd:dateTime ;
-                  :hired_on_date "1954-01-01T00:00:00"^^xsd:dateTime ;
-                  rdfs:label "John von Neumann" .
+                  rdfs:label "John Von Neumann" .
 
 
 ###  http://michaeldebellis.com/people/Jordan_Baker
@@ -1670,7 +1670,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                 :has_employer :Massachusetts_Institute_of_Technology ;
                 :is_employment_for :Noam_Chomsky ;
                 :employee_id "MIT-1953" ;
-                :hired_on_date "1955-01-01T00:00:00"^^xsd:dateTime ;
+                :start_date "1955-01-01T00:00:00"^^xsd:dateTime ;
                 dct:contributor "Michael DeBellis" ;
                 dct:created "2025-09-16T21:27:49Z"^^xsd:dateTime ;
                 rdfs:label "MIT Employment" .
@@ -1682,7 +1682,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                :has_employer :Max_Planck_Unit_for_the_Science_of_Pathogens ;
                :is_employment_for :Emmanuelle_Charpentier ;
                :employee_id "000-99-4321" ;
-               :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
+               :start_date "2002-01-01T00:00:00"^^xsd:dateTime ;
                dct:contributor "Michael DeBellis" ;
                dct:created "2025-09-16T21:24:27Z"^^xsd:dateTime ;
                rdfs:label "MP Employment" .
@@ -1985,7 +1985,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                 :has_employer :University_of_California_Berkeley ;
                 :is_employment_for :Jennifer_Doudna ;
                 :employee_id "ucb-bio-1234" ;
-                :hired_on_date "2002-01-01T00:00:00"^^xsd:dateTime ;
+                :start_date "2002-01-01T00:00:00"^^xsd:dateTime ;
                 dct:contributor "Michael DeBellis" ;
                 dct:created "2025-09-16T21:26:24Z"^^xsd:dateTime ;
                 rdfs:label "UCB Employment" .

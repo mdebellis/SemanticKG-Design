@@ -1,0 +1,81 @@
+# =========================================
+# ROBOT VERIFY TESTS — SemanticKG-Design
+# Convention: a failing test RETURNS rows
+# =========================================
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+# 1) Every class must have an English rdfs:label
+SELECT ?cls
+WHERE {
+  ?cls a owl:Class .
+  FILTER NOT EXISTS {
+    ?cls rdfs:label ?l .
+    FILTER(LANGMATCHES(LANG(?l), "en"))
+  }
+}
+# message: Missing @en rdfs:label on class
+
+# 2) Every object property must have an English rdfs:label
+SELECT ?p
+WHERE {
+  ?p a owl:ObjectProperty .
+  FILTER NOT EXISTS {
+    ?p rdfs:label ?l .
+    FILTER(LANGMATCHES(LANG(?l), "en"))
+  }
+}
+# message: Missing @en rdfs:label on object property
+
+# 3) All IRIs must use slash (/) not hash (#)
+SELECT ?bad
+WHERE {
+  VALUES ?t { owl:Class owl:ObjectProperty owl:DatatypeProperty owl:AnnotationProperty owl:NamedIndividual }
+  ?bad a ?t .
+  FILTER(CONTAINS(STR(?bad), "#"))
+}
+# message: IRI uses a fragment (#); use slash style IRIs
+
+# 4) Object property local names should be lowercase_with_underscores
+# (checks the last path segment; adjust your domain prefix as needed)
+SELECT ?p ?local
+WHERE {
+  ?p a owl:ObjectProperty .
+  BIND(STRAFTER(STR(?p), "https://www.michaeldebellis.com/") AS ?tail)
+  BIND(REPLACE(?tail, "^.*/", "") AS ?local)
+  FILTER(!REGEX(?local, "^[a-z0-9_]+$"))
+}
+# message: Object property local name is not lowercase_with_underscores
+
+# 5) Classes must not be unsatisfiable after reasoning (guard)
+SELECT ?cls
+WHERE {
+  ?cls a owl:Class .
+  FILTER(?cls != owl:Nothing)
+  FILTER EXISTS { ?cls owl:equivalentClass owl:Nothing }
+}
+# message: Class is equivalent to owl:Nothing (unsatisfiable)
+
+# 6) Preferred labels: if you use SKOS in BRO, require skos:definition @en when present
+SELECT ?entity
+WHERE {
+  VALUES ?t { owl:Class owl:ObjectProperty }
+  ?entity a ?t .
+  FILTER NOT EXISTS {
+    ?entity skos:definition ?d .
+    FILTER(LANGMATCHES(LANG(?d), "en"))
+  }
+}
+# message: Missing @en skos:definition
+
+# 7) Domain rule-of-thumb: forbid dangling domains/ranges to owl:Thing (optional)
+SELECT ?p
+WHERE {
+  ?p a owl:ObjectProperty .
+  VALUES ?ax { rdfs:domain rdfs:range }
+  ?p ?ax owl:Thing .
+}
+# message: Domain/range to owl:Thing; prefer a specific class or omit

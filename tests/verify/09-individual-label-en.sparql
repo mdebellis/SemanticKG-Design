@@ -1,0 +1,17 @@
+# 09-individual-label-en.sparql
+# Checks that all named individuals have an English rdfs:label (@en)
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+SELECT ?ind
+WHERE {
+  ?ind a owl:NamedIndividual .
+  FILTER NOT EXISTS {
+    ?ind rdfs:label ?l .
+    FILTER(LANGMATCHES(LANG(?l), "en"))
+  }
+}
+# message: Missing @en rdfs:label on individual
+

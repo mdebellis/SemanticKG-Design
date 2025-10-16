@@ -1,0 +1,9 @@
+# 03-no-hash-iris.sparql
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+SELECT ?bad
+WHERE {
+  VALUES ?t { owl:Class owl:ObjectProperty owl:DatatypeProperty owl:AnnotationProperty owl:NamedIndividual }
+  ?bad a ?t .
+  FILTER(CONTAINS(STR(?bad), "#"))
+}

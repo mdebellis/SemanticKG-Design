@@ -1,0 +1,12 @@
+# 01-class-label-en.sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+SELECT ?cls
+WHERE {
+  ?cls a owl:Class .
+  FILTER NOT EXISTS {
+    ?cls rdfs:label ?l .
+    FILTER(LANGMATCHES(LANG(?l), "en"))
+  }
+}

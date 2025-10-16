@@ -1,0 +1,15 @@
+# 
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?entity
+WHERE {
+  VALUES ?t { owl:Class owl:ObjectProperty }
+  ?entity a ?t .
+  FILTER NOT EXISTS {
+    ?entity skos:definition ?d .
+    FILTER(LANGMATCHES(LANG(?d), "en"))
+  }
+}
+
+

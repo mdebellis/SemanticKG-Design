@@ -1,0 +1,10 @@
+# 04-op-lowercase_underscores.sparql
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+SELECT ?p ?local
+WHERE {
+  ?p a owl:ObjectProperty .
+  BIND(STRAFTER(STR(?p), "https://www.michaeldebellis.com/") AS ?tail)
+  BIND(REPLACE(?tail, "^.*/", "") AS ?local)
+  FILTER(!REGEX(?local, "^[a-z0-9_]+$"))
+}

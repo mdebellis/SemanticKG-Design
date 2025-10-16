@@ -1,0 +1,30 @@
+# 10-detect-multiple-declarations.sparql
+################################################################################
+# Purpose: Detect entities (IRIs) declared with more than one OWL type.
+# Example: an IRI that appears both as an AnnotationProperty and a DataProperty,
+#          or both as an ObjectProperty and an Individual.
+#
+# Expected result: 0 results. Any returned entity has inconsistent declarations.
+#
+# Author: Michael DeBellis
+# Date: 2025-10-15
+################################################################################
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+SELECT ?entity (GROUP_CONCAT(DISTINCT ?type; separator=", ") AS ?declaredAs)
+WHERE {
+  VALUES ?typeClass {
+    owl:Class
+    owl:ObjectProperty
+    owl:DataProperty
+    owl:AnnotationProperty
+    owl:NamedIndividual
+  }
+  ?entity rdf:type ?typeClass .
+  BIND(STRAFTER(STR(?typeClass), "#") AS ?type)
+}
+GROUP BY ?entity
+HAVING (COUNT(DISTINCT ?type) > 1)
+ORDER BY ?entity

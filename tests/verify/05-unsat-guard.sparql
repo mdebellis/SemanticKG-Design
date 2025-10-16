@@ -1,0 +1,10 @@
+# 05-unsat-guard.sparql
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+SELECT ?cls
+WHERE {
+  ?cls a owl:Class .
+  FILTER(?cls != owl:Nothing)
+  FILTER EXISTS { ?cls owl:equivalentClass owl:Nothing }
+}
+

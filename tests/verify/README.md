@@ -228,3 +228,39 @@ logs/
 
 
 This provides an auditable record of ontology health over time and supports automated QA or release documentation.
+🧩 Example Log Output
+
+Below is an excerpt from a real verification run (shortened for readability):
+Running ontology verification suite against: http://localhost:7200/repositories/data-product
+Results will be logged to: ./logs/verify-2025-10-16_18-45-00.log
+------------------------------------------------------
+
+▶ Running 01-verify-prefixes.sparql
+------------------------------------------------------
+✅  Passed
+
+▶ Running 02-verify-language-tags.sparql
+------------------------------------------------------
+✅  Passed
+
+▶ Running 06-verify-dc-usage.sparql
+------------------------------------------------------
+entity
+------------------------------------------------------
+http://purl.org/dc/elements/1.1/title
+http://purl.org/dc/elements/1.1/creator
+⚠️  Issues detected in 06-verify-dc-usage.sparql
+
+▶ Running 10-detect-multiple-declarations.sparql
+------------------------------------------------------
+✅  Passed
+
+------------------------------------------------------
+Verification complete. Full results saved in ./logs/verify-2025-10-16_18-45-00.log
+🧭 Interpreting the Output
+
+✅ Passed: The SPARQL query returned zero rows (ontology conforms to the rule).
+
+⚠️ Issues detected: The query returned one or more rows. Review the entities listed and correct the source ontology.
+
+Each run’s full transcript is stored in /test/verify/logs/ for later comparison.

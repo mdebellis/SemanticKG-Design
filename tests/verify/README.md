@@ -207,3 +207,24 @@ echo "Verification complete."
 
 ---
 
+🧾 Automated Run Logs
+
+Every time you run run-verify.sh, results are stored in /test/verify/logs/ with a timestamped filename.
+Each log captures:
+
+The SPARQL endpoint tested
+
+The list of verification queries executed
+
+A ✅ for passes and ⚠️ for any detected issues
+
+Full SPARQL output for traceability
+
+Example:
+
+logs/
+ ├─ verify-2025-10-16_18-45-00.log
+ ├─ verify-2025-10-17_07-20-22.log
+
+
+This provides an auditable record of ontology health over time and supports automated QA or release documentation.

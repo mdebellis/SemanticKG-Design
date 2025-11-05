@@ -1,0 +1,152 @@
+@prefix : <http://www.michaeldebellis.com/restaurant_example/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.michaeldebellis.com/restaurant_example/> .
+
+<http://www.michaeldebellis.com/restaurant_example> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/contributor
+<http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/created
+<http://purl.org/dc/terms/created> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.michaeldebellis.com/restaurant_example/Expensive
+:Expensive rdf:type owl:Class ;
+           rdfs:subClassOf :Restaurants_By_Price ;
+           <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+           <http://purl.org/dc/terms/created> "2025-10-20T23:58:16Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/German
+:German rdf:type owl:Class ;
+        rdfs:subClassOf :Restaurants_By_Cuisine ;
+        <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+        <http://purl.org/dc/terms/created> "2025-10-20T23:59:01Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Indian
+:Indian rdf:type owl:Class ;
+        rdfs:subClassOf :Restaurants_By_Cuisine ;
+        <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+        <http://purl.org/dc/terms/created> "2025-10-20T23:59:01Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Inexpensive
+:Inexpensive rdf:type owl:Class ;
+             rdfs:subClassOf :Restaurants_By_Price ;
+             <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+             <http://purl.org/dc/terms/created> "2025-10-20T23:58:16Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Italian
+:Italian rdf:type owl:Class ;
+         rdfs:subClassOf :Restaurants_By_Cuisine ;
+         <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+         <http://purl.org/dc/terms/created> "2025-10-20T23:59:01Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Moderate
+:Moderate rdf:type owl:Class ;
+          rdfs:subClassOf :Restaurants_By_Price ;
+          <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+          <http://purl.org/dc/terms/created> "2025-10-20T23:58:16Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Restaurant
+:Restaurant rdf:type owl:Class ;
+            <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+            <http://purl.org/dc/terms/created> "2025-10-20T23:54:09Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Restaurants_By_Cuisine
+:Restaurants_By_Cuisine rdf:type owl:Class ;
+                        rdfs:subClassOf :Restaurant ;
+                        <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+                        <http://purl.org/dc/terms/created> "2025-10-20T23:55:16Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Restaurants_By_Price
+:Restaurants_By_Price rdf:type owl:Class ;
+                      rdfs:subClassOf :Restaurant ;
+                      <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+                      <http://purl.org/dc/terms/created> "2025-10-20T23:55:16Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Vegan
+:Vegan rdf:type owl:Class ;
+       rdfs:subClassOf :Restaurants_By_Cuisine ;
+       <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+       <http://purl.org/dc/terms/created> "2025-10-20T23:59:01Z"^^xsd:dateTime .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.michaeldebellis.com/restaurant_example/Diwali
+:Diwali rdf:type owl:NamedIndividual ,
+                 :Indian ,
+                 :Moderate ;
+        <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+        <http://purl.org/dc/terms/created> "2025-10-21T00:04:40Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Greens_Restaurant
+:Greens_Restaurant rdf:type owl:NamedIndividual ,
+                            :Expensive ,
+                            :Vegan ;
+                   <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+                   <http://purl.org/dc/terms/created> "2025-10-21T00:00:57Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Italian_Garden
+:Italian_Garden rdf:type owl:NamedIndividual ,
+                         :Expensive ,
+                         :Italian ;
+                <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+                <http://purl.org/dc/terms/created> "2025-10-21T00:03:21Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/Old_Luna_Restaurant
+:Old_Luna_Restaurant rdf:type owl:NamedIndividual ,
+                              :Italian ,
+                              :Moderate ;
+                     <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+                     <http://purl.org/dc/terms/created> "2025-10-21T00:02:44Z"^^xsd:dateTime .
+
+
+###  http://www.michaeldebellis.com/restaurant_example/The_Berghoff
+:The_Berghoff rdf:type owl:NamedIndividual ,
+                       :German ,
+                       :Moderate ;
+              <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
+              <http://purl.org/dc/terms/created> "2025-10-20T23:59:34Z"^^xsd:dateTime .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Expensive
+                :Inexpensive
+                :Moderate
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

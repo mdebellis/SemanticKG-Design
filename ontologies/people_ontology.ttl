@@ -169,74 +169,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
               rdfs:label "greater than" .
 
 
-###  http://michaeldebellis.com/people/has_Address
-:has_Address rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :has_Location ;
-             owl:inverseOf :is_Address_For ;
+###  http://michaeldebellis.com/people/has_address
+:has_address rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :has_location ;
+             owl:inverseOf :is_address_for ;
              rdfs:domain :Agent ;
              rdfs:range :Address ;
              rdfs:label "has address" .
-
-
-###  http://michaeldebellis.com/people/has_Colleague
-:has_Colleague rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf :has_Social_Relationship ;
-               rdf:type owl:SymmetricProperty ,
-                        owl:IrreflexiveProperty ;
-               rdfs:label "has colleague" .
-
-
-###  http://michaeldebellis.com/people/has_Gender
-:has_Gender rdf:type owl:ObjectProperty ,
-                     owl:FunctionalProperty ;
-            rdfs:domain :Animal ;
-            rdfs:range :Gender ;
-            rdfs:label "has gender" .
-
-
-###  http://michaeldebellis.com/people/has_Location
-:has_Location rdf:type owl:ObjectProperty ;
-              rdfs:range :Place ;
-              rdfs:label "has location" .
-
-
-###  http://michaeldebellis.com/people/has_Member
-:has_Member rdf:type owl:ObjectProperty ;
-            owl:inverseOf :is_Member_Of ;
-            rdfs:domain :Organization ;
-            rdfs:range :Agent ;
-            rdfs:label "has member" .
-
-
-###  http://michaeldebellis.com/people/has_Pet
-:has_Pet rdf:type owl:ObjectProperty ;
-         owl:inverseOf :is_Pet_Of ;
-         rdfs:label "has pet" .
-
-
-###  http://michaeldebellis.com/people/has_Social_Relationship
-:has_Social_Relationship rdf:type owl:ObjectProperty ,
-                                  owl:SymmetricProperty ,
-                                  owl:IrreflexiveProperty ;
-                         rdfs:domain :Person ;
-                         rdfs:range :Person ;
-                         rdfs:label "has social relationship" .
-
-
-###  http://michaeldebellis.com/people/has_State
-:has_State rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf :has_Location ;
-           rdfs:domain :Address ;
-           rdfs:range :State ;
-           rdfs:label "has state" .
-
-
-###  http://michaeldebellis.com/people/has_Subsidiary
-:has_Subsidiary rdf:type owl:ObjectProperty ;
-                owl:inverseOf :is_subsidiary_of ;
-                rdfs:domain :Organization ;
-                rdfs:range :Orgonization_Component ;
-                rdfs:label "has subsidiary" .
 
 
 ###  http://michaeldebellis.com/people/has_aunt
@@ -269,10 +208,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_city
 :has_city rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :has_Location ;
+          rdfs:subPropertyOf :has_location ;
           rdfs:domain :Address ;
           rdfs:range :City ;
           rdfs:label "has city" .
+
+
+###  http://michaeldebellis.com/people/has_colleague
+:has_colleague rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :has_social_relationship ;
+               rdf:type owl:SymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:label "has colleague" .
 
 
 ###  http://michaeldebellis.com/people/has_component
@@ -304,7 +251,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_employer
 :has_employer rdf:type owl:ObjectProperty ;
-              owl:inverseOf :is_Employer_Of ;
+              owl:inverseOf :is_employer_of ;
               rdfs:domain :Employee ;
               rdfs:range :Agent ;
               rdfs:label "has employer" .
@@ -312,7 +259,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_family_relationship
 :has_family_relationship rdf:type owl:ObjectProperty ;
-                         rdfs:subPropertyOf :has_Social_Relationship ;
+                         rdfs:subPropertyOf :has_social_relationship ;
                          rdf:type owl:IrreflexiveProperty ;
                          rdfs:label "has family relationship" .
 
@@ -328,10 +275,18 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_friend
 :has_friend rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :has_Social_Relationship ;
+            rdfs:subPropertyOf :has_social_relationship ;
             rdf:type owl:SymmetricProperty ,
                      owl:IrreflexiveProperty ;
             rdfs:label "has friend" .
+
+
+###  http://michaeldebellis.com/people/has_gender
+:has_gender rdf:type owl:ObjectProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :Animal ;
+            rdfs:range :Gender ;
+            rdfs:label "has gender" .
 
 
 ###  http://michaeldebellis.com/people/has_higher_seniority_than
@@ -353,12 +308,26 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
              rdfs:label "has husband" .
 
 
+###  http://michaeldebellis.com/people/has_location
+:has_location rdf:type owl:ObjectProperty ;
+              rdfs:range :Place ;
+              rdfs:label "has location" .
+
+
 ###  http://michaeldebellis.com/people/has_lower_seniority_than
 :has_lower_seniority_than rdf:type owl:ObjectProperty ,
                                    owl:TransitiveProperty ;
                           dct:contributor "Michael DeBellis" ;
                           dct:created "2025-10-01T18:31:14Z"^^xsd:dateTime ;
                           rdfs:label "has lower seniority than" .
+
+
+###  http://michaeldebellis.com/people/has_member
+:has_member rdf:type owl:ObjectProperty ;
+            owl:inverseOf :is_member_of ;
+            rdfs:domain :Organization ;
+            rdfs:range :Agent ;
+            rdfs:label "has member" .
 
 
 ###  http://michaeldebellis.com/people/has_mother
@@ -372,7 +341,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://michaeldebellis.com/people/has_nation
 :has_nation rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf :has_Location ;
+            rdfs:subPropertyOf :has_location ;
             rdfs:domain :Address ;
             rdfs:range :Nation ;
             dct:contributor "Michael DeBellis" ;
@@ -385,6 +354,12 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
             rdfs:subPropertyOf :has_family_relationship ;
             rdf:type owl:IrreflexiveProperty ;
             rdfs:label "has parent" .
+
+
+###  http://michaeldebellis.com/people/has_pet
+:has_pet rdf:type owl:ObjectProperty ;
+         owl:inverseOf :is_pet_of ;
+         rdfs:label "has pet" .
 
 
 ###  http://michaeldebellis.com/people/has_role
@@ -409,10 +384,19 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
             rdfs:subPropertyOf :has_sibling ;
             rdf:type owl:IrreflexiveProperty ;
             rdfs:range [ rdf:type owl:Restriction ;
-                         owl:onProperty :has_Gender ;
+                         owl:onProperty :has_gender ;
                          owl:hasValue :Female
                        ] ;
             rdfs:label "has sister" .
+
+
+###  http://michaeldebellis.com/people/has_social_relationship
+:has_social_relationship rdf:type owl:ObjectProperty ,
+                                  owl:SymmetricProperty ,
+                                  owl:IrreflexiveProperty ;
+                         rdfs:domain :Person ;
+                         rdfs:range :Person ;
+                         rdfs:label "has social relationship" .
 
 
 ###  http://michaeldebellis.com/people/has_son
@@ -435,6 +419,22 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
             rdfs:domain :Adult ;
             rdfs:range :Adult ;
             rdfs:label "has spouse" .
+
+
+###  http://michaeldebellis.com/people/has_state
+:has_state rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :has_location ;
+           rdfs:domain :Address ;
+           rdfs:range :State ;
+           rdfs:label "has state" .
+
+
+###  http://michaeldebellis.com/people/has_subsidiary
+:has_subsidiary rdf:type owl:ObjectProperty ;
+                owl:inverseOf :is_subsidiary_of ;
+                rdfs:domain :Organization ;
+                rdfs:range :Orgonization_Component ;
+                rdfs:label "has subsidiary" .
 
 
 ###  http://michaeldebellis.com/people/has_uncle
@@ -462,26 +462,9 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
           rdfs:label "has wife" .
 
 
-###  http://michaeldebellis.com/people/is_Address_For
-:is_Address_For rdf:type owl:ObjectProperty ;
+###  http://michaeldebellis.com/people/is_address_for
+:is_address_for rdf:type owl:ObjectProperty ;
                 rdfs:label "is address for" .
-
-
-###  http://michaeldebellis.com/people/is_Employer_Of
-:is_Employer_Of rdf:type owl:ObjectProperty ;
-                rdfs:label "is employer of" .
-
-
-###  http://michaeldebellis.com/people/is_Member_Of
-:is_Member_Of rdf:type owl:ObjectProperty ;
-              rdfs:label "is member of" .
-
-
-###  http://michaeldebellis.com/people/is_Pet_Of
-:is_Pet_Of rdf:type owl:ObjectProperty ;
-           rdfs:domain :Pet ;
-           rdfs:range :Human ;
-           rdfs:label "is pet of" .
 
 
 ###  http://michaeldebellis.com/people/is_aunt_of
@@ -518,6 +501,23 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :is_contained_in_transitive rdf:type owl:ObjectProperty ,
                                      owl:TransitiveProperty ;
                             rdfs:label "is contained in transitive" .
+
+
+###  http://michaeldebellis.com/people/is_employer_of
+:is_employer_of rdf:type owl:ObjectProperty ;
+                rdfs:label "is employer of" .
+
+
+###  http://michaeldebellis.com/people/is_member_of
+:is_member_of rdf:type owl:ObjectProperty ;
+              rdfs:label "is member of" .
+
+
+###  http://michaeldebellis.com/people/is_pet_of
+:is_pet_of rdf:type owl:ObjectProperty ;
+           rdfs:domain :Pet ;
+           rdfs:range :Human ;
+           rdfs:label "is pet of" .
 
 
 ###  http://michaeldebellis.com/people/is_subsidiary_of
@@ -732,7 +732,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Boy rdf:type owl:Class ;
      owl:equivalentClass [ owl:intersectionOf ( :Child
                                                 [ rdf:type owl:Restriction ;
-                                                  owl:onProperty :has_Gender ;
+                                                  owl:onProperty :has_gender ;
                                                   owl:hasValue :Male
                                                 ]
                                               ) ;
@@ -938,7 +938,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Girl rdf:type owl:Class ;
       owl:equivalentClass [ owl:intersectionOf ( :Child
                                                  [ rdf:type owl:Restriction ;
-                                                   owl:onProperty :has_Gender ;
+                                                   owl:onProperty :has_gender ;
                                                    owl:hasValue :Female
                                                  ]
                                                ) ;
@@ -996,7 +996,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Hermit rdf:type owl:Class ;
         owl:equivalentClass [ owl:intersectionOf ( :Person
                                                    [ rdf:type owl:Restriction ;
-                                                     owl:onProperty :has_Social_Relationship ;
+                                                     owl:onProperty :has_social_relationship ;
                                                      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
                                                      owl:onClass :Person
                                                    ]
@@ -1048,7 +1048,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Man rdf:type owl:Class ;
      owl:equivalentClass [ owl:intersectionOf ( :Adult
                                                 [ rdf:type owl:Restriction ;
-                                                  owl:onProperty :has_Gender ;
+                                                  owl:onProperty :has_gender ;
                                                   owl:hasValue :Male
                                                 ]
                                               ) ;
@@ -1132,7 +1132,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                                   owl:complementOf :Human
                                                 ]
                                                 [ rdf:type owl:Restriction ;
-                                                  owl:onProperty :is_Pet_Of ;
+                                                  owl:onProperty :is_pet_of ;
                                                   owl:someValuesFrom :Human
                                                 ]
                                               ) ;
@@ -1243,7 +1243,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Social_Person rdf:type owl:Class ;
                owl:equivalentClass [ owl:intersectionOf ( :Person
                                                           [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :has_Social_Relationship ;
+                                                            owl:onProperty :has_social_relationship ;
                                                             owl:minQualifiedCardinality "5"^^xsd:nonNegativeInteger ;
                                                             owl:onClass :Person
                                                           ]
@@ -1337,7 +1337,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Woman rdf:type owl:Class ;
        owl:equivalentClass [ owl:intersectionOf ( :Adult
                                                   [ rdf:type owl:Restriction ;
-                                                    owl:onProperty :has_Gender ;
+                                                    owl:onProperty :has_gender ;
                                                     owl:hasValue :Female
                                                   ]
                                                 ) ;
@@ -1364,8 +1364,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Address_Of_Marlow_Detective_Agency rdf:type owl:NamedIndividual ,
                                              :Address ,
                                              :Test_Data ;
-                                    :has_State :California ;
                                     :has_city :Los_Angeles ;
+                                    :has_state :California ;
                                     :street "Hollywood Blvd." ,
                                             "the Cahuenga Building" ;
                                     rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Big_Sleep> ;
@@ -1385,8 +1385,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Address_Of_Spade_Detective_Agency rdf:type owl:NamedIndividual ,
                                             :Address ,
                                             :Test_Data ;
-                                   :has_State :California ;
                                    :has_city :San_Francisco ;
+                                   :has_state :California ;
                                    :street "617 Bush Street" ;
                                    rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Maltese_Falcon_(novel)> ;
                                    rdfs:label "Address Of Spade Detective Agency" .
@@ -1403,7 +1403,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Alan_Turing rdf:type owl:NamedIndividual ,
                       :Man ,
                       :Test_Data ;
-             :has_Colleague :John_von_Neumann ;
+             :has_colleague :John_von_Neumann ;
              :birth_date "1912-06-23T00:00:00Z"^^xsd:dateTime ;
              :employee_id "999-99-9999" ;
              rdfs:label "Alan Turing" .
@@ -1413,7 +1413,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Albert_Einstein rdf:type owl:NamedIndividual ,
                           :Man ,
                           :Test_Data ;
-                 :has_Colleague :Emmy_Noether ,
+                 :has_colleague :Emmy_Noether ,
                                 :John_von_Neumann ;
                  :birth_date "1879-03-14T00:00:00Z"^^xsd:dateTime ;
                  :employee_id "999-99-1234" ;
@@ -1429,9 +1429,9 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Allison rdf:type owl:NamedIndividual ,
                   :Human ,
                   :Test_Data ;
-         :has_Gender :Female ;
-         :has_Pet :Ash ;
          :has_friend :Michael ;
+         :has_gender :Female ;
+         :has_pet :Ash ;
          :has_age 28 ;
          rdfs:label "Allison" .
 
@@ -1448,7 +1448,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Alonzo_Church rdf:type owl:NamedIndividual ,
                         :Man ,
                         :Test_Data ;
-               :has_Colleague :Alan_Turing ;
+               :has_colleague :Alan_Turing ;
                rdfs:label "Alonzo Church" .
 
 
@@ -1613,7 +1613,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Celeste_Albaret rdf:type owl:NamedIndividual ,
                           :Person ,
                           :Test_Data ;
-                 :has_Social_Relationship :Marcel_Proust ;
+                 :has_social_relationship :Marcel_Proust ;
                  rdfs:label "Céleste Albaret" .
 
 
@@ -1635,7 +1635,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Claude_Shannon rdf:type owl:NamedIndividual ,
                          :Man ,
                          :Test_Data ;
-                :has_Colleague :Alan_Turing ;
+                :has_colleague :Alan_Turing ;
                 :has_employer :Bell_Labs ;
                 :birth_date "1916-04-30T00:00:00Z"^^xsd:dateTime ;
                 :employee_id "abc-de-fghi" ;
@@ -1685,7 +1685,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Dinsdale_Piranha rdf:type owl:NamedIndividual ,
                            :Man ,
                            :Test_Data ;
-                  :has_Pet :Spiny_Norman ;
+                  :has_pet :Spiny_Norman ;
                   rdfs:isDefinedBy <https://www.youtube.com/watch?v=8ZkWL-XvO0U> ;
                   rdfs:label "Dinsdale Piranha" .
 
@@ -1740,7 +1740,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Emmanuelle_Charpentier rdf:type owl:NamedIndividual ,
                                  :Test_Data ,
                                  :Woman ;
-                        :has_Colleague :Jennifer_Doudna ;
+                        :has_colleague :Jennifer_Doudna ;
                         :has_employer :Max_Planck_Unit_for_the_Science_of_Pathogens ;
                         :birth_date "1968-12-11T00:00:00Z"^^xsd:dateTime ;
                         :employee_id "000-99-4321" ;
@@ -1851,7 +1851,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :HenryCGatz rdf:type owl:NamedIndividual ,
                      :Man ,
                      :Test_Data ;
-            :has_Pet :Fido ;
+            :has_pet :Fido ;
             rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
             rdfs:label "Henry C. Gatz" .
 
@@ -1901,7 +1901,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                        :Research_Institute ,
                                        :Test_Data ;
                               :has_city :Princeton ;
-                              :is_Employer_Of :Albert_Einstein ;
+                              :is_employer_of :Albert_Einstein ;
                               rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Institute_for_Advanced_Study> ;
                               rdfs:label "Institute For Advanced Study" .
 
@@ -1936,10 +1936,10 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                      :Man ,
                      :Test_Data ;
             owl:differentFrom :Jordan_Baker ;
-            :has_Social_Relationship :Daisy_Buchanan ,
+            :has_friend :Nick_Carraway ;
+            :has_social_relationship :Daisy_Buchanan ,
                                      :Jordan_Baker ,
                                      :Tom_Buchanan ;
-            :has_friend :Nick_Carraway ;
             :wikidata <https://www.wikidata.org/wiki/Q7048121> ;
             rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Great_Gatsby> ;
             rdfs:label "Jay Gatsby" .
@@ -1961,7 +1961,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Jim_Doe rdf:type owl:NamedIndividual ,
                   :Person ,
                   :Test_Data ;
-         :has_Gender :Male ;
+         :has_gender :Male ;
          :has_age 12 ;
          rdfs:label "Jim Doe" .
 
@@ -1970,7 +1970,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :John rdf:type owl:NamedIndividual ,
                :Human ,
                :Test_Data ;
-      :has_Pet :Eric_The_Fish ;
+      :has_pet :Eric_The_Fish ;
       rdfs:label "John" .
 
 
@@ -1992,7 +1992,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :John_G_Kemeny rdf:type owl:NamedIndividual ,
                         :Man ,
                         :Test_Data ;
-               :has_Colleague :John_von_Neumann ;
+               :has_colleague :John_von_Neumann ;
                rdfs:label "John G. Kemeny" .
 
 
@@ -2055,7 +2055,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                         :Test_Data ,
                         :University ;
                :has_city :London ;
-               :is_Employer_Of :Alan_Turing ;
+               :is_employer_of :Alan_Turing ;
                rdfs:label "Kings College" .
 
 
@@ -2080,7 +2080,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Kurt_Godel rdf:type owl:NamedIndividual ,
                      :Man ,
                      :Test_Data ;
-            :has_Colleague :Albert_Einstein ;
+            :has_colleague :Albert_Einstein ;
             :has_friend :Albert_Einstein ;
             rdfs:label "Kurt Gödel" .
 
@@ -2089,7 +2089,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Lise_Meitner rdf:type owl:NamedIndividual ,
                        :Test_Data ,
                        :Woman ;
-              :has_Colleague :Albert_Einstein ;
+              :has_colleague :Albert_Einstein ;
               :birth_date "1878-11-07T00:00:00Z"^^xsd:dateTime ;
               rdfs:label "Lise Meitner" .
 
@@ -2141,7 +2141,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Marcel_Proust rdf:type owl:NamedIndividual ,
                         :Man ,
                         :Test_Data ;
-               :has_Pet :Marcel ;
+               :has_pet :Marcel ;
                :birth_date "1871-07-10T00:00:00Z"^^xsd:dateTime ;
                rdfs:label "Marcel Proust" .
 
@@ -2169,7 +2169,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                                 :Test_Data ,
                                                 :University ;
                                        :has_city :Cambridge ;
-                                       :is_Employer_Of :Noam_Chomsky ;
+                                       :is_employer_of :Noam_Chomsky ;
                                        rdfs:isDefinedBy <https://web.mit.edu/> ;
                                        rdfs:label "Massachusetts Institute of Technology" .
 
@@ -2193,9 +2193,9 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Michael rdf:type owl:NamedIndividual ,
                   :Man ,
                   :Test_Data ;
-         :has_Colleague :Noam_Chomsky ;
-         :has_Pet :Buddy ;
+         :has_colleague :Noam_Chomsky ;
          :has_daughter :Oriana ;
+         :has_pet :Buddy ;
          rdfs:label "Michael" .
 
 
@@ -2228,7 +2228,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Miss_Havisham rdf:type owl:NamedIndividual ,
                         :Person ,
                         :Test_Data ;
-               :has_Gender :Female ;
+               :has_gender :Female ;
                :has_age 65 ;
                rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Miss_Havisham> ;
                rdfs:label "Miss Havisham" .
@@ -2360,7 +2360,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Oriana rdf:type owl:NamedIndividual ,
                  :Person ,
                  :Test_Data ;
-        :has_Gender :Female ;
+        :has_gender :Female ;
         :has_age 14 ;
         rdfs:label "Oriana" .
 
@@ -2369,7 +2369,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Oskar_Morgenstern rdf:type owl:NamedIndividual ,
                             :Man ,
                             :Test_Data ;
-                   :has_Colleague :John_von_Neumann ;
+                   :has_colleague :John_von_Neumann ;
                    rdfs:label "Oskar Morgenstern" .
 
 
@@ -2457,7 +2457,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Sam_Spade rdf:type owl:NamedIndividual ,
                     :Man ,
                     :Test_Data ;
-           :has_Address :Address_Of_Spade_Detective_Agency ;
+           :has_address :Address_Of_Spade_Detective_Agency ;
            :has_employer :Sam_Spade ;
            :phone "(415) 555-1212" ;
            rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Maltese_Falcon_(novel)> ;
@@ -2509,8 +2509,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Sherlock_Holmes rdf:type owl:NamedIndividual ,
                           :Man ,
                           :Test_Data ;
-                 :has_Address :Address_Of_Sherlock_Holmes ;
-                 :has_Colleague :Doctor_Watson ;
+                 :has_address :Address_Of_Sherlock_Holmes ;
+                 :has_colleague :Doctor_Watson ;
                  :wikidata <https://www.wikidata.org/wiki/Q3481944> ;
                  rdfs:label "Sherlock Holmes" .
 
@@ -2673,7 +2673,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                                    :Test_Data ,
                                    :University ;
                           :has_city :Manchester ;
-                          :is_Employer_Of :Alan_Turing ;
+                          :is_employer_of :Alan_Turing ;
                           rdfs:label "University of Manchester" .
 
 
@@ -2697,7 +2697,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Whiskers rdf:type owl:NamedIndividual ,
                    :Cat ,
                    :Test_Data ;
-          :is_Pet_Of :Oriana ;
+          :is_pet_of :Oriana ;
           rdfs:label "Whiskers" .
 
 

@@ -1,4 +1,4 @@
-# SemanticKG-Design
+# Semantic Knowledge Graph Design
 For ontology, code and other supporting examples and tools for the book: Designing Semantic Knowledge Graphs: A Guide to Utilizing Semantic Web Technologies for Agile Data Management
 ## License
 This work is licensed under the [Creative Commons Attribution 4.0 International (CC-BY-4.0)](https://creativecommons.org/licenses/by/4.0/) license. 

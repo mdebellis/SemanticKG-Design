@@ -1,7 +1,7 @@
 PREFIX owl:  <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX :  <http://michaeldebellis.com/people/>
+PREFIX :  <https://michaeldebellis.com/people/>
 
 #Additional SPARQL queries to see examples of integration between ontology and data
 #Important: THESE QUERIES WILL NOT WORK IN SNAP SPARQL. You need to use AllegroGrap, GraphDB, Stardog

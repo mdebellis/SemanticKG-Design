@@ -127,19 +127,9 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  https://michaeldebellis.com/people/contains
 :contains rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :contains_transitive ;
           owl:inverseOf :is_contained_in ;
-          rdf:type owl:IrreflexiveProperty ;
+          rdf:type owl:TransitiveProperty ;
           rdfs:label "contains" .
-
-
-###  https://michaeldebellis.com/people/contains_transitive
-:contains_transitive rdf:type owl:ObjectProperty ;
-                     owl:inverseOf :is_contained_in_transitive ;
-                     rdf:type owl:TransitiveProperty ;
-                     rdfs:domain :Place ;
-                     rdfs:range :Place ;
-                     rdfs:label "contains transitive" .
 
 
 ###  https://michaeldebellis.com/people/eats
@@ -491,16 +481,9 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 
 ###  https://michaeldebellis.com/people/is_contained_in
-:is_contained_in rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :is_contained_in_transitive ;
-                 rdf:type owl:IrreflexiveProperty ;
+:is_contained_in rdf:type owl:ObjectProperty ,
+                          owl:TransitiveProperty ;
                  rdfs:label "is contained in" .
-
-
-###  https://michaeldebellis.com/people/is_contained_in_transitive
-:is_contained_in_transitive rdf:type owl:ObjectProperty ,
-                                     owl:TransitiveProperty ;
-                            rdfs:label "is contained in transitive" .
 
 
 ###  https://michaeldebellis.com/people/is_employer_of

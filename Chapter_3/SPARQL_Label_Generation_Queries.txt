@@ -31,7 +31,7 @@ WHERE {?p a owl:ObjectProperty.
     BIND(STRAFTER(STR(?p), 'pattern_examples/') as ?name)
 	BIND(LCASE(REPLACE(?name,"_", " " )) as ?lblname)
 	OPTIONAL{?p rdfs:label ?elbl.}
-	FILTER(?p != owl:topObjectProperty &&"" != ?lblname && !BOUND(?elbl))}	
+	FILTER(?p != owl:topObjectProperty && "" != ?lblname && !BOUND(?elbl) && ?p != owl:bottomObjectProperty)}	
 
 #Create labels for all Data Properties that don't already have them
 #Using all lower case for property labels 
@@ -41,7 +41,7 @@ WHERE {?p a owl:DatatypeProperty.
     BIND(STRAFTER(STR(?p), 'pattern_examples/') as ?name)
 	BIND(LCASE(REPLACE(?name,"_", " " )) as ?lblname)		
 	OPTIONAL{?p rdfs:label ?elbl.}
-	FILTER(?p != owl:topDataProperty && "" != ?lblname && !BOUND(?elbl))}	
+	FILTER(?p != owl:topDataProperty && "" != ?lblname && !BOUND(?elbl) && ?p != owl:bottomDataProperty)}	
 
 #This is a useful query if you forget to add language tags
 #It replaces all existing labels with labels with English tags	

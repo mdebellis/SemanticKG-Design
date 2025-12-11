@@ -1,0 +1,202 @@
+@prefix gora:      <https://www.michaeldebellis.com/gora/> .
+@prefix sulo:      <https://w3id.org/sulo/> .
+@prefix prov:      <http://www.w3.org/ns/prov#> .
+@prefix dcterms:   <http://purl.org/dc/terms/> .
+@prefix skos:      <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:       <http://www.w3.org/2002/07/owl#> .
+
+<https://www.michaeldebellis.com/gora/>
+    a owl:Ontology ;
+    dcterms:title "GORA Orbital Events Ontology"@en ;
+    dcterms:description
+        "A small domain ontology for conjunction events between space objects, built on SULO and PROV-O."@en ;
+    owl:imports
+        <https://w3id.org/sulo/> ,
+        <http://www.w3.org/ns/prov-o#> .
+
+#################################################################
+###  Classes
+#################################################################
+
+gora:Space_Object
+    a owl:Class ;
+    rdfs:label "Space Object"@en ;
+    rdfs:comment "A natural or artificial object in orbital space."@en ;
+    rdfs:subClassOf
+        sulo:SpatialObject ,
+        prov:Entity .
+
+gora:Conjunction_Event
+    a owl:Class ;
+    rdfs:label "Conjunction Event"@en ;
+    rdfs:comment "An event in which two space objects pass within a min. threshold distance."@en ;
+    rdfs:subClassOf
+        sulo:Process ,
+        prov:Activity .
+
+gora:Orbital_Organization
+    a owl:Class ;
+    rdfs:label "Orbital Organization"@en ;
+    rdfs:comment "A space agency or observatory that reports conjunction events."@en ;
+    rdfs:subClassOf prov:Agent .
+
+gora:Risk_Category
+    a owl:Class ;
+    rdfs:label "Risk Category"@en ;
+    rdfs:subClassOf skos:Concept .
+
+gora:Risk_Category_Scheme
+    a skos:ConceptScheme ;
+    skos:prefLabel "Conjunction Risk Categories"@en .
+
+#################################################################
+###  Risk individuals
+#################################################################
+
+gora:Risk_Low
+    a gora:Risk_Category ;
+    skos:prefLabel "Low risk"@en ;
+    skos:inScheme gora:Risk_Category_Scheme .
+
+gora:Risk_Medium
+    a gora:Risk_Category ;
+    skos:prefLabel "Medium risk"@en ;
+    skos:inScheme gora:Risk_Category_Scheme .
+
+gora:Risk_High
+    a gora:Risk_Category ;
+    skos:prefLabel "High risk"@en ;
+    skos:inScheme gora:Risk_Category_Scheme .
+
+#################################################################
+###  Object properties
+#################################################################
+
+gora:has_primary_object
+    a owl:ObjectProperty ;
+    rdfs:label "has primary object"@en ;
+    rdfs:domain gora:Conjunction_Event ;
+    rdfs:range  gora:Space_Object ;
+    rdfs:subPropertyOf sulo:hasParticipant .
+
+gora:has_secondary_object
+    a owl:ObjectProperty ;
+    rdfs:label "has secondary object"@en ;
+    rdfs:domain gora:Conjunction_Event ;
+    rdfs:range  gora:Space_Object ;
+    rdfs:subPropertyOf sulo:hasParticipant .
+
+gora:reported_by
+    a owl:ObjectProperty ;
+    rdfs:label "reported by"@en ;
+    rdfs:domain gora:Conjunction_Event ;
+    rdfs:range  gora:Orbital_Organization ;
+    rdfs:subPropertyOf prov:wasAssociatedWith .
+
+gora:has_risk_category
+    a owl:ObjectProperty ;
+    rdfs:label "has risk category"@en ;
+    rdfs:domain gora:Conjunction_Event ;
+    rdfs:range  gora:Risk_Category .
+
+#################################################################
+###  Data properties (all using xsd:decimal)
+#################################################################
+
+gora:has_closest_approach_time
+    a owl:DatatypeProperty ;
+    rdfs:label "has closest approach time"@en ;
+    rdfs:domain gora:Conjunction_Event ;
+    rdfs:range  xsd:dateTime .
+
+gora:has_min_distance_m
+    a owl:DatatypeProperty ;
+    rdfs:label "has minimum distance (meters)"@en ;
+    rdfs:domain gora:Conjunction_Event ;
+    rdfs:range  xsd:decimal .
+
+gora:has_relative_velocity_m_per_s
+    a owl:DatatypeProperty ;
+    rdfs:label "has relative velocity (m/s)"@en ;
+    rdfs:domain gora:Conjunction_Event ;
+    rdfs:range  xsd:decimal .
+
+
+
+
+#################################################################
+### Space objects
+#################################################################
+
+gora:SAT_12345 a gora:Space_Object ;
+    rdfs:label "SAT-12345"@en .
+
+gora:DEBRIS_98765 a gora:Space_Object ;
+    rdfs:label "DEBRIS-98765"@en .
+
+gora:SAT_54321 a gora:Space_Object ;
+    rdfs:label "SAT-54321"@en .
+
+gora:SAT_99999 a gora:Space_Object ;
+    rdfs:label "SAT-99999"@en .
+
+gora:SAT_77777 a gora:Space_Object ;
+    rdfs:label "SAT-77777"@en .
+
+gora:DEBRIS_22222 a gora:Space_Object ;
+    rdfs:label "DEBRIS-22222"@en .
+
+#################################################################
+### Organizations
+#################################################################
+
+gora:Pacific_Space_Agency
+    a gora:Orbital_Organization ;
+    rdfs:label "Pacific Space Agency"@en .
+
+gora:Global_Orbital_Research_Agency
+    a gora:Orbital_Organization ;
+    rdfs:label "Global Orbital Research Agency"@en .
+
+gora:European_Space_Observatory
+    a gora:Orbital_Organization ;
+    rdfs:label "European Space Observatory"@en .
+
+#################################################################
+### Conjunction events (using xsd:decimal)
+#################################################################
+
+gora:CE_2025_000123
+    a gora:Conjunction_Event ;
+    rdfs:label "Conjunction event CE-2025-000123"@en ;
+    gora:has_primary_object gora:SAT_12345 ;
+    gora:has_secondary_object gora:DEBRIS_98765 ;
+    gora:has_closest_approach_time "2025-11-04T12:34:56Z"^^xsd:dateTime ;
+    gora:has_min_distance_m "350.0"^^xsd:decimal ;
+    gora:has_relative_velocity_m_per_s "7200.0"^^xsd:decimal ;
+    gora:has_risk_category gora:Risk_Medium ;
+    gora:reported_by gora:Pacific_Space_Agency .
+
+gora:CE_2025_000124
+    a gora:Conjunction_Event ;
+    rdfs:label "Conjunction event CE-2025-000124"@en ;
+    gora:has_primary_object gora:SAT_54321 ;
+    gora:has_secondary_object gora:SAT_99999 ;
+    gora:has_closest_approach_time "2025-11-04T13:10:00Z"^^xsd:dateTime ;
+    gora:has_min_distance_m "1200.0"^^xsd:decimal ;
+    gora:has_relative_velocity_m_per_s "6800.0"^^xsd:decimal ;
+    gora:has_risk_category gora:Risk_Low ;
+    gora:reported_by gora:Global_Orbital_Research_Agency .
+
+gora:CE_2025_000125
+    a gora:Conjunction_Event ;
+    rdfs:label "Conjunction event CE-2025-000125"@en ;
+    gora:has_primary_object gora:SAT_77777 ;
+    gora:has_secondary_object gora:DEBRIS_22222 ;
+    gora:has_closest_approach_time "2025-11-04T15:05:30Z"^^xsd:dateTime ;
+    gora:has_min_distance_m "220.5"^^xsd:decimal ;
+    gora:has_relative_velocity_m_per_s "7400.0"^^xsd:decimal ;
+    gora:has_risk_category gora:Risk_High ;
+    gora:reported_by gora:European_Space_Observatory .

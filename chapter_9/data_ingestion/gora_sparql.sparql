@@ -1,0 +1,12 @@
+PREFIX gora: <https://www.michaeldebellis.com/gora/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?event ?primary ?secondary ?time ?distance ?risk
+WHERE {
+  ?event a gora:Conjunction_Event ;
+         gora:has_primary_object ?primary ;
+         gora:has_secondary_object ?secondary ;
+         gora:has_closest_approach_time ?time ;
+         gora:has_min_distance_m ?distance ;
+         gora:has_risk_category ?risk .
+}

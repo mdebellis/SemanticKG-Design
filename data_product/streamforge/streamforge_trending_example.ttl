@@ -1,0 +1,145 @@
+@prefix : <https://www.michaeldebellis.com/streamforge/trending_videos_example#> .
+@prefix dp: <https://www.michaeldebellis.com/dp/> .
+@prefix sf: <https://www.michaeldebellis.com/streamforge/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <https://www.michaeldebellis.com/streamforge/trending_videos_example> .
+
+<https://www.michaeldebellis.com/streamforge/trending_videos_example> rdf:type owl:Ontology ;
+                                                                       owl:imports dp: ;
+                                                                       dcterms:description "Example instance data for the StreamForge Trending Videos Data Product, using the Data Product Ontology (dp)."@en ;
+                                                                       rdfs:label "StreamForge Trending Videos Data Product Example"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://api.streamforge.example.com/trending
+<https://api.streamforge.example.com/trending> rdf:type owl:NamedIndividual .
+
+
+###  https://www.michaeldebellis.com/streamforge/Content_Discovery_Domain
+sf:Content_Discovery_Domain rdf:type owl:NamedIndividual ,
+                                     dp:Domain ;
+                            rdfs:comment "Domain responsible for helping StreamForge users discover relevant and trending video content."@en ;
+                            rdfs:label "Content Discovery Domain"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Content_Discovery_Team
+sf:Content_Discovery_Team rdf:type owl:NamedIndividual ,
+                                   dp:Data_Product_Team ;
+                          rdfs:comment "Team that owns and operates the Trending Videos Data Product for StreamForge."@en ;
+                          rdfs:label "Content Discovery Team"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Trending_Videos_API
+sf:Trending_Videos_API rdf:type owl:NamedIndividual ,
+                                dcat:DataService ;
+                       dcat:endpointURL <https://api.streamforge.example.com/trending> ;
+                       dp:has_api_type dp:REST_API ;
+                       dcterms:description "API that exposes ranked lists of trending StreamForge videos for various markets and time windows."@en ;
+                       rdfs:label "Trending Videos API"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Trending_Videos_Aggregation_Job
+sf:Trending_Videos_Aggregation_Job rdf:type owl:NamedIndividual ,
+                                            prov:Activity ;
+                                   prov:generated sf:Trending_Videos_Metrics_Dataset ;
+                                   prov:used sf:Watch_Events_Dataset ;
+                                   prov:endedAtTime "2025-12-10T08:05:00Z"^^xsd:dateTime ;
+                                   prov:startedAtTime "2025-12-10T08:00:00Z"^^xsd:dateTime ;
+                                   rdfs:comment "Batch or streaming job that aggregates watch events into trending metrics and updates the Trending Videos dataset."@en ;
+                                   rdfs:label "Trending Videos Aggregation Job"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Trending_Videos_Completeness_Metric
+sf:Trending_Videos_Completeness_Metric rdf:type owl:NamedIndividual ,
+                                                dp:Quality_Metric ;
+                                       dcterms:description "For a given time window and market, at least 99% of videos that exceed the minimum view threshold must be included in the trending computation."@en ;
+                                       rdfs:comment "Metric describing the fraction of eligible videos correctly included in the trending computation over a given time period."@en ;
+                                       rdfs:label "Trending Videos Completeness Metric"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Trending_Videos_Contract
+sf:Trending_Videos_Contract rdf:type owl:NamedIndividual ,
+                                     dp:Contract ;
+                            dcterms:description "Defines the schema and semantics of the Trending Videos API and dataset, including ranking criteria, supported time windows, markets, and stability constraints for the meaning of the trend score."@en ;
+                            rdfs:comment "Contract describing key fields, semantics, and constraints for the Trending Videos Data Product."@en ;
+                            rdfs:label "Trending Videos Contract"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Trending_Videos_Key
+sf:Trending_Videos_Key rdf:type owl:NamedIndividual ,
+                                dp:Product_Key ;
+                       rdfs:comment "Canonical product key for the StreamForge Trending Videos Data Product."@en ;
+                       rdfs:label "streamforge-trending-videos"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Trending_Videos_Metrics_Dataset
+sf:Trending_Videos_Metrics_Dataset rdf:type owl:NamedIndividual ,
+                                            dcat:Dataset ;
+                                   dcterms:description "Aggregated metrics per video and time window (views, watch time, likes, engagement scores) used to compute trending rankings."@en ;
+                                   dcterms:identifier "sf.trending-videos-metrics"@en ;
+                                   dcterms:title "Trending Videos Metrics"@en ;
+                                   rdfs:label "Trending Videos Metrics Dataset"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Trending_Videos_Product
+sf:Trending_Videos_Product rdf:type owl:NamedIndividual ,
+                                    dp:Data_Product ;
+                           dp:has_bounded_context <https://www.michaeldebellis.com/streamforge/trending_videos_example/Trending_Videos_Context> ;
+                           dp:has_contract sf:Trending_Videos_Contract ;
+                           dp:has_domain sf:Content_Discovery_Domain ;
+                           dp:has_product_key sf:Trending_Videos_Key ;
+                           dp:has_version sf:Trending_Videos_v1 ;
+                           dp:owned_by sf:Content_Discovery_Team ;
+                           rdfs:comment "Data Product that exposes ranked lists of trending videos on StreamForge, with freshness and quality guarantees."@en ;
+                           rdfs:label "Trending Videos Data Product"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Trending_Videos_SLA
+sf:Trending_Videos_SLA rdf:type owl:NamedIndividual ,
+                                dp:SLA ;
+                       dcterms:description "The Trending Videos Data Product is refreshed at least every 5 minutes and the API is available 99.9% of the time over a rolling 30-day window."@en ;
+                       rdfs:comment "SLA for the Trending Videos Data Product, including freshness and availability targets."@en ;
+                       rdfs:label "Trending Videos SLA"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Trending_Videos_v1
+sf:Trending_Videos_v1 rdf:type owl:NamedIndividual ,
+                               dp:Data_Product_Version ;
+                      dp:consumes_dataset sf:Watch_Events_Dataset ;
+                      dp:exposes_service sf:Trending_Videos_API ;
+                      dp:has_quality_metric sf:Trending_Videos_Completeness_Metric ;
+                      dp:has_sla sf:Trending_Videos_SLA ;
+                      dp:implemented_by_activity sf:Trending_Videos_Aggregation_Job ;
+                      dp:produces_dataset sf:Trending_Videos_Metrics_Dataset ;
+                      rdfs:comment "First production version of the StreamForge Trending Videos Data Product."@en ;
+                      rdfs:label "Trending Videos v1"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Watch_Events_Dataset
+sf:Watch_Events_Dataset rdf:type owl:NamedIndividual ,
+                                 dcat:Dataset ;
+                        dcterms:description "Raw or lightly processed event stream capturing video watch events (user, video, timestamp, device, geography, etc.)."@en ;
+                        dcterms:identifier "sf.watch-events"@en ;
+                        dcterms:title "StreamForge Watch Events"@en ;
+                        rdfs:label "Watch Events Dataset"@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/trending_videos_example/Trending_Videos_Context
+<https://www.michaeldebellis.com/streamforge/trending_videos_example/Trending_Videos_Context> rdf:type owl:NamedIndividual ,
+                                                                                                       dp:Bounded_Context ;
+                                                                                              dcterms:contributor "Michael DeBellis" ;
+                                                                                              dcterms:created "2025-12-12T05:06:42Z"^^xsd:dateTime ;
+                                                                                              rdfs:comment "Bounded context for ranking and exposing trending videos in the Content Discovery domain."@en ;
+                                                                                              rdfs:label "Trending Videos Context"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

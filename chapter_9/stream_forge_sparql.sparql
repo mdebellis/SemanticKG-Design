@@ -1,0 +1,29 @@
+PREFIX sfg:  <https://www.michaeldebellis.com/stream_forge_example/>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+SELECT *
+WHERE {
+  GRAPH <https://www.michaeldebellis.com/stream_forge_example/graphs/ABox> {
+    ?snapshot a sfg:Trending_Snapshot_Record .
+  }
+
+  GRAPH <https://www.michaeldebellis.com/stream_forge_example/graphs/Meta> {
+    ?snapshot prov:wasGeneratedBy ?run .
+    ?run prov:used ?input .
+  }
+}
+
+SELECT ?snapshot ?run ?input ?time
+WHERE {
+  GRAPH <https://www.michaeldebellis.com/stream_forge_example/graphs/ABox> {
+    ?snapshot a sfg:Trending_Snapshot_Record .
+  }
+
+  GRAPH <https://www.michaeldebellis.com/stream_forge_example/graphs/Meta> {
+    ?snapshot prov:wasGeneratedBy ?run .
+    ?run prov:used ?input ;
+         prov:endedAtTime ?time .
+  }
+}

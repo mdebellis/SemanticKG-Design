@@ -9,30 +9,6 @@
 <https://michaeldebellis.com/pattern_examples> rdf:type owl:Ontology .
 
 #################################################################
-#    Annotation properties
-#################################################################
-
-###  http://purl.org/dc/terms/contributor
-<http://purl.org/dc/terms/contributor> rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/created
-<http://purl.org/dc/terms/created> rdf:type owl:AnnotationProperty .
-
-
-###  https://michaeldebellis.com/pattern_examples/example1
-:example1 rdf:type owl:AnnotationProperty ;
-          <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
-          <http://purl.org/dc/terms/created> "2025-12-19T20:49:11Z"^^xsd:dateTime .
-
-
-###  https://michaeldebellis.com/pattern_examples/new_example
-:new_example rdf:type owl:AnnotationProperty ;
-             <http://purl.org/dc/terms/contributor> "Michael DeBellis" ;
-             <http://purl.org/dc/terms/created> "2025-12-19T20:49:20Z"^^xsd:dateTime .
-
-
-#################################################################
 #    Object Properties
 #################################################################
 

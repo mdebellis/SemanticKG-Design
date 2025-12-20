@@ -1,0 +1,17 @@
+# --- add_missing_class_labels ---
+CONSTRUCT {
+  ?class rdfs:label ?lblname .
+}
+WHERE {
+  ?class rdf:type owl:Class .
+  BIND(STRAFTER(STR(?class), 'pattern_examples/') as ?name)
+  BIND(REPLACE(?name, "_", " " ) as ?lblname)
+  OPTIONAL { ?class rdfs:label ?existing_label . }
+  FILTER(
+    ?class != owl:Thing &&
+    ?class != owl:Nothing &&
+    "" != ?lblname &&
+    !BOUND(?existing_label)
+  )
+}
+

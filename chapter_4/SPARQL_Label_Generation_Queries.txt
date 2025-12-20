@@ -17,11 +17,11 @@ WHERE {?class rdf:type owl:Class.
 		
 #Create labels for all Individuals that don't already have them		
 CONSTRUCT {?individual rdfs:label ?lblname.}
-WHERE {?individual a owl:Thing.
+WHERE {?individual a owl:NamedIndividual.
     BIND(STRAFTER(STR(?individual), 'pattern_examples/') as ?name)
 	BIND(REPLACE(?name,"_", " " ) as ?lblname)
 	OPTIONAL{?individual rdfs:label ?elbl.}
-	FILTER(!BOUND(?elbl) && "" != ?lblname && !BOUND(?elbl))}		
+	FILTER(!BOUND(?elbl) && "" != ?lblname)}		
 
 #Create labels for all Object Properties that don't already have them
 #Make sure to never change owl:topObjectProperty
@@ -42,6 +42,16 @@ WHERE {?p a owl:DatatypeProperty.
 	BIND(LCASE(REPLACE(?name,"_", " " )) as ?lblname)		
 	OPTIONAL{?p rdfs:label ?elbl.}
 	FILTER(?p != owl:topDataProperty && "" != ?lblname && !BOUND(?elbl) && ?p != owl:bottomDataProperty)}	
+
+#Create labels for all Annotation Properties that don't already have them
+#Using all lower case for property labels 
+#Don't need to worry about top and botom as those are only for reasoning	
+CONSTRUCT {?p rdfs:label ?lblname.}
+WHERE {?p a owl:AnnotationProperty.
+    BIND(STRAFTER(STR(?p), 'pattern_examples/') as ?name)
+	BIND(LCASE(REPLACE(?name,"_", " " )) as ?lblname)		
+	OPTIONAL{?p rdfs:label ?elbl.}
+	FILTER("" != ?lblname && !BOUND(?elbl))}	
 
 #This is a useful query if you forget to add language tags
 #It replaces all existing labels with labels with English tags	

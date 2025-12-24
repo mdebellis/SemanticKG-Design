@@ -1,0 +1,14 @@
+PREFIX dp:   <https://www.michaeldebellis.com/dp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# Q8 — Versioning: product versions and version chains
+# Purpose: List versions per Data Product and prior-version relationships
+SELECT ?up_label ?down_label
+WHERE {
+  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+    ?up dp:upstream_of ?down .
+    OPTIONAL { ?up rdfs:label ?up_label }
+    OPTIONAL { ?down rdfs:label ?down_label }
+  }
+}
+ORDER BY ?up_label ?down_label

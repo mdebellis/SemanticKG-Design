@@ -1,0 +1,20 @@
+PREFIX dp:      <https://www.michaeldebellis.com/dp/>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+# Q1 — Catalog view: datasets in a catalog
+# Purpose: Which datasets are published in a given Data Catalog
+SELECT ?product ?product_label ?owner_label ?type_label ?context_label
+WHERE {
+  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+    ?product a dp:Data_Product ;
+             rdfs:label ?product_label ;
+             dp:owned_by ?owner ;
+             dp:has_product_type ?ptype ;
+             dp:has_bounded_context ?bctx .
+
+    OPTIONAL { ?owner rdfs:label ?owner_label }
+    OPTIONAL { ?ptype rdfs:label ?type_label }
+    OPTIONAL { ?bctx rdfs:label ?context_label }
+  }
+}
+ORDER BY ?product_label

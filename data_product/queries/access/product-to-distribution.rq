@@ -1,0 +1,15 @@
+PREFIX dp:      <https://www.michaeldebellis.com/dp/>
+PREFIX dcat:    <http://www.w3.org/ns/dcat#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+# Q3 — Product → Distribution / access URL
+# Purpose: How to physically access the data (warehouse, Parquet, etc.)
+SELECT ?catalog_label ?dataset ?dataset_label
+WHERE {
+  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+    dp:StreamForge_Catalog rdfs:label ?catalog_label ;
+                           dcat:dataset ?dataset .
+    OPTIONAL { ?dataset rdfs:label ?dataset_label }
+  }
+}
+ORDER BY ?dataset_label

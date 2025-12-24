@@ -1,0 +1,394 @@
+@prefix : <https://www.michaeldebellis.com/dp/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix kw: <http://franz.com/ns/keyword#> .
+@prefix nd: <http://franz.com/ns/allegrograph/5.0/geo/nd#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema#> .
+@prefix err: <http://www.w3.org/2005/xqt-errors#> .
+@prefix fti: <http://franz.com/ns/allegrograph/2.2/textindex/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ndfn: <http://franz.com/ns/allegrograph/5.0/geo/nd/fn#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix keyword: <http://franz.com/ns/keyword#> .
+@base <https://www.michaeldebellis.com/dp/> .
+
+<https://www.michaeldebellis.com/dp/> rdf:type owl:Ontology ;
+                                       owl:imports <http://www.w3.org/2004/02/skos/core> ,
+                                                   <http://www.w3.org/ns/dcat#> ,
+                                                   <http://www.w3.org/ns/prov-o#> ;
+                                       dcterms:description "An ontology for modeling Data Products, their ownership, datasets, services, contracts, and quality attributes, aligned with DCAT and PROV."@en ;
+                                       rdfs:label "Data Product Ontology"@en ;
+                                       owl:versionInfo "0.1.0 draft – 2025-12-11"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2002/07/owl#versionInfo
+owl:versionInfo rdfs:comment "Data Product usage: owl:versionInfo is used to record human-readable version identifiers (for example, semantic versions or release labels) on Data Product individuals."@en ,
+                             "Data Product usage: owl:versionInfo provides a human-readable version identifier for a Data Product version (e.g., semantic version, date-based label, or release tag)."@en .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://www.michaeldebellis.com/dp/consumes_dataset
+:consumes_dataset rdf:type owl:ObjectProperty ;
+                  rdfs:range <http://www.w3.org/ns/dcat#Dataset> ;
+                  rdfs:comment "Data Product usage: Indicates that a Data Product consumes one or more datasets as inputs."@en ,
+                               "Relates a Data Product Version to a dataset that it consumes as an input or dependency."@en ;
+                  rdfs:label "consumes dataset"@en .
+
+
+###  https://www.michaeldebellis.com/dp/exposes_service
+:exposes_service rdf:type owl:ObjectProperty ;
+                 rdfs:range <http://www.w3.org/ns/dcat#DataService> ;
+                 rdfs:comment "Data Product usage: Links a Data Product to a service through which it is accessed."@en ,
+                              "Relates a Data Product Version to a data service that exposes its data via an API or endpoint."@en ;
+                 rdfs:label "exposes service"@en .
+
+
+###  https://www.michaeldebellis.com/dp/has_api_type
+:has_api_type rdf:type owl:ObjectProperty ;
+              rdfs:domain <http://www.w3.org/ns/dcat#DataService> ;
+              rdfs:range :API_Type ;
+              rdfs:comment "Data Product usage: Indicates the API style used to expose a Data Product."@en ,
+                           "Relates a data service to the type of API or interface that it provides (e.g., REST, GraphQL, SPARQL)."@en ;
+              rdfs:label "has API type"@en .
+
+
+###  https://www.michaeldebellis.com/dp/has_bounded_context
+:has_bounded_context rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Data_Product ;
+                     rdfs:range :Bounded_Context ;
+                     dcterms:contributor "Michael DeBellis" ;
+                     dcterms:created "2025-12-12T04:27:40Z"^^xsd:dateTime ;
+                     rdfs:comment "Data Product usage: Associates a Data Product with the bounded context that defines its semantic scope."@en ,
+                                  "Relates a Data Product to the bounded context whose model and language it implements."@en ;
+                     rdfs:label "has bounded context"@en .
+
+
+###  https://www.michaeldebellis.com/dp/has_contract
+:has_contract rdf:type owl:ObjectProperty ;
+              rdfs:domain :Data_Product ;
+              rdfs:range :Contract ;
+              rdfs:comment "Data Product usage: Associates a Data Product with a governing contract."@en ,
+                           "Relates a Data Product to a contract describing its expected behavior and constraints."@en ;
+              rdfs:label "has contract"@en .
+
+
+###  https://www.michaeldebellis.com/dp/has_domain
+:has_domain rdf:type owl:ObjectProperty ;
+            rdfs:domain :Data_Product ;
+            rdfs:range :Domain ;
+            rdfs:comment "Data Product usage: Links a Data Product to the organizational domain in which it is defined."@en ,
+                         "Relates a Data Product to the domain that owns and governs it."@en ;
+            rdfs:label "has domain"@en .
+
+
+###  https://www.michaeldebellis.com/dp/has_product_key
+:has_product_key rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain :Data_Product ;
+                 rdfs:range :Product_Key ;
+                 rdfs:comment "Data Product usage: Associates a Data Product with its stable product key."@en ,
+                              "Relates a Data Product to a controlled Product Key individual used as its canonical identifier instead of a free-text string."@en ;
+                 rdfs:label "has product key"@en .
+
+
+###  https://www.michaeldebellis.com/dp/has_product_type
+:has_product_type rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Data_Product ;
+                  rdfs:range :Data_Product_Type ;
+                  rdfs:comment "Data Product usage: Associates a Data Product with its classification type."@en ,
+                               "Relates a Data Product to a classification of its type (e.g., source-aligned, aggregate, feature-store)."@en ;
+                  rdfs:label "has product type"@en .
+
+
+###  https://www.michaeldebellis.com/dp/has_quality_metric
+:has_quality_metric rdf:type owl:ObjectProperty ;
+                    rdfs:range :Quality_Metric ;
+                    rdfs:comment "Data Product usage: Associates a Data Product with one or more quality metrics."@en ,
+                                 "Relates a Data Product Version to a quality metric describing some property of its data."@en ;
+                    rdfs:label "has quality metric"@en .
+
+
+###  https://www.michaeldebellis.com/dp/has_sla
+:has_sla rdf:type owl:ObjectProperty ;
+         rdfs:range :SLA ;
+         rdfs:comment "Data Product usage: Associates a Data Product with an SLA defining its service expectations."@en ,
+                      "Relates a Data Product Version (or in some cases the abstract Data Product) to an associated service level agreement."@en ;
+         rdfs:label "has SLA"@en .
+
+
+###  https://www.michaeldebellis.com/dp/has_version
+:has_version rdf:type owl:ObjectProperty ;
+             owl:inverseOf :is_version_of ;
+             rdfs:domain :Data_Product ;
+             rdfs:range :Data_Product_Version ;
+             rdfs:comment "Links a Data Product to one of its released versions."@en ;
+             rdfs:label "has version"@en .
+
+
+###  https://www.michaeldebellis.com/dp/implemented_by_activity
+:implemented_by_activity rdf:type owl:ObjectProperty ;
+                         rdfs:range <http://www.w3.org/ns/prov#Activity> ;
+                         rdfs:comment "Data Product usage: Links a Data Product to the activity or process that implements or generates it."@en ,
+                                      "Relates a Data Product Version to the PROV activity (e.g., pipeline, job, process) that produces or maintains it."@en ;
+                         rdfs:label "implemented by activity"@en .
+
+
+###  https://www.michaeldebellis.com/dp/is_version_of
+:is_version_of rdf:type owl:ObjectProperty ;
+               rdfs:domain :Data_Product_Version ;
+               rdfs:range :Data_Product ;
+               rdfs:comment "Inverse of has_version."@en ;
+               rdfs:label "is version of"@en .
+
+
+###  https://www.michaeldebellis.com/dp/owned_by
+:owned_by rdf:type owl:ObjectProperty ;
+          rdfs:domain :Data_Product ;
+          rdfs:range :Data_Product_Team ;
+          rdfs:comment "Data Product usage: Associates a Data Product with the team or organization that owns and is accountable for it."@en ,
+                       "Relates a Data Product to the team that owns and operates it."@en ;
+          rdfs:label "owned by"@en .
+
+
+###  https://www.michaeldebellis.com/dp/previous_version
+:previous_version rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Data_Product_Version ;
+                  rdfs:range :Data_Product_Version ;
+                  rdfs:comment "Links a version to the immediately prior version in its lineage."@en ;
+                  rdfs:label "previous version"@en .
+
+
+###  https://www.michaeldebellis.com/dp/produces_dataset
+:produces_dataset rdf:type owl:ObjectProperty ;
+                  rdfs:range <http://www.w3.org/ns/dcat#Dataset> ;
+                  rdfs:comment "Data Product usage: Indicates that a Data Product produces one or more datasets as outputs."@en ,
+                               "Relates a Data Product Version to a dataset that it publishes as part of its output."@en ;
+                  rdfs:label "produces dataset"@en .
+
+
+###  https://www.michaeldebellis.com/dp/upstream_of
+:upstream_of rdf:type owl:ObjectProperty ;
+             rdfs:domain :Bounded_Context ;
+             rdfs:range :Bounded_Context ;
+             dcterms:contributor "Michael DeBellis" ;
+             dcterms:created "2025-12-12T04:30:40Z"^^xsd:dateTime ;
+             rdfs:comment "Data Product usage: Indicates an upstream dependency relationship between Data Products."@en ,
+                          "Indicates that one bounded context provides data or behavior that another depends on."@en ;
+             rdfs:label "upstream of"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://www.michaeldebellis.com/dp/version_identifier
+:version_identifier rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Data_Product_Version ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "Human-readable version id such as v1, v2.0, 2025-01-15, etc."@en ;
+                    rdfs:label "version identifier"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.w3.org/ns/dcat#DataService
+<http://www.w3.org/ns/dcat#DataService> rdfs:comment "Data Product usage: dcat:DataService represents a service-based access mechanism (for example, an API or query endpoint) through which consumers interact with the product."@en .
+
+
+###  http://www.w3.org/ns/dcat#Dataset
+<http://www.w3.org/ns/dcat#Dataset> rdfs:comment "Data Product usage: dcat:Dataset represents a concrete realization of a Data Product. A Data Product may be realized by one or more datasets, but is not itself equivalent to a dataset."@en .
+
+
+###  http://www.w3.org/ns/prov#Activity
+<http://www.w3.org/ns/prov#Activity> rdfs:comment "Data Product usage: prov:Activity represents processes that generate, update, or release Data Products or versions (for example ingestion runs, transformations, or publication workflows)."@en .
+
+
+###  http://www.w3.org/ns/prov#Agent
+<http://www.w3.org/ns/prov#Agent> rdfs:comment "Data Product usage: prov:Agent represents accountable actors responsible for producing, owning, or maintaining the product, including teams, organizations, or automated agents."@en .
+
+
+###  https://www.michaeldebellis.com/dp/API_Type
+:API_Type rdf:type owl:Class ;
+          rdfs:comment "A controlled vocabulary class describing what kind of API or interface a data service provides (e.g., REST, GraphQL, SPARQL)."@en ,
+                       "Data Product usage: API types describe how consumers interact with a Data Product through service-based interfaces."@en ;
+          rdfs:label "API Type"@en ;
+          skos:definition "A classification of API styles used to expose Data Products, such as REST, GraphQL, or SPARQL."@en .
+
+
+###  https://www.michaeldebellis.com/dp/Bounded_Context
+:Bounded_Context rdf:type owl:Class ;
+                 dcterms:contributor "Michael DeBellis" ;
+                 dcterms:created "2025-12-12T04:24:48Z"^^xsd:dateTime ;
+                 rdfs:comment "A coherent domain model boundary in the sense of Domain-Driven Design."@en ,
+                              "Data Product usage: Bounded contexts scope the semantics and meaning of Data Products and help manage dependencies between products owned by different domains."@en ;
+                 rdfs:label "Bounded Context"@en ;
+                 skos:definition "A bounded context defines the boundary within which a particular domain model and vocabulary apply."@en .
+
+
+###  https://www.michaeldebellis.com/dp/Contract
+:Contract rdf:type owl:Class ;
+          rdfs:comment "A contract describing the agreed behavior, interfaces, or constraints of a Data Product."@en ,
+                       "Data Product usage: Contracts capture expectations such as availability, quality, and permitted use of a Data Product."@en ;
+          rdfs:label "Contract"@en ;
+          skos:definition "A formal agreement defining obligations, expectations, and responsibilities associated with a Data Product."@en .
+
+
+###  https://www.michaeldebellis.com/dp/Data_Product
+:Data_Product rdf:type owl:Class ;
+              rdfs:comment "A domain-owned, versioned data microservice that exposes datasets and services together with contracts and quality guarantees."@en ,
+                           "Data Product usage: A Data Product represents the unit of ownership, governance, and consumption. It is not equivalent to a dataset or service, but is realized through them."@en ;
+              rdfs:label "Data Product"@en ;
+              skos:definition "An organizationally owned data artifact designed for consumption, governed by explicit policies, versioned over time, and realized through one or more datasets or services."@en .
+
+
+###  https://www.michaeldebellis.com/dp/Data_Product_Team
+:Data_Product_Team rdf:type owl:Class ;
+                   rdfs:subClassOf <http://www.w3.org/ns/prov#Agent> ;
+                   rdfs:comment "A team or group of people responsible for owning and operating a Data Product."@en ,
+                                "Data Product usage: Data Product Teams are the accountable owners of Data Products, aligning with domain-oriented ownership models such as Domain-Driven Design and Data Mesh."@en ;
+                   rdfs:label "Data Product Team"@en ;
+                   skos:definition "A team responsible for the development, operation, and lifecycle management of one or more Data Products."@en .
+
+
+###  https://www.michaeldebellis.com/dp/Data_Product_Type
+:Data_Product_Type rdf:type owl:Class ;
+                   rdfs:comment "A classification of Data Products, such as source-aligned, aggregate, or feature-store products."@en ,
+                                "Data Product usage: Product types support cataloging, discovery, and governance by distinguishing broad categories of Data Products."@en ;
+                   rdfs:label "Data Product Type"@en ;
+                   skos:definition "A classification indicating the general kind of Data Product, such as analytical, operational, or reference data."@en .
+
+
+###  https://www.michaeldebellis.com/dp/Data_Product_Version
+:Data_Product_Version rdf:type owl:Class ;
+                      rdfs:comment "A specific released version of a Data Product. Data_Product is the enduring product identity; Data_Product_Version captures version-specific facts."@en ;
+                      rdfs:label "Data Product Version"@en .
+
+
+###  https://www.michaeldebellis.com/dp/Domain
+:Domain rdf:type owl:Class ;
+        rdfs:comment "A business or problem domain that owns and governs one or more Data Products."@en ,
+                     "Data Product usage: Domains provide the organizational context within which Data Products are defined, owned, and governed."@en ;
+        rdfs:label "Domain"@en ;
+        skos:definition "An organizational domain representing a coherent area of business responsibility and meaning."@en .
+
+
+###  https://www.michaeldebellis.com/dp/Product_Key
+:Product_Key rdf:type owl:Class ;
+             rdfs:comment "A controlled vocabulary of identifiers for Data Products, used instead of free-text strings to avoid typos and inconsistency."@en ,
+                          "Data Product usage: Product keys support traceability, versioning, and governance across systems and catalogs."@en ;
+             rdfs:label "Product Key"@en ;
+             skos:definition "A stable identifier or key used to uniquely identify a Data Product."@en .
+
+
+###  https://www.michaeldebellis.com/dp/Quality_Metric
+:Quality_Metric rdf:type owl:Class ;
+                rdfs:comment "A metric describing some aspect of data quality such as completeness, accuracy, or timeliness for a Data Product version."@en ,
+                             "Data Product usage: Quality metrics support governance and consumer trust by making data quality explicit and monitorable."@en ;
+                rdfs:label "Quality Metric"@en ;
+                skos:definition "A measurable indicator used to assess the quality of a Data Product."@en .
+
+
+###  https://www.michaeldebellis.com/dp/SLA
+:SLA rdf:type owl:Class ;
+     rdfs:comment "A service level agreement specifying performance, availability, freshness, or other guarantees for a Data Product or a version of it."@en ,
+                  "Data Product usage: SLAs define operational expectations such as freshness, availability, and response times for Data Products."@en ;
+     rdfs:label "Service Level Agreement"@en ;
+     skos:definition "A service level agreement specifying measurable service commitments for a Data Product."@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://www.michaeldebellis.com/dp/GraphQL_API
+:GraphQL_API rdf:type owl:NamedIndividual ,
+                      :API_Type ;
+             rdfs:comment "An API exposed using a GraphQL interface."@en ,
+                          "Data Product usage: Indicates that a Data Product is exposed through a GraphQL API."@en ;
+             rdfs:label "GraphQL API"@en .
+
+
+###  https://www.michaeldebellis.com/dp/REST_API
+:REST_API rdf:type owl:NamedIndividual ,
+                   :API_Type ;
+          rdfs:comment "An API exposed using a REST-style interface."@en ,
+                       "Data Product usage: Indicates that a Data Product is exposed through a REST-style API."@en ;
+          rdfs:label "REST API"@en .
+
+
+###  https://www.michaeldebellis.com/dp/SPARQL_Endpoint
+:SPARQL_Endpoint rdf:type owl:NamedIndividual ,
+                          :API_Type ;
+                 rdfs:comment "A SPARQL endpoint that exposes query access to data, typically over HTTP."@en ,
+                              "Data Product usage: Indicates that a Data Product is exposed through a SPARQL endpoint, typically for RDF-based Data Products."@en ;
+                 rdfs:label "SPARQL endpoint"@en .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+dcterms:hasVersion rdfs:comment "Data Product usage: Data Product versions are modeled as separate Data Product individuals linked using dcterms:hasVersion and dcterms:isVersionOf, rather than through a dedicated version class."@en ,
+                                "Data Product usage: dcterms:hasVersion relates a Data Product to another Data Product that represents one of its versions."@en .
+
+
+dcterms:isReplacedBy rdfs:comment "Data Product usage: dcterms:isReplacedBy indicates that a Data Product version has been superseded by a later version."@en ,
+                                  "Data Product usage: dcterms:isReplacedBy is used to indicate that a Data Product version has been superseded by a later version."@en .
+
+
+dcterms:isVersionOf rdfs:comment "Data Product usage: Indicates that a Data Product individual represents a specific version of another Data Product."@en ,
+                                 "Data Product usage: dcterms:isVersionOf indicates that a Data Product represents a specific version of another Data Product."@en .
+
+
+dcterms:issued rdfs:comment "Data Product usage: dcterms:issued is used as the formal release date of a Data Product version as communicated to consumers."@en ,
+                            "Data Product usage: dcterms:issued represents the formal release date of a Data Product version as communicated to consumers."@en .
+
+
+dcterms:modified rdfs:comment "Data Product usage: dcterms:modified indicates when a Data Product or its metadata was last changed."@en .
+
+
+dcterms:replaces rdfs:comment "Data Product usage: dcterms:replaces indicates that a Data Product version supersedes an earlier version."@en ,
+                              "Data Product usage: dcterms:replaces is used to indicate that a Data Product version supersedes an earlier version."@en .
+
+
+dcterms:status rdfs:comment "Data Product usage: dcterms:status is used for lifecycle status (e.g., Draft, Stable, Deprecated, Retired), typically pointing to a controlled vocabulary (skos:Concept)."@en .
+
+
+skos:Concept rdfs:comment "Data Product usage: skos:Concept represents controlled values used to classify or describe a Data Product consistently (for example, statuses, types, and policy classifications)."@en .
+
+
+skos:ConceptScheme rdfs:comment "Data Product usage: skos:ConceptScheme is used to define controlled vocabularies for attributes such as lifecycle status, product type, or governance classifications."@en .
+
+
+<http://www.w3.org/ns/dcat#Distribution> rdfs:comment "Data Product usage: dcat:Distribution represents a specific technical form in which a Data Product is made available to consumers, such as a file format, API endpoint, or database access method."@en .
+
+
+<http://www.w3.org/ns/prov#Entity> rdfs:comment "Data Product usage: A Data Product (and each released version of a Data Product) is treated as a prov:Entity to support explicit lineage, derivation, and auditability over time."@en .
+
+
+<http://www.w3.org/ns/prov#wasAttributedTo> rdfs:comment "Data Product usage: prov:wasAttributedTo associates a Data Product (or version) with the responsible agent, supporting accountability and governance."@en .
+
+
+<http://www.w3.org/ns/prov#wasDerivedFrom> rdfs:comment "Data Product usage: prov:wasDerivedFrom is the preferred way to represent lineage relationships between successive versions of a Data Product."@en ,
+                                                        "Data Product usage: prov:wasDerivedFrom represents derivation relationships between versions, supporting version lineage and auditability."@en .
+
+
+<http://www.w3.org/ns/prov#wasGeneratedBy> rdfs:comment "Data Product usage: prov:wasGeneratedBy links a Data Product (or version) to the activity that generated or released it."@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

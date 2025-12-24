@@ -1,0 +1,75 @@
+@prefix docs:   <https://www.michaeldebellis.com/docs/> .
+@prefix dp:     <https://www.michaeldebellis.com/dp/> .
+@prefix dcat:   <http://www.w3.org/ns/dcat#> .
+@prefix dcterms:<http://purl.org/dc/terms/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.michaeldebellis.com/docs/>
+  rdf:type owl:Ontology ;
+  rdfs:label "Documents Ontology"@en ;
+  dcterms:title "Documents Ontology"@en ;
+  dcterms:description "A minimal ontology for modeling narrative documents used in RAG examples. Documents are first-class individuals with vectorizable text and explicit links to topics, data products, and datasets."@en ;
+  owl:imports <https://www.michaeldebellis.com/dp/> ,
+              <http://purl.org/dc/terms/> ,
+              <http://www.w3.org/ns/dcat#> .
+
+#########
+# Classes
+#########
+
+docs:Document
+  rdf:type owl:Class ;
+  rdfs:label "Document"@en ;
+  dcterms:description "A narrative information artifact intended for human consumption (e.g., report, memo, incident write-up) and used as retrievable context in RAG."@en .
+
+docs:Report
+  rdf:type owl:Class ;
+  rdfs:subClassOf docs:Document ;
+  rdfs:label "Report"@en ;
+  dcterms:description "A document that reports findings, metrics, analyses, and/or recommendations."@en .
+
+docs:Quarterly_Report
+  rdf:type owl:Class ;
+  rdfs:subClassOf docs:Report ;
+  rdfs:label "Quarterly Report"@en ;
+  dcterms:description "A report covering a specific quarter, usually including trends, KPIs, and recommended actions."@en .
+
+docs:Incident_Report
+  rdf:type owl:Class ;
+  rdfs:subClassOf docs:Report ;
+  rdfs:label "Incident Report"@en ;
+  dcterms:description "A report describing an operational incident: impact, timeline, root cause, mitigations, and follow-up actions."@en .
+
+docs:Strategy_Memo
+  rdf:type owl:Class ;
+  rdfs:subClassOf docs:Document ;
+  rdfs:label "Strategy Memo"@en ;
+  dcterms:description "A short document describing a strategy, decision rationale, or plan of record."@en .
+
+############
+# Properties
+############
+
+docs:about_topic
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "about topic"@en ;
+  dcterms:description "Links a document to the topic (often a business domain or bounded context) that the document is primarily about."@en ;
+  rdfs:domain docs:Document ;
+  rdfs:range dp:Domain .
+
+docs:uses_data_product
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "uses data product"@en ;
+  dcterms:description "Indicates that the document references, depends on, or was produced using a specific data product."@en ;
+  rdfs:domain docs:Document ;
+  rdfs:range dp:Data_Product .
+
+docs:uses_dataset
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "uses dataset"@en ;
+  dcterms:description "Indicates that the document references, depends on, or was produced using a specific dataset (typically from the catalog)."@en ;
+  rdfs:domain docs:Document ;
+  rdfs:range dcat:Dataset .

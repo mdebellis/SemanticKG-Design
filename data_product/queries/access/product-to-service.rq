@@ -1,0 +1,21 @@
+PREFIX dp:      <https://www.michaeldebellis.com/dp/>
+PREFIX dcat:    <http://www.w3.org/ns/dcat#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+# Q4 — Product → Service / operational endpoint
+# Purpose: Operational access paths (APIs, feature services)
+SELECT ?product_label ?dataset_label ?dist_label ?accessURL
+WHERE {
+  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+    ?product a dp:Data_Product ;
+             rdfs:label ?product_label ;
+             dp:produces_dataset ?dataset .
+
+    ?dataset rdfs:label ?dataset_label ;
+             dcat:distribution ?dist .
+
+    ?dist rdfs:label ?dist_label ;
+          dcat:accessURL ?accessURL .
+  }
+}
+ORDER BY ?product_label ?dataset_label

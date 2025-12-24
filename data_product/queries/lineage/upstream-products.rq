@@ -1,0 +1,22 @@
+PREFIX dp:   <https://www.michaeldebellis.com/dp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# Q7 — Lineage: upstream → downstream products
+# Purpose: Data Product lineage and dependency analysis
+SELECT ?product_label ?version ?version_label ?version_id ?prev_label
+WHERE {
+  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+    ?product a dp:Data_Product ;
+             rdfs:label ?product_label ;
+             dp:has_version ?version .
+
+    OPTIONAL { ?version rdfs:label ?version_label }
+    OPTIONAL { ?version dp:version_identifier ?version_id }
+
+    OPTIONAL {
+      ?version dp:previous_version ?prev .
+      OPTIONAL { ?prev rdfs:label ?prev_label }
+    }
+  }
+}
+ORDER BY ?product_label ?version_id

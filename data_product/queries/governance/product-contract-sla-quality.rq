@@ -1,0 +1,35 @@
+PREFIX dp:      <https://www.michaeldebellis.com/dp/>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+# Q6 — Governance view: contract + SLA + quality metric
+# Purpose: Governance completeness per Data Product
+SELECT ?product_label
+       ?contract_label ?contract_desc
+       ?sla_label ?sla_desc
+       ?qm_label ?qm_desc
+WHERE {
+  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+    ?product a dp:Data_Product ;
+             rdfs:label ?product_label .
+
+    OPTIONAL {
+      ?product dp:has_contract ?contract .
+      OPTIONAL { ?contract rdfs:label ?contract_label }
+      OPTIONAL { ?contract dcterms:description ?contract_desc }
+    }
+
+    OPTIONAL {
+      ?product dp:has_sla ?sla .
+      OPTIONAL { ?sla rdfs:label ?sla_label }
+      OPTIONAL { ?sla dcterms:description ?sla_desc }
+    }
+
+    OPTIONAL {
+      ?product dp:has_quality_metric ?qm .
+      OPTIONAL { ?qm rdfs:label ?qm_label }
+      OPTIONAL { ?qm dcterms:description ?qm_desc }
+    }
+  }
+}
+ORDER BY ?product_label

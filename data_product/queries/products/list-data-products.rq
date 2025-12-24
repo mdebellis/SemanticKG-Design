@@ -1,0 +1,18 @@
+PREFIX dp:      <https://www.michaeldebellis.com/dp/>
+PREFIX dcat:    <http://www.w3.org/ns/dcat#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+# Q5 — List Data Products with ownership and context
+# Purpose: Inventory view: owner, product type, bounded context
+SELECT ?product_label ?service_label ?endpointURL
+WHERE {
+  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+    ?product a dp:Data_Product ;
+             rdfs:label ?product_label ;
+             dp:exposes_service ?svc .
+
+    ?svc rdfs:label ?service_label ;
+         dcat:endpointURL ?endpointURL .
+  }
+}
+ORDER BY ?product_label ?service_label

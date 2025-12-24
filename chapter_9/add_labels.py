@@ -1,4 +1,6 @@
 from __future__ import annotations
+#            ^^ two underscores on each side
+
 
 import argparse
 from dataclasses import dataclass

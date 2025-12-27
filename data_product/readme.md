@@ -43,7 +43,11 @@ Load all files into the **default graph**, then run the reasoner if your environ
 ---
 
 ## Notes
-
+* Baseline StreamForge Data Product / Catalog RAG example. All data in default graph. Docs generated via create_docs_sparql.ru.
+After Loading and Running MaterializerVerified counts:
+- ABox triples: 3849
+- docs:Document instances: 3
+- linked to core data products: 3
 * All data is loaded into the **default graph** for clarity and ease of understanding.
 * The SPARQL update generates the document instances used by the RAG examples in later chapters.
 * Additional examples (e.g., data pipelines, trending analytics, named graphs) are intentionally kept separate to avoid conflating concerns.

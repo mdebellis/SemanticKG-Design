@@ -1,7 +1,3 @@
-Here’s a concise, neutral **README boilerplate** you can drop straight into the `data_product` directory. It keeps the explanation high-level and leaves the conceptual depth for the book.
-
----
-
 ## Data Product / Catalog Example
 
 This directory contains a **minimal, self-contained example** used throughout the book to illustrate how **Data Products**, **Catalog metadata**, and **Documents** can be modeled and queried as part of a Retrieval-Augmented Generation (RAG) workflow.
@@ -54,8 +50,3 @@ Load all files into the **default graph**, then run the reasoner if your environ
 
 ---
 
-If you want, I can also give you:
-
-* a *one-paragraph “what this example demonstrates”* variant for Chapter 1
-* a slightly more formal version suitable for an academic appendix
-* or a version that explicitly mirrors your **AgilGraph / lifecycle** framing

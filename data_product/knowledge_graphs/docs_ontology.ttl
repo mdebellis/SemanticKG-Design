@@ -7,14 +7,14 @@
 @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 
-<https://www.michaeldebellis.com/docs/>
+<https://www.michaeldebellis.com/docs>
   rdf:type owl:Ontology ;
   rdfs:label "Documents Ontology"@en ;
   dcterms:title "Documents Ontology"@en ;
   dcterms:description "A minimal ontology for modeling narrative documents used in RAG examples. Documents are first-class individuals with vectorizable text and explicit links to topics, data products, and datasets."@en ;
-  owl:imports <https://www.michaeldebellis.com/dp/> ,
-              <http://purl.org/dc/terms/> ,
-              <http://www.w3.org/ns/dcat#> .
+  owl:imports <https://www.michaeldebellis.com/dp> ,
+              <http://purl.org/dc/terms> ,
+              <http://www.w3.org/ns/dcat> .
 
 #########
 # Classes

@@ -1,4 +1,4 @@
-@prefix : <https://www.michaeldebellis.com/streamforge/trending_videos_example#> .
+@prefix : <https://www.michaeldebellis.com/streamforge/trending_videos_example/> .
 @prefix dp: <https://www.michaeldebellis.com/dp/> .
 @prefix sf: <https://www.michaeldebellis.com/streamforge/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .

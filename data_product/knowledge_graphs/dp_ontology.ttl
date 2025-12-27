@@ -19,10 +19,10 @@
 @prefix keyword: <http://franz.com/ns/keyword#> .
 @base <https://www.michaeldebellis.com/dp/> .
 
-<https://www.michaeldebellis.com/dp/> rdf:type owl:Ontology ;
+<https://www.michaeldebellis.com/dp> rdf:type owl:Ontology ;
                                        owl:imports <http://www.w3.org/2004/02/skos/core> ,
-                                                   <http://www.w3.org/ns/dcat#> ,
-                                                   <http://www.w3.org/ns/prov-o#> ;
+                                                   <http://www.w3.org/ns/dcat> ,
+                                                   <http://www.w3.org/ns/prov-o> ;
                                        dcterms:description "An ontology for modeling Data Products, their ownership, datasets, services, contracts, and quality attributes, aligned with DCAT and PROV."@en ;
                                        rdfs:label "Data Product Ontology"@en ;
                                        owl:versionInfo "0.1.0 draft – 2025-12-11"@en .

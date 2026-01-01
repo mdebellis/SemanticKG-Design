@@ -136,3 +136,356 @@ Follow-up
       dcterms:created "2025-09-03"^^xsd:date ;
       docs:uses_data_product dp:SF_Video_Metadata_Product ;
       docs:uses_dataset <https://www.michaeldebellis.com/streamforge/dataset/Video_Metadata_Current> .}
+
+
+# 12/27/25. Added new TBox info
+PREFIX docs:    <https://www.michaeldebellis.com/docs/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+
+INSERT DATA {
+
+  ########################################################################
+  # Class
+  ########################################################################
+
+  docs:Document_Chunk
+    rdf:type owl:Class ;
+    rdfs:label "Document chunk"@en ;
+    dcterms:description
+      "A contiguous segment of a document (e.g., a section or paragraph group) used for chunk-level retrieval and vector indexing."@en .
+
+  ########################################################################
+  # Object properties
+  ########################################################################
+
+  docs:has_chunk
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "has chunk"@en ;
+    rdfs:domain docs:Document ;
+    rdfs:range docs:Document_Chunk .
+
+  docs:is_chunk_of
+    rdf:type owl:ObjectProperty ;
+    rdfs:label "is chunk of"@en ;
+    rdfs:domain docs:Document_Chunk ;
+    rdfs:range docs:Document ;
+    owl:inverseOf docs:has_chunk .
+
+  ########################################################################
+  # Datatype properties
+  ########################################################################
+
+  docs:chunk_text
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "chunk text"@en ;
+    rdfs:domain docs:Document_Chunk ;
+    rdfs:range rdf:langString .
+
+  docs:chunk_title
+    rdf:type owl:DatatypeProperty ;
+    rdfs:label "chunk title"@en ;
+    rdfs:domain docs:Document_Chunk ;
+    rdfs:range rdf:langString .
+
+  docs:chunk_index
+    rdf:type owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:label "chunk index"@en ;
+    rdfs:domain docs:Document_Chunk ;
+    rdfs:range xsd:integer .
+
+}
+
+# 12/27/25  Deleted old documents in order to create new ones with better structure
+PREFIX docs:    <https://www.michaeldebellis.com/docs/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+DELETE {
+  ?doc ?p ?o .
+  ?chunk ?cp ?co .
+}
+WHERE {
+  VALUES ?doc {
+    docs:Creator_Engagement_Report_Q3_2025
+    docs:Personalization_Performance_Review_Q3_2025
+    docs:Incident_Report_Video_Metadata_Freshness_Regression
+  }
+
+  # delete all triples about the doc
+  ?doc ?p ?o .
+
+  # if chunks exist, delete all triples about them too
+  OPTIONAL {
+    ?doc docs:has_chunk ?chunk .
+    ?chunk ?cp ?co .
+  }
+  OPTIONAL {
+    ?chunk docs:is_chunk_of ?doc .
+    ?chunk ?cp ?co .
+  }
+}
+
+# 12/27/25 Verify deletions
+PREFIX docs: <https://www.michaeldebellis.com/docs/>
+SELECT ?s ?p ?o
+WHERE {
+  VALUES ?s {
+    docs:Creator_Engagement_Report_Q3_2025
+    docs:Personalization_Performance_Review_Q3_2025
+    docs:Incident_Report_Video_Metadata_Freshness_Regression
+  }
+  ?s ?p ?o
+}
+LIMIT 50
+
+# 12/27/25 New Updates. Same Data Better Structure
+PREFIX docs:    <https://www.michaeldebellis.com/docs/>
+PREFIX dp:      <https://www.michaeldebellis.com/dp/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcat:    <http://www.w3.org/ns/dcat#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+
+INSERT DATA {
+
+  ######################################################################
+  # Document 1: Creator Engagement Report — Q3 2025
+  ######################################################################
+
+  docs:Creator_Engagement_Report_Q3_2025
+    a owl:NamedIndividual , docs:Quarterly_Report ;
+    dcterms:title "Creator Engagement Report — Q3 2025"@en ;
+    dcterms:creator "Creator Growth Analytics Team"@en ;
+    dcterms:publisher "StreamForge Data Products Group"@en ;
+    dcterms:created "2025-10-10"^^xsd:date ;
+    docs:uses_data_product dp:SF_Creator_Insights_Product ;
+    docs:uses_data_product dp:SF_Video_Metadata_Product ;
+    docs:uses_dataset <https://www.michaeldebellis.com/streamforge/dataset/Creator_Engagement_Metrics> ;
+    docs:uses_dataset <https://www.michaeldebellis.com/streamforge/dataset/Video_Metadata_Current> ;
+    docs:has_chunk docs:Creator_Engagement_Report_Q3_2025_Chunk_01 ;
+    docs:has_chunk docs:Creator_Engagement_Report_Q3_2025_Chunk_02 ;
+    docs:has_chunk docs:Creator_Engagement_Report_Q3_2025_Chunk_03 ;
+    docs:has_chunk docs:Creator_Engagement_Report_Q3_2025_Chunk_04 ;
+    docs:has_chunk docs:Creator_Engagement_Report_Q3_2025_Chunk_05 ;
+    docs:has_chunk docs:Creator_Engagement_Report_Q3_2025_Chunk_06 ;
+    docs:has_chunk docs:Creator_Engagement_Report_Q3_2025_Chunk_07 ;
+    docs:has_chunk docs:Creator_Engagement_Report_Q3_2025_Chunk_08 .
+
+  docs:Creator_Engagement_Report_Q3_2025_Chunk_01
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Creator_Engagement_Report_Q3_2025 ;
+    docs:chunk_index 1 ;
+    docs:chunk_title "Summary"@en ;
+    docs:chunk_text "StreamForge creator engagement improved in Q3 2025, but gains were uneven across creator cohorts and upload frequencies. This report summarizes creator-side engagement metrics, highlights drivers of change, and proposes data product improvements for Q4."@en .
+
+  docs:Creator_Engagement_Report_Q3_2025_Chunk_02
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Creator_Engagement_Report_Q3_2025 ;
+    docs:chunk_index 2 ;
+    docs:chunk_title "Scope and time window"@en ;
+    docs:chunk_text "Reporting period: Q3 2025 (2025-07-01 to 2025-09-30). Population: active creators with at least one upload in the last 90 days. Exclusions: policy-removed channels and test accounts."@en .
+
+  docs:Creator_Engagement_Report_Q3_2025_Chunk_03
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Creator_Engagement_Report_Q3_2025 ;
+    docs:chunk_index 3 ;
+    docs:chunk_title "Key metrics (Q3 vs Q2)"@en ;
+    docs:chunk_text "Monthly active creators (MAC): +6.2%. Uploads per active creator: +3.1%. Creator retention (90-day): +1.4 pp. Creator time-to-first-view median improved from 46 minutes to 39 minutes. Creator monetization enrollment: flat (+0.2%)."@en .
+
+  docs:Creator_Engagement_Report_Q3_2025_Chunk_04
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Creator_Engagement_Report_Q3_2025 ;
+    docs:chunk_index 4 ;
+    docs:chunk_title "Drivers and observations (1–2)"@en ;
+    docs:chunk_text "1) Faster time-to-first-view correlated strongly with higher creator retention, especially for small channels (<10k subscribers). 2) Improvements concentrated in long-form video; short-form creators did not see comparable lift."@en .
+
+  docs:Creator_Engagement_Report_Q3_2025_Chunk_05
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Creator_Engagement_Report_Q3_2025 ;
+    docs:chunk_index 5 ;
+    docs:chunk_title "Drivers and observations (3–4)"@en ;
+    docs:chunk_text "3) Metadata completeness (title, tags, category) was the strongest predictor of search impressions for new uploads. 4) The creator onboarding funnel had a measurable drop at connect payout account, but this is outside the primary scope of this report."@en .
+
+  docs:Creator_Engagement_Report_Q3_2025_Chunk_06
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Creator_Engagement_Report_Q3_2025 ;
+    docs:chunk_index 6 ;
+    docs:chunk_title "Data quality notes"@en ;
+    docs:chunk_text "Intermittent missing tag fields in the video metadata feed during August. A small fraction of creator profiles contained stale country codes after an upstream identity change. Issues did not materially change Q3 directional results, but reduce confidence in cohort segmentation."@en .
+
+  docs:Creator_Engagement_Report_Q3_2025_Chunk_07
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Creator_Engagement_Report_Q3_2025 ;
+    docs:chunk_index 7 ;
+    docs:chunk_title "Recommendations for Q4"@en ;
+    docs:chunk_text "Prioritize the Video Metadata data product to improve completeness and freshness of tags and categories. Add a creator-facing metadata quality indicator. Publish a weekly Creator Engagement Snapshot. Add SLAs for metadata freshness and completeness aligned with creator experience metrics (time-to-first-view and impressions)."@en .
+
+  docs:Creator_Engagement_Report_Q3_2025_Chunk_08
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Creator_Engagement_Report_Q3_2025 ;
+    docs:chunk_index 8 ;
+    docs:chunk_title "Open questions"@en ;
+    docs:chunk_text "How much of time-to-first-view improvement came from ranking changes vs metadata improvements? Can we isolate the short-form creator cohort and design targeted metadata guidance?"@en .
+
+
+  ######################################################################
+  # Document 2: Personalization Performance Review — Q3 2025
+  ######################################################################
+
+  docs:Personalization_Performance_Review_Q3_2025
+    a owl:NamedIndividual , docs:Quarterly_Report ;
+    dcterms:title "Personalization Performance Review — Q3 2025"@en ;
+    dcterms:creator "Personalization Platform Team"@en ;
+    dcterms:publisher "StreamForge Recommendations & Trust"@en ;
+    dcterms:created "2025-10-12"^^xsd:date ;
+    docs:uses_data_product dp:SF_Recs_Features_Product ;
+    docs:uses_data_product dp:SF_Video_Metadata_Product ;
+    docs:uses_dataset <https://www.michaeldebellis.com/streamforge/dataset/Personalization_Events_Q3_2025> ;
+    docs:uses_dataset <https://www.michaeldebellis.com/streamforge/dataset/Video_Metadata_Current> ;
+    docs:has_chunk docs:Personalization_Performance_Review_Q3_2025_Chunk_01 ;
+    docs:has_chunk docs:Personalization_Performance_Review_Q3_2025_Chunk_02 ;
+    docs:has_chunk docs:Personalization_Performance_Review_Q3_2025_Chunk_03 ;
+    docs:has_chunk docs:Personalization_Performance_Review_Q3_2025_Chunk_04 ;
+    docs:has_chunk docs:Personalization_Performance_Review_Q3_2025_Chunk_05 ;
+    docs:has_chunk docs:Personalization_Performance_Review_Q3_2025_Chunk_06 ;
+    docs:has_chunk docs:Personalization_Performance_Review_Q3_2025_Chunk_07 ;
+    docs:has_chunk docs:Personalization_Performance_Review_Q3_2025_Chunk_08 .
+
+  docs:Personalization_Performance_Review_Q3_2025_Chunk_01
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Personalization_Performance_Review_Q3_2025 ;
+    docs:chunk_index 1 ;
+    docs:chunk_title "Summary"@en ;
+    docs:chunk_text "This Q3 2025 review assesses StreamForge personalization performance across home feed ranking, Up Next, and notification targeting. It summarizes model metrics, user outcomes, and known risks to establish a stable baseline for Q4 experiments and to identify data product priorities affecting model quality."@en .
+
+  docs:Personalization_Performance_Review_Q3_2025_Chunk_02
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Personalization_Performance_Review_Q3_2025 ;
+    docs:chunk_index 2 ;
+    docs:chunk_title "Scope and time window"@en ;
+    docs:chunk_text "Reporting period: Q3 2025 (2025-07-01 to 2025-09-30). Surfaces: Home feed, Up Next, Notifications. Regions: global, with separate monitoring for India and Brazil."@en .
+
+  docs:Personalization_Performance_Review_Q3_2025_Chunk_03
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Personalization_Performance_Review_Q3_2025 ;
+    docs:chunk_index 3 ;
+    docs:chunk_title "User outcome summary (Q3 vs Q2)"@en ;
+    docs:chunk_text "Watch time per daily active user: +2.0%. Session starts per user: +1.1%. Not interested feedback rate: +0.4 pp (worse). Complaint rate (recommendation relevance): +0.2 pp (worse). Creator distribution: more concentrated in top 1% channels (+0.6 pp share)."@en .
+
+  docs:Personalization_Performance_Review_Q3_2025_Chunk_04
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Personalization_Performance_Review_Q3_2025 ;
+    docs:chunk_index 4 ;
+    docs:chunk_title "Model and data signals (performance and drift)"@en ;
+    docs:chunk_text "Offline AUC improved modestly for home feed ranking (+0.3%), but calibration drift increased in August. User embeddings refreshed less frequently than expected for a subset of users due to a pipeline backlog."@en .
+
+  docs:Personalization_Performance_Review_Q3_2025_Chunk_05
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Personalization_Performance_Review_Q3_2025 ;
+    docs:chunk_index 5 ;
+    docs:chunk_title "Model and data signals (metadata and language)"@en ;
+    docs:chunk_text "Video metadata freshness had measurable impact on cold-start performance for new uploads and new creators. Category and tag coverage remains inconsistent across languages, affecting semantic retrieval features."@en .
+
+  docs:Personalization_Performance_Review_Q3_2025_Chunk_06
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Personalization_Performance_Review_Q3_2025 ;
+    docs:chunk_index 6 ;
+    docs:chunk_title "Risks and mitigations"@en ;
+    docs:chunk_text "Concentration risk: personalization reinforces already-large channels; mitigate with exploration controls and fairness-aware re-ranking. Drift risk: August calibration issues suggest instability in timestamp-derived features; mitigate with feature sanity checks and freshness SLAs. Trust risk: rising not interested feedback indicates relevance mismatch; mitigate with cohort-specific tuning and better negative-signal modeling."@en .
+
+  docs:Personalization_Performance_Review_Q3_2025_Chunk_07
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Personalization_Performance_Review_Q3_2025 ;
+    docs:chunk_index 7 ;
+    docs:chunk_title "Recommendations for Q4"@en ;
+    docs:chunk_text "Enforce a strict SLA for Video Metadata Freshness and validate timestamp monotonicity. Add monitoring for embedding refresh delays and backpressure in the feature pipeline. Run an experiment to reduce channel concentration without reducing watch time. Improve multilingual tag normalization as a data product enhancement rather than a model-side patch."@en .
+
+  docs:Personalization_Performance_Review_Q3_2025_Chunk_08
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Personalization_Performance_Review_Q3_2025 ;
+    docs:chunk_index 8 ;
+    docs:chunk_title "Decisions requested"@en ;
+    docs:chunk_text "Approve prioritization of metadata freshness work (pipeline plus catalog validation) over new model architecture changes for the first half of Q4."@en .
+
+
+  ######################################################################
+  # Document 3: Incident Report — Video Metadata Freshness Regression
+  ######################################################################
+
+  docs:Incident_Report_Video_Metadata_Freshness_Regression
+    a owl:NamedIndividual , docs:Incident_Report ;
+    dcterms:title "Incident Report — Video Metadata Freshness Regression"@en ;
+    dcterms:creator "Data Reliability Engineering (DRE)"@en ;
+    dcterms:publisher "StreamForge Platform Operations"@en ;
+    dcterms:created "2025-09-03"^^xsd:date ;
+    docs:uses_data_product dp:SF_Video_Metadata_Product ;
+    docs:uses_dataset <https://www.michaeldebellis.com/streamforge/dataset/Video_Metadata_Current> ;
+    docs:has_chunk docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_01 ;
+    docs:has_chunk docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_02 ;
+    docs:has_chunk docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_03 ;
+    docs:has_chunk docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_04 ;
+    docs:has_chunk docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_05 ;
+    docs:has_chunk docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_06 ;
+    docs:has_chunk docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_07 ;
+    docs:has_chunk docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_08 .
+
+  docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_01
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Incident_Report_Video_Metadata_Freshness_Regression ;
+    docs:chunk_index 1 ;
+    docs:chunk_title "Summary"@en ;
+    docs:chunk_text "On 2025-09-01 a regression in video metadata freshness caused the cataloged metadata dataset to lag real-time updates by several hours. The incident affected personalization cold-start behavior and search indexing for newly uploaded videos. This report documents impact, timeline, root cause, and corrective actions."@en .
+
+  docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_02
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Incident_Report_Video_Metadata_Freshness_Regression ;
+    docs:chunk_index 2 ;
+    docs:chunk_title "Impact"@en ;
+    docs:chunk_text "Window of impact: 2025-09-01 08:20 UTC to 2025-09-01 16:05 UTC. Metadata lag: up to 6.4 hours at peak. User impact: reduced impressions and slower indexing for new uploads; elevated not relevant feedback in new-content cohorts. Internal impact: downstream jobs consumed stale timestamps, triggering feature drift alerts."@en .
+
+  docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_03
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Incident_Report_Video_Metadata_Freshness_Regression ;
+    docs:chunk_index 3 ;
+    docs:chunk_title "Detection"@en ;
+    docs:chunk_text "Primary signal: freshness SLA monitor breached for the Video Metadata dataset. Secondary signal: downstream model feature drift alerts spiked for timestamp-derived features."@en .
+
+  docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_04
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Incident_Report_Video_Metadata_Freshness_Regression ;
+    docs:chunk_index 4 ;
+    docs:chunk_title "Timeline (UTC)"@en ;
+    docs:chunk_text "08:20 freshness SLA breach detected. 08:35 incident declared; DRE engaged. 09:10 suspected backlog in ingestion pipeline. 11:40 identified retry storm in metadata enrichment. 13:15 mitigation applied by throttling retries and clearing stuck partitions. 16:05 freshness returned to normal; incident resolved."@en .
+
+  docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_05
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Incident_Report_Video_Metadata_Freshness_Regression ;
+    docs:chunk_index 5 ;
+    docs:chunk_title "Root cause"@en ;
+    docs:chunk_text "A deployment changed retry behavior in the metadata enrichment job. Malformed payloads triggered repeated retries, saturating the queue and delaying partitions. The system lacked a circuit breaker for repeated failures on the same payload class."@en .
+
+  docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_06
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Incident_Report_Video_Metadata_Freshness_Regression ;
+    docs:chunk_index 6 ;
+    docs:chunk_title "Corrective actions (engineering controls)"@en ;
+    docs:chunk_text "Add circuit breaker and dead-letter routing for malformed payloads. Rate-limit retries and cap max retry time per partition. Introduce payload validation earlier in ingestion."@en .
+
+  docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_07
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Incident_Report_Video_Metadata_Freshness_Regression ;
+    docs:chunk_index 7 ;
+    docs:chunk_title "Corrective actions (catalog checks)"@en ;
+    docs:chunk_text "Extend catalog checks to include freshness monotonicity and timestamp plausibility rules."@en .
+
+  docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_08
+    a owl:NamedIndividual , docs:Document_Chunk ;
+    docs:is_chunk_of docs:Incident_Report_Video_Metadata_Freshness_Regression ;
+    docs:chunk_index 8 ;
+    docs:chunk_title "Follow-up"@en ;
+    docs:chunk_text "Owner: Video Metadata data product team. Deadline: implement circuit breaker and catalog validation rules by 2025-09-20. Verification: replay incident window and confirm SLA compliance under fault injection."@en .
+
+}

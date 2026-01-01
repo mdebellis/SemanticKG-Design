@@ -1,0 +1,73 @@
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+# Browse-export CONSTRUCT for Protégé (StreamForge RAG baseline)
+#
+# Purpose
+#   Produce a "Protégé-safe" Turtle snapshot for browsing/debugging the repository contents.
+#   This snapshot is NOT intended for re-loading into AllegroGraph as a source-of-truth dump.
+#
+# Key design choices
+#  1) No named graphs: this query assumes everything is in the default graph.
+#
+#  2) Exclude ontology headers (subjects typed owl:Ontology):
+#     AllegroGraph repository exports often contain multiple ontology header blocks
+#     (e.g., DCAT, DCTERMS, PROV, FOAF, plus our own). Protégé will throw
+#     "Ontology already exists" errors if the same OntologyID appears more than once.
+#     Filtering out owl:Ontology subjects prevents duplicate ontology definitions.
+#
+#  3) Exclude TBox triples ABOUT external vocabularies (DCAT/DCTERMS/PROV/FOAF/SKOS/RDF/RDFS/OWL/XSD):
+#     We still use these vocabularies as predicates in our ABox data, but we do not export
+#     their own schema axioms (domain/range/property chains, special punning patterns, etc.).
+#     Those external schema triples are a common source of noisy Protégé/OWLAPI warnings.
+#     Removing them keeps the snapshot stable and easy to reason over.
+#
+#  4) Add one small root ontology header (Browse_Export):
+#     We add a single owl:Ontology node (with an rdfs:label) so Protégé has a clean
+#     "active ontology" to display. We intentionally do NOT add owl:imports here to avoid
+#     pulling in external vocabularies with OWL Full / punning quirks.
+#
+# Result
+#   A compact snapshot containing:
+#     - Our ABox instances and assertions
+#     - Our own TBox (dp/docs/streamforge terms) as present in the repository
+#   while excluding duplicate ontology headers and external-vocabulary schema clutter.
+# One line summary: Export ABox + our schema for Protégé browsing; drop owl:Ontology headers and external-vocabulary TBox.
+CONSTRUCT {
+  ?s ?p ?o .
+}
+WHERE {
+  {
+    ?s ?p ?o .
+
+    # 1) Never export ontology headers (prevents duplicate ontology defs)
+    FILTER NOT EXISTS { ?s rdf:type owl:Ontology }
+
+    # 2) Drop *schema triples about external vocabularies* (DCAT/DCTERMS/PROV/FOAF/etc.)
+    #    This keeps your ABox data that *uses* those predicates, but removes the noisy TBox.
+    FILTER (
+      !(
+        isIRI(?s) &&
+        (
+          STRSTARTS(STR(?s), "http://www.w3.org/ns/dcat") ||
+          STRSTARTS(STR(?s), "http://purl.org/dc/terms/") ||
+          STRSTARTS(STR(?s), "http://www.w3.org/ns/prov#") ||
+          STRSTARTS(STR(?s), "http://xmlns.com/foaf/0.1/") ||
+          STRSTARTS(STR(?s), "http://www.w3.org/2004/02/skos/core#") ||
+          STRSTARTS(STR(?s), "http://www.w3.org/2001/XMLSchema#") ||
+          STRSTARTS(STR(?s), "http://www.w3.org/2002/07/owl#") ||
+          STRSTARTS(STR(?s), "http://www.w3.org/1999/02/22-rdf-syntax-ns#") ||
+          STRSTARTS(STR(?s), "http://www.w3.org/2000/01/rdf-schema#")
+        )
+      )
+    )
+  }
+  UNION
+  {
+    VALUES (?s ?p ?o) {
+      (<https://www.michaeldebellis.com/streamforge/Browse_Export> rdf:type owl:Ontology)
+      (<https://www.michaeldebellis.com/streamforge/Browse_Export> rdfs:label "StreamForge RAG browse export"@en)
+    }
+  }
+}

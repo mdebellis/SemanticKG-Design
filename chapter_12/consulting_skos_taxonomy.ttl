@@ -1,0 +1,383 @@
+prefix dc: <http://purl.org/dc/elements/1.1/>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix err: <http://www.w3.org/2005/xqt-errors#>
+prefix fn: <http://www.w3.org/2005/xpath-functions#>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix fti: <http://franz.com/ns/allegrograph/2.2/textindex/>
+prefix keyword: <http://franz.com/ns/keyword#>
+prefix kw: <http://franz.com/ns/keyword#>
+prefix nd: <http://franz.com/ns/allegrograph/5.0/geo/nd#>
+prefix ndfn: <http://franz.com/ns/allegrograph/5.0/geo/nd/fn#>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix sh: <http://www.w3.org/ns/shacl#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix xs: <http://www.w3.org/2001/XMLSchema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+<https://michaeldebellis.com/consulting_taxonomy> rdf:type owl:Ontology ; 
+  dcterms:contributor "Dave Beckett", "Nikki Rogers", "Participants in W3C's Semantic Web Deployment Working Group." ; 
+  dcterms:creator "Alistair Miles", "Sean Bechhofer" ; 
+  dcterms:description "An RDF vocabulary for describing the basic structure and content of concept schemes such as thesauri, classification schemes, subject heading lists, taxonomies, 'folksonomies', other types of controlled vocabulary, and also concept schemes embedded in glossaries and terminologies."@en ; 
+  dcterms:title "SKOS Vocabulary"@en ; 
+  rdfs:seeAlso <http://www.w3.org/TR/skos-reference/> . 
+dcterms:contributor rdf:type owl:AnnotationProperty . 
+dcterms:creator rdf:type owl:AnnotationProperty . 
+dcterms:description rdf:type owl:AnnotationProperty . 
+dcterms:title rdf:type owl:AnnotationProperty . 
+skos:altLabel rdf:type owl:AnnotationProperty ; 
+  rdfs:comment "The range of skos:altLabel is the class of RDF plain literals."@en, "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise disjoint properties."@en ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "alternative label"@en ; 
+  skos:definition "An alternative lexical label for a resource."@en ; 
+  skos:example "Acronyms, abbreviations, spelling variants, and irregular plural/singular forms may be included among the alternative labels for a concept. Mis-spelled terms are normally included as hidden labels (see skos:hiddenLabel)."@en ; 
+  rdfs:subPropertyOf rdfs:label . 
+skos:changeNote rdf:type owl:AnnotationProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "change note"@en ; 
+  skos:definition "A note about a modification to a concept."@en ; 
+  rdfs:subPropertyOf skos:note . 
+skos:definition rdf:type owl:AnnotationProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "definition"@en ; 
+  skos:definition "A statement or formal explanation of the meaning of a concept."@en ; 
+  rdfs:subPropertyOf skos:note . 
+skos:editorialNote rdf:type owl:AnnotationProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "editorial note"@en ; 
+  skos:definition "A note for an editor, translator or maintainer of the vocabulary."@en ; 
+  rdfs:subPropertyOf skos:note . 
+skos:example rdf:type owl:AnnotationProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "example"@en ; 
+  skos:definition "An example of the use of a concept."@en ; 
+  rdfs:subPropertyOf skos:note . 
+skos:hiddenLabel rdf:type owl:AnnotationProperty ; 
+  rdfs:comment "The range of skos:hiddenLabel is the class of RDF plain literals."@en, "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise disjoint properties."@en ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "hidden label"@en ; 
+  skos:definition "A lexical label for a resource that should be hidden when generating visual displays of the resource, but should still be accessible to free text search operations."@en ; 
+  rdfs:subPropertyOf rdfs:label . 
+skos:historyNote rdf:type owl:AnnotationProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "history note"@en ; 
+  skos:definition "A note about the past state/use/meaning of a concept."@en ; 
+  rdfs:subPropertyOf skos:note . 
+skos:note rdf:type owl:AnnotationProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "note"@en ; 
+  skos:definition "A general note, for any purpose."@en ; 
+  skos:scopeNote "This property may be used directly, or as a super-property for more specific note types."@en . 
+skos:prefLabel rdf:type owl:AnnotationProperty ; 
+  rdfs:comment "A resource has no more than one value of skos:prefLabel per language tag, and no more than one value of skos:prefLabel without language tag."@en, "The range of skos:prefLabel is the class of RDF plain literals."@en, """skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise
+      disjoint properties."""@en ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "preferred label"@en ; 
+  skos:definition "The preferred lexical label for a resource, in a given language."@en ; 
+  rdfs:subPropertyOf rdfs:label . 
+skos:scopeNote rdf:type owl:AnnotationProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "scope note"@en ; 
+  skos:definition "A note that helps to clarify the meaning and/or the use of a concept."@en ; 
+  rdfs:subPropertyOf skos:note . 
+skos:broadMatch rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:broader, skos:mappingRelation ; 
+  owl:inverseOf skos:narrowMatch ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "has broader match"@en ; 
+  skos:definition "skos:broadMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes."@en . 
+skos:broader rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:broaderTransitive ; 
+  owl:inverseOf skos:narrower . 
+skos:broaderTransitive rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:semanticRelation ; 
+  owl:inverseOf skos:narrowerTransitive ; 
+  rdf:type owl:TransitiveProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "has broader transitive"@en ; 
+  skos:definition "skos:broaderTransitive is a transitive superproperty of skos:broader." ; 
+  skos:scopeNote "By convention, skos:broaderTransitive is not used to make assertions. Rather, the properties can be used to draw inferences about the transitive closure of the hierarchical relation, which is useful e.g. when implementing a simple query expansion algorithm in a search application."@en . 
+skos:closeMatch rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:mappingRelation ; 
+  rdf:type owl:SymmetricProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "has close match"@en ; 
+  skos:definition "skos:closeMatch is used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications. In order to avoid the possibility of \"compound errors\" when combining mappings across more than two concept schemes, skos:closeMatch is not declared to be a transitive property."@en . 
+skos:exactMatch rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:closeMatch ; 
+  rdf:type owl:SymmetricProperty, owl:TransitiveProperty ; 
+  rdfs:comment "skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch."@en ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "has exact match"@en ; 
+  skos:definition "skos:exactMatch is used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications. skos:exactMatch is a transitive property, and is a sub-property of skos:closeMatch."@en . 
+skos:hasTopConcept rdf:type owl:ObjectProperty ; 
+  owl:inverseOf skos:topConceptOf ; 
+  rdfs:domain skos:ConceptScheme ; 
+  rdfs:range skos:Concept . 
+skos:inScheme rdf:type owl:ObjectProperty ; 
+  rdfs:range skos:ConceptScheme ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "is in scheme"@en ; 
+  skos:definition "Relates a resource (for example a concept) to a concept scheme in which it is included."@en ; 
+  skos:scopeNote "A concept may be a member of more than one concept scheme."@en . 
+skos:mappingRelation rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:semanticRelation ; 
+  rdfs:comment "These concept mapping relations mirror semantic relations, and the data model defined below is similar (with the exception of skos:exactMatch) to the data model defined for semantic relations. A distinct vocabulary is provided for concept mapping relations, to provide a convenient way to differentiate links within a concept scheme from links between concept schemes. However, this pattern of usage is not a formal requirement of the SKOS data model, and relies on informal definitions of best practice."@en ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "is in mapping relation with"@en ; 
+  skos:definition "Relates two concepts coming, by convention, from different schemes, and that have comparable meanings"@en . 
+skos:member rdf:type owl:ObjectProperty ; 
+  rdfs:domain skos:Collection . 
+_:b04C3E8FDx1 rdf:type owl:Class . 
+_:b04C3E8FDx2 rdf:first skos:Collection . 
+_:b04C3E8FDx3 rdf:first skos:Concept . 
+_:b04C3E8FDx2 rdf:rest _:b04C3E8FDx3 . 
+_:b04C3E8FDx3 rdf:rest rdf:nil . 
+_:b04C3E8FDx1 owl:unionOf _:b04C3E8FDx2 . 
+skos:member rdfs:range _:b04C3E8FDx1 ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "has member"@en ; 
+  skos:definition "Relates a collection to one of its members."@en . 
+skos:memberList rdf:type owl:ObjectProperty, owl:FunctionalProperty ; 
+  rdfs:domain skos:OrderedCollection ; 
+  rdfs:range rdf:List ; 
+  rdfs:comment """For any resource, every item in the list given as the value of the
+      skos:memberList property is also a value of the skos:member property."""@en ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "has member list"@en ; 
+  skos:definition "Relates an ordered collection to the RDF list containing its members."@en . 
+skos:narrowMatch rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:mappingRelation, skos:narrower ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "has narrower match"@en ; 
+  skos:definition "skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes."@en . 
+skos:narrower rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:narrowerTransitive . 
+skos:narrowerTransitive rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:semanticRelation ; 
+  rdf:type owl:TransitiveProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "has narrower transitive"@en ; 
+  skos:definition "skos:narrowerTransitive is a transitive superproperty of skos:narrower." ; 
+  skos:scopeNote "By convention, skos:narrowerTransitive is not used to make assertions. Rather, the properties can be used to draw inferences about the transitive closure of the hierarchical relation, which is useful e.g. when implementing a simple query expansion algorithm in a search application."@en . 
+skos:related rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:semanticRelation ; 
+  rdf:type owl:SymmetricProperty . 
+skos:relatedMatch rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:mappingRelation, skos:related ; 
+  rdf:type owl:SymmetricProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "has related match"@en ; 
+  skos:definition "skos:relatedMatch is used to state an associative mapping link between two conceptual resources in different concept schemes."@en . 
+skos:semanticRelation rdf:type owl:ObjectProperty ; 
+  rdfs:domain skos:Concept ; 
+  rdfs:range skos:Concept ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "is in semantic relation with"@en ; 
+  skos:definition "Links a concept to a concept related by meaning."@en ; 
+  skos:scopeNote "This property should not be used directly, but as a super-property for all properties denoting a relationship of meaning between concepts."@en . 
+skos:topConceptOf rdf:type owl:ObjectProperty ; 
+  rdfs:subPropertyOf skos:inScheme ; 
+  rdfs:domain skos:Concept ; 
+  rdfs:range skos:ConceptScheme . 
+skos:notation rdf:type owl:DatatypeProperty ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "notation"@en ; 
+  skos:definition "A notation, also known as classification code, is a string of characters such as \"T58.5\" or \"303.4833\" used to uniquely identify a concept within the scope of a given concept scheme."@en ; 
+  skos:scopeNote "By convention, skos:notation is used with a typed literal in the object position of the triple."@en . 
+rdf:List rdf:type owl:Class . 
+skos:Collection rdf:type owl:Class ; 
+  owl:disjointWith skos:Concept, skos:ConceptScheme ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "Collection"@en ; 
+  skos:definition "A meaningful collection of concepts."@en ; 
+  skos:scopeNote "Labelled collections can be used where you would like a set of concepts to be displayed under a 'node label' in the hierarchy."@en . 
+skos:Concept rdf:type owl:Class ; 
+  owl:disjointWith skos:ConceptScheme ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "Concept"@en ; 
+  skos:definition "An idea or notion; a unit of thought."@en . 
+skos:ConceptScheme rdf:type owl:Class ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "Concept Scheme"@en ; 
+  skos:definition "A set of concepts, optionally including statements about semantic relationships between those concepts."@en ; 
+  skos:example "Thesauri, classification schemes, subject heading lists, taxonomies, 'folksonomies', and other types of controlled vocabulary are all examples of concept schemes. Concept schemes are also embedded in glossaries and terminologies."@en ; 
+  skos:scopeNote "A concept scheme may be defined to include concepts from different sources."@en . 
+skos:OrderedCollection rdf:type owl:Class ; 
+  rdfs:subClassOf skos:Collection ; 
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ; 
+  rdfs:label "Ordered Collection"@en ; 
+  skos:definition "An ordered collection of concepts, where both the grouping and the ordering are meaningful."@en ; 
+  skos:scopeNote "Ordered collections can be used where you would like a set of concepts to be displayed in a specific order, and optionally under a 'node label'."@en . 
+<https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm_Taxonomy> rdf:type skos:ConceptScheme ; 
+  rdfs:label "Consulting Firm Taxonomy"@en ; 
+  skos:hasTopConcept <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> . 
+<https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> rdf:type skos:Concept ; 
+  rdfs:label "Consulting Firm"@en ; 
+  skos:topConceptOf <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm_Taxonomy> . 
+<https://michaeldebellis.com/consulting_taxonomy/Service_Line> rdf:type skos:Concept ; 
+  rdfs:label "Service Line"@en ; 
+  skos:topConceptOf <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm_Taxonomy> ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> ; 
+  skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Strategy>, <https://michaeldebellis.com/consulting_taxonomy/Data_And_AI>, <https://michaeldebellis.com/consulting_taxonomy/Cybersecurity>, <https://michaeldebellis.com/consulting_taxonomy/Cloud_Engineering>, <https://michaeldebellis.com/consulting_taxonomy/Risk_And_Compliance> . 
+<https://michaeldebellis.com/consulting_taxonomy/Offering> rdf:type skos:Concept ; 
+  rdfs:label "Offering"@en ; 
+  skos:topConceptOf <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm_Taxonomy> ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> ; 
+  skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Data_Product_Design>, <https://michaeldebellis.com/consulting_taxonomy/Ontology_Engineering>, <https://michaeldebellis.com/consulting_taxonomy/Graph_RAG_Implementation>, <https://michaeldebellis.com/consulting_taxonomy/Data_Governance_Playbook>, <https://michaeldebellis.com/consulting_taxonomy/Reference_Architecture>, <https://michaeldebellis.com/consulting_taxonomy/Data_Quality_Assessment>, <https://michaeldebellis.com/consulting_taxonomy/SHACL_Validation_Models>, <https://michaeldebellis.com/consulting_taxonomy/Metadata_Management> . 
+<https://michaeldebellis.com/consulting_taxonomy/Industry> rdf:type skos:Concept ; 
+  rdfs:label "Industry"@en ; 
+  skos:topConceptOf <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm_Taxonomy> ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> ; 
+  skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Healthcare>, <https://michaeldebellis.com/consulting_taxonomy/Financial_Services>, <https://michaeldebellis.com/consulting_taxonomy/Retail>, <https://michaeldebellis.com/consulting_taxonomy/Manufacturing>, <https://michaeldebellis.com/consulting_taxonomy/Public_Sector> . 
+<https://michaeldebellis.com/consulting_taxonomy/Client> rdf:type skos:Concept ; 
+  rdfs:label "Client"@en ; 
+  skos:topConceptOf <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm_Taxonomy> ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> ; 
+  skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Northwind_Health>, <https://michaeldebellis.com/consulting_taxonomy/Acme_Bank>, <https://michaeldebellis.com/consulting_taxonomy/Contoso_Retail> . 
+<https://michaeldebellis.com/consulting_taxonomy/Engagement> rdf:type skos:Concept ; 
+  rdfs:label "Engagement"@en ; 
+  skos:topConceptOf <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm_Taxonomy> ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> ; 
+  skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Northwind_Claims_RAG>, <https://michaeldebellis.com/consulting_taxonomy/Acme_KYC_Modernization>, <https://michaeldebellis.com/consulting_taxonomy/Contoso_Product_Analytics> . 
+<https://michaeldebellis.com/consulting_taxonomy/Team> rdf:type skos:Concept ; 
+  rdfs:label "Team"@en ; 
+  skos:topConceptOf <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm_Taxonomy> ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> ; 
+  skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Engagement_Team>, <https://michaeldebellis.com/consulting_taxonomy/Data_Platform_Team>, <https://michaeldebellis.com/consulting_taxonomy/Governance_Team>, <https://michaeldebellis.com/consulting_taxonomy/Security_Team>, <https://michaeldebellis.com/consulting_taxonomy/Ontology_Team> . 
+<https://michaeldebellis.com/consulting_taxonomy/Deliverable> rdf:type skos:Concept ; 
+  rdfs:label "Deliverable"@en ; 
+  skos:topConceptOf <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm_Taxonomy> ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> ; 
+  skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Requirements_Model>, <https://michaeldebellis.com/consulting_taxonomy/Conceptual_Model>, <https://michaeldebellis.com/consulting_taxonomy/Design_Model>, <https://michaeldebellis.com/consulting_taxonomy/Implementation_Pipeline>, <https://michaeldebellis.com/consulting_taxonomy/Validation_Rules>, <https://michaeldebellis.com/consulting_taxonomy/Data_Catalog_Entries>, <https://michaeldebellis.com/consulting_taxonomy/Runbook>, <https://michaeldebellis.com/consulting_taxonomy/Executive_Readout> . 
+<https://michaeldebellis.com/consulting_taxonomy/Strategy> rdf:type skos:Concept ; 
+  rdfs:label "Strategy"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Service_Line> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_And_AI> rdf:type skos:Concept ; 
+  rdfs:label "Data and AI"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Service_Line> . 
+<https://michaeldebellis.com/consulting_taxonomy/Cybersecurity> rdf:type skos:Concept ; 
+  rdfs:label "Cybersecurity"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Service_Line> . 
+<https://michaeldebellis.com/consulting_taxonomy/Cloud_Engineering> rdf:type skos:Concept ; 
+  rdfs:label "Cloud Engineering"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Service_Line> . 
+<https://michaeldebellis.com/consulting_taxonomy/Risk_And_Compliance> rdf:type skos:Concept ; 
+  rdfs:label "Risk and Compliance"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Service_Line> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_Product_Design> rdf:type skos:Concept ; 
+  rdfs:label "Data Product Design"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Offering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Ontology_Engineering> rdf:type skos:Concept ; 
+  rdfs:label "Ontology Engineering"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Offering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Graph_RAG_Implementation> rdf:type skos:Concept ; 
+  rdfs:label "Graph RAG Implementation"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Offering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_Governance_Playbook> rdf:type skos:Concept ; 
+  rdfs:label "Data Governance Playbook"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Offering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Reference_Architecture> rdf:type skos:Concept ; 
+  rdfs:label "Reference Architecture"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Offering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_Quality_Assessment> rdf:type skos:Concept ; 
+  rdfs:label "Data Quality Assessment"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Offering> . 
+<https://michaeldebellis.com/consulting_taxonomy/SHACL_Validation_Models> rdf:type skos:Concept ; 
+  rdfs:label "SHACL Validation Models"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Offering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Metadata_Management> rdf:type skos:Concept ; 
+  rdfs:label "Metadata Management"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Offering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Graph_RAG_Implementation> skos:related <https://michaeldebellis.com/consulting_taxonomy/Ontology_Engineering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_Product_Design> skos:related <https://michaeldebellis.com/consulting_taxonomy/Metadata_Management> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_Quality_Assessment> skos:related <https://michaeldebellis.com/consulting_taxonomy/SHACL_Validation_Models> . 
+<https://michaeldebellis.com/consulting_taxonomy/Cybersecurity> skos:related <https://michaeldebellis.com/consulting_taxonomy/Risk_And_Compliance> . 
+<https://michaeldebellis.com/consulting_taxonomy/Healthcare> rdf:type skos:Concept ; 
+  rdfs:label "Healthcare"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Industry> . 
+<https://michaeldebellis.com/consulting_taxonomy/Financial_Services> rdf:type skos:Concept ; 
+  rdfs:label "Financial Services"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Industry> . 
+<https://michaeldebellis.com/consulting_taxonomy/Retail> rdf:type skos:Concept ; 
+  rdfs:label "Retail"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Industry> . 
+<https://michaeldebellis.com/consulting_taxonomy/Manufacturing> rdf:type skos:Concept ; 
+  rdfs:label "Manufacturing"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Industry> . 
+<https://michaeldebellis.com/consulting_taxonomy/Public_Sector> rdf:type skos:Concept ; 
+  rdfs:label "Public Sector"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Industry> . 
+<https://michaeldebellis.com/consulting_taxonomy/Northwind_Health> rdf:type skos:Concept ; 
+  rdfs:label "Northwind Health"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Client> . 
+<https://michaeldebellis.com/consulting_taxonomy/Acme_Bank> rdf:type skos:Concept ; 
+  rdfs:label "Acme Bank"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Client> . 
+<https://michaeldebellis.com/consulting_taxonomy/Contoso_Retail> rdf:type skos:Concept ; 
+  rdfs:label "Contoso Retail"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Client> . 
+<https://michaeldebellis.com/consulting_taxonomy/Acme_Bank> skos:altLabel "Acme Financial"@en . 
+<https://michaeldebellis.com/consulting_taxonomy/Northwind_Health> skos:altLabel "Northwind Healthcare"@en . 
+<https://michaeldebellis.com/consulting_taxonomy/Contoso_Retail> skos:altLabel "Contoso Stores"@en . 
+<https://michaeldebellis.com/consulting_taxonomy/Northwind_Claims_RAG> rdf:type skos:Concept ; 
+  rdfs:label "Northwind Claims RAG"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Engagement> ; 
+  skos:related <https://michaeldebellis.com/consulting_taxonomy/Northwind_Health>, <https://michaeldebellis.com/consulting_taxonomy/Graph_RAG_Implementation>, <https://michaeldebellis.com/consulting_taxonomy/Healthcare> . 
+<https://michaeldebellis.com/consulting_taxonomy/Acme_KYC_Modernization> rdf:type skos:Concept ; 
+  rdfs:label "Acme KYC Modernization"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Engagement> ; 
+  skos:related <https://michaeldebellis.com/consulting_taxonomy/Acme_Bank>, <https://michaeldebellis.com/consulting_taxonomy/Risk_And_Compliance>, <https://michaeldebellis.com/consulting_taxonomy/Financial_Services> . 
+<https://michaeldebellis.com/consulting_taxonomy/Contoso_Product_Analytics> rdf:type skos:Concept ; 
+  rdfs:label "Contoso Product Analytics"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Engagement> ; 
+  skos:related <https://michaeldebellis.com/consulting_taxonomy/Contoso_Retail>, <https://michaeldebellis.com/consulting_taxonomy/Data_And_AI>, <https://michaeldebellis.com/consulting_taxonomy/Retail> . 
+<https://michaeldebellis.com/consulting_taxonomy/Engagement_Team> rdf:type skos:Concept ; 
+  rdfs:label "Engagement Team"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Team> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_Platform_Team> rdf:type skos:Concept ; 
+  rdfs:label "Data Platform Team"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Team> . 
+<https://michaeldebellis.com/consulting_taxonomy/Governance_Team> rdf:type skos:Concept ; 
+  rdfs:label "Governance Team"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Team> . 
+<https://michaeldebellis.com/consulting_taxonomy/Security_Team> rdf:type skos:Concept ; 
+  rdfs:label "Security Team"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Team> . 
+<https://michaeldebellis.com/consulting_taxonomy/Ontology_Team> rdf:type skos:Concept ; 
+  rdfs:label "Ontology Team"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Team> ; 
+  skos:related <https://michaeldebellis.com/consulting_taxonomy/Ontology_Engineering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Governance_Team> skos:related <https://michaeldebellis.com/consulting_taxonomy/Data_Governance_Playbook> . 
+<https://michaeldebellis.com/consulting_taxonomy/Security_Team> skos:related <https://michaeldebellis.com/consulting_taxonomy/Cybersecurity> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_Platform_Team> skos:related <https://michaeldebellis.com/consulting_taxonomy/Reference_Architecture> . 
+<https://michaeldebellis.com/consulting_taxonomy/Engagement_Team> skos:related <https://michaeldebellis.com/consulting_taxonomy/Executive_Readout> . 
+<https://michaeldebellis.com/consulting_taxonomy/Requirements_Model> rdf:type skos:Concept ; 
+  rdfs:label "Requirements Model"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Deliverable> . 
+<https://michaeldebellis.com/consulting_taxonomy/Conceptual_Model> rdf:type skos:Concept ; 
+  rdfs:label "Conceptual Model"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Deliverable> . 
+<https://michaeldebellis.com/consulting_taxonomy/Design_Model> rdf:type skos:Concept ; 
+  rdfs:label "Design Model"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Deliverable> . 
+<https://michaeldebellis.com/consulting_taxonomy/Implementation_Pipeline> rdf:type skos:Concept ; 
+  rdfs:label "Implementation Pipeline"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Deliverable> . 
+<https://michaeldebellis.com/consulting_taxonomy/Validation_Rules> rdf:type skos:Concept ; 
+  rdfs:label "Validation Rules"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Deliverable> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_Catalog_Entries> rdf:type skos:Concept ; 
+  rdfs:label "Data Catalog Entries"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Deliverable> . 
+<https://michaeldebellis.com/consulting_taxonomy/Runbook> rdf:type skos:Concept ; 
+  rdfs:label "Runbook"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Deliverable> . 
+<https://michaeldebellis.com/consulting_taxonomy/Executive_Readout> rdf:type skos:Concept ; 
+  rdfs:label "Executive Readout"@en ; 
+  skos:broader <https://michaeldebellis.com/consulting_taxonomy/Deliverable> . 
+<https://michaeldebellis.com/consulting_taxonomy/Requirements_Model> skos:related <https://michaeldebellis.com/consulting_taxonomy/Strategy> . 
+<https://michaeldebellis.com/consulting_taxonomy/Conceptual_Model> skos:related <https://michaeldebellis.com/consulting_taxonomy/Ontology_Engineering> . 
+<https://michaeldebellis.com/consulting_taxonomy/Design_Model> skos:related <https://michaeldebellis.com/consulting_taxonomy/SHACL_Validation_Models> . 
+<https://michaeldebellis.com/consulting_taxonomy/Validation_Rules> skos:related <https://michaeldebellis.com/consulting_taxonomy/Data_Quality_Assessment> . 
+<https://michaeldebellis.com/consulting_taxonomy/Data_Catalog_Entries> skos:related <https://michaeldebellis.com/consulting_taxonomy/Metadata_Management> . 

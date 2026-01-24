@@ -50,4 +50,6 @@ It is not a formal schema definition.
   "device_type": "string",
   "region": "string"
 }
+```
+
 This document is referenced by the StreamForge Data Product Catalog as an external artifact via dcterms:source

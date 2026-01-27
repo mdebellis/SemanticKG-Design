@@ -1,0 +1,28 @@
+PREFIX :     <https://michaeldebellis.com/consulting_taxonomy/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# This query is for the original SKOS taxonomy that only has skos
+# top_concept and broader/narrower links
+PREFIX :     <https://michaeldebellis.com/consulting_taxonomy/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT ?parent ?child
+WHERE {
+  VALUES ?scheme { :Consulting_Firm_Taxonomy }
+  ?root skos:topConceptOf ?scheme .
+
+  ?parent skos:narrower ?child .
+  FILTER EXISTS { ?root (skos:narrower)* ?parent }
+}
+ORDER BY ?parent ?child
+
+
+
+# Counts the reachable concepts in the skos only ontology
+SELECT (COUNT(DISTINCT ?node) AS ?reachableConcepts)
+WHERE {
+  VALUES ?scheme { :Consulting_Firm_Taxonomy }
+  ?root skos:topConceptOf ?scheme .
+  ?root (skos:narrower)* ?node .
+}

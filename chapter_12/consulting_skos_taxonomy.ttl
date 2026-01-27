@@ -381,3 +381,18 @@ skos:OrderedCollection rdf:type owl:Class ;
 <https://michaeldebellis.com/consulting_taxonomy/Design_Model> skos:related <https://michaeldebellis.com/consulting_taxonomy/SHACL_Validation_Models> . 
 <https://michaeldebellis.com/consulting_taxonomy/Validation_Rules> skos:related <https://michaeldebellis.com/consulting_taxonomy/Data_Quality_Assessment> . 
 <https://michaeldebellis.com/consulting_taxonomy/Data_Catalog_Entries> skos:related <https://michaeldebellis.com/consulting_taxonomy/Metadata_Management> . 
+<https://michaeldebellis.com/consulting_taxonomy/Acme_KYC_Modernization> skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Acme_KYC_Modernization_Executive_Readout>, <https://michaeldebellis.com/consulting_taxonomy/Acme_KYC_Modernization_Requirements_Model>, <https://michaeldebellis.com/consulting_taxonomy/Acme_KYC_Modernization_Engagement_Team> . 
+<https://michaeldebellis.com/consulting_taxonomy/Acme_KYC_Modernization_Executive_Readout> rdfs:label "Acme KYC Modernization Executive Readout"@en ; 
+  rdf:type skos:Concept . 
+<https://michaeldebellis.com/consulting_taxonomy/Acme_KYC_Modernization_Requirements_Model> rdfs:label "Acme KYC Modernization Requirements Model"@en ; 
+  rdf:type skos:Concept . 
+<https://michaeldebellis.com/consulting_taxonomy/Acme_KYC_Modernization_Engagement_Team> rdfs:label "Acme KYC Modernization Engagement Team"@en ; 
+  rdf:type skos:Concept . 
+<https://michaeldebellis.com/consulting_taxonomy/Northwind_Claims_RAG> skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Northwind_Claims_RAG_Validation_Rules>, <https://michaeldebellis.com/consulting_taxonomy/Northwind_Claims_RAG_Conceptual_Model>, <https://michaeldebellis.com/consulting_taxonomy/Northwind_Claims_RAG_Engagement_Team> . 
+<https://michaeldebellis.com/consulting_taxonomy/Northwind_Claims_RAG_Validation_Rules> rdfs:label "Northwind Claims RAG Validation Rules"@en ; 
+  rdf:type skos:Concept . 
+<https://michaeldebellis.com/consulting_taxonomy/Northwind_Claims_RAG_Conceptual_Model> rdfs:label "Northwind Claims RAG Conceptual Model"@en ; 
+  rdf:type skos:Concept . 
+<https://michaeldebellis.com/consulting_taxonomy/Northwind_Claims_RAG_Engagement_Team> rdfs:label "Northwind Claims RAG Engagement Team"@en ; 
+  rdf:type skos:Concept . 
+<https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm> skos:narrower <https://michaeldebellis.com/consulting_taxonomy/Deliverable>, <https://michaeldebellis.com/consulting_taxonomy/Team>, <https://michaeldebellis.com/consulting_taxonomy/Engagement>, <https://michaeldebellis.com/consulting_taxonomy/Client>, <https://michaeldebellis.com/consulting_taxonomy/Industry>, <https://michaeldebellis.com/consulting_taxonomy/Offering>, <https://michaeldebellis.com/consulting_taxonomy/Service_Line> . 

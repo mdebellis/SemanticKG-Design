@@ -1,0 +1,96 @@
+PREFIX :     <https://michaeldebellis.com/consulting_taxonomy/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX sulo: <https://w3id.org/sulo/>
+
+# Query to see initial SKOS taxonomy
+SELECT DISTINCT ?parent ?child
+WHERE {VALUES ?scheme { :Consulting_Firm_Taxonomy }
+  ?root  skos:topConceptOf ?scheme .
+  ?root  (skos:narrower)* ?parent .
+  ?parent skos:narrower ?child .}
+ORDER BY ?parent ?child
+
+# To begin make the root node of the taxonomy and 
+# its children into OWL classes
+INSERT {:Consulting_Firm rdf:type owl:Class .
+        ?concept rdf:type owl:Class .}
+WHERE {:Consulting_Firm skos:narrower ?concept .}
+	   
+# The children (nodes that are skos:narrower) of Client are instances.
+INSERT {?client rdf:type :Client.}
+WHERE {:Client skos:narrower ?client.}
+
+# The children (nodes that are skos:narrower) of Engagement are instances.
+INSERT {?engagement rdf:type :Engagement.}
+WHERE {:Engagement  skos:narrower ?engagement.}
+
+# The rest of the children of the second level concepts are subclasses
+INSERT {?child rdfs:subClassOf ?parent .}
+WHERE {SELECT DISTINCT ?child ?parent 
+	WHERE {
+		{ :Deliverable skos:narrower ?child . BIND(:Deliverable   AS ?parent) }
+		UNION
+		{ :Industry skos:narrower ?child . BIND(:Industry      AS ?parent) }
+		UNION
+		{ :Offering skos:narrower ?child . BIND(:Offering      AS ?parent) }
+		UNION
+		{ :Service_Line  skos:narrower ?child . BIND(:Service_Line  AS ?parent) }
+		UNION
+		{ :Team  skos:narrower ?child . BIND(:Team AS ?parent) }}}
+
+
+# Add object property before using it
+INSERT DATA {sulo:hasDirectPart rdf:type owl:ObjectProperty ;
+                     rdfs:label "has direct part"@en .}
+
+# The children of Engagements are parts of the engagement (safe; no cross product)
+INSERT {?engagement sulo:hasDirectPart ?part .}
+WHERE {{ :Acme_KYC_Modernization  skos:narrower ?part . BIND(:Acme_KYC_Modernization  AS ?engagement)}
+  UNION
+  {:Northwind_Claims_RAG    skos:narrower ?part . BIND(:Northwind_Claims_RAG    AS ?engagement)}}
+	   
+	   
+# After graph query (OWL relations only, same node set as the SKOS tree)
+# Use this after doing the transformations above
+# This query returns only the transformed predicates: rdfs:subClassOf, rdf:type, sulo:isDirectPartOf
+# It restricts the nodes to those reachable from your scheme’s root using the original SKOS taxonomy. 
+# That gives you a revised graph that covers the same conceptual space as the SKOS tree, without dragging in unrelated stuff.
+SELECT DISTINCT ?s ?p ?o
+WHERE {
+  VALUES ?scheme { :Consulting_Firm_Taxonomy }
+
+  # Identify the root of the SKOS taxonomy
+  ?root skos:topConceptOf ?scheme .
+
+  # --- Subclass edges (class hierarchy) ---
+  {
+    ?s rdfs:subClassOf ?o .
+    BIND(rdfs:subClassOf AS ?p)
+
+    # Keep only edges where the subject is reachable from the SKOS root
+    FILTER EXISTS { ?root (skos:narrower)* ?s }
+  }
+  UNION
+
+  # --- Instance typing edges ---
+  {
+    ?s rdf:type ?o .
+    BIND(rdf:type AS ?p)
+
+    # Keep only typings where the individual is reachable from the SKOS root
+    FILTER EXISTS { ?root (skos:narrower)* ?s }
+  }
+  UNION
+
+  # --- Mereology edges ---
+  {
+    ?s sulo:isDirectPartOf ?o .
+    BIND(sulo:isDirectPartOf AS ?p)
+
+    # Keep only part-of edges where the part is reachable from the SKOS root
+    FILTER EXISTS { ?root (skos:narrower)* ?s }
+  }
+}
+

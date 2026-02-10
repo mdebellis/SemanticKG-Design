@@ -12,6 +12,14 @@
                                             owl:imports <http://www.w3.org/2004/02/skos/core> .
 
 #################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/created
+dcterms:created rdf:type owl:AnnotationProperty .
+
+
+#################################################################
 #    Object Properties
 #################################################################
 
@@ -489,6 +497,14 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
             rdfs:label "Individual"@en ;
             skos:definition "An instance of one or more OWL classes. Individuals are analogous to instances in Object-Oriented Programming (OOP) and rows in relational databases."@en ;
             skos:prefLabel "Individual"@en .
+
+
+###  https://www.michaeldebellis.com/glossary/Iterative_Development
+:Iterative_Development rdf:type owl:NamedIndividual ,
+                                skos:Concept ;
+                       skos:narrower :Agile_Methods ;
+                       dcterms:contributor "Michael DeBellis" ;
+                       dcterms:created "2026-02-08T02:00:52Z"^^xsd:dateTime .
 
 
 ###  https://www.michaeldebellis.com/glossary/Knowledge_Base

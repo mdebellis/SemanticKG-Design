@@ -5,16 +5,12 @@ PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
 # Q2 — Product → Dataset mapping
 # Purpose: For each Data Product, list the DCAT Dataset(s) it produces
 SELECT ?product_label ?dataset ?dataset_label
-WHERE {
-  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+WHERE { {
     ?product a dp:Data_Product ;
              rdfs:label ?product_label ;
              dp:produces_dataset ?dataset .
     OPTIONAL { ?dataset rdfs:label ?dataset_label }
   }
   # (Optional) show that the dataset really is DCAT
-  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
-    ?dataset a dcat:Dataset .
-  }
-}
+ {?dataset a dcat:Dataset . }}
 ORDER BY ?product_label ?dataset_label

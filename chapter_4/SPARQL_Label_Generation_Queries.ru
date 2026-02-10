@@ -1,0 +1,62 @@
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX :  <https://michaeldebellis.com/pattern_examples/>
+
+#Important: the following four queries will work for Snap SPARQL in Protege
+#If you are using any other SPARQL tool replace the CONSTRUCT statement with an INSERT
+#Create labels for all Classes that don't already have them
+#Make sure to never change owl:Nothing nor owl:Thing 
+CONSTRUCT {?class rdfs:label ?lblname.}
+WHERE {?class rdf:type owl:Class.
+    BIND(STRAFTER(STR(?class), 'pattern_examples/') as ?name)
+	BIND(REPLACE(?name,"_", " " ) as ?lblname)
+	OPTIONAL{?class rdfs:label ?elbl.}
+	FILTER(?class != owl:Thing && ?class != owl:Nothing && "" != ?lblname && !BOUND(?elbl))}
+		
+#Create labels for all Individuals that don't already have them		
+CONSTRUCT {?individual rdfs:label ?lblname.}
+WHERE {?individual a owl:NamedIndividual.
+    BIND(STRAFTER(STR(?individual), 'pattern_examples/') as ?name)
+	BIND(REPLACE(?name,"_", " " ) as ?lblname)
+	OPTIONAL{?individual rdfs:label ?elbl.}
+	FILTER(!BOUND(?elbl) && "" != ?lblname)}		
+
+#Create labels for all Object Properties that don't already have them
+#Make sure to never change owl:topObjectProperty
+#Using all lower case for property labels 
+CONSTRUCT {?p rdfs:label ?lblname.}
+WHERE {?p a owl:ObjectProperty.
+    BIND(STRAFTER(STR(?p), 'pattern_examples/') as ?name)
+	BIND(LCASE(REPLACE(?name,"_", " " )) as ?lblname)
+	OPTIONAL{?p rdfs:label ?elbl.}
+	FILTER(?p != owl:topObjectProperty && "" != ?lblname && !BOUND(?elbl) && ?p != owl:bottomObjectProperty)}	
+
+#Create labels for all Data Properties that don't already have them
+#Using all lower case for property labels 
+#Make sure to never change owl:topDataProperty
+CONSTRUCT {?p rdfs:label ?lblname.}
+WHERE {?p a owl:DatatypeProperty.
+    BIND(STRAFTER(STR(?p), 'pattern_examples/') as ?name)
+	BIND(LCASE(REPLACE(?name,"_", " " )) as ?lblname)		
+	OPTIONAL{?p rdfs:label ?elbl.}
+	FILTER(?p != owl:topDataProperty && "" != ?lblname && !BOUND(?elbl) && ?p != owl:bottomDataProperty)}	
+
+#Create labels for all Annotation Properties that don't already have them
+#Using all lower case for property labels 
+#Don't need to worry about top and botom as those are only for reasoning	
+CONSTRUCT {?p rdfs:label ?lblname.}
+WHERE {?p a owl:AnnotationProperty.
+    BIND(STRAFTER(STR(?p), 'pattern_examples/') as ?name)
+	BIND(LCASE(REPLACE(?name,"_", " " )) as ?lblname)		
+	OPTIONAL{?p rdfs:label ?elbl.}
+	FILTER("" != ?lblname && !BOUND(?elbl))}	
+
+#This is a useful query if you forget to add language tags
+#It replaces all existing labels with labels with English tags	
+DELETE {?s rdfs:label ?label.}
+INSERT {?s rdfs:label ?newLabel.}
+WHERE {?s rdfs:label ?label.
+  FILTER (lang(?label) = "" && !isLiteral(?label) || datatype(?label) = xsd:string)
+  BIND (STR(?label)@en AS ?newLabel)}

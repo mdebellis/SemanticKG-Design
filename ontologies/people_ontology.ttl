@@ -125,6 +125,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 #    Object Properties
 #################################################################
 
+###  https://michaeldebellis.com/people/born_in
+:born_in rdf:type owl:ObjectProperty ;
+         rdfs:domain :Person ;
+         rdfs:range :Place ;
+         dct:contributor "Michael DeBellis" ;
+         dct:created "2026-02-06T22:14:21Z"^^xsd:dateTime ;
+         rdfs:label "born in"@en .
+
+
 ###  https://michaeldebellis.com/people/contains
 :contains rdf:type owl:ObjectProperty ;
           owl:inverseOf :is_contained_in ;
@@ -1386,6 +1395,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Alan_Turing rdf:type owl:NamedIndividual ,
                       :Man ,
                       :Test_Data ;
+             :born_in :London ;
              :has_colleague :John_von_Neumann ;
              :birth_date "1912-06-23T00:00:00Z"^^xsd:dateTime ;
              :employee_id "999-99-9999" ;
@@ -1396,8 +1406,10 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Albert_Einstein rdf:type owl:NamedIndividual ,
                           :Man ,
                           :Test_Data ;
+                 :born_in :Ulm ;
                  :has_colleague :Emmy_Noether ,
                                 :John_von_Neumann ;
+                 :has_employer :Swiss_Federal_Office_for_Intellectual_Property ;
                  :birth_date "1879-03-14T00:00:00Z"^^xsd:dateTime ;
                  :employee_id "999-99-1234" ;
                  :nobel_prize_winner "true"^^xsd:boolean ;
@@ -1507,6 +1519,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                  :City ,
                  :Test_Data ;
         rdfs:label "Berlin" .
+
+
+###  https://michaeldebellis.com/people/Bern
+:Bern rdf:type owl:NamedIndividual ,
+               :City ;
+      dct:contributor "Michael DeBellis" ;
+      dct:created "2026-02-06T22:36:45Z"^^xsd:dateTime ;
+      rdfs:label "Bern"@en .
 
 
 ###  https://michaeldebellis.com/people/Brazil
@@ -1754,6 +1774,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                  :Continent ,
                  :Test_Data ;
         :contains :Germany ,
+                  :Switzerland ,
                   :United_Kingdom ;
         rdfs:label "Europe" .
 
@@ -1793,14 +1814,16 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Foot rdf:type owl:NamedIndividual ,
                :Distance_Unit ;
       dct:contributor "Michael DeBellis" ;
-      dct:created "2025-10-13T21:14:24Z"^^xsd:dateTime .
+      dct:created "2025-10-13T21:14:24Z"^^xsd:dateTime ;
+      rdfs:label "Foot" .
 
 
 ###  https://michaeldebellis.com/people/Germany
 :Germany rdf:type owl:NamedIndividual ,
                   :Nation ,
                   :Test_Data ;
-         :contains :Berlin ;
+         :contains :Berlin ,
+                   :Ulm ;
          rdfs:label "Germany" .
 
 
@@ -1808,6 +1831,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Grace_Hopper rdf:type owl:NamedIndividual ,
                        :Test_Data ,
                        :Woman ;
+              :born_in :New_York_City ;
               :has_employer :Harvard_University ;
               :birth_date "1906-12-09T00:00:00Z"^^xsd:dateTime ;
               rdfs:label "Grace Hopper" .
@@ -2292,6 +2316,23 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
             rdfs:label "New Jersey" .
 
 
+###  https://michaeldebellis.com/people/New_York_City
+:New_York_City rdf:type owl:NamedIndividual ,
+                        :City ;
+               dct:contributor "Michael DeBellis" ;
+               dct:created "2026-02-06T22:28:04Z"^^xsd:dateTime ;
+               rdfs:label "New York City" .
+
+
+###  https://michaeldebellis.com/people/New_York_State
+:New_York_State rdf:type owl:NamedIndividual ,
+                         :State ;
+                :contains :New_York_City ;
+                dct:contributor "Michael DeBellis" ;
+                dct:created "2026-02-06T22:27:15Z"^^xsd:dateTime ;
+                rdfs:label "New York State"@en .
+
+
 ###  https://michaeldebellis.com/people/Nick_Carraway
 :Nick_Carraway rdf:type owl:NamedIndividual ,
                         :Person ,
@@ -2305,6 +2346,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Noam_Chomsky rdf:type owl:NamedIndividual ,
                        :Person ,
                        :Test_Data ;
+              :born_in :Philadelphia ;
               :birth_date "1928-12-07T00:00:00Z"^^xsd:dateTime ;
               :email "chomsky@mit.edu"^^xsd:anyURI ;
               :employee_id "MIT-1953" ;
@@ -2378,6 +2420,23 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
      dct:contributor "Michael DeBellis" ;
      dct:created "2025-09-19T15:37:03Z"^^xsd:dateTime ;
      rdfs:label "PC2" .
+
+
+###  https://michaeldebellis.com/people/Pennsylvania
+:Pennsylvania rdf:type owl:NamedIndividual ,
+                       :State ;
+              :contains :Philadelphia ;
+              dct:contributor "Michael DeBellis" ;
+              dct:created "2026-02-06T22:21:58Z"^^xsd:dateTime ;
+              rdfs:label "Pennsylvania" .
+
+
+###  https://michaeldebellis.com/people/Philadelphia
+:Philadelphia rdf:type owl:NamedIndividual ,
+                       :City ;
+              dct:contributor "Michael DeBellis" ;
+              dct:created "2026-02-06T22:21:21Z"^^xsd:dateTime ;
+              rdfs:label "Philadelphia" .
 
 
 ###  https://michaeldebellis.com/people/Philip_Marlowe
@@ -2551,6 +2610,24 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
            rdfs:label "Susan Doe" .
 
 
+###  https://michaeldebellis.com/people/Swiss_Federal_Office_for_Intellectual_Property
+:Swiss_Federal_Office_for_Intellectual_Property rdf:type owl:NamedIndividual ,
+                                                         :Organization ;
+                                                :has_location :Bern ;
+                                                dct:contributor "Michael DeBellis" ;
+                                                dct:created "2026-02-06T22:38:38Z"^^xsd:dateTime ;
+                                                rdfs:label "Swiss Federal Office for Intellectual Property" .
+
+
+###  https://michaeldebellis.com/people/Switzerland
+:Switzerland rdf:type owl:NamedIndividual ,
+                      :Nation ;
+             :contains :Bern ;
+             dct:contributor "Michael DeBellis" ;
+             dct:created "2026-02-06T22:36:59Z"^^xsd:dateTime ;
+             rdfs:label "Switzerland"@en .
+
+
 ###  https://michaeldebellis.com/people/Ten_Centimeters
 :Ten_Centimeters rdf:type owl:NamedIndividual ,
                           :Distance_Measurement ;
@@ -2628,9 +2705,19 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
      :contains :California ,
                :Illinois ,
                :Massachusetts ,
-               :New_Jersey ;
+               :New_Jersey ,
+               :New_York_State ,
+               :Pennsylvania ;
      rdfs:label "USA" ;
      :wikidata <https://www.wikidata.org/wiki/Q30> .
+
+
+###  https://michaeldebellis.com/people/Ulm
+:Ulm rdf:type owl:NamedIndividual ,
+              :City ;
+     dct:contributor "Michael DeBellis" ;
+     dct:created "2026-02-06T22:25:05Z"^^xsd:dateTime ;
+     rdfs:label "Ulm"@en .
 
 
 ###  https://michaeldebellis.com/people/United_Kingdom

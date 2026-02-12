@@ -1,5 +1,6 @@
 from franz.openrdf.connect import ag_connect
 from franz.openrdf.vocabulary import RDF
+import os
 
 # Utilities to make and query AllegroGraph objects
 # Note that functions to retrieve values need to be sent a complete IRI

@@ -2018,7 +2018,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                   :has_employer :IBM ,
                                 :Institute_For_Advanced_Study ;
                   :birth_date "1903-12-28T00:00:00Z"^^xsd:dateTime ;
-                  :employee_id "999-00-1234" ;
+                  :employee_id "3670-DSL" ,
+                               "999-00-1234" ;
                   :start_date "1933-01-01T00:00:00"^^xsd:dateTime ,
                               "1954-01-01T00:00:00"^^xsd:dateTime ;
                   rdfs:label "John Von Neumann" .

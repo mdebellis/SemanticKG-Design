@@ -1,0 +1,6 @@
+dp:has_bounded_context
+prov:generated
+dp:has_platform_port
+dp:about_domain_concept
+dp:consumes_dataset
+dcat:catalog

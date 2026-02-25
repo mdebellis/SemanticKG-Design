@@ -1450,7 +1450,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                          :Employment ;
                 :has_employer :IBM ;
                 :is_employment_for :John_von_Neumann ;
-                :employee_id "999-00-1234" ;
+                :employee_id "3670-DSL" ;
                 :start_date "1954-01-01T00:00:00"^^xsd:dateTime ;
                 dct:contributor "Michael DeBellis" ;
                 dct:created "2025-09-16T21:26:57Z"^^xsd:dateTime ;
@@ -1592,7 +1592,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  http://michaeldebellis.com/people/John_von_Neumann
 :John_von_Neumann rdf:type owl:NamedIndividual ,
                            :Person ;
-                  :has_employer :IBM ;
                   :birth_date "1903-12-28T00:00:00Z"^^xsd:dateTime ;
                   rdfs:label "John Von Neumann" .
 

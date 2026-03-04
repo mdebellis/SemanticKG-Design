@@ -1,0 +1,262 @@
+@prefix sfg:  <https://www.michaeldebellis.com/stream_forge_example/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://www.michaeldebellis.com/stream_forge_example/graphs/TBox> {
+
+  sfg: a owl:Ontology ;
+    rdfs:label "StreamForge Example (minimal) ontology"@en .
+
+  ### Classes (minimal)
+  sfg:Trending_Snapshot_Record a owl:Class ;
+    rdfs:label "Trending snapshot record"@en ;
+    rdfs:comment "A record representing that a video appeared in the trending list at a particular snapshot time."@en .
+
+  sfg:Video a owl:Class ;
+    rdfs:label "Video"@en ;
+    rdfs:comment "A video in the StreamForge platform."@en .
+
+  sfg:Channel a owl:Class ;
+    rdfs:label "Channel"@en ;
+    rdfs:comment "A channel (publisher) in the StreamForge platform."@en .
+
+  sfg:Category a owl:Class ;
+    rdfs:label "Category"@en ;
+    rdfs:comment "A content category used to classify videos."@en .
+
+  sfg:Region a owl:Class ;
+    rdfs:label "Region"@en ;
+    rdfs:comment "A geographic or market region in which a snapshot is observed."@en .
+
+  sfg:Ingestion_Run a owl:Class ;
+    rdfs:subClassOf prov:Activity ;
+    rdfs:label "Ingestion run"@en ;
+    rdfs:comment "A concrete execution of the ingestion pipeline."@en .
+
+  sfg:Ingestion_Pipeline a owl:Class ;
+    rdfs:subClassOf prov:SoftwareAgent ;
+    rdfs:label "Ingestion pipeline"@en ;
+    rdfs:comment "The software agent that performs ingestion."@en .
+
+  sfg:Input_Batch a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Input batch"@en ;
+    rdfs:comment "An input dataset (e.g., a CSV file) processed by an ingestion run."@en .
+
+  ### Object properties
+  sfg:has_video a owl:ObjectProperty ;
+    rdfs:label "has video"@en ;
+    rdfs:comment "Links a snapshot record to the video it refers to."@en ;
+    rdfs:domain sfg:Trending_Snapshot_Record ;
+    rdfs:range sfg:Video .
+
+  sfg:has_channel a owl:ObjectProperty ;
+    rdfs:label "has channel"@en ;
+    rdfs:comment "Links a snapshot record to the channel associated with the video."@en ;
+    rdfs:domain sfg:Trending_Snapshot_Record ;
+    rdfs:range sfg:Channel .
+
+  sfg:has_category a owl:ObjectProperty ;
+    rdfs:label "has category"@en ;
+    rdfs:comment "Links a snapshot record to its category."@en ;
+    rdfs:domain sfg:Trending_Snapshot_Record ;
+    rdfs:range sfg:Category .
+
+  sfg:has_region a owl:ObjectProperty ;
+    rdfs:label "has region"@en ;
+    rdfs:comment "Links a snapshot record to the region in which it was observed."@en ;
+    rdfs:domain sfg:Trending_Snapshot_Record ;
+    rdfs:range sfg:Region .
+
+  ### Datatype properties
+  sfg:has_rank a owl:DatatypeProperty ;
+    rdfs:label "has rank"@en ;
+    rdfs:comment "The rank of the video within the trending list at the snapshot time."@en ;
+    rdfs:domain sfg:Trending_Snapshot_Record ;
+    rdfs:range xsd:integer .
+
+  sfg:has_view_count a owl:DatatypeProperty ;
+    rdfs:label "has view count"@en ;
+    rdfs:comment "The view count observed at snapshot time."@en ;
+    rdfs:domain sfg:Trending_Snapshot_Record ;
+    rdfs:range xsd:integer .
+
+  sfg:has_like_count a owl:DatatypeProperty ;
+    rdfs:label "has like count"@en ;
+    rdfs:comment "The like count observed at snapshot time."@en ;
+    rdfs:domain sfg:Trending_Snapshot_Record ;
+    rdfs:range xsd:integer .
+
+  sfg:has_comment_count a owl:DatatypeProperty ;
+    rdfs:label "has comment count"@en ;
+    rdfs:comment "The comment count observed at snapshot time."@en ;
+    rdfs:domain sfg:Trending_Snapshot_Record ;
+    rdfs:range xsd:integer .
+
+  sfg:has_snapshot_time a owl:DatatypeProperty ;
+    rdfs:label "has snapshot time"@en ;
+    rdfs:comment "The timestamp at which the snapshot was captured."@en ;
+    rdfs:domain sfg:Trending_Snapshot_Record ;
+    rdfs:range xsd:dateTime .
+}
+
+<https://www.michaeldebellis.com/stream_forge_example/graphs/ABox> {
+
+  ### Region + Categories
+  sfg:US a sfg:Region ; rdfs:label "US"@en .
+
+  sfg:Education a sfg:Category, skos:Concept ; rdfs:label "Education"@en .
+  sfg:Gaming    a sfg:Category, skos:Concept ; rdfs:label "Gaming"@en .
+  sfg:Music     a sfg:Category, skos:Concept ; rdfs:label "Music"@en .
+  sfg:News      a sfg:Category, skos:Concept ; rdfs:label "News"@en .
+
+  ### Videos + Channels (from the CSV)
+  sfg:vid_8f31 a sfg:Video ;
+    rdfs:label "Midnight Drive (Official Video)"@en ;
+    dcterms:identifier "vid_8f31" .
+
+  sfg:ch_102 a sfg:Channel ;
+    rdfs:label "Neon Signal"@en ;
+    dcterms:identifier "ch_102" .
+
+  sfg:vid_91aa a sfg:Video ;
+    rdfs:label "Acoustic Sessions: Winter Set"@en ;
+    dcterms:identifier "vid_91aa" .
+
+  sfg:ch_077 a sfg:Channel ;
+    rdfs:label "Luna Harper"@en ;
+    dcterms:identifier "ch_077" .
+
+  sfg:vid_77c0 a sfg:Video ;
+    rdfs:label "Speedrun: Glitchless Any%"@en ;
+    dcterms:identifier "vid_77c0" .
+
+  sfg:ch_211 a sfg:Channel ;
+    rdfs:label "ByteRunners"@en ;
+    dcterms:identifier "ch_211" .
+
+  sfg:vid_31ef a sfg:Video ;
+    rdfs:label "Election Update: Key Results"@en ;
+    dcterms:identifier "vid_31ef" .
+
+  sfg:ch_014 a sfg:Channel ;
+    rdfs:label "Daily Brief"@en ;
+    dcterms:identifier "ch_014" .
+
+  sfg:vid_5bd2 a sfg:Video ;
+    rdfs:label "Intro to Knowledge Graphs (OWL in Practice)"@en ;
+    dcterms:identifier "vid_5bd2" .
+
+  sfg:ch_301 a sfg:Channel ;
+    rdfs:label "Semantic Systems Lab"@en ;
+    dcterms:identifier "ch_301" .
+
+  ### Snapshot records (one per row)
+  sfg:snapshot_20251212T220000Z_US_Music_1_vid_8f31 a sfg:Trending_Snapshot_Record ;
+    rdfs:label "20251212T220000Z US Music 1 vid_8f31"@en ;
+    sfg:has_video sfg:vid_8f31 ;
+    sfg:has_channel sfg:ch_102 ;
+    sfg:has_category sfg:Music ;
+    sfg:has_region sfg:US ;
+    sfg:has_rank 1 ;
+    sfg:has_view_count 18450231 ;
+    sfg:has_like_count 623114 ;
+    sfg:has_comment_count 48291 ;
+    sfg:has_snapshot_time "2025-12-12T22:00:00Z"^^xsd:dateTime .
+
+  sfg:snapshot_20251212T220000Z_US_Music_2_vid_91aa a sfg:Trending_Snapshot_Record ;
+    rdfs:label "20251212T220000Z US Music 2 vid_91aa"@en ;
+    sfg:has_video sfg:vid_91aa ;
+    sfg:has_channel sfg:ch_077 ;
+    sfg:has_category sfg:Music ;
+    sfg:has_region sfg:US ;
+    sfg:has_rank 2 ;
+    sfg:has_view_count 9421188 ;
+    sfg:has_like_count 311552 ;
+    sfg:has_comment_count 18433 ;
+    sfg:has_snapshot_time "2025-12-12T22:00:00Z"^^xsd:dateTime .
+
+  sfg:snapshot_20251212T220000Z_US_Gaming_1_vid_77c0 a sfg:Trending_Snapshot_Record ;
+    rdfs:label "20251212T220000Z US Gaming 1 vid_77c0"@en ;
+    sfg:has_video sfg:vid_77c0 ;
+    sfg:has_channel sfg:ch_211 ;
+    sfg:has_category sfg:Gaming ;
+    sfg:has_region sfg:US ;
+    sfg:has_rank 1 ;
+    sfg:has_view_count 5018812 ;
+    sfg:has_like_count 291044 ;
+    sfg:has_comment_count 15520 ;
+    sfg:has_snapshot_time "2025-12-12T22:00:00Z"^^xsd:dateTime .
+
+  sfg:snapshot_20251212T220000Z_US_News_1_vid_31ef a sfg:Trending_Snapshot_Record ;
+    rdfs:label "20251212T220000Z US News 1 vid_31ef"@en ;
+    sfg:has_video sfg:vid_31ef ;
+    sfg:has_channel sfg:ch_014 ;
+    sfg:has_category sfg:News ;
+    sfg:has_region sfg:US ;
+    sfg:has_rank 1 ;
+    sfg:has_view_count 3120044 ;
+    sfg:has_like_count 120311 ;
+    sfg:has_comment_count 28944 ;
+    sfg:has_snapshot_time "2025-12-12T22:00:00Z"^^xsd:dateTime .
+
+  sfg:snapshot_20251212T220000Z_US_Education_1_vid_5bd2 a sfg:Trending_Snapshot_Record ;
+    rdfs:label "20251212T220000Z US Education 1 vid_5bd2"@en ;
+    sfg:has_video sfg:vid_5bd2 ;
+    sfg:has_channel sfg:ch_301 ;
+    sfg:has_category sfg:Education ;
+    sfg:has_region sfg:US ;
+    sfg:has_rank 1 ;
+    sfg:has_view_count 221904 ;
+    sfg:has_like_count 12940 ;
+    sfg:has_comment_count 733 ;
+    sfg:has_snapshot_time "2025-12-12T22:00:00Z"^^xsd:dateTime .
+}
+
+<https://www.michaeldebellis.com/stream_forge_example/graphs/Meta> {
+
+  ### Ingestion run + pipeline agent + input batch
+  <https://www.michaeldebellis.com/stream_forge_example/ingestion_run_20251212T220058Z>
+    a sfg:Ingestion_Run, prov:Activity ;
+    rdfs:label "20251212T220058Z"@en ;
+    prov:wasAssociatedWith sfg:StreamForge_Example_Pipeline_Prefect ;
+    prov:used <https://www.michaeldebellis.com/stream_forge_example/input_batch_stream_forge_example_trending_snapshot_csv_20251212T220000Z> ;
+    prov:startedAtTime "2025-12-12T22:00:58Z"^^xsd:dateTime ;
+    prov:endedAtTime "2025-12-12T22:01:10Z"^^xsd:dateTime .
+
+  sfg:StreamForge_Example_Pipeline_Prefect
+    a sfg:Ingestion_Pipeline, prov:SoftwareAgent ;
+    rdfs:label "StreamForge Example Pipeline (Prefect)"@en .
+
+  <https://www.michaeldebellis.com/stream_forge_example/input_batch_stream_forge_example_trending_snapshot_csv_20251212T220000Z>
+    a sfg:Input_Batch, prov:Entity ;
+    rdfs:label "stream_forge_example_trending_snapshot.csv"@en ;
+    dcterms:format "text/csv" ;
+    prov:atLocation "input_data/stream_forge_example_trending_snapshot.csv" .
+
+  ### Provenance links from records to the run and the input
+  sfg:snapshot_20251212T220000Z_US_Music_1_vid_8f31
+    prov:wasGeneratedBy <https://www.michaeldebellis.com/stream_forge_example/ingestion_run_20251212T220058Z> ;
+    prov:wasDerivedFrom <https://www.michaeldebellis.com/stream_forge_example/input_batch_stream_forge_example_trending_snapshot_csv_20251212T220000Z> .
+
+  sfg:snapshot_20251212T220000Z_US_Music_2_vid_91aa
+    prov:wasGeneratedBy <https://www.michaeldebellis.com/stream_forge_example/ingestion_run_20251212T220058Z> ;
+    prov:wasDerivedFrom <https://www.michaeldebellis.com/stream_forge_example/input_batch_stream_forge_example_trending_snapshot_csv_20251212T220000Z> .
+
+  sfg:snapshot_20251212T220000Z_US_Gaming_1_vid_77c0
+    prov:wasGeneratedBy <https://www.michaeldebellis.com/stream_forge_example/ingestion_run_20251212T220058Z> ;
+    prov:wasDerivedFrom <https://www.michaeldebellis.com/stream_forge_example/input_batch_stream_forge_example_trending_snapshot_csv_20251212T220000Z> .
+
+  sfg:snapshot_20251212T220000Z_US_News_1_vid_31ef
+    prov:wasGeneratedBy <https://www.michaeldebellis.com/stream_forge_example/ingestion_run_20251212T220058Z> ;
+    prov:wasDerivedFrom <https://www.michaeldebellis.com/stream_forge_example/input_batch_stream_forge_example_trending_snapshot_csv_20251212T220000Z> .
+
+  sfg:snapshot_20251212T220000Z_US_Education_1_vid_5bd2
+    prov:wasGeneratedBy <https://www.michaeldebellis.com/stream_forge_example/ingestion_run_20251212T220058Z> ;
+    prov:wasDerivedFrom <https://www.michaeldebellis.com/stream_forge_example/input_batch_stream_forge_example_trending_snapshot_csv_20251212T220000Z> .
+}

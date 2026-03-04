@@ -167,7 +167,10 @@ if __name__ == "__main__":
 
     # Bind prefixes (adjust if needed)
     g.bind("dp", Namespace("https://www.michaeldebellis.com/dp/"))
+    g.bind("docs", Namespace("https://www.michaeldebellis.com/docs/"))
+    g.bind("sf", Namespace("https://www.michaeldebellis.com/streamforge/"))
     g.bind("prov", Namespace("http://www.w3.org/ns/prov#"))
+    g.bind("dcat", Namespace("http://www.w3.org/ns/dcat#"))
     g.bind("rdfs", Namespace("http://www.w3.org/2000/01/rdf-schema#"))
 
     # Read predicate list

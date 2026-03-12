@@ -101,10 +101,17 @@ def add_embedding_notes_from_properties(
         for s, _, o in g.triples((None, pred_uri, None)):
             # You said assume rdfs:label@en is always set for s and o:
             s_label = get_label_en(s)
-            o_label = get_label_en(o) if isinstance(o, URIRef) else (str(o) if isinstance(o, Literal) else None)
+            if isinstance(o, URIRef):
+                o_label = get_label_en(o)
+                if o_label is None:
+                    o_label = str(o)  # fallback to the IRI itself
+            elif isinstance(o, Literal):
+                o_label = str(o)
+            else:
+                o_label = None
 
             if s_label is None or o_label is None:
-                # Since you said these are always present, treat missing as an error
+                # treat missing label as an error
                 raise ValueError(
                     f"Missing rdfs:label@en (or any rdfs:label) for "
                     f"{'subject' if s_label is None else 'object'} in triple: "
@@ -166,6 +173,8 @@ if __name__ == "__main__":
     g.parse(input_file, format="turtle")
 
     # Bind prefixes (adjust if needed)
+    g.bind("dctm", Namespace("http://purl.org/dc/terms/"))
+    g.bind("odrl", Namespace("http://www.w3.org/ns/odrl/2/"))
     g.bind("dp", Namespace("https://www.michaeldebellis.com/dp/"))
     g.bind("docs", Namespace("https://www.michaeldebellis.com/docs/"))
     g.bind("sf", Namespace("https://www.michaeldebellis.com/streamforge/"))

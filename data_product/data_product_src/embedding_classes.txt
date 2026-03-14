@@ -1,8 +1,4 @@
 dcat:DataService
-dcat:DataService
-dcat:DataService
-dcat:Dataset
-dcat:Dataset
 dcat:Dataset
 dcat:Distribution
 dcat:Resource
@@ -15,7 +11,9 @@ dp:Access_Type
 dp:Analytic_Data_Port
 dp:API_Type
 dp:Bounded_Context
+dp:Catalog_Asset
 dp:Computational_Policy
+dp:Container
 dp:Context_Map
 dp:Context_Map_Relationship
 dp:Context_Map_Relationship_Type
@@ -32,6 +30,7 @@ dp:Interface
 dp:Operational_Data_Port
 dp:Output_Port
 dp:Platform
+dp:Platform_Port
 dp:Port_Implementation
 dp:Programming_Language
 dp:Quality_Metric
@@ -39,6 +38,7 @@ dp:Query_Language
 dp:Service
 dp:Service_Level_Agreement
 dp:User
+odrl:Action
 odrl:Asset
 odrl:Duty
 odrl:Party
@@ -48,5 +48,9 @@ odrl:Privacy
 odrl:Prohibition
 prov:Activity
 prov:Organization
+prov:Person
 sf:Video
 sf:Video_Playback
+skos:definition
+skos:scopeNote
+skos:example

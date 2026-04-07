@@ -4,6 +4,7 @@ PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl:  <http://www.w3.org/2002/07/owl#>
 PREFIX sulo: <https://w3id.org/sulo/>
 
+# Listing 12-1
 # Query to see initial SKOS taxonomy
 SELECT DISTINCT ?parent ?child
 WHERE {VALUES ?scheme { :Consulting_Firm_Taxonomy }
@@ -12,24 +13,29 @@ WHERE {VALUES ?scheme { :Consulting_Firm_Taxonomy }
   ?parent skos:narrower ?child .}
 ORDER BY ?parent ?child
 
+# Listing 12-2
 # To begin make the root node of the taxonomy and 
 # its children into OWL classes
 INSERT {:Consulting_Firm rdf:type owl:Class .
         ?concept rdf:type owl:Class .}
 WHERE {:Consulting_Firm skos:narrower ?concept .}
-	   
+
+# Listing 12-3. SPARQL to transform the appropriate narrower links to rdf:type	   
 # The children (nodes that are skos:narrower) of Client are instances.
 INSERT {?client rdf:type :Client.}
 WHERE {:Client skos:narrower ?client.}
 
+# # Listing 12-3. SPARQL to transform the appropriate narrower links to rdf:type
 # The children (skos:narrower) of Industry are instances.
 INSERT {?industry rdf:type :Industry.}
 WHERE {:Industry skos:narrower ?industry.}
 
+# Listing 12-3. SPARQL to transform the appropriate narrower links to rdf:type
 # The children (nodes that are skos:narrower) of Engagement are instances.
 INSERT {?engagement rdf:type :Engagement.}
 WHERE {:Engagement  skos:narrower ?engagement.}
 
+# Listing 12-4. Transforming appropriate narrower links to subclass relations
 # The rest of the children of the second level concepts are subclasses
 INSERT {?child rdfs:subClassOf ?parent .}
 WHERE {SELECT DISTINCT ?child ?parent 
@@ -42,10 +48,12 @@ WHERE {SELECT DISTINCT ?child ?parent
 		UNION
 		{ :Team  skos:narrower ?child . BIND(:Team AS ?parent) }}}
 
+# Listing 12-5. Adding a has part object property to the ontology
 # Add object property before using it
 INSERT DATA {sulo:hasDirectPart rdf:type owl:ObjectProperty ;
              rdfs:label "has direct part"@en .}
 
+# Listing 12-6. Using hasDirectPart to transform narrower links to sub-part relations
 # The children of Engagements are parts of the engagement (safe; no cross product)
 INSERT {?engagement sulo:hasDirectPart ?part .}
 WHERE {{ :Acme_KYC_Modernization  skos:narrower ?part . BIND(:Acme_KYC_Modernization  AS ?engagement)}
@@ -53,7 +61,7 @@ WHERE {{ :Acme_KYC_Modernization  skos:narrower ?part . BIND(:Acme_KYC_Moderniza
   {:Northwind_Claims_RAG    skos:narrower ?part . BIND(:Northwind_Claims_RAG    AS ?engagement)}}
   
 
-
+# Listing 12-7. Some narrower links don’t directly transform to a simple OWL relation
 # Final graph for Gruff:
 # - skos:narrower only from :Consulting_Firm
 # - everywhere else show only rdf:type, sulo:hasDirectPart, rdfs:subClassOf

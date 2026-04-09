@@ -8,35 +8,35 @@ PREFIX :  <https://michaeldebellis.com/people/>
 #Remember to always leave the PREFIX statements in place
 #Note: these queries should all work in Snap SPARQL, but many SPARQL queries won't
 
-#Example SPARQL query to list all classes
+# Listing 3-7. SPARQL Query to Retrieve all Classes
 SELECT *
 WHERE {?class rdf:type owl:Class}
 
-#List all class labels, ordered by label
+# Listing 3-8. SPARQL Query to Retrieve Classes and Labels
 SELECT ?label  
 WHERE {?class rdfs:subClassOf owl:Thing;
 			  rdfs:label ?label} ORDER BY ?label
 
-#List all object properties. Display and order by their labels			
+# Listing 3-9. SPARQL Query to Retrieve Object Properties and Labels			
 SELECT ?label  
 WHERE {?object_property rdf:type owl:ObjectProperty;
 				        rdfs:label ?label} ORDER BY ?label
 
-# List all the instances of Person who have an age, order by age.
+# Listing 3-10. SPARQL Query to Retrieve People Who Have Age Values Defined
 SELECT ?person_label ?age
 WHERE {?person :has_age ?age.} ORDER BY ?age
 	
-# List all the instances of Person. Include their age if available. Order by Person label. 	
+# Listing 3-11. SPARQL Query to Retrieve All People With Ages When Available 	
 SELECT ?person_label ?age
 WHERE {?person rdf:type :Person;
                rdfs:label ?person_label.
 	OPTIONAL {?person :has_age ?age}} ORDER BY ?person_label
 	
-# List all people with a birthdate (exclude people with no birthdate)
+# Listing 3-12. SPARQL Query to Retrieve People With Known Birthdays (exclude people with no birthdate)
 SELECT *
 WHERE {?person :birth_Date ?birth_day} ORDER BY ?birth_day
 
-# List all the instances of Person. Include their birth day if available. Order by Person label. 	
+# Listing 3-13. SPARQL Query to Retrieve All People And Birthdays and Age When Known	
 SELECT ?person_label ?birth_day
 WHERE {?person rdf:type :Person;
                rdfs:label ?person_label.

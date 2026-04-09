@@ -159,15 +159,27 @@ WHERE {?person rdf:type :Person .
   ?person ?p ?o .}
 
 # Listing 8-19. Constraining a broad query to one individual
-# Constraining a broad query to one individual 
 SELECT ?p ?o
 WHERE {:Albert_Einstein ?p ?o .}
 
 # Listing 8-20. Constraining a broad query using LIMIT
-# Constraining a broad query using LIMIT
 SELECT *
 WHERE {?person rdf:type :Person .
   ?person ?p ?o .} LIMIT 100
+
+Listing 8-21. SPARQL Updates to Change Labels from strings to langStrings
+# Example: apply normalization to add lang tags to rdfs:label,
+# skos:prefLabel, and skos:altLabel
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+DELETE { ?s ?p ?old }
+INSERT { ?s ?p ?new }
+WHERE { VALUES ?p { rdfs:label skos:prefLabel skos:altLabel }
+  ?s ?p ?old .
+  FILTER( lang(?old) = "" || datatype(?old) = xsd:string )
+  BIND(STRLANG(STR(?old), "en") AS ?new)}
+
 
 
 

@@ -30,7 +30,8 @@
       sh:path :hired_on_date ; # Defines the datatype for hired_on_date
       sh:datatype xsd:dateTime ;
       sh:severity sh:Warning ;] .
-	  
+
+# Listing 3-23 The Employee Contact SHACL Shape.
 :Employee_Contact_Shape
   a sh:NodeShape ;
   sh:targetClass :Employee ;

@@ -49,6 +49,10 @@ WHERE {?person rdf:type :Person;
 OPTIONAL {?person :has_age ?age}
 OPTIONAL {?person :birth_Date ?birth_day}} ORDER BY ?person_label
 
+# Listing 3-21. SPARQL Query to Retrieve Any Person with No Social Relations
+SELECT ?person 
+WHERE {?person rdf:type :Person.
+FILTER NOT EXISTS {?person :has_social_relationship ?otherPerson.}}
 
 
 

@@ -1,0 +1,53 @@
+#Listing 8-1. SPARQL Update to Move Triples from one Sub-Graph to Another
+INSERT {GRAPH <https://example.com/graphs/Validated_Graph> 
+{?observation a :Climate_Observation ;
+:has_measurement_value ?value . }}
+WHERE {GRAPH <https://example.com/graphs/Raw_Graph> 
+{?observation a :Climate_Observation ;
+                 :has_measurement_value ?value .
+    ?observation :validation_status "valid" . }};
+DELETE {GRAPH <https://example.com/graphs/Raw_Graph> 
+    {?observation a :Climate_Observation ;
+                 :has_measurement_value ?value ;
+                 :validation_status "valid" .}}
+WHERE {GRAPH <https://example.com/graphs/Raw_Graph> 
+    {?observation a :Climate_Observation ;
+                 :has_measurement_value ?value ;
+                 :validation_status "valid" .}}
+				 
+# Listing 8-2. SPARQL Query Confined to a Specific Sub-graph
+PREFIX : <https://www.michaeldebellis.com/climate/>
+SELECT ?observation ?value
+WHERE {GRAPH <https://example.com/graphs/Validated_Graph> 
+    {?observation a :Climate_Observation ;
+                 :has_measurement_value ?value . }}
+
+# Listing 8-3 Move everything from one graph to another
+MOVE GRAPH <https://example.com/graphs/Raw_Graph>
+TO   GRAPH <https://example.com/graphs/Cleaned_Graph>
+
+# Listing 8-4 Copy everything from one graph to another
+COPY GRAPH <https://example.com/graphs/Validated_Graph>
+TO   GRAPH <https://example.com/graphs/Published_Graph>
+
+# Listing 8-5 Add everything from one graph to another (union)
+ADD GRAPH <https://example.com/graphs/Source_A_Graph>
+TO  GRAPH <https://example.com/graphs/Integrated_View>
+
+#Listing 8-6 Move only selected triples (pattern-based)
+INSERT {GRAPH <https://example.com/graphs/Validated_Graph> 
+   { ?observation a :Climate_Observation ;
+                 :has_measurement_value ?value .}}
+WHERE {GRAPH <https://example.com/graphs/Raw_Graph> 
+    {?observation a :Climate_Observation ;
+                 :has_measurement_value ?value ;
+                 :validation_status "valid" . }};
+DELETE {GRAPH <https://example.com/graphs/Raw_Graph> 
+    {?observation a :Climate_Observation ;
+                 :has_measurement_value ?value ;
+                 :validation_status "valid" . }}
+WHERE {GRAPH <https://example.com/graphs/Raw_Graph> 
+    {?observation a :Climate_Observation ;
+                 :has_measurement_value ?value ;
+                 :validation_status "valid" .}}
+

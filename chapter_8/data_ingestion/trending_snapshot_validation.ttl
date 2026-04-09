@@ -1,0 +1,138 @@
+@prefix sfg:  <https://www.michaeldebellis.com/stream_forge_example/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+sfg:Trending_Snapshot_Record_Shape
+    a sh:NodeShape ;
+    sh:targetClass sfg:Trending_Snapshot_Record ;
+
+    sh:property [
+        sh:path prov:wasGeneratedBy ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each trending snapshot record must have exactly one generating ingestion run."@en ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:minCount 1 ;
+        sh:message "Each trending snapshot record must identify at least one source input batch."@en ;
+    ] ;
+
+    sh:sparql [
+        sh:message "Provenance triples for a trending snapshot record must be stored in the Meta named graph."@en ;
+        sh:select """
+            SELECT $this
+            WHERE {
+              FILTER NOT EXISTS {
+                GRAPH <https://www.michaeldebellis.com/stream_forge_example/graphs/Meta> {
+                  $this prov:wasGeneratedBy ?run .
+                }
+              }
+            }
+        """ ;
+    ] ;
+
+    sh:sparql [
+        sh:message "Derivation triples for a trending snapshot record must be stored in the Meta named graph."@en ;
+        sh:select """
+            SELECT $this
+            WHERE {
+              FILTER NOT EXISTS {
+                GRAPH <https://www.michaeldebellis.com/stream_forge_example/graphs/Meta> {
+                  $this prov:wasDerivedFrom ?source .
+                }
+              }
+            }
+        """ ;
+    ] .
+	
+@prefix sfg:  <https://www.michaeldebellis.com/stream_forge_example/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+sfg:Trending_Snapshot_Record_Shape
+    a sh:NodeShape ;
+    sh:targetClass sfg:Trending_Snapshot_Record ;
+    rdfs:label "Trending snapshot record shape"@en ;
+    sh:description "Validates the core structure of a trending snapshot record."@en ;
+
+    sh:property [
+        sh:path sfg:has_video ;
+        sh:class sfg:Video ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A trending snapshot record must have exactly one video."@en ;
+    ] ;
+
+    sh:property [
+        sh:path sfg:has_channel ;
+        sh:class sfg:Channel ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A trending snapshot record must have exactly one channel."@en ;
+    ] ;
+
+    sh:property [
+        sh:path sfg:has_category ;
+        sh:class sfg:Category ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A trending snapshot record must have exactly one category."@en ;
+    ] ;
+
+    sh:property [
+        sh:path sfg:has_region ;
+        sh:class sfg:Region ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A trending snapshot record must have exactly one region."@en ;
+    ] ;
+
+    sh:property [
+        sh:path sfg:has_rank ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:minInclusive 1 ;
+        sh:message "A trending snapshot record must have exactly one positive integer rank."@en ;
+    ] ;
+
+    sh:property [
+        sh:path sfg:has_view_count ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:minInclusive 0 ;
+        sh:message "A trending snapshot record must have exactly one non-negative integer view count."@en ;
+    ] ;
+
+    sh:property [
+        sh:path sfg:has_like_count ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:minInclusive 0 ;
+        sh:message "A trending snapshot record must have exactly one non-negative integer like count."@en ;
+    ] ;
+
+    sh:property [
+        sh:path sfg:has_comment_count ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:minInclusive 0 ;
+        sh:message "A trending snapshot record must have exactly one non-negative integer comment count."@en ;
+    ] ;
+
+    sh:property [
+        sh:path sfg:has_snapshot_time ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A trending snapshot record must have exactly one snapshot time."@en ;
+    ] .

@@ -3,4 +3,5 @@ ontologies/USGSThesaurus.rdf
 ontologies/NASA_thesaurus-OWL.xml
 /data_product/snapshots/
 /archive
-
+__pycache__/
+*.pyc

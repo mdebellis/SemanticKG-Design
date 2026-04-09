@@ -51,3 +51,126 @@ WHERE {GRAPH <https://example.com/graphs/Raw_Graph>
                  :has_measurement_value ?value ;
                  :validation_status "valid" .}}
 
+# Listing 8-7. SPARQL Transformation to Generate SHACL Constraints from OWL Axioms
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX sh:   <http://www.w3.org/ns/shacl#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+CONSTRUCT {<https://www.michaeldebellis.com/people/shapes/generated>
+    a sh:NodeShape ;
+    sh:property ?ps .
+  ?ps a sh:PropertyShape ;
+      sh:path ?p ;
+      sh:datatype ?dt ;
+      sh:name ?label .}
+WHERE {?p a owl:DatatypeProperty ;
+     rdfs:range ?dt .
+  FILTER(STRSTARTS(STR(?dt), STR(xsd:)))
+  OPTIONAL { ?p rdfs:label ?label }
+  # Use local name after your People namespace to build readable shape IRIs
+  BIND( STRAFTER(STR(?p), "https://michaeldebellis.com/people/") AS ?local )
+  # Fallback if STRAFTER() didn't match (keeps query robust)
+  BIND( IF(BOUND(?local) && STRLEN(?local) > 0, ?local, ENCODE_FOR_URI(STR(?p))) AS ?id )
+BIND(IRI(CONCAT("https://www.michaeldebellis.com/people/shapes/ps/datatype/", ?id))
+    AS ?ps )}
+
+# Listing 8-8. SPARQL Generate SHACL Cardinality Constraints from OWL Axioms
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX sh:   <http://www.w3.org/ns/shacl#>
+CONSTRUCT {<https://www.michaeldebellis.com/people/shapes/generated>
+    a sh:NodeShape ;
+    sh:property ?ps .
+  ?ps a sh:PropertyShape ;
+      sh:path ?p ;
+      sh:maxCount 1 ;
+      sh:name ?label .}
+WHERE {?p a owl:FunctionalProperty .
+  OPTIONAL { ?p rdfs:label ?label }
+  # Use local name after your People namespace to build readable shape IRIs
+  BIND( STRAFTER(STR(?p), "https://michaeldebellis.com/people/") AS ?local )
+  # Fallback if STRAFTER() didn't match
+  BIND( IF(BOUND(?local) && STRLEN(?local) > 0, ?local, ENCODE_FOR_URI(STR(?p))) AS ?id )
+  BIND( IRI(CONCAT("https://www.michaeldebellis.com/people/shapes/ps/functional/", ?id)) AS ?ps )}
+
+# Listing 8-9. A simple query to return all triples with Einstein as subject
+PREFIX :  <https://michaeldebellis.com/people/>
+SELECT *
+WHERE {:Albert_Einstein ?p ?o .}
+
+# Listing 8-10. Using DISTINCT to avoid duplicate triples in your results
+# DISTINCT removes duplicates. As with all queries
+# remember to include the PREFIX from Listing 8-1
+SELECT DISTINCT *
+WHERE { :Albert_Einstein ?p ?o .}
+
+# Listing 8-11. Finding triples with Einstein as subject 
+PREFIX :  <https://michaeldebellis.com/people/>
+SELECT ?p ?o
+WHERE {:Albert_Einstein ?p ?o .}
+
+# Listing 8-12. A BAD example that will generate un-needed extra solutions. Do NOT do this!
+# Anti-Pattern! This is a BAD query! Don’t do this!
+PREFIX :  <https://michaeldebellis.com/people/>
+SELECT DISTINCT *
+WHERE {?s ?p1 :Albert_Einstein .
+       :Albert_Einstein ?p2 ?o .}
+
+# Listing 8-13. Using UNION to create a more efficient query
+SELECT ?s ?p ?o
+WHERE {
+  {:Albert_Einstein ?p ?o .
+    BIND(:Albert_Einstein AS ?s)  }
+  UNION
+  {?s ?p :Albert_Einstein .
+    BIND(:Albert_Einstein AS ?o) }}
+
+# Listing 8-14. Using CONSTRUCT returns triples rather than tables
+CONSTRUCT {:Albert_Einstein ?p ?o .}
+WHERE {:Albert_Einstein ?p ?o .}
+
+$ Listing 8-15. Using CONSTRUCT returns triples rather than tables
+CONSTRUCT { :Albert_Einstein ?p ?o .
+  	      ?s ?p2 :Albert_Einstein .}
+WHERE {
+  { :Albert_Einstein ?p ?o }
+  UNION
+  { ?s ?p2 :Albert_Einstein } }
+
+# Listing 8-16. The OPTIONAL anti-pattern
+# Looks reasonable, but may produce duplicate-looking results
+PREFIX :  <https://michaeldebellis.com/people/>
+SELECT ?birthPlace
+WHERE {:Albert_Einstein :born_in ?birthPlace .
+OPTIONAL {:Albert_Einstein :has_employer ?organization .}}
+
+# Listing 8-17. Using DISTINCT to guard against the OPTIONAL anti-pattern
+# Use DISTINCT to guard against OPTIONAL anti-pattern
+SELECT DISTINCT ?birthPlace
+WHERE {:Albert_Einstein :born_in ?birthPlace .
+  OPTIONAL { :Albert_Einstein :has_employer ?organization . }}
+
+# Listing 8-18. An extremely broad query
+# Anti-pattern: Extremely Broad Query
+SELECT *
+WHERE {?person rdf:type :Person .
+  ?person ?p ?o .}
+
+# Listing 8-19. Constraining a broad query to one individual
+# Constraining a broad query to one individual 
+SELECT ?p ?o
+WHERE {:Albert_Einstein ?p ?o .}
+
+# Listing 8-20. Constraining a broad query using LIMIT
+# Constraining a broad query using LIMIT
+SELECT *
+WHERE {?person rdf:type :Person .
+  ?person ?p ?o .} LIMIT 100
+
+
+
+
+
+

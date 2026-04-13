@@ -4,6 +4,8 @@ This directory contains ontologies, knowledge graphs, SPARQL, and Python to deve
 
 The example is is based on a made-up video streaming company called StreamForge
 
+The Semantic Knowledge Graph is here: https://github.com/mdebellis/SemanticKG-Design/blob/main/data_product/knowledge_graph/streamforge_data_catalog_V1.ttl
+
 ---
 
 ## Ontologies Used
@@ -45,7 +47,7 @@ The following describes the various ontologies that were reused and created for 
    
 ```
 
----
+
 
 
 

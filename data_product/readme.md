@@ -12,45 +12,48 @@ The contents include:
 
 ---
 
-## Loading Order
+## Ontologies Used
 
-Load all files into the **default graph**, then run the reasoner if your environment supports it.
+The following describes the various ontologies that were reused and created for this example.
 
 ```text
 1) dcat.ttl
    The W3C Data Catalog vocabulary.
-   This ontology has no dependencies.
+   This ontology utilizes Dublin Core, SKOS, AND PROV. 
 
-2) dp_ontology.ttl
+2) Dublin Core Terms
+   Dublin Core provides basic metadata properties. Most are annotation properties.
+   It has no dependencies
+
+3) Simple Knowledge Organization System (SKOS)
+   SKOS is used for meta data and concept organization
+
+4) prov.ttl
+   The W3C vocabulary for data provenance.
+   Uses SKOS and Dublin Core
+
+5) dp_ontology.ttl
    Defines the Data Product ontology.
-   May reference entities defined in DCAT.
+   Uses 1-4
 
-3) docs_ontology.ttl
+6) docs_ontology.ttl
    Defines the Document ontology used for RAG.
-   May reference entities defined in the Data Product ontology.
+   Uses 1-5
 
-4) streamforge_abox.ttl
-   ABox data for the StreamForge example domain
-   (datasets, data products, organizations, etc.).
+7) streamforge_abox.ttl
+   ABox data for the StreamForge example domain. Most of the data in the other ontologies is TBox.
+   This is mostly ABox. 
+   Uses 1-5
 
 5) create_docs_sparql.ru
    Execute this SPARQL UPDATE to create Document
    instances and link them to data products and datasets.
    
-6) Run the reasoner. 
 ```
 
 ---
 
-## Notes
-* Baseline StreamForge Data Product / Catalog RAG example. All data in default graph. Docs generated via create_docs_sparql.ru.
-After Loading and Running MaterializerVerified counts:
-- ABox triples: 3849
-- docs:Document instances: 3
-- linked to core data products: 3
-* All data is loaded into the **default graph** for clarity and ease of understanding.
-* The SPARQL update generates the document instances used by the RAG examples in later chapters.
-* Additional examples (e.g., data pipelines, trending analytics, named graphs) are intentionally kept separate to avoid conflating concerns.
+
 
 ---
 

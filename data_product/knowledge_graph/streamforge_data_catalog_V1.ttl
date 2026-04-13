@@ -1,4 +1,4 @@
-@prefix : <https://www.michaeldebellis.com/streamforge#> .
+@prefix : <https://www.michaeldebellis.com/streamforge/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dp: <https://www.michaeldebellis.com/dp/> .
 @prefix sf: <https://www.michaeldebellis.com/streamforge/> .
@@ -17,7 +17,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
-@base <https://www.michaeldebellis.com/streamforge#> .
+@base <https://www.michaeldebellis.com/streamforge/> .
 
 <https://www.michaeldebellis.com/streamforge> rdf:type owl:Ontology ;
                                                dctm:created "2025-12-01T00:00:00+00:00"^^xsd:dateTime ;
@@ -1071,7 +1071,7 @@ dp:has_relationship_type rdf:type owl:ObjectProperty ;
 ###  https://www.michaeldebellis.com/dp/has_sidecar
 dp:has_sidecar rdf:type owl:ObjectProperty ;
                owl:inverseOf dp:is_sidecar_for ;
-               rdfs:domain dp:Catalog_Asset ;
+               rdfs:domain dp:Data_Product ;
                rdfs:range dp:Sidecar ;
                rdfs:label "has sidecar"@en .
 
@@ -1814,7 +1814,7 @@ dp:Bounded_Context rdf:type owl:Class ;
                                 "Data Product usage: Bounded contexts scope the semantics and meaning of Data Products and help manage dependencies between products owned by different domains."@en ;
                    rdfs:label "Bounded Context"@en ;
                    skos:definition "A bounded context defines the boundary within which a particular domain model and vocabulary apply."@en ,
-                                   "enenenBounded Context is a concept from Domain-Driven Design (DDD) that defines a clear boundary within which a particular domain model, vocabulary, and set of assumptions are valid and consistently used. Within a bounded context, terms have precise meanings and models are internally coherent, while the same terms may have different meanings in other contexts. By explicitly defining these boundaries, bounded contexts reduce ambiguity, limit coupling between systems, and enable teams to evolve models independently while integrating with other contexts through well-defined interfaces or translation mechanisms."@en ;
+                                   "Bounded Context is a concept from Domain-Driven Design (DDD) that defines a clear boundary within which a particular domain model, vocabulary, and set of assumptions are valid and consistently used. Within a bounded context, terms have precise meanings and models are internally coherent, while the same terms may have different meanings in other contexts. By explicitly defining these boundaries, bounded contexts reduce ambiguity, limit coupling between systems, and enable teams to evolve models independently while integrating with other contexts through well-defined interfaces or translation mechanisms."@en ;
                    dp:embedding_note "Bounded Context has contributor Michael DeBellis."@en .
 
 
@@ -1947,11 +1947,15 @@ dp:Data_Contract rdf:type owl:Class ;
 
 ###  https://www.michaeldebellis.com/dp/Data_Product
 dp:Data_Product rdf:type owl:Class ;
-                rdfs:subClassOf dp:Catalog_Asset ,
-                                [ rdf:type owl:Restriction ;
-                                  owl:onProperty dp:has_bounded_context ;
-                                  owl:someValuesFrom dp:Bounded_Context
-                                ] ;
+                owl:equivalentClass [ owl:intersectionOf ( dp:Catalog_Asset
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty dp:has_bounded_context ;
+                                                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                             owl:onClass dp:Bounded_Context
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ;
                 rdfs:comment "A domain-owned, versioned data microservice that exposes datasets and services together with contracts and quality guarantees."@en ,
                              "Data Product usage: A Data Product represents the unit of ownership, governance, and consumption. It is not equivalent to a dataset or service, but is realized through them."@en ;
                 rdfs:label "Data Product"@en ;
@@ -2209,7 +2213,15 @@ dp:Service_Level_Agreement rdf:type owl:Class ;
 
 ###  https://www.michaeldebellis.com/dp/Sidecar
 dp:Sidecar rdf:type owl:Class ;
-           rdfs:subClassOf dp:Component ;
+           owl:equivalentClass [ owl:intersectionOf ( dp:Component
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty dp:is_sidecar_for ;
+                                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass dp:Data_Product
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] ;
            rdfs:label "Sidecar"@en ;
            skos:definition "A data product sidecar is a process that shares the execution context of a data product and is only responsible for domain-agnostic and cross-cutting concerns such as policy execution. In addition to policy execution, the sidecar process can be extended to implement other standardized features of a data product such as discovery. Dehghani, Zhamak. Data Mesh: Delivering Data-Driven Value at Scale (p. 4). O'Reilly Media. Kindle Edition."@en ;
            dp:embedding_note "Sidecar is a kind of Component."@en .
@@ -2284,8 +2296,7 @@ docs:Creator_Engagement_Report_Q3_2025 rdf:type owl:NamedIndividual ,
                                                       docs:Creator_Engagement_Report_Q3_2025_Chunk_06 ,
                                                       docs:Creator_Engagement_Report_Q3_2025_Chunk_07 ,
                                                       docs:Creator_Engagement_Report_Q3_2025_Chunk_08 ;
-                                       dp:uses_data_product dp:SF_Video_Metadata_Product ,
-                                                            sf:SF_Creator_Insights_Data_Product ;
+                                       dp:uses_data_product sf:SF_Creator_Insights_Data_Product ;
                                        dp:uses_dataset sf:Creator_Engagement_Metrics ,
                                                        sf:Video_Metadata_Current ;
                                        dctm:created "2025-10-10"^^xsd:date ;
@@ -2691,7 +2702,6 @@ docs:Incident_Report_Video_Metadata_Freshness_Regression rdf:type owl:NamedIndiv
                                                                         docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_06 ,
                                                                         docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_07 ,
                                                                         docs:Incident_Report_Video_Metadata_Freshness_Regression_Chunk_08 ;
-                                                         dp:uses_data_product dp:SF_Video_Metadata_Product ;
                                                          dp:uses_dataset sf:Video_Metadata_Current ;
                                                          dctm:created "2025-09-03"^^xsd:date ;
                                                          dctm:creator "Data Reliability Engineering (DRE)"@en ;
@@ -2804,8 +2814,7 @@ docs:Personalization_Performance_Review_Q3_2025 rdf:type owl:NamedIndividual ,
                                                                docs:Personalization_Performance_Review_Q3_2025_Chunk_06 ,
                                                                docs:Personalization_Performance_Review_Q3_2025_Chunk_07 ,
                                                                docs:Personalization_Performance_Review_Q3_2025_Chunk_08 ;
-                                                dp:uses_data_product dp:SF_Recs_Features_Product ,
-                                                                     dp:SF_Video_Metadata_Product ;
+                                                dp:uses_data_product dp:Recommendation_Features_Data_Product ;
                                                 dp:uses_dataset sf:Personalization_Events_Q3_2025 ,
                                                                 sf:Video_Metadata_Current ;
                                                 dctm:created "2025-10-12"^^xsd:date ;
@@ -3845,6 +3854,38 @@ dp:Raw_Data rdf:type owl:NamedIndividual ,
             dp:embedding_note "Raw data has validation rank 10."@en .
 
 
+###  https://www.michaeldebellis.com/dp/Recommendation_Features_Data_Product
+dp:Recommendation_Features_Data_Product rdf:type owl:NamedIndividual ,
+                                                 dp:Data_Product ;
+                                        dp:consumes_dataset sf:SF_Video_Metadata_Dataset ;
+                                        dp:exposes_service dp:SF_Recs_Features_Service ;
+                                        dp:has_api_type dp:REST_API ;
+                                        dp:has_bounded_context sf:Content_Discovery_Bounded_Context ;
+                                        dp:has_data_contract dp:SF_Recs_Features_Contract ;
+                                        dp:has_domain dp:StreamForge_Domain ;
+                                        dp:has_product_key dp:SF_Recommendations_Features_Key ;
+                                        dp:has_product_type dp:Operational_Data_Product_Type ;
+                                        dp:has_quality_metric dp:SF_Recs_Features_Quality ;
+                                        dp:has_sla dp:SF_Recs_Features_SLA ;
+                                        dp:has_version dp:SF_Recs_Features_V1 ;
+                                        dp:owned_by dp:StreamForge_Personalization_Team ;
+                                        dp:produces_dataset dp:SF_Recs_Features_Dataset ;
+                                        dctm:description "Generates and serves offline and online feature sets used by ranking/recommendation systems."@en ;
+                                        rdfs:label "Recommendation Features Data Product"@en ;
+                                        dp:embedding_note "Recommendation Features Data Product consumes dataset SF Video Metadata Dataset."@en ,
+                                                          "Recommendation Features Data Product exposes service SF Recs Features Service."@en ,
+                                                          "Recommendation Features Data Product has api type REST API."@en ,
+                                                          "Recommendation Features Data Product has bounded context Content Discovery Bounded Context."@en ,
+                                                          "Recommendation Features Data Product has data contract SF Recs Features Contract."@en ,
+                                                          "Recommendation Features Data Product has product key SF Recommendations Features Key."@en ,
+                                                          "Recommendation Features Data Product has product type Operational Data Product Type."@en ,
+                                                          "Recommendation Features Data Product has quality metric SF Recs Features Quality."@en ,
+                                                          "Recommendation Features Data Product has sla SF Recs Features SLA."@en ,
+                                                          "Recommendation Features Data Product has version SF Recs Features V1."@en ,
+                                                          "Recommendation Features Data Product is an instance of Data Product."@en ,
+                                                          "SF Recs Features Product produces dataset SF Recs Features Dataset."@en .
+
+
 ###  https://www.michaeldebellis.com/dp/S3
 dp:S3 rdf:type owl:NamedIndividual ,
                dp:Platform ;
@@ -3944,39 +3985,6 @@ dp:SF_Recs_Features_Dataset rdf:type owl:NamedIndividual ;
                             dp:embedding_note "SF Recs Features Dataset has publisher StreamForge Organization."@en .
 
 
-###  https://www.michaeldebellis.com/dp/SF_Recs_Features_Product
-dp:SF_Recs_Features_Product rdf:type owl:NamedIndividual ,
-                                     dp:Data_Product ;
-                            dp:consumes_dataset sf:SF_Video_Metadata_Dataset ;
-                            dp:exposes_service dp:SF_Recs_Features_Service ;
-                            dp:has_api_type dp:REST_API ;
-                            dp:has_bounded_context sf:Content_Discovery_Bounded_Context ;
-                            dp:has_data_contract dp:SF_Recs_Features_Contract ;
-                            dp:has_domain dp:StreamForge_Domain ;
-                            dp:has_product_key dp:SF_Recommendations_Features_Key ;
-                            dp:has_product_type dp:Operational_Data_Product_Type ;
-                            dp:has_quality_metric dp:SF_Recs_Features_Quality ;
-                            dp:has_sla dp:SF_Recs_Features_SLA ;
-                            dp:has_version dp:SF_Recs_Features_V1 ;
-                            dp:owned_by dp:StreamForge_Personalization_Team ;
-                            dp:produces_dataset dp:SF_Recs_Features_Dataset ;
-                            dctm:description "Generates and serves offline and online feature sets used by ranking/recommendation systems."@en ;
-                            rdfs:label "SF Recs Features Product"@en ;
-                            dp:embedding_note "SF Recs Features Product consumes dataset SF Video Metadata Dataset."@en ,
-                                              "SF Recs Features Product exposes service SF Recs Features Service."@en ,
-                                              "SF Recs Features Product has api type REST API."@en ,
-                                              "SF Recs Features Product has bounded context Content Discovery Bounded Context."@en ,
-                                              "SF Recs Features Product has data contract SF Recs Features Contract."@en ,
-                                              "SF Recs Features Product has domain StreamForge Domain."@en ,
-                                              "SF Recs Features Product has product key SF Recommendations Features Key."@en ,
-                                              "SF Recs Features Product has product type Operational Data Product Type."@en ,
-                                              "SF Recs Features Product has quality metric SF Recs Features Quality."@en ,
-                                              "SF Recs Features Product has sla SF Recs Features SLA."@en ,
-                                              "SF Recs Features Product has version SF Recs Features V1."@en ,
-                                              "SF Recs Features Product is an instance of Data Product."@en ,
-                                              "SF Recs Features Product produces dataset SF Recs Features Dataset."@en .
-
-
 ###  https://www.michaeldebellis.com/dp/SF_Recs_Features_Quality
 dp:SF_Recs_Features_Quality rdf:type owl:NamedIndividual ;
                             dctm:description "Stability and timeliness metrics for feature production."@en ;
@@ -4013,41 +4021,6 @@ dp:SF_Recs_Features_V1 rdf:type owl:NamedIndividual ;
 dp:SF_Video_Metadata_Key rdf:type owl:NamedIndividual ;
                          dctm:description "Business key identifying the video metadata product."@en ;
                          rdfs:label "SF Video Metadata Key"@en .
-
-
-###  https://www.michaeldebellis.com/dp/SF_Video_Metadata_Product
-dp:SF_Video_Metadata_Product rdf:type owl:NamedIndividual ;
-                             dp:exposes_service dp:SF_Video_Metadata_Service ;
-                             dp:has_api_type dp:REST_API ;
-                             dp:has_bounded_context sf:Ingestion_And_Metadata_Bounded_Context ;
-                             dp:has_data_contract dp:SF_Metadata_Contract ;
-                             dp:has_domain dp:StreamForge_Domain ;
-                             dp:has_product_key dp:SF_Video_Metadata_Key ;
-                             dp:has_product_type dp:Operational_Data_Product_Type ;
-                             dp:has_quality_metric dp:SF_Metadata_Quality ;
-                             dp:has_sla dp:SF_Metadata_SLA ;
-                             dp:has_version dp:SF_Video_Metadata_V1 ,
-                                            dp:SF_Video_Metadata_V2 ;
-                             dp:owned_by dp:StreamForge_Data_Platform_Team ;
-                             dp:produces_dataset sf:SF_Video_Metadata_Dataset ;
-                             dp:upstream_of dp:SF_Recs_Features_Product ,
-                                            sf:SF_Creator_Insights_Data_Product ;
-                             dctm:description "Provides canonical video metadata to ingestion, discovery, and analytics consumers."@en ;
-                             rdfs:label "SF Video Metadata Product"@en ;
-                             dp:embedding_note "SF Video Metadata Product exposes service SF Video Metadata Service."@en ,
-                                               "SF Video Metadata Product has api type REST API."@en ,
-                                               "SF Video Metadata Product has bounded context Ingestion And Metadata Bounded Context."@en ,
-                                               "SF Video Metadata Product has data contract SF Metadata Contract."@en ,
-                                               "SF Video Metadata Product has domain StreamForge Domain."@en ,
-                                               "SF Video Metadata Product has product key SF Video Metadata Key."@en ,
-                                               "SF Video Metadata Product has product type Operational Data Product Type."@en ,
-                                               "SF Video Metadata Product has quality metric SF Metadata Quality."@en ,
-                                               "SF Video Metadata Product has sla SF Metadata SLA."@en ,
-                                               "SF Video Metadata Product has version SF Video Metadata V1."@en ,
-                                               "SF Video Metadata Product has version SF Video Metadata V2."@en ,
-                                               "SF Video Metadata Product produces dataset SF Video Metadata Dataset."@en ,
-                                               "SF Video Metadata Product upstream of SF Creator Insights Product."@en ,
-                                               "SF Video Metadata Product upstream of SF Recs Features Product."@en .
 
 
 ###  https://www.michaeldebellis.com/dp/SF_Video_Metadata_Service
@@ -4257,11 +4230,11 @@ dp:United_States rdf:type owl:NamedIndividual ,
                                    "United States contains Illinois."@en .
 
 
-###  https://www.michaeldebellis.com/dp/Upstream_Downstream
-dp:Upstream_Downstream rdf:type owl:NamedIndividual ,
+###  https://www.michaeldebellis.com/dp/Upstream-Downstream
+dp:Upstream-Downstream rdf:type owl:NamedIndividual ,
                                 dp:Context_Map_Relationship_Type ;
                        rdfs:comment "Downstream context depends on upstream context; upstream publishes what downstream needs."@en ;
-                       rdfs:label "Upstream Downstream"@en ;
+                       rdfs:label "Upstream-Downstream"@en ;
                        dp:embedding_note "Upstream Downstream is an instance of Context Map Relationship Type."@en .
 
 
@@ -4427,7 +4400,7 @@ sf:Creator_Data_Product rdf:type owl:NamedIndividual ,
                                  dp:Data_Product ;
                         dp:about_domain_concept sf:Creator ;
                         dp:has_analytic_port sf:Get_Creator_History ;
-                        dp:has_bounded_context sf:StreamForge_Bounded_Context ;
+                        dp:has_bounded_context sf:Creator_Analytics_Bounded_Context ;
                         dp:has_catalog_policy dp:Creator_History_Access_Policy ,
                                               dp:Creator_History_External_Access_Prohibition_Policy ;
                         rdfs:label "Creator Data Product"@en ;
@@ -4590,6 +4563,14 @@ Solstice Music strengthens RAG responses that need to connect operational issues
                           skos:definition "A synthetic music creator used for examples involving spikes, trend events, and revenue sensitivity."@en ;
                           skos:note "Synthetic example creator for StreamForge."@en ;
                           dp:embedding_note "Solstice Music (Creator) is an instance of Creator."@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Customer-Supplier
+sf:Customer-Supplier rdf:type owl:NamedIndividual ,
+                              dp:Context_Map_Relationship_Type ;
+                     dctm:created "2026-04-13T19:21:05Z"^^xsd:dateTime ;
+                     dctm:creator "Michael DeBellis" ;
+                     rdfs:label "Customer-Supplier"@en .
 
 
 ###  https://www.michaeldebellis.com/streamforge/Describe_User_Data_Product
@@ -4950,6 +4931,15 @@ sf:Ingestion_And_Metadata_Bounded_Context rdf:type owl:NamedIndividual ;
                                           rdfs:label "Ingestion And Metadata Bounded Context"@en .
 
 
+###  https://www.michaeldebellis.com/streamforge/Ingestion_And_Metadata_to_Playback_And_Engagement
+sf:Ingestion_And_Metadata_to_Playback_And_Engagement rdf:type owl:NamedIndividual ,
+                                                              dp:Context_Map_Relationship ;
+                                                     dp:has_from_context sf:Ingestion_And_Metadata_Bounded_Context ;
+                                                     dp:has_relationship_type sf:Customer-Supplier ;
+                                                     dp:has_to_context sf:Playback_and_Engagement_Bounded_Context ;
+                                                     rdfs:label "Ingestion & Metadata → Playback & Engagement (Customer-Supplier)"@en .
+
+
 ###  https://www.michaeldebellis.com/streamforge/Ingestion_To_Content_Discovery_Anti_Corruption_Layer
 sf:Ingestion_To_Content_Discovery_Anti_Corruption_Layer rdf:type owl:NamedIndividual ,
                                                                  dp:Context_Map_Relationship ;
@@ -4967,7 +4957,7 @@ sf:Ingestion_To_Content_Discovery_Anti_Corruption_Layer rdf:type owl:NamedIndivi
 sf:Ingestion_To_Content_Discovery_Customer_Supplier rdf:type owl:NamedIndividual ,
                                                              dp:Context_Map_Relationship ;
                                                     dp:has_from_context sf:Ingestion_And_Metadata_Bounded_Context ;
-                                                    dp:has_relationship_type dp:Upstream_Downstream ;
+                                                    dp:has_relationship_type dp:Upstream-Downstream ;
                                                     dp:has_to_context sf:Content_Discovery_Bounded_Context ;
                                                     rdfs:label "Ingestion & Metadata → Content Discovery (Customer–Supplier)"@en ;
                                                     dp:embedding_note "Ingestion & Metadata → Content Discovery (Customer–Supplier) has from context Ingestion And Metadata Bounded Context."@en ,
@@ -5021,7 +5011,7 @@ sf:Ingestion_To_Creator_Analytics_Upstream_Downstream rdf:type owl:NamedIndividu
                                                                dp:Context_Map_Relationship ;
                                                       dp:has_data_contract sf:Ingestion_To_Creator_Analytics_Data_Contract ;
                                                       dp:has_from_context sf:Ingestion_And_Metadata_Bounded_Context ;
-                                                      dp:has_relationship_type dp:Upstream_Downstream ;
+                                                      dp:has_relationship_type dp:Upstream-Downstream ;
                                                       dp:has_to_context sf:Creator_Analytics_Bounded_Context ;
                                                       rdfs:label "Ingestion & Metadata → Creator Analytics (Upstream–Downstream)"@en ;
                                                       dp:embedding_note "Ingestion & Metadata → Creator Analytics (Upstream–Downstream) has data contract Ingestion → Creator Analytics Data Contract."@en ,
@@ -5080,6 +5070,22 @@ sf:Play_Video_For_User_API rdf:type owl:NamedIndividual ;
                            rdfs:label "Play Video for User API"@en ;
                            dp:embedding_note "Play Video for User API has access type API Access."@en ,
                                              "Play Video for User API has contributor Michael DeBellis."@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Playback_and_Engagement_Bounded_Context
+sf:Playback_and_Engagement_Bounded_Context rdf:type owl:NamedIndividual ,
+                                                    dp:Bounded_Context ;
+                                           rdfs:label "Playback and Engagement Bounded Context"@en ;
+                                           dp:embedding_note "Playback and Engagement Bounded Context is an instance of Bounded Context."@en .
+
+
+###  https://www.michaeldebellis.com/streamforge/Recommendation_Data_Product
+sf:Recommendation_Data_Product rdf:type owl:NamedIndividual ,
+                                        dp:Data_Product ;
+                               dp:has_bounded_context sf:Content_Discovery_Bounded_Context ;
+                               dctm:created "2026-04-13T16:50:29Z"^^xsd:dateTime ;
+                               dctm:creator "Michael DeBellis" ;
+                               rdfs:label "Recommendation Data Product"@en .
 
 
 ###  https://www.michaeldebellis.com/streamforge/SF_Ads_Performance_Data_Product
@@ -5162,8 +5168,7 @@ sf:SF_Creator_Insights_Data_Product rdf:type owl:NamedIndividual ,
                                     rdfs:comment "The SF Creator Insights Data Product depends on engagement events, creator profile data, video metadata, and the derived KPI dataset."@en ,
                                                  "The SF Creator Insights Data Product directly depends on user playback events" ,
                                                  "The SF Creator Insights Data Product is owned by the Creator Analytics Team" ;
-                                    rdfs:label "SF Creator Insights Data Product"@en ,
-                                               "SF Creator Insights Product"@en ;
+                                    rdfs:label "SF Creator Insights Data Product"@en ;
                                     dp:access_mode "SQL (BigQuery)"@en ;
                                     dp:data_granularity "Weekly aggregates per creator and content category"@en ;
                                     dp:embedding_note "SF Creator Insights Data Product access mode SQL (BigQuery)."@en ,
@@ -5592,13 +5597,6 @@ sf:Search_Relevance_Experiment_Report_Q4_2025_Chunk_06 rdf:type owl:NamedIndivid
                                                                          "Search Relevance Experiment Report Q4 2025 Chunk 06 is an instance of Document Chunk."@en .
 
 
-###  https://www.michaeldebellis.com/streamforge/StreamForge_Bounded_Context
-sf:StreamForge_Bounded_Context rdf:type owl:NamedIndividual ,
-                                        dp:Bounded_Context ;
-                               rdfs:label "StreamForge Bounded Context"@en ;
-                               dp:embedding_note "StreamForge Bounded Context is an instance of Bounded Context."@en .
-
-
 ###  https://www.michaeldebellis.com/streamforge/StreamForge_Catalog
 sf:StreamForge_Catalog rdf:type owl:NamedIndividual ,
                                 dcat:Catalog ,
@@ -5662,8 +5660,8 @@ sf:StreamForge_Sub_Catalog rdf:type owl:NamedIndividual ,
 ###  https://www.michaeldebellis.com/streamforge/StreamForge_To_Content_Discovery_Upstream_Downstream
 sf:StreamForge_To_Content_Discovery_Upstream_Downstream rdf:type owl:NamedIndividual ,
                                                                  dp:Context_Map_Relationship ;
-                                                        dp:has_from_context sf:StreamForge_Bounded_Context ;
-                                                        dp:has_relationship_type dp:Upstream_Downstream ;
+                                                        dp:has_from_context sf:Playback_and_Engagement_Bounded_Context ;
+                                                        dp:has_relationship_type dp:Upstream-Downstream ;
                                                         dp:has_to_context sf:Content_Discovery_Bounded_Context ;
                                                         rdfs:label "StreamForge Core → Content Discovery (Upstream–Downstream)"@en ;
                                                         dp:embedding_note "StreamForge Core → Content Discovery (Upstream–Downstream) has from context StreamForge Bounded Context."@en ,
@@ -5783,7 +5781,7 @@ sf:User_Data_Product rdf:type owl:NamedIndividual ,
                      dp:about_domain_concept dp:User ;
                      dp:has_analytic_port sf:Get_User_Demographics ,
                                           sf:Get_User_Subscriptions ;
-                     dp:has_bounded_context sf:StreamForge_Bounded_Context ;
+                     dp:has_bounded_context sf:Playback_and_Engagement_Bounded_Context ;
                      rdfs:label "User Data Product"@en ;
                      dp:embedding_note "User Data Product has analytic port User Demographics Query."@en ,
                                        "User Data Product has analytic port User Subscriptions Query."@en ,
@@ -5932,7 +5930,7 @@ sf:Video_Data_Product rdf:type owl:NamedIndividual ,
                       dp:about_domain_concept sf:Video ;
                       dp:has_analytic_port sf:Get_Trending_Videos ,
                                            sf:Get_Video_Metadata ;
-                      dp:has_bounded_context sf:StreamForge_Bounded_Context ;
+                      dp:has_bounded_context sf:Ingestion_And_Metadata_Bounded_Context ;
                       dp:has_operational_port sf:Create_A_Video_API ,
                                               sf:Play_Video_For_User_API ;
                       rdfs:label "Video Data Product"@en ;
@@ -5971,7 +5969,7 @@ sf:Video_Playback_Data_Product rdf:type owl:NamedIndividual ,
                                prov:wasAssociatedWith dp:User ;
                                dp:about_domain_concept sf:Video_Playback ;
                                dp:has_analytic_port sf:Get_Video_Playback_Events ;
-                               dp:has_bounded_context sf:StreamForge_Bounded_Context ;
+                               dp:has_bounded_context sf:Playback_and_Engagement_Bounded_Context ;
                                dp:owned_by dp:Content_Platform_Team ;
                                rdfs:comment "The Video Playback Data Product is owned by the Content Platform Team" ,
                                             "The Video Playback Data Product requires user-level playback events" ;

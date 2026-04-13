@@ -1,14 +1,8 @@
 ## Data Product / Catalog Example
 
-This directory contains a **minimal, self-contained example** used throughout the book to illustrate how **Data Products**, **Catalog metadata**, and **Documents** can be modeled and queried as part of a Retrieval-Augmented Generation (RAG) workflow.
+This directory contains ontologies, knowledge graphs, SPARQL, and Python to develop a Data Catalog example based on the concepts of Data Products and Domain Driven Design (DDD). 
 
-The example is intentionally simple and uses a **single default graph**. Named graphs, pipelines, and more advanced deployment patterns are introduced later in the book.
-
-The contents include:
-
-* TBox ontologies for catalogs, data products, and documents
-* An ABox example based on the *StreamForge* domain
-* A SPARQL update that generates document instances used as the RAG corpus
+The example is is based on a made-up video streaming company called StreamForge
 
 ---
 

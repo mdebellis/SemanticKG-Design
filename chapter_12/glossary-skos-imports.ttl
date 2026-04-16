@@ -504,7 +504,8 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
                                 skos:Concept ;
                        skos:narrower :Agile_Methods ;
                        dcterms:contributor "Michael DeBellis" ;
-                       dcterms:created "2026-02-08T02:00:52Z"^^xsd:dateTime .
+                       dcterms:created "2026-02-08T02:00:52Z"^^xsd:dateTime ;
+                       rdfs:label "Iterative Development"@en .
 
 
 ###  https://www.michaeldebellis.com/glossary/Knowledge_Base
@@ -704,6 +705,9 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
 :Property rdf:type owl:NamedIndividual ,
                    skos:Concept ;
           skos:inScheme :Glossary ;
+          skos:narrower :Annotation_Property ,
+                        :Datatype_Property ,
+                        :Object_Property ;
           skos:related :OWL ,
                        :SPARQL ;
           rdfs:label "Property"@en ;
@@ -714,6 +718,7 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
 ###  https://www.michaeldebellis.com/glossary/Property_Graph
 :Property_Graph rdf:type owl:NamedIndividual ,
                          skos:Concept ;
+                skos:broader :Knowledge_Graph ;
                 skos:inScheme :Glossary ;
                 rdfs:label "Property Graph"@en ;
                 skos:definition "A Property Graph is a graph data model in which nodes and edges can both have associated properties expressed as key–value pairs. Nodes typically represent entities, edges represent relationships, and both may carry arbitrary attributes used for querying or computation. Property graphs are widely used in graph databases because they are flexible, intuitive, and performant for traversal-based queries. Unlike Semantic Knowledge Graphs, property graphs do not have a formal logical semantics or standardized meaning for relationships; interpretation is largely application-specific. As a result, while property graphs are well suited for operational and analytical graph workloads, they do not natively support formal reasoning or semantic interoperability in the way ontology-based models do."@en ;
@@ -807,6 +812,7 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
 :SPARQL rdf:type owl:NamedIndividual ,
                  skos:Concept ;
         skos:inScheme :Glossary ;
+        skos:related :SQL_Structured_Query_Language ;
         rdfs:label "SPARQL"@en ;
         skos:definition "SPARQL Protocol and RDF Query Language. A W3C standard graph query language to query knowledge graphs."@en ;
         skos:prefLabel "SPARQL"@en .
@@ -842,6 +848,7 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
 ###  https://www.michaeldebellis.com/glossary/Semantic_Knowledge_Graph
 :Semantic_Knowledge_Graph rdf:type owl:NamedIndividual ,
                                    skos:Concept ;
+                          skos:broader :Knowledge_Graph ;
                           skos:inScheme :Glossary ;
                           rdfs:label "Semantic Knowledge Graph"@en ;
                           skos:definition "A knowledge graph is a structure that represents knowledge as a graph, also known as a Semantic Network. Knowledge graphs can include RDF graphs, property graphs, and Semantic Knowledge Graphs. A Semantic Knowledge Graph is an RDF graph that utilizes OWL ontologies to define the schemas of the graph."@en ;
@@ -968,6 +975,7 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
 ###  https://www.michaeldebellis.com/glossary/URI_Uniform_Resource_Identifier
 :URI_Uniform_Resource_Identifier rdf:type owl:NamedIndividual ,
                                           skos:Concept ;
+                                 skos:broader :IRI_Internationalized_Resource_Identifier ;
                                  skos:inScheme :Glossary ;
                                  rdfs:label "URI (Uniform Resource Identifier)"@en ;
                                  skos:definition "a standardized identifier used to uniquely identify resources on the Web. A URI is a character string with a defined syntax that can name or locate a resource, including web pages, documents, services, or abstract concepts. URIs provide the foundational identification mechanism of the Web and Semantic Web, enabling resources to be referenced consistently and linked across systems, regardless of whether the identifier directly resolves to a network location. URIs are a type of IRI. URIs were defined before IRIs and hence it is common for documentation to refer to URIs. However, the preferred term now is IRI."@en ;
@@ -977,6 +985,7 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
 ###  https://www.michaeldebellis.com/glossary/URL_Uniform_Resource_Locator
 :URL_Uniform_Resource_Locator rdf:type owl:NamedIndividual ,
                                        skos:Concept ;
+                              skos:broader :URI_Uniform_Resource_Identifier ;
                               skos:inScheme :Glossary ;
                               rdfs:label "URL (Uniform Resource Locator)"@en ;
                               skos:definition "a specific type of IRI that identifies a resource by describing both its location and the protocol used to access it. A URL typically includes a scheme such as http, https, or ftp, followed by a network address and optional path, query, or fragment components, allowing software to retrieve the identified resource. While all URLs are IRIs, not all IRIs are URLs, since some IRIs serve only as names without implying a retrievable location."@en ;

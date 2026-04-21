@@ -113,11 +113,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :canonical_unit rdf:type owl:AnnotationProperty ;
                 dct:contributor "Michael DeBellis" ;
                 dct:created "2025-10-13T20:18:59Z"^^xsd:dateTime ;
+                rdfs:label "canonical unit"@en ;
                 rdfs:range :Unit .
 
 
 ###  https://michaeldebellis.com/people/wikidata
 :wikidata rdf:type owl:AnnotationProperty ;
+          rdfs:label "wikidata"@en ;
           rdfs:range xsd:anyURI .
 
 
@@ -550,7 +552,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                  rdfs:domain :Measurement ;
                  rdfs:range xsd:decimal ;
                  dct:contributor "Michael DeBellis" ;
-                 dct:created "2025-10-13T20:48:21Z"^^xsd:dateTime .
+                 dct:created "2025-10-13T20:48:21Z"^^xsd:dateTime ;
+                 rdfs:label "canonical value"@en .
 
 
 ###  https://michaeldebellis.com/people/email

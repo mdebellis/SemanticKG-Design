@@ -1,4 +1,4 @@
-'''
+```yaml
 openapi: 3.0.3
 info:
   title: StreamForge Video Metadata API
@@ -52,4 +52,4 @@ components:
           type: string
         maturityRating:
           type: string
-'''
+```

@@ -48,8 +48,8 @@ components:
           format: date-time
         durationSeconds:
           type: integer
-'''
         genre:
           type: string
         maturityRating:
           type: string
+'''

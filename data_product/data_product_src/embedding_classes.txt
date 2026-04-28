@@ -52,5 +52,4 @@ prov:Person
 sf:Video
 sf:Video_Playback
 skos:definition
-skos:scopeNote
-skos:example
+

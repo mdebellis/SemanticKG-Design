@@ -46,7 +46,8 @@ The following describes the various ontologies that were reused and created for 
    instances and link them to data products and datasets.
    
 ```
-
+## Additional Directories
+There are several sub-directories under this directory. They all have code and text examples that are part of the Semantic Knowledge Graph Data Catalog Streamforge example. Some directories such as REST, graphql, and kafka have various examples of mock interfaces defined for data ports on the data products in the data catalog. For example, the Video_Data_Product has the Query_Port: Video_Metadata_Query. That port has two implementations: one for [GraphQL](https://github.com/mdebellis/SemanticKG-Design/blob/main/data_product/graphql/Get_Video_Metadata_GraphQL_Implementation.md), one for [REST/OpenAPI](https://github.com/mdebellis/SemanticKG-Design/blob/main/data_product/REST/Get_Video_Metadata_REST-OpenAPI_Implementation.md). The URLs for those two are saved as part of the different Port Implementations for that Data Product. In an actual Data Catalog, those would be IRIs with the appropriate parameters to the appropriate systems, here they are documents that stand for such external interfaces. 
 
 
 

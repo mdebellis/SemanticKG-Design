@@ -148,10 +148,10 @@ def add_embedding_notes_from_properties(
 # Step2: From your repo directory at the terminal:
 # 2.1: Test mode (safe — prints only) This is the default to make sure things are working. It is currently the default
 # because the function doesn't do a lot of error checking so best to make sure all your properties can be found, etc.
-# python add_embedding_notes_from_properties.py streamforge.ttl embedding_properties.txt
+# python add_embedding_notes_from_properties.py streamforge_data_catalog_V1.ttl embedding_properties.txt
 #
 # 2.2: Insert mode
-# python add_embedding_notes_from_properties.py streamforge.ttl embedding_properties.txt --insert
+# python add_embedding_notes_from_properties.py streamforge_data_catalog_V1.ttl embedding_properties.txt --insert
 #
 # That will write a new ontology file: output_with_embedding_notes.ttl You can change that filename later if needed.
 

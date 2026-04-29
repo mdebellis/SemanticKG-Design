@@ -7,6 +7,7 @@ docs:Incident_Report
 docs:Quarterly_Report
 docs:Report
 docs:Strategy_Memo
+docs:Strategy_Memo
 dp:Access_Type
 dp:Analytic_Data_Port
 dp:API_Type
@@ -18,6 +19,7 @@ dp:Context_Map
 dp:Context_Map_Relationship
 dp:Context_Map_Relationship_Type
 dp:Contract
+dp:Control_Port
 dp:Creator
 dp:Data_Analysis_Activity
 dp:Data_Contract
@@ -25,6 +27,8 @@ dp:Data_Product
 dp:Data_Product_Team
 dp:Describe_Data_Product_Port
 dp:Discover-Observe_Port
+dp:Governance_Annotation
+dp:Input_Port
 dp:Integration_Technology
 dp:Interface
 dp:Operational_Data_Port
@@ -35,6 +39,7 @@ dp:Port_Implementation
 dp:Programming_Language
 dp:Quality_Metric
 dp:Query_Language
+dp:Risk_Flag_Annotation
 dp:Service
 dp:Service_Level_Agreement
 dp:User
@@ -45,11 +50,10 @@ odrl:Party
 odrl:Permission
 odrl:Policy
 odrl:Privacy
+odrl:Privacy
 odrl:Prohibition
 prov:Activity
 prov:Organization
 prov:Person
 sf:Video
 sf:Video_Playback
-skos:definition
-

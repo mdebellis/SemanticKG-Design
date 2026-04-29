@@ -235,10 +235,10 @@ def add_embedding_notes_from_classes(
 #
 # Step2: From your repo directory at the terminal:
 # 2.1: Test mode (safe — prints only) This is the default
-# python add_embedding_notes_from_classes.py streamforge.ttl embedding_classes.txt
+# python add_embedding_notes_from_classes.py streamforge_data_catalog_V1.ttl embedding_classes.txt
 #
 # 2.2: Insert mode
-# python add_embedding_notes_from_classes.py streamforge.ttl embedding_classes.txt --insert
+# python add_embedding_notes_from_classes.py streamforge_data_catalog_V1.ttl embedding_classes.txt --insert
 #
 # That will write a new ontology file: output_with_embedding_notes.ttl
 
@@ -261,6 +261,7 @@ if __name__ == "__main__":
 
     # Bind prefixes (adjust if needed)
     g.bind("odrl", Namespace("http://www.w3.org/ns/odrl/2/"))
+    g.bind("dctm", Namespace("http://purl.org/dc/terms/"))
     g.bind("dp", Namespace("https://www.michaeldebellis.com/dp/"))
     g.bind("docs", Namespace("https://www.michaeldebellis.com/docs/"))
     g.bind("sf", Namespace("https://www.michaeldebellis.com/streamforge/"))

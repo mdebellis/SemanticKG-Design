@@ -1,6 +1,7 @@
 dcat:keyword
 dctm:description
 dctm:source
+dctm:title
 docs:uses_data_product
 docs:uses_dataset
 dp:about_domain_concept
@@ -64,6 +65,8 @@ prov:wasAssociatedWith
 prov:wasAttributedTo
 prov:wasDerivedFrom
 prov:wasGeneratedBy
+rdfs:comment
+rdfs:label
 skos:definition
 skos:example
 skos:scopeNote

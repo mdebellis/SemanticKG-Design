@@ -49,7 +49,6 @@ odrl:Party
 odrl:Permission
 odrl:Policy
 odrl:Privacy
-odrl:Privacy
 odrl:Prohibition
 prov:Activity
 prov:Organization

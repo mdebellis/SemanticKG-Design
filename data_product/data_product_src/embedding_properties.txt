@@ -48,7 +48,6 @@ dp:is_downstream_of
 dp:is_member_of
 dp:is_upstream_of
 dp:lifecycle_stage
-dp:prohibition
 dp:requires_review_by
 dp:uses_data_product
 dp:uses_dataset

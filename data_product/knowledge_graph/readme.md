@@ -20,7 +20,7 @@ This is the **canonical version** of the knowledge graph.
 ---
 ## Embedding Notes and Labels
 
-What are embedding_notes you may be asking. Good question. When using a knowledge graph to store the documents in a RAG Corpus there is a great deal of information in the knowledge graph itself that is not available to the LLM. Even when adding `skos:definition` strings and creating vectors for such strings, this is still not ideal because if class Foo has a skos:definition that says "This class must be used with the Bar class for all Foo Bar tasks" the string may not be clear to the LLM. The user browsing the graph knows that the string is associated with class Foo but the LLM doesn't. Hence, embedding_notes are notes that are generated specifically to communicate the information in the knowledge graph to the LLM. 
+What are `embedding_notes`? you may be asking. Good question. When using a knowledge graph to store the documents in a RAG Corpus there is a great deal of information in the knowledge graph itself that is not available to the LLM. Even when adding `skos:definition` strings and creating vectors for such strings, this is still not ideal because if class Foo has a skos:definition that says "This class must be used with the Bar class for all Foo Bar tasks" the string may not be clear to the LLM. The user browsing the graph knows that the string is associated with class Foo but the LLM doesn't. Hence, embedding_notes are notes that are generated specifically to communicate the information in the knowledge graph to the LLM. 
 
 There are two Python functions: 
 

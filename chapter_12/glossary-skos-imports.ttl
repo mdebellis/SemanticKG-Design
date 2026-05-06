@@ -185,6 +185,16 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
              skos:prefLabel "CAP Theorem"@en .
 
 
+###  https://www.michaeldebellis.com/glossary/CI-CD
+:CI-CD rdf:type owl:NamedIndividual ,
+                skos:Concept ;
+       skos:inScheme :Glossary ;
+       dcterms:created "2026-05-06T20:00:15Z"^^xsd:dateTime ;
+       dcterms:creator "Michael DeBellis" ;
+       rdfs:label "CI/CD"@en ;
+       skos:definition "CI/CD (Continuous Integration / Continuous Delivery or Continuous Deployment) is a set of software engineering practices that automate the building, testing, validation, and deployment of applications and data pipelines. Continuous Integration (CI) focuses on frequently merging changes into a shared codebase and automatically running tests to detect problems early. Continuous Delivery/Deployment (CD) extends this process by automating the release of validated changes into staging or production environments. CI/CD pipelines improve reliability, repeatability, and development speed by reducing manual deployment steps and enabling rapid feedback. In the context of Semantic Knowledge Graphs, CI/CD pipelines often include ontology validation, SHACL checks, SPARQL regression tests, and automated deployment of graph schemas, ingestion workflows, and semantic services." .
+
+
 ###  https://www.michaeldebellis.com/glossary/CQRS
 :CQRS rdf:type owl:NamedIndividual ,
                skos:Concept ;
@@ -416,6 +426,16 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
                   skos:prefLabel "Forward chaining"@en .
 
 
+###  https://www.michaeldebellis.com/glossary/GDPR
+:GDPR rdf:type owl:NamedIndividual ,
+               skos:Concept ;
+      skos:inScheme :Glossary ;
+      dcterms:created "2026-05-06T19:58:56Z"^^xsd:dateTime ;
+      dcterms:creator "Michael DeBellis" ;
+      rdfs:label "GDPR"@en ;
+      skos:definition "GDPR (General Data Protection Regulation) is a European Union regulation governing the collection, processing, storage, and sharing of personal data. It establishes strict requirements for transparency, consent, data minimization, security, and the rights of individuals—including the rights to access, correct, and delete their personal data. GDPR applies not only to organizations within the European Union but also to organizations that process the data of EU residents. In the context of Semantic Knowledge Graphs, GDPR compliance often requires explicit modeling of provenance, consent, data lineage, retention policies, and access controls so that personal data can be governed, audited, and managed consistently across distributed systems and data products."@en .
+
+
 ###  https://www.michaeldebellis.com/glossary/Gist
 :Gist rdf:type owl:NamedIndividual ,
                skos:Concept ;
@@ -451,6 +471,16 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
            rdfs:label "Graphwise"@en ;
            skos:definition "Graphwise is a commercial knowledge-graph and semantic-AI platform that provides tools for building, managing, and operationalizing Semantic Knowledge Graphs and graph-based analytics. Developed by Graphwise, the platform emphasizes enterprise use cases such as data integration, metadata management, and graph-enhanced AI, including retrieval-augmented generation (RAG). Graphwise supports ontology-driven modeling, semantic enrichment, and scalable graph querying, positioning Semantic Knowledge Graphs as a foundation for interoperable data products and intelligent applications."@en ;
            skos:prefLabel "Graphwise"@en .
+
+
+###  https://www.michaeldebellis.com/glossary/HIPAA
+:HIPAA rdf:type owl:NamedIndividual ,
+                skos:Concept ;
+       skos:inScheme :Glossary ;
+       dcterms:created "2026-05-06T19:57:42Z"^^xsd:dateTime ;
+       dcterms:creator "Michael DeBellis" ;
+       rdfs:label "HIPAA"@en ;
+       skos:definition "HIPAA (Health Insurance Portability and Accountability Act) is a United States federal law that establishes standards for protecting sensitive health information and regulating how medical data is stored, accessed, and shared. HIPAA includes privacy, security, and breach-notification requirements for healthcare providers, insurers, and related organizations that handle protected health information (PHI). Compliance typically involves access controls, auditing, encryption, and governance policies. In the context of Semantic Knowledge Graphs, HIPAA requirements often influence ontology design, metadata governance, provenance tracking, and fine-grained access control to ensure that healthcare and patient-related data is managed securely and in accordance with regulatory obligations."@en .
 
 
 ###  https://www.michaeldebellis.com/glossary/HTML_Hypertext_Markup_Language
@@ -1033,6 +1063,7 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
 :Waterfall_Model rdf:type owl:NamedIndividual ,
                           skos:Concept ;
                  skos:inScheme :Glossary ;
+                 skos:related :Agile_Methods ;
                  rdfs:label "Waterfall Model"@en ;
                  skos:definition "The Waterfall Model is a linear, sequential approach to system development in which work progresses through fixed phases—such as requirements, design, implementation, testing, and deployment—each of which must be completed before the next begins. This model emphasizes upfront specification and comprehensive documentation, with limited opportunity to revisit earlier decisions once a phase is complete. While the waterfall model can be effective in stable, well-understood domains, it is often ill-suited to complex or evolving data and semantic systems. In the context of Semantic Knowledge Graphs, the waterfall approach contrasts with iterative methods, as semantic models typically benefit from incremental refinement as domain understanding and data sources evolve."@en ;
                  skos:prefLabel "Waterfall Model"@en .

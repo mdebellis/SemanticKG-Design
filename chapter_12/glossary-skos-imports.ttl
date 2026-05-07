@@ -464,6 +464,15 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
             skos:prefLabel "Governance"@en .
 
 
+###  https://www.michaeldebellis.com/glossary/GraphQL
+:GraphQL rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         dcterms:created "2026-05-07T02:05:44Z"^^xsd:dateTime ;
+         dcterms:creator "Michael DeBellis" ;
+         rdfs:label "GraphQL"@en ;
+         skos:definition "GraphQL is a query language and API specification for requesting and manipulating data through a flexible, strongly typed interface. Originally developed by Meta Platforms, GraphQL allows clients to specify exactly what data they need rather than relying on fixed server-defined responses, reducing over-fetching and under-fetching common in REST-based APIs. GraphQL APIs expose data through a schema that defines available object types, fields, and relationships. Despite its name, GraphQL is not inherently a graph database or semantic technology; it is an API query language that can be implemented over relational databases, property graphs, Semantic Knowledge Graphs, or other data sources. In the context of Semantic Knowledge Graphs, GraphQL is often used as an application-facing access layer that complements SPARQL by providing a developer-friendly interface for consuming semantically integrated data."@en .
+
+
 ###  https://www.michaeldebellis.com/glossary/Graphwise
 :Graphwise rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -773,6 +782,16 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
                                     skos:prefLabel "RDF (Resource Description Framework)"@en .
 
 
+###  https://www.michaeldebellis.com/glossary/REST
+:REST rdf:type owl:NamedIndividual ,
+               skos:Concept ;
+      skos:inScheme :Glossary ;
+      dcterms:created "2026-05-07T02:02:29Z"^^xsd:dateTime ;
+      dcterms:creator "Michael DeBellis" ;
+      rdfs:label "REST"@en ;
+      skos:definition "REST (Representational State Transfer) is an architectural style for designing networked applications and web APIs using standard HTTP operations such as GET, POST, PUT, and DELETE. REST-based systems organize functionality around resources identified by URLs, with clients interacting with those resources through stateless requests. REST emphasizes simplicity, scalability, and loose coupling between clients and servers, making it one of the most widely used approaches for web services and microservice architectures. In the context of Semantic Knowledge Graphs, REST APIs are commonly used to expose semantic services, data products, and graph operations to applications, often complementing standards such as SPARQL or GraphQL with simpler, task-oriented interfaces."@en .
+
+
 ###  https://www.michaeldebellis.com/glossary/Regression_Test
 :Regression_Test rdf:type owl:NamedIndividual ,
                           skos:Concept ;
@@ -1067,6 +1086,15 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
                  rdfs:label "Waterfall Model"@en ;
                  skos:definition "The Waterfall Model is a linear, sequential approach to system development in which work progresses through fixed phases—such as requirements, design, implementation, testing, and deployment—each of which must be completed before the next begins. This model emphasizes upfront specification and comprehensive documentation, with limited opportunity to revisit earlier decisions once a phase is complete. While the waterfall model can be effective in stable, well-understood domains, it is often ill-suited to complex or evolving data and semantic systems. In the context of Semantic Knowledge Graphs, the waterfall approach contrasts with iterative methods, as semantic models typically benefit from incremental refinement as domain understanding and data sources evolve."@en ;
                  skos:prefLabel "Waterfall Model"@en .
+
+
+###  https://www.michaeldebellis.com/glossary/gRPC
+:gRPC rdf:type owl:NamedIndividual ,
+               skos:Concept ;
+      dcterms:created "2026-05-07T02:04:04Z"^^xsd:dateTime ;
+      dcterms:creator "Michael DeBellis" ;
+      rdfs:label "gRPC"@en ;
+      skos:definition "gRPC is a high-performance framework for remote procedure calls (RPC) that enables applications to communicate efficiently across distributed systems. Originally developed by Google, gRPC uses HTTP/2 for transport and Protocol Buffers (protobuf) for compact, strongly typed message serialization. Unlike REST, which is resource-oriented, gRPC is procedure-oriented: clients invoke methods on remote services as if they were local function calls. gRPC supports features such as streaming, bidirectional communication, and efficient binary encoding, making it well suited for microservices and real-time systems. In the context of Semantic Knowledge Graphs, gRPC is often used for high-throughput internal services and data pipelines, complementing more semantically oriented interfaces such as SPARQL and GraphQL."@en .
 
 
 ###  https://www.michaeldebellis.com/glossary/owlNothing

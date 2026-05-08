@@ -722,6 +722,17 @@ skos:topConceptOf rdf:type owl:ObjectProperty .
        skos:prefLabel "Phase"@en .
 
 
+###  https://www.michaeldebellis.com/glossary/Polyseme
+:Polyseme rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:inScheme :Glossary ;
+          skos:related :Data_Mesh ;
+          dcterms:created "2026-05-07T17:42:27Z"^^xsd:dateTime ;
+          dcterms:creator "Michael DeBellis" ;
+          rdfs:label "Polyseme"@en ;
+          skos:definition "In Data Mesh, a polyseme is a business concept that crosses domain boundaries but has domain-specific meanings, attributes, or representations in each bounded context. Examples include terms such as Customer, Account, Artist, or Product: the same word is used across the enterprise, but each domain may define it according to its own responsibilities, lifecycle, identifiers, and business rules. A polyseme should therefore not be forced into a single enterprise-wide definition; instead, its domain-specific meanings should be modeled explicitly and linked through governed mappings where interoperability is needed."@en .
+
+
 ###  https://www.michaeldebellis.com/glossary/Prefix
 :Prefix rdf:type owl:NamedIndividual ,
                  skos:Concept ;

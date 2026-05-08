@@ -97,5 +97,16 @@ WHERE {
 }
 ORDER BY ?predicate ?parent ?child
 
+# Additional queries, not in book for the book glossary knowledge graph
+PREFIX :     <https://www.michaeldebellis.com/glossary/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+SELECT DISTINCT *
+WHERE {?s skos:narrower ?o}
+
+SELECT DISTINCT *
+WHERE {?s skos:broader ?o}
 	   
 	   

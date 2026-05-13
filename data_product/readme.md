@@ -1,6 +1,6 @@
 ## Data Product / Catalog Example
 
-This directory contains ontologies, knowledge graphs, SPARQL, and Python to develop a Data Catalog example based on the concepts of Data Products and Domain Driven Design (DDD). 
+This directory contains ontologies, knowledge graphs, SPARQL, and Python to develop a Data Catalog example based on the concepts of Data Products and Domain Driven Design (DDD). This example is used in both Chapter 11 and Chapter 13. In addition, this is the most sophisticated (and I hope reusable) of all the examples so rather than putting them in a chapter directory, I gave them a directory of their own. 
 
 The example is is based on a made-up video streaming company called StreamForge
 

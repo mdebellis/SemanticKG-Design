@@ -1,5 +1,15 @@
 <h2 id="desc" class="list">[Ontology Name]: Description <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
 
-<span class="markdown">This is a placeholder text for the description of your ontology. The description should include an explanation and a diagram explaining how the classes are related, examples of usage, etc.
+<span class="markdown">
+The People Ontology defines a small set of classes, properties, and individuals for modeling people, organizations, family relationships, employment relationships, and related biographical information. It is designed as a teaching ontology rather than a production ontology, so the model emphasizes clear examples of common OWL modeling patterns.
 
+The class hierarchy includes general classes such as <code>Agent</code>, <code>Person</code>, and <code>Organization</code>. The <code>Agent</code> class provides a common superclass for entities that can act, participate in relationships, or bear responsibility. <code>Person</code> represents individual human beings, while <code>Organization</code> represents institutions such as universities, corporations, and other organized groups.
+
+The ontology includes object properties for modeling family relationships, including <code>has_parent</code>, <code>has_father</code>, <code>has_mother</code>, <code>has_sibling</code>, <code>has_brother</code>, and <code>has_sister</code>. These properties are organized into property hierarchies so that more specific assertions can imply more general relationships. For example, a statement using <code>has_father</code> can also support the more general conclusion that the same person has a parent.
+
+The ontology also includes properties for relationships between people and organizations, such as employment or institutional affiliation. These examples show how an ontology can represent both social relationships among people and organizational relationships involving agents.
+
+The individual examples include historically significant people, especially from science and computing, as well as fictional characters from literature. These individuals provide concrete examples for demonstrating class membership, object property assertions, inverse properties, property hierarchies, and basic OWL reasoning.
+
+This ontology is intentionally modest in scope. It is not intended to be a complete model of biography, genealogy, employment, literature, or organizational structure. Instead, it provides a compact, understandable set of examples that can be used to explain how semantic models are built and how OWL reasoners can derive useful additional knowledge from explicitly asserted facts.
 </span>

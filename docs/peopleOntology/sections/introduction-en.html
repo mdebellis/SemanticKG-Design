@@ -1,3 +1,12 @@
 <h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
 <span class="markdown">
-This is a place holder text for the introduction. The introduction should briefly describe the ontology, its motivation, state of the art and goals.</span>
+The People Ontology is a small sample ontology used throughout the book to illustrate basic Semantic Web and OWL modeling concepts. It is intentionally based on familiar ideas: people, family relationships, organizations, employment, and historically or culturally recognizable individuals. The goal is not to create a complete biographical knowledge graph, but to provide examples that are easy to understand while still demonstrating important modeling techniques.
+
+The ontology includes people from history, science, computing, and literature. Examples include figures such as Albert Einstein, Alan Turing, Grace Hopper, Jennifer Doudna, and Emmanuelle Charpentier, along with fictional characters such as Jay Gatsby, Daisy Buchanan, Sam Spade, and Philip Marlowe. Using well-known individuals makes the examples easier to follow, while also providing enough variety to illustrate relationships among people, organizations, roles, and works of fiction.
+
+A central purpose of the ontology is to demonstrate how OWL property hierarchies work. Family relationships provide intuitive examples. Properties such as <code>has_father</code> and <code>has_mother</code> can be modeled as more specific forms of <code>has_parent</code>. Similarly, properties such as <code>has_sister</code> and <code>has_brother</code> can be modeled as more specific forms of <code>has_sibling</code>. These examples show how a reasoner can infer more general relationships from more specific assertions.
+
+The ontology also illustrates the Agent design pattern, in which both people and organizations can be treated as agents. This provides a simple way to model relationships such as employment, organizational membership, authorship, and responsibility. For example, a person can work for an organization, an organization can employ a person, and both can participate in activities or be associated with documents and other resources.
+
+Because the ontology is designed for teaching and demonstration, it favors clarity over completeness. It includes enough real and fictional data to make examples concrete, but it should not be treated as an authoritative source for biographical or literary facts. Its primary purpose is to support examples of OWL classes, individuals, object properties, inverse properties, property hierarchies, and reasoning in a form that is easy for readers to understand.
+</span>

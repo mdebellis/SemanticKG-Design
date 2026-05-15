@@ -2573,7 +2573,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Spiny_Norman rdf:type owl:NamedIndividual ,
                        :Hedgehog ,
                        :Test_Data ;
-              rdfs:isDefinedBy <https://www.youtube.com/watch?v=C-FDW1shmqA> ;
+              rdfs:isDefinedBy <https://www.youtube.com/watch?v=9515QBnHV-c> ;
               rdfs:label "Spiny Norman" ;
               :wikidata <https://www.wikidata.org/wiki/Q7569306> .
 

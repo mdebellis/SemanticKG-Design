@@ -65,7 +65,6 @@ prov:wasAttributedTo
 prov:wasDerivedFrom
 prov:wasGeneratedBy
 rdfs:comment
-rdfs:label
 skos:definition
 skos:example
 skos:scopeNote

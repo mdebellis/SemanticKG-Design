@@ -217,10 +217,10 @@ def add_embedding_notes_from_properties(
 #
 # Step 2: From your repo directory at the terminal:
 # 2.1: Test mode (safe — prints only). This is the default.
-# python add_embedding_notes_from_properties_consolidated.py streamforge_data_catalog_V1_w_class_embedding_notes.ttl embedding_properties.txt
+# python add_embedding_notes_from_properties.py streamforge_data_catalog_V1_w_class_embedding_notes.ttl embedding_properties.txt
 #
 # 2.2: Insert mode
-# python add_embedding_notes_from_properties_consolidated.py streamforge_data_catalog_V1_w_class_embedding_notes.ttl embedding_properties.txt --insert
+# python add_embedding_notes_from_properties.py streamforge_data_catalog_V1_w_class_embedding_notes.ttl embedding_properties.txt --insert
 #
 # That will write a new ontology file based on the input filename:
 # If the input file is streamforge_data_catalog_V1_w_class_embedding_notes.ttl the output file will be:

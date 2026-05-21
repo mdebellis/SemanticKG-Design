@@ -341,10 +341,10 @@ def add_embedding_notes_from_classes(
 #
 # Step 2: From your repo directory at the terminal:
 # 2.1: Test mode (safe — prints only). This is the default.
-# python add_embedding_notes_from_classes_consolidated.py streamforge_data_catalog_V1.ttl embedding_classes.txt
+# python add_embedding_notes_from_classes.py streamforge_data_catalog_V1.ttl embedding_classes.txt
 #
 # 2.2: Insert mode
-# python add_embedding_notes_from_classes_consolidated.py streamforge_data_catalog_V1.ttl embedding_classes.txt --insert
+# python add_embedding_notes_from_classes.py streamforge_data_catalog_V1.ttl embedding_classes.txt --insert
 #
 # That will write a new ontology file based on the input filename:
 # If the input file is streamforge_data_catalog_V1.ttl the output file will be:

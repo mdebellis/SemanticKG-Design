@@ -21,10 +21,6 @@ ORDER BY DESC(?sitelinks)
 
 # Listing 3-16. SPARQL Query to Find Nobel Prize Winners in Physics
 # Nobel Prize winners in Physics
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX wikibase: <http://wikiba.se/ontology#>
-PREFIX schema: <http://schema.org/>
 SELECT ?winner ?winnerLabel ?birthPlace ?birthPlaceLabel ?wikiPage
 WHERE {
   ?winner wdt:P166 wd:Q38104 ;  # Won the Nobel Prize in Physics

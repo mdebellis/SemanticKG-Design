@@ -44,7 +44,6 @@ WHERE {?item wdt:P31/wdt:P279* wd:Q16917;
 # Listing 3-20. SPARQL Query to Find Connections to Ada Lovelace and Display as Graph
 # Use the graph view to view people and concepts related to Ada Lovelace, the first programmer
 # Note: the last line is not a normal comment, it tells Wikidata what kind of UI to use
-# 
 #defaultView:Graph
 SELECT ?item ?itemLabel ?itemImage ?value ?valueLabel ?valueImage ?edgeLabel WHERE {
   BIND(wd:Q7259 AS ?item)  # Ada Lovelace

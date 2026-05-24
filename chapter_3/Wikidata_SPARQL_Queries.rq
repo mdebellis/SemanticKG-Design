@@ -1,4 +1,10 @@
 # Copy this URL and paste into your browser to go to the Wikidata SPARQL engine: https://query.wikidata.org/
+# Paste the following prefixes and leave them as you paste the various queries
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX schema: <http://schema.org/>
 
 # Listing 3-15. SPARQL Query to Find People in Wikidata Who Were Born in NY City
 #Humans born in New York City

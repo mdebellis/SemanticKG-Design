@@ -23,18 +23,18 @@ WHERE {:Albert_Einstein !rdf:type ?o}
 # These queries show examples of using some of the SPARQL Path Operators such as +
 # List all people that Einstein has a social relationship with
 SELECT *
-WHERE {:Albert_Einstein :has_Social_Relationship ?person}
+WHERE {:Albert_Einstein :has_social_relationship ?person}
 
 #Lists the people that Einstein has a social relation with
 #The * path operator includes people who have a social relation with Einstein's social relations
 SELECT *
-WHERE {:Albert_Einstein :has_Social_Relationship* ?person}
+WHERE {:Albert_Einstein :has_social_relationship* ?person}
 
 #Gives the same set of people, except by not using the path operator we get the properties as well as the nodes
 SELECT *
-WHERE {:Albert_Einstein :has_Social_Relationship ?person.
-       ?person :has_Social_Relationship ?person1.}
+WHERE {:Albert_Einstein :has_social_relationship ?person.
+       ?person :has_social_relationship ?person1.}
 
 #Lists all the people who have a child or a pet
 SELECT *
-WHERE {?person :has_Child|:has_Pet ?living_thing}
+WHERE {?person :has_child|:has_pet ?living_thing}

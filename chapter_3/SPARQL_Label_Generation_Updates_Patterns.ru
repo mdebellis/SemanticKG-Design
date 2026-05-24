@@ -10,7 +10,7 @@ PREFIX :  <https://michaeldebellis.com/pattern_examples/>
 #Create labels for all Classes that don't already have them
 #Make sure to never change owl:Nothing nor owl:Thing 
 CONSTRUCT {?class rdfs:label ?lblname.}
-WHERE {?class rdf:type owl:Class.
+WHERE {?class a owl:Class.
     BIND(STRAFTER(STR(?class), 'pattern_examples/') as ?name)
 	BIND(REPLACE(?name,"_", " " ) as ?lblname)
 	OPTIONAL{?class rdfs:label ?elbl.}

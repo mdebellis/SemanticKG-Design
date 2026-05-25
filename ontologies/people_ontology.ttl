@@ -1030,6 +1030,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  https://michaeldebellis.com/people/Living_Thing
 :Living_Thing rdf:type owl:Class ;
+              owl:disjointWith :Physical_Thing ;
               rdfs:label "Living Thing" .
 
 

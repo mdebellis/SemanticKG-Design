@@ -55,11 +55,13 @@ SELECT ?item ?itemLabel ?itemImage ?value ?valueLabel ?valueImage ?edgeLabel WHE
   OPTIONAL { ?value wdt:P18 ?valueImage. }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". }}
 
-#If you’d like to try this Graph View query with a different person or concept, it’s easy to do. 
-#All you need is the Wikidata identifier (also called a Q-ID) for the entity you’re interested in. Here’s how to find it:
-#1.	Go to Wikidata: https://www.wikidata.org/
-#2.	In the search bar, type the name of the person or concept you want to explore (e.g., Alan Turing, Taylor Swift, quantum computing,…).
-#3.	Click on the correct result. The URL will look something like: https://www.wikidata.org/wiki/Q7251. The Q-number at the end (Q7251) is the identifier you need.
-#4.	Once you have the identifier, go to the Wikidata Query Service with the Ada Lovelace query above, and replace the line: 
-#   BIND(wd:Q7259 AS ?item)  # Ada Lovelace with: BIND(wd:QXXXXXX AS ?item)  # Your new item here
-#5.	Substitute your chosen Q-ID for QXXXXXX, run the query, and view the graph.
+# If you’d like to try this Graph View query with a different person or concept, it’s easy to do. 
+# All you need is the Wikidata identifier (also called a Q-ID) for the entity you’re interested in. Here’s how to find it:
+# 1.	Go to Wikidata: https://www.wikidata.org/
+# 2.	In the search bar, type the name of the person or concept you want to explore (e.g., Alan Turing, Taylor Swift, quantum computing,…).
+# 3.	Click on the correct result. The URL will look something like: https://www.wikidata.org/wiki/Q7251. The Q-number at the end (Q7251) is the identifier you need.
+# 4.	Once you have the identifier, (we'll call it: wd:QXXXXXX) go to the Wikidata Query Service with the Ada Lovelace query above, and replace the line: 
+# BIND(wd:Q7259 AS ?item)  # Ada Lovelace 
+# with: 
+# BIND(wd:QXXXXXX AS ?item)  # Your new item here
+# 5. Run the revised query, and view the graph.

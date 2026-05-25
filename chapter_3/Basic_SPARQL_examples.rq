@@ -24,25 +24,21 @@ WHERE {?object_property rdf:type owl:ObjectProperty;
 
 # Listing 3-10. SPARQL Query to Retrieve People Who Have Age Values Defined
 SELECT ?person_label ?age
-WHERE {?person :has_age ?age.} ORDER BY ?age
+WHERE {?person rdf:type :Person;
+               rdfs:label ?person_label;
+		   :has_age ?age.} ORDER BY ?age
 	
 # Listing 3-11. SPARQL Query to Retrieve All People With Ages When Available 	
 SELECT ?person_label ?age
 WHERE {?person rdf:type :Person;
                rdfs:label ?person_label.
-	OPTIONAL {?person :has_age ?age}} ORDER BY ?person_label
+OPTIONAL {?person :has_age ?age}} ORDER BY ?person_label
 	
 # Listing 3-12. SPARQL Query to Retrieve People With Known Birthdays (exclude people with no birthdate)
 SELECT *
 WHERE {?person :birth_Date ?birth_day} ORDER BY ?birth_day
 
-# Listing 3-13. SPARQL Query to Retrieve All People And Birthdays and Age When Known	
-SELECT ?person_label ?birth_day
-WHERE {?person rdf:type :Person;
-               rdfs:label ?person_label.
-OPTIONAL {?person :birth_Date ?birth_day}} ORDER BY ?person_label
-
-# List all the instances of Person. Include their age and birth day if available. 
+# Listing 3-13. List all the instances of Person. Include their age and birth day if available. 
 SELECT ?person_label ?age ?birth_day
 WHERE {?person rdf:type :Person;
                rdfs:label ?person_label.

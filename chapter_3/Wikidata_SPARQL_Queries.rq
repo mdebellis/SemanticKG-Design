@@ -1,4 +1,10 @@
 # Copy this URL and paste into your browser to go to the Wikidata SPARQL engine: https://query.wikidata.org/
+# Paste the following prefixes and leave them as you paste the various queries
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX schema: <http://schema.org/>
 
 # Listing 3-15. SPARQL Query to Find People in Wikidata Who Were Born in NY City
 #Humans born in New York City
@@ -6,8 +12,7 @@ SELECT DISTINCT ?item ?itemLabel ?itemDescription ?sitelinks
 WHERE {?item wdt:P31 wd:Q5;            # Any instance of a human
              wdt:P19/wdt:P131* wd:Q60; # Who was born in any value (eg. a hospital)
 # that has the property of 'administrative area of' New York City or New York City itself.
-
-# Note that using wdt:P19 wd:Q60;  # Who was born in New York City.
+# Note that using wdt:P19 wd:Q60; Who was born in New York City
 # Doesn't include humans with the birth place listed as a hospital
 # or an administrative area or other location of New York City.
           wikibase:sitelinks ?sitelinks.
@@ -16,10 +21,6 @@ ORDER BY DESC(?sitelinks)
 
 # Listing 3-16. SPARQL Query to Find Nobel Prize Winners in Physics
 # Nobel Prize winners in Physics
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX wikibase: <http://wikiba.se/ontology#>
-PREFIX schema: <http://schema.org/>
 SELECT ?winner ?winnerLabel ?birthPlace ?birthPlaceLabel ?wikiPage
 WHERE {
   ?winner wdt:P166 wd:Q38104 ;  # Won the Nobel Prize in Physics
@@ -32,16 +33,17 @@ ORDER BY ?winnerLabel
 LIMIT 50
 
 # Listing 3-19. SPARQL Query that Finds All Hospitals in the World and Display on World Map
-#Map of hospitals across the world using the Map View
-#Note: the next line is not a normal comment, it tells Wikidata what kind of UI to use
+# Map of hospitals across the world using the Map View
+# Note: the next line is not a normal comment, it tells Wikidata what kind of UI to use
+# Normally you don't need to include comments but make sure to include the one below to see the results in a map
 #defaultView:Map
 SELECT DISTINCT * 
 WHERE {?item wdt:P31/wdt:P279* wd:Q16917;
         wdt:P625 ?geo .}
 
 # Listing 3-20. SPARQL Query to Find Connections to Ada Lovelace and Display as Graph
-#Use the graph view to view people and concepts related to Ada Lovelace, the first programmer
-#Note: the next line is not a normal comment, it tells Wikidata what kind of UI to use
+# Use the graph view to view people and concepts related to Ada Lovelace, the first programmer
+# Note: the last line is not a normal comment, it tells Wikidata what kind of UI to use
 #defaultView:Graph
 SELECT ?item ?itemLabel ?itemImage ?value ?valueLabel ?valueImage ?edgeLabel WHERE {
   BIND(wd:Q7259 AS ?item)  # Ada Lovelace

@@ -294,8 +294,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :has_higher_seniority_than rdf:type owl:ObjectProperty ;
                            owl:inverseOf :has_lower_seniority_than ;
                            rdf:type owl:TransitiveProperty ;
-                           rdfs:domain :Role ;
-                           rdfs:range :Role ;
+                           rdfs:domain :Technical_Role ;
+                           rdfs:range :Technical_Role ;
                            dct:contributor "Michael DeBellis" ;
                            dct:created "2025-10-01T18:30:32Z"^^xsd:dateTime ;
                            rdfs:label "has higher seniority than" .
@@ -363,13 +363,13 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
          rdfs:label "has pet" .
 
 
-###  https://michaeldebellis.com/people/has_role
-:has_role rdf:type owl:ObjectProperty ;
-          rdfs:domain :Employee ;
-          rdfs:range :Role ;
-          dct:contributor "Michael DeBellis" ;
-          dct:created "2025-10-01T18:13:23Z"^^xsd:dateTime ;
-          rdfs:label "has role" .
+###  https://michaeldebellis.com/people/has_profession_role
+:has_profession_role rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Person ;
+                     rdfs:range :Profession_Role ;
+                     dct:created "2026-05-26T15:40:59Z"^^xsd:dateTime ;
+                     dct:creator "Michael DeBellis" ;
+                     rdfs:label "has profession role" .
 
 
 ###  https://michaeldebellis.com/people/has_sibling
@@ -436,6 +436,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                 rdfs:domain :Organization ;
                 rdfs:range :Orgonization_Component ;
                 rdfs:label "has subsidiary" .
+
+
+###  https://michaeldebellis.com/people/has_techical_role
+:has_techical_role rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Employee ;
+                   rdfs:range :Technical_Role ;
+                   dct:contributor "Michael DeBellis" ;
+                   dct:created "2025-10-01T18:13:23Z"^^xsd:dateTime ;
+                   rdfs:label "has technical role" .
 
 
 ###  https://michaeldebellis.com/people/has_uncle
@@ -612,6 +621,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
        rdfs:domain :Agent ;
        rdfs:range rdfs:Literal ;
        rdfs:label "phone" .
+
+
+###  https://michaeldebellis.com/people/profession_string
+:profession_string rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Person ;
+                   rdfs:range xsd:string ;
+                   dct:created "2026-05-26T15:54:10Z"^^xsd:dateTime ;
+                   dct:creator "Michael DeBellis" ;
+                   rdfs:label "profession string" .
 
 
 ###  https://michaeldebellis.com/people/start_date
@@ -1170,6 +1188,22 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
          rdfs:label "Product" .
 
 
+###  https://michaeldebellis.com/people/Profession_Role
+:Profession_Role rdf:type owl:Class ;
+                 owl:equivalentClass [ rdf:type owl:Class ;
+                                       owl:oneOf ( :Author
+                                                   :Biologist
+                                                   :Computer_Scientist
+                                                   :Detective
+                                                   :Physicist
+                                                 )
+                                     ] ;
+                 rdfs:subClassOf :Role ;
+                 dct:created "2026-05-26T15:35:08Z"^^xsd:dateTime ;
+                 dct:creator "Michael DeBellis" ;
+                 rdfs:label "Profession Role" .
+
+
 ###  https://michaeldebellis.com/people/Province
 :Province rdf:type owl:Class ;
           rdfs:subClassOf :Place ;
@@ -1204,16 +1238,8 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  https://michaeldebellis.com/people/Role
 :Role rdf:type owl:Class ;
-      owl:equivalentClass [ rdf:type owl:Class ;
-                            owl:oneOf ( :Director
-                                        :Manager
-                                        :Scientist
-                                        :Senior_Staff
-                                        :Staff
-                                      )
-                          ] ;
-      dct:contributor "Michael DeBellis" ;
-      dct:created "2025-10-01T18:13:51Z"^^xsd:dateTime ;
+      dct:created "2026-05-26T15:33:51Z"^^xsd:dateTime ;
+      dct:creator "Michael DeBellis" ;
       rdfs:label "Role" .
 
 
@@ -1253,6 +1279,22 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :State rdf:type owl:Class ;
        rdfs:subClassOf :Place ;
        rdfs:label "State" .
+
+
+###  https://michaeldebellis.com/people/Technical_Role
+:Technical_Role rdf:type owl:Class ;
+                owl:equivalentClass [ rdf:type owl:Class ;
+                                      owl:oneOf ( :Director
+                                                  :Manager
+                                                  :Scientist
+                                                  :Senior_Staff
+                                                  :Staff
+                                                )
+                                    ] ;
+                rdfs:subClassOf :Role ;
+                dct:contributor "Michael DeBellis" ;
+                dct:created "2025-10-01T18:13:51Z"^^xsd:dateTime ;
+                rdfs:label "Technical Role" .
 
 
 ###  https://michaeldebellis.com/people/Test_Data
@@ -1398,6 +1440,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  https://michaeldebellis.com/people/Alan_Turing
 :Alan_Turing rdf:type owl:NamedIndividual ,
                       :Man ,
+                      :Person ,
                       :Test_Data ;
              :born_in :London ;
              :has_colleague :John_von_Neumann ;
@@ -1486,6 +1529,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
            rdfs:label "Australia" .
 
 
+###  https://michaeldebellis.com/people/Author
+:Author rdf:type owl:NamedIndividual ,
+                 :Profession_Role ;
+        dct:created "2026-05-26T15:38:21Z"^^xsd:dateTime ;
+        dct:creator "Michael DeBellis" ;
+        rdfs:label "Author" .
+
+
 ###  https://michaeldebellis.com/people/Aviva_Chomsky
 :Aviva_Chomsky rdf:type owl:NamedIndividual ,
                         :Test_Data ,
@@ -1531,6 +1582,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
       dct:contributor "Michael DeBellis" ;
       dct:created "2026-02-06T22:36:45Z"^^xsd:dateTime ;
       rdfs:label "Bern"@en .
+
+
+###  https://michaeldebellis.com/people/Biologist
+:Biologist rdf:type owl:NamedIndividual ,
+                    :Profession_Role ;
+           dct:created "2026-05-26T15:38:49Z"^^xsd:dateTime ;
+           dct:creator "Michael DeBellis" ;
+           rdfs:label "Biologist" .
 
 
 ###  https://michaeldebellis.com/people/Brazil
@@ -1620,6 +1679,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Celeste_Albaret rdf:type owl:NamedIndividual ,
                           :Person ,
                           :Test_Data ;
+                 :has_gender :Female ;
                  :has_social_relationship :Marcel_Proust ;
                  rdfs:label "Céleste Albaret" .
 
@@ -1650,6 +1710,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                 :start_date "1941-01-01T00:00:00"^^xsd:dateTime ;
                 rdfs:isDefinedBy <https://en.wikipedia.org/wiki/Claude_Shannon> ;
                 rdfs:label "Claude Shannon" .
+
+
+###  https://michaeldebellis.com/people/Computer_Scientist
+:Computer_Scientist rdf:type owl:NamedIndividual ,
+                             :Profession_Role ;
+                    dct:created "2026-05-26T15:38:13Z"^^xsd:dateTime ;
+                    dct:creator "Michael DeBellis" ;
+                    rdfs:label "Computer Scientist" .
 
 
 ###  https://michaeldebellis.com/people/Confucius
@@ -1688,6 +1756,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
      rdfs:label "Day" .
 
 
+###  https://michaeldebellis.com/people/Detective
+:Detective rdf:type owl:NamedIndividual ,
+                    :Profession_Role ;
+           dct:created "2026-05-26T15:38:37Z"^^xsd:dateTime ;
+           dct:creator "Michael DeBellis" ;
+           rdfs:label "Detective" .
+
+
 ###  https://michaeldebellis.com/people/Dinsdale_Piranha
 :Dinsdale_Piranha rdf:type owl:NamedIndividual ,
                            :Man ,
@@ -1699,7 +1775,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  https://michaeldebellis.com/people/Director
 :Director rdf:type owl:NamedIndividual ,
-                   :Role ;
+                   :Technical_Role ;
           :has_higher_seniority_than :Scientist ;
           dct:contributor "Michael DeBellis" ;
           dct:created "2025-10-01T18:15:09Z"^^xsd:dateTime ;
@@ -2127,7 +2203,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  https://michaeldebellis.com/people/Manager
 :Manager rdf:type owl:NamedIndividual ,
-                  :Role ;
+                  :Technical_Role ;
          :has_higher_seniority_than :Senior_Staff ;
          dct:contributor "Michael DeBellis" ;
          dct:created "2025-10-01T18:14:47Z"^^xsd:dateTime ;
@@ -2377,6 +2453,16 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                rdfs:label "North America" .
 
 
+###  https://michaeldebellis.com/people/Odilon_Albaret
+:Odilon_Albaret rdf:type owl:NamedIndividual ,
+                         :Person ,
+                         :Test_Data ;
+                :has_gender :Male ;
+                dct:created "2026-05-26T15:21:49Z"^^xsd:dateTime ;
+                dct:creator "Michael DeBellis" ;
+                rdfs:label "Odilon Albaret" .
+
+
 ###  https://michaeldebellis.com/people/One_Mile
 :One_Mile rdf:type owl:NamedIndividual ,
                    :Distance_Measurement ;
@@ -2452,6 +2538,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                 rdfs:label "Philip Marlowe" .
 
 
+###  https://michaeldebellis.com/people/Physicist
+:Physicist rdf:type owl:NamedIndividual ,
+                    :Profession_Role ;
+           dct:created "2026-05-26T15:39:05Z"^^xsd:dateTime ;
+           dct:creator "Michael DeBellis" ;
+           rdfs:label "Physicist" .
+
+
 ###  https://michaeldebellis.com/people/Princeton
 :Princeton rdf:type owl:NamedIndividual ,
                     :City ,
@@ -2506,6 +2600,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                     :Test_Data ;
            :has_address :Address_Of_Spade_Detective_Agency ;
            :has_employer :Sam_Spade ;
+           :has_profession_role :Detective ;
            :phone "(415) 555-1212" ;
            rdfs:isDefinedBy <https://en.wikipedia.org/wiki/The_Maltese_Falcon_(novel)> ;
            rdfs:label "Sam Spade" .
@@ -2527,7 +2622,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  https://michaeldebellis.com/people/Scientist
 :Scientist rdf:type owl:NamedIndividual ,
-                    :Role ;
+                    :Technical_Role ;
            :has_higher_seniority_than :Manager ;
            dct:contributor "Michael DeBellis" ;
            dct:created "2025-10-01T18:14:59Z"^^xsd:dateTime ;
@@ -2545,7 +2640,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  https://michaeldebellis.com/people/Senior_Staff
 :Senior_Staff rdf:type owl:NamedIndividual ,
-                       :Role ;
+                       :Technical_Role ;
               :has_higher_seniority_than :Staff ;
               dct:contributor "Michael DeBellis" ;
               dct:created "2025-10-01T18:14:41Z"^^xsd:dateTime ;
@@ -2588,7 +2683,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 
 ###  https://michaeldebellis.com/people/Staff
 :Staff rdf:type owl:NamedIndividual ,
-                :Role ;
+                :Technical_Role ;
        dct:contributor "Michael DeBellis" ;
        dct:created "2025-10-01T18:14:31Z"^^xsd:dateTime ;
        rdfs:label "Staff" .
@@ -2720,6 +2815,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 ###  https://michaeldebellis.com/people/Ulm
 :Ulm rdf:type owl:NamedIndividual ,
               :City ;
+     :has_profession_role :Physicist ;
      dct:contributor "Michael DeBellis" ;
      dct:created "2026-02-06T22:25:05Z"^^xsd:dateTime ;
      rdfs:label "Ulm"@en .

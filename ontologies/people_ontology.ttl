@@ -1943,6 +1943,15 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
             rdfs:label "Henry C. Gatz" .
 
 
+###  https://michaeldebellis.com/people/Hermann_Einstein
+:Hermann_Einstein rdf:type owl:NamedIndividual ,
+                           :Man ;
+                  :has_son :Albert_Einstein ;
+                  dct:created "2026-05-26T23:35:38Z"^^xsd:dateTime ;
+                  dct:creator "Michael DeBellis" ;
+                  rdfs:label "Hermann Einstein" .
+
+
 ###  https://michaeldebellis.com/people/Hour
 :Hour rdf:type owl:NamedIndividual ,
                :Test_Data ,

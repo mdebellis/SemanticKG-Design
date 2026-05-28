@@ -25,7 +25,7 @@ WHERE {:Consulting_Firm skos:narrower ?concept .}
 INSERT {?client rdf:type :Client.}
 WHERE {:Client skos:narrower ?client.}
 
-# # Listing 12-3. SPARQL to transform the appropriate narrower links to rdf:type
+# Listing 12-3. SPARQL to transform the appropriate narrower links to rdf:type
 # The children (skos:narrower) of Industry are instances.
 INSERT {?industry rdf:type :Industry.}
 WHERE {:Industry skos:narrower ?industry.}

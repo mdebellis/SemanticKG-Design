@@ -301,6 +301,7 @@ skos:topConceptOf rdf:type owl:ObjectProperty ;
 
 ###  https://michaeldebellis.com/consulting_taxonomy/has_client
 :has_client rdf:type owl:ObjectProperty ;
+            rdfs:domain :Consulting_Firm ;
             rdfs:range :Client ;
             dcterms:contributor "Michael DeBellis" ;
             dcterms:created "2026-01-31T02:38:35Z"^^xsd:dateTime ;
@@ -309,6 +310,8 @@ skos:topConceptOf rdf:type owl:ObjectProperty ;
 
 ###  https://michaeldebellis.com/consulting_taxonomy/has_industry
 :has_industry rdf:type owl:ObjectProperty ;
+              rdfs:domain :Client ;
+              rdfs:range :Industry ;
               dcterms:contributor "Michael DeBellis" ;
               dcterms:created "2026-01-31T02:45:00Z"^^xsd:dateTime ;
               rdfs:label "has industry"@en .
@@ -357,6 +360,15 @@ skos:topConceptOf rdf:type owl:ObjectProperty ;
                  dcterms:contributor "Michael DeBellis" ;
                  dcterms:created "2026-01-31T02:39:33Z"^^xsd:dateTime ;
                  rdfs:label "runs engagement"@en .
+
+
+###  https://michaeldebellis.com/consulting_taxonomy/serves_industry
+:serves_industry rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Consulting_Firm ;
+                 rdfs:range :Industry ;
+                 dcterms:created "2026-05-29T00:13:30Z"^^xsd:dateTime ;
+                 dcterms:creator "Michael DeBellis" ;
+                 rdfs:label "serves industry"@en .
 
 
 ###  https://w3id.org/sulo/hasDirectPart
@@ -437,12 +449,20 @@ skos:OrderedCollection rdf:type owl:Class ;
 ###  https://michaeldebellis.com/consulting_taxonomy/Consulting_Firm
 :Consulting_Firm rdf:type owl:Class ;
                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty :has_client ;
+                                   owl:someValuesFrom :Client
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
                                    owl:onProperty :offers_service ;
-                                   owl:someValuesFrom :Offering
+                                   owl:someValuesFrom :Service_Line
                                  ] ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty :runs_engagement ;
                                    owl:someValuesFrom :Engagement
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :serves_industry ;
+                                   owl:someValuesFrom :Industry
                                  ] .
 
 
@@ -646,6 +666,21 @@ skos:OrderedCollection rdf:type owl:Class ;
 :Acme_KYC_Modernization_Requirements_Model rdf:type owl:NamedIndividual ,
                                                     skos:Concept ;
                                            rdfs:label "Acme KYC Modernization Requirements Model"@en .
+
+
+###  https://michaeldebellis.com/consulting_taxonomy/Brachman_Consulting
+:Brachman_Consulting rdf:type owl:NamedIndividual ,
+                              :Consulting_Firm ;
+                     :has_client :Acme_Bank ,
+                                 :Northwind_Health ;
+                     :runs_engagement :Acme_KYC_Modernization ,
+                                      :Northwind_Claims_RAG ;
+                     :serves_industry :Financial_Services ,
+                                      :Healthcare ,
+                                      :Retail ;
+                     dcterms:contributor "Michael DeBellis" ;
+                     dcterms:created "2026-01-31T02:42:48Z"^^xsd:dateTime ;
+                     rdfs:label "Brachman Consulting"@en .
 
 
 ###  https://michaeldebellis.com/consulting_taxonomy/Client
@@ -1023,15 +1058,6 @@ skos:OrderedCollection rdf:type owl:Class ;
                     :Ontology_Team ,
                     :Security_Team ;
       skos:topConceptOf :Consulting_Firm_Taxonomy .
-
-
-###  https://michaeldebellis.com/consulting_taxonomy/Turing_Chomsy_Consulting
-:Turing_Chomsy_Consulting rdf:type owl:NamedIndividual ,
-                                   :Consulting_Firm ;
-                          :runs_engagement :Acme_KYC_Modernization ,
-                                           :Northwind_Claims_RAG ;
-                          dcterms:contributor "Michael DeBellis" ;
-                          dcterms:created "2026-01-31T02:42:48Z"^^xsd:dateTime .
 
 
 ###  https://michaeldebellis.com/consulting_taxonomy/Validation_Rules

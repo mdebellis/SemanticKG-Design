@@ -5974,15 +5974,18 @@ sf:StreamForge_Catalog rdf:type owl:NamedIndividual ,
                        <http://www.w3.org/ns/dcat#dataset> dp:SF_Recs_Features_Dataset ,
                                                            sf:SF_Creator_Insights_Dataset ,
                                                            sf:SF_Engagement_Events_Dataset ,
-                                                           sf:SF_Video_Metadata_Dataset ;
+                                                           sf:SF_Video_Metadata_Dataset ,
+                                                           sf:sf_engagement_events ;
                        <http://www.w3.org/ns/dcat#record> sf:CatalogRecord_001 ;
                        <http://www.w3.org/ns/dcat#resource> sf:SF_Engagement_API_Service ,
                                                             sf:SF_Engagement_Events_Dataset ;
-                       <http://www.w3.org/ns/dcat#service> sf:SF_Engagement_API_Service ;
+                       <http://www.w3.org/ns/dcat#service> sf:SF_Engagement_API_Service ,
+                                                           sf:sf_query_service ;
                        dp:has_platform_port sf:Discover_Data_Products ;
                        dcterms:description "A small demo catalog containing a few StreamForge datasets and services that are produced by Data Products."@en ;
                        dcterms:publisher dp:StreamForge_Organization ;
-                       rdfs:label "StreamForge Catalog"@en .
+                       rdfs:label "StreamForge Catalog"@en ;
+                       skos:editorialNote "This annotation set was added locally to ensure DCAT terms have consistent SKOS documentation in this knowledge graph."@en .
 
 
 ###  https://www.michaeldebellis.com/streamforge/StreamForge_Catalog_Assistant
@@ -6363,15 +6366,6 @@ sf:dist_parquet rdf:type owl:NamedIndividual ,
                 rdfs:label "dist parquet"@en ;
                 skos:editorialNote "Local annotation bundle added for consistency in this knowledge graph."@en ;
                 <http://www.w3.org/ns/dcat#downloadURL> <https://example.com/downloads/sf_engagement_events.parquet> .
-
-
-###  https://www.michaeldebellis.com/streamforge/enterprise_catalog
-sf:enterprise_catalog rdf:type owl:NamedIndividual ,
-                               <http://www.w3.org/ns/dcat#Catalog> ;
-                      <http://www.w3.org/ns/dcat#dataset> sf:sf_engagement_events ;
-                      <http://www.w3.org/ns/dcat#service> sf:sf_query_service ;
-                      rdfs:label "Enterprise data catalog"@en ;
-                      skos:editorialNote "This annotation set was added locally to ensure DCAT terms have consistent SKOS documentation in this knowledge graph."@en .
 
 
 ###  https://www.michaeldebellis.com/streamforge/inputDataset_v3

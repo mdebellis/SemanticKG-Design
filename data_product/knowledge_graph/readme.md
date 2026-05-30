@@ -16,6 +16,7 @@ This is the **canonical version** of the knowledge graph.
 ### `streamforge_data_catalog_V1_w_embedding-notes.ttl`
 
 - ✔ Identical to `streamforge_data_catalog_V1.ttl` except
+- ✔ Does include materialized inferences
 - ✔ Does include embedding_notes
 ---
 ## Embedding Notes and Labels

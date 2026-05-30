@@ -2486,6 +2486,7 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
                  :Person ,
                  :Test_Data ;
         :has_gender :Female ;
+        :has_pet :Whiskers ;
         :has_age 14 ;
         rdfs:label "Oriana" .
 
@@ -2877,7 +2878,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty ;
 :Whiskers rdf:type owl:NamedIndividual ,
                    :Cat ,
                    :Test_Data ;
-          :is_pet_of :Oriana ;
           rdfs:label "Whiskers" .
 
 

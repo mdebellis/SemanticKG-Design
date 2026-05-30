@@ -6,7 +6,7 @@ PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
 # Purpose: Operational access paths (APIs, feature services)
 SELECT ?product_label ?dataset_label ?dist_label ?accessURL
 WHERE {
-  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+ {
     ?product a dp:Data_Product ;
              rdfs:label ?product_label ;
              dp:produces_dataset ?dataset .

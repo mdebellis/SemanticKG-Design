@@ -5,7 +5,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 # Purpose: Data Product lineage and dependency analysis
 SELECT ?product_label ?version ?version_label ?version_id ?prev_label
 WHERE {
-  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+ {
     ?product a dp:Data_Product ;
              rdfs:label ?product_label ;
              dp:has_version ?version .

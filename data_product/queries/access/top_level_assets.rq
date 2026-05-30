@@ -1,0 +1,8 @@
+PREFIX dp:      <https://www.michaeldebellis.com/dp/>
+PREFIX dcat:    <http://www.w3.org/ns/dcat#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sf:      <https://www.michaeldebellis.com/streamforge/>
+
+# Q3 — Get Top Level Data Catalog Resources
+SELECT DISTINCT *
+WHERE  {sf:StreamForge_Catalog ?p ?catalog_asset.}

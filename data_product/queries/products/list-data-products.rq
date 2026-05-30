@@ -6,7 +6,7 @@ PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
 # Purpose: Inventory view: owner, product type, bounded context
 SELECT ?product_label ?service_label ?endpointURL
 WHERE {
-  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+{
     ?product a dp:Data_Product ;
              rdfs:label ?product_label ;
              dp:exposes_service ?svc .

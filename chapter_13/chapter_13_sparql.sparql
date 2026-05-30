@@ -1,0 +1,15 @@
+# Listing 13-1. Product discovery within bounded contexts
+PREFIX dp: <https://www.michaeldebellis.com/dp/>
+CONSTRUCT {
+  # Derived edge for visualization and discovery
+  ?bc dp:has_data_product ?dp .
+  # Core product structure
+  ?dp   dp:has_port ?port .
+  ?port dp:has_interface ?iface .
+  ?iface dp:has_access_type ?accessType .}
+WHERE {
+  ?dp a dp:Data_Product ;
+      dp:has_bounded_context ?bc ;
+      dp:has_port ?port .
+  ?port dp:has_interface ?iface .
+  ?iface dp:has_access_type ?accessType .}

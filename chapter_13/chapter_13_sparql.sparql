@@ -13,3 +13,23 @@ WHERE {
       dp:has_port ?port .
   ?port dp:has_interface ?iface .
   ?iface dp:has_access_type ?accessType .}
+
+# Listing 13-2. Architectural intent between bounded contexts
+PREFIX dp: <https://www.michaeldebellis.com/dp/>
+SELECT DISTINCT *
+WHERE {?bcs dp:is_source_context_for ?sc.
+        ?sc dp:has_relationship_type ?rt;
+         dp:has_target_context ?bct.}
+		 
+# Listing 13-3. Intent is operationalized through products, ports, and interfaces
+PREFIX dp:   <https://www.michaeldebellis.com/dp/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+# Context-map relationship as first-class object
+SELECT DISTINCT *
+WHERE {?dp dp:has_port ?p;
+           dp:in_bounded_context ?bc.
+		?bc dp:is_source_context_for ?sc.
+		?sc dp:has_target_context ?bc.
+       ?ca dp:uses_technology ?t.
+OPTIONAL {?dp dp:has_implementation ?i}}
+

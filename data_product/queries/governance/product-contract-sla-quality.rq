@@ -9,7 +9,7 @@ SELECT ?product_label
        ?sla_label ?sla_desc
        ?qm_label ?qm_desc
 WHERE {
-  GRAPH <https://www.michaeldebellis.com/graphs/streamforge/ABox> {
+   {
     ?product a dp:Data_Product ;
              rdfs:label ?product_label .
 

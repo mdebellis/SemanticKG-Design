@@ -18,6 +18,7 @@ This is the **canonical version** of the knowledge graph.
 - ✔ Identical to `streamforge_data_catalog_V1.ttl` except
 - ✔ Does include materialized inferences
 - ✔ Does include embedding_notes
+- ❌ Designed for use in **AllegroGraph** or other graph databases but not  **Protégé**. It will load in **Protégé** but the materialized triples make the **Protégé** UI very cluttered. 
 ---
 ## Embedding Notes and Labels
 

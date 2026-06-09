@@ -660,6 +660,7 @@ skos:relatedMatch rdf:type owl:ObjectProperty ;
 skos:semanticRelation rdf:type owl:ObjectProperty ;
                       rdfs:domain skos:Concept ;
                       rdfs:range skos:Concept ;
+                      rdfs:comment "This and all of its sub-properties are from the Simple Knowledge Organization System (SKOS)"@en ;
                       rdfs:label "is in semantic relation with"@en ;
                       skos:definition "Relates a concept to another concept that is semantically related to it."@en .
 
@@ -4575,11 +4576,10 @@ sf:Add_Availability_Status_To_Playback_Video_Change rdf:type owl:NamedIndividual
                                                     <http://www.w3.org/ns/prov#wasAssociatedWith> sf:Playback_And_Engagement_Team ;
                                                     dp:affects_port_implementation sf:Playback_Event_Port_Implementation ;
                                                     dp:changes_domain_concept sf:Playback_Video_Concept ;
-                                                    dp:changes_realization sf:Get_video_playback_events_Kafka_implementation ;
                                                     dp:in_bounded_context sf:Playback_and_Engagement_Bounded_Context ;
                                                     dp:may_affect_data_product sf:Recommendation_Features_Data_Product ;
                                                     dp:may_affect_domain_concept sf:Recommendation_Video_Concept ;
-                                                    dp:propagates_via_context_map_relationship sf:Playback_And_Engagement_To_Content_Discovery_Context_Map_Relationship ;
+                                                    dp:propagates_via_context_map_relationship sf:Playback_Engagement_To_Content_Discovery_Upstream-Downstream ;
                                                     rdfs:label "Add availability status to Playback Video concept"@en ;
                                                     skos:definition "A domain concept change activity that adds availability status to the Playback Video concept so playback services and downstream data products can distinguish videos that are playable, blocked, expired, or restricted by region."@en .
 
@@ -5336,11 +5336,8 @@ sf:Playable rdf:type owl:NamedIndividual ,
 
 
 ###  https://www.michaeldebellis.com/streamforge/Playback_And_Engagement_Team
-sf:Playback_And_Engagement_Team rdf:type owl:NamedIndividual .
-
-
-###  https://www.michaeldebellis.com/streamforge/Playback_And_Engagement_To_Content_Discovery_Context_Map_Relationship
-sf:Playback_And_Engagement_To_Content_Discovery_Context_Map_Relationship rdf:type owl:NamedIndividual .
+sf:Playback_And_Engagement_Team rdf:type owl:NamedIndividual ;
+                                rdfs:label "Playback and Engagement Team"@en .
 
 
 ###  https://www.michaeldebellis.com/streamforge/Playback_And_Engagement_to_Ingestion_And_Metadata
@@ -5364,7 +5361,9 @@ sf:Playback_Engagement_To_Content_Discovery_Upstream-Downstream rdf:type owl:Nam
 
 
 ###  https://www.michaeldebellis.com/streamforge/Playback_Event_Port_Implementation
-sf:Playback_Event_Port_Implementation rdf:type owl:NamedIndividual .
+sf:Playback_Event_Port_Implementation rdf:type owl:NamedIndividual ;
+                                      dp:is_implementation_for sf:Play_Video_For_User_API ;
+                                      rdfs:label "Playback Event Port Implementation"@en .
 
 
 ###  https://www.michaeldebellis.com/streamforge/Playback_Governance_Sidecar

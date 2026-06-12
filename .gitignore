@@ -5,3 +5,6 @@ ontologies/NASA_thesaurus-OWL.xml
 /archive
 __pycache__/
 *.pyc
+.venv/
+venv/
+env/

@@ -8,7 +8,7 @@ import os
 # However functions to create objects and set values assume all new objects go in
 # the main ontology so only need to pass them the last part of the IRI and they complete the
 # iri in the function using make_ontology_iri
-conn = ag_connect('climate_obstruction', host=os.getenv("AGRAPH_HOST", "localhost"), port=int(os.getenv("AGRAPH_PORT", "10035")),
+conn = ag_connect(repo='streamforge_data_catalog', host=os.getenv("AGRAPH_HOST", "localhost"), port=int(os.getenv("AGRAPH_PORT", "10035")),
                   user=os.getenv("AGRAPH_USER"), password=os.getenv("AGRAPH_PASSWORD"))
 owl_named_individual = conn.createURI("http://www.w3.org/2002/07/owl#NamedIndividual")
 owl_datatype_property = conn.createURI("http://www.w3.org/2002/07/owl#DatatypeProperty")
@@ -18,14 +18,14 @@ owl_class = conn.createURI("http://www.w3.org/2002/07/owl#Class")
 rdfs_label_property = conn.createURI("http://www.w3.org/2000/01/rdf-schema#label")
 rdfs_is_defined_by_property = conn.createURI("http://www.w3.org/2000/01/rdf-schema#isDefinedBy")
 skos_pref_label_property = conn.createURI("http://www.w3.org/2004/02/skos/core#prefLabel")
-ontology_string = "https://www.michaeldebellis.com/climate_obstruction/"
+ontology_string = "https://www.michaeldebellis.com/streamforge_data_catalog/"
 gist_string = "https://w3id.org/semanticarts/ns/ontology/gist/"
 
 # Function to check in case any http rather than https sneak into ontologies
 def find_http_iris(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         for i, line in enumerate(f, 1):
-            if 'http://www.michaeldebellis.com/climate_obstruction/' in line:
+            if 'http://www.michaeldebellis.com/streamforge_data_catalog/' in line:
                 print(f"[Line {i}]: {line.strip()}")
 
 # Given the last part of an IRI will return the full IRI string

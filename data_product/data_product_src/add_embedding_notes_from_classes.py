@@ -344,7 +344,7 @@ def add_embedding_notes_from_classes(
 # python add_embedding_notes_from_classes.py streamforge_data_catalog_V1.ttl embedding_classes.txt
 #
 # 2.2: Insert mode
-# python add_embedding_notes_from_classes.py streamforge_data_catalog_V1.ttl embedding_classes.txt --insert
+# python add_embedding_notes_from_classes.py streamforge_data_catalog_V1_w_reasoning.ttl embedding_classes.txt --insert
 #
 # That will write a new ontology file based on the input filename:
 # If the input file is streamforge_data_catalog_V1.ttl the output file will be:

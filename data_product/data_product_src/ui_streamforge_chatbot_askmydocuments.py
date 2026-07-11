@@ -235,6 +235,141 @@ def local_name(uri_or_literal: str) -> str:
     return text
 
 
+def sparql_iri(value: str) -> str:
+    """Return a full IRI in SPARQL syntax, or an empty string if it is not an IRI."""
+    text = str(value or "").strip()
+    if not text:
+        return ""
+
+    if text.startswith("<") and text.endswith(">"):
+        text = text[1:-1].strip()
+
+    if not re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", text):
+        return ""
+
+    # The values originate in AllegroGraph query bindings. Reject characters
+    # that cannot safely appear here rather than generating malformed SPARQL.
+    if any(character in text for character in '<>"{}|^`\\'):
+        return ""
+
+    return f"<{text}>"
+
+
+def build_gruff_exploration_query(trace_rows: List[Dict[str, str]]) -> str:
+    """Build a deterministic CONSTRUCT query for the selected domain objects."""
+    domain_objects: List[str] = []
+    seen_objects = set()
+
+    for row in trace_rows:
+        vdb_id = sparql_iri(row.get("Vector ID", ""))
+        domain_object = sparql_iri(row.get("Domain Object", ""))
+
+        # The first query uses the vector IRI as a last-resort fallback when it
+        # cannot resolve the original RDF subject. Do not expose those vector
+        # objects in the user-facing Gruff graph.
+        if not domain_object or domain_object == vdb_id:
+            continue
+
+        if domain_object not in seen_objects:
+            domain_objects.append(domain_object)
+            seen_objects.add(domain_object)
+
+    if not domain_objects:
+        return ""
+
+    values_block = "\n".join(f"    {domain_object}" for domain_object in domain_objects)
+
+    return f"""\
+PREFIX dp: <https://www.michaeldebellis.com/dp/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+# This query makes no OpenAI call. The vector search has already selected the
+# domain objects; only those objects and a small deterministic neighborhood are
+# returned to Gruff.
+CONSTRUCT {{
+  # Labels and types of the selected domain objects.
+  ?selectedObject ?selectedLabelPredicate ?selectedLabel .
+  ?selectedObject rdf:type ?selectedType .
+
+  # Any direct RDF relationship between two objects selected by the vector search.
+  # This preserves relationships such as is_downstream_of or applies_to_activity.
+  ?selectedObject ?connectingPredicate ?connectedSelectedObject .
+
+  # One-hop downstream neighborhood.
+  ?selectedObject dp:is_downstream_of ?downstreamObject .
+  ?downstreamObject ?downstreamLabelPredicate ?downstreamLabel .
+  ?downstreamObject rdf:type ?downstreamType .
+
+  # One-hop upstream neighborhood.
+  ?upstreamObject dp:is_downstream_of ?selectedObject .
+  ?upstreamObject ?upstreamLabelPredicate ?upstreamLabel .
+  ?upstreamObject rdf:type ?upstreamType .
+}}
+WHERE {{
+  VALUES ?selectedObject {{
+{values_block}
+  }}
+
+  OPTIONAL {{
+    VALUES ?selectedLabelPredicate {{ rdfs:label skos:prefLabel dcterms:title }}
+    ?selectedObject ?selectedLabelPredicate ?selectedLabel .
+  }}
+
+  OPTIONAL {{
+    ?selectedObject rdf:type ?selectedType .
+    FILTER(?selectedType NOT IN (owl:NamedIndividual))
+  }}
+
+  # Explicitly include links among the objects returned by the vector search.
+  # A CONSTRUCT query guarantees that Gruff receives these relationship triples.
+  OPTIONAL {{
+    VALUES ?connectedSelectedObject {{
+{values_block}
+    }}
+    ?selectedObject ?connectingPredicate ?connectedSelectedObject .
+    FILTER(?connectingPredicate NOT IN (
+      rdf:type,
+      rdfs:label,
+      skos:prefLabel,
+      dcterms:title
+    ))
+  }}
+
+  OPTIONAL {{
+    ?selectedObject dp:is_downstream_of ?downstreamObject .
+
+    OPTIONAL {{
+      VALUES ?downstreamLabelPredicate {{ rdfs:label skos:prefLabel dcterms:title }}
+      ?downstreamObject ?downstreamLabelPredicate ?downstreamLabel .
+    }}
+
+    OPTIONAL {{
+      ?downstreamObject rdf:type ?downstreamType .
+      FILTER(?downstreamType NOT IN (owl:NamedIndividual))
+    }}
+  }}
+
+  OPTIONAL {{
+    ?upstreamObject dp:is_downstream_of ?selectedObject .
+
+    OPTIONAL {{
+      VALUES ?upstreamLabelPredicate {{ rdfs:label skos:prefLabel dcterms:title }}
+      ?upstreamObject ?upstreamLabelPredicate ?upstreamLabel .
+    }}
+
+    OPTIONAL {{
+      ?upstreamObject rdf:type ?upstreamType .
+      FILTER(?upstreamType NOT IN (owl:NamedIndividual))
+    }}
+  }}
+}}
+"""
+
+
 def copy_to_clipboard(text: str) -> None:
     """Copy text to clipboard when pyperclip is available."""
     try:
@@ -291,6 +426,7 @@ def do_query(query_string: str) -> Tuple[str, List[Dict[str, str]]]:
 def init_state() -> None:
     defaults = {
         "last_query": "",
+        "gruff_query": "",
         "answer": "",
         "trace_rows": [],
     }
@@ -302,7 +438,7 @@ def init_state() -> None:
 init_state()
 
 st.title(APP_TITLE)
-st.caption("Graph RAG with llm:askMyDocuments plus citation-to-domain-object tracing (v2)")
+st.caption("Graph RAG with one-time LLM retrieval plus deterministic Gruff exploration (v4)")
 
 col1, col2 = st.columns(2)
 
@@ -346,6 +482,7 @@ with col1:
             vector_threshold,
         )
         st.session_state.last_query = query_string
+        st.session_state.gruff_query = ""
         answer, trace_rows = do_query(query_string)
         st.session_state.answer = answer
         st.session_state.trace_rows = trace_rows
@@ -370,15 +507,38 @@ with col2:
     st.subheader("SPARQL Sent to AllegroGraph")
 
     st.text_area(
-        "Copied to clipboard after each query:",
+        "The LLM/vector query is copied to the clipboard after each Ask:",
         value=st.session_state.last_query,
-        height=620,
-        placeholder="The generated SPARQL query will appear here and will also be copied to the clipboard.",
+        height=330,
+        placeholder="The generated llm:askMyDocuments query will appear here.",
     )
 
-    if st.button("Copy SPARQL Again"):
+    if st.button("Copy LLM SPARQL Again"):
         if st.session_state.last_query:
             copy_to_clipboard(st.session_state.last_query)
+
+    st.subheader("Gruff Graph Query")
+    st.caption("Generated from the resolved domain objects; vector nodes are omitted and no second OpenAI call is made.")
+
+    if st.button(
+        "Generate and Copy Gruff Graph Query",
+        disabled=not bool(st.session_state.trace_rows),
+    ):
+        gruff_query = build_gruff_exploration_query(st.session_state.trace_rows)
+        st.session_state.gruff_query = gruff_query
+        if gruff_query:
+            copy_to_clipboard(gruff_query)
+
+    st.text_area(
+        "Paste this deterministic CONSTRUCT query into Gruff:",
+        value=st.session_state.gruff_query,
+        height=390,
+        placeholder="Ask a question, then select Generate and Copy Gruff Query.",
+    )
+
+    if st.button("Copy Gruff Query Again"):
+        if st.session_state.gruff_query:
+            copy_to_clipboard(st.session_state.gruff_query)
 
 st.page_link(GRUFF_URL, label="Open Gruff", icon=None)
 st.page_link(HELP_URL, label="Project Repository", icon=None)

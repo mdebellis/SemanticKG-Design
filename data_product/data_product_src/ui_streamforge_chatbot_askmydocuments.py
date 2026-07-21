@@ -39,6 +39,18 @@ VECTOR_REPO = "streamforge_data_catalog"
 
 DEFAULT_NUM_VECTOR_RESULTS = 4
 DEFAULT_VECTOR_THRESHOLD = 0.75
+MAX_GRUFF_DOMAIN_OBJECTS = 10
+STREAMFORGE_ASSISTANT_INSTRUCTIONS = """\
+You are a helpful member of the StreamForge Data Catalog team.
+
+Answer as if you are helping an internal StreamForge user understand the data catalog.
+Use a practical, catalog-team voice rather than a generic RAG assistant voice.
+
+Use only the retrieved catalog evidence when making factual claims about StreamForge.
+If the retrieved evidence is incomplete, say what you can infer and what would need to be checked.
+Mention relevant data products, annotations, policies, skills, teams, datasets, or interfaces when they appear in the retrieved evidence.
+Keep the answer concise but useful.
+"""
 
 PREFIXES = """\
 PREFIX llm: <http://franz.com/ns/allegrograph/8.0.0/llm/>
@@ -75,33 +87,16 @@ WHERE {
   (?response ?score ?vdbId ?citedText)
     llm:askMyDocuments (?query ${vector_repo} ${num_vector_results} ${vector_threshold}) .
 
-  # Direct vector metadata trace. This works when the vector-store metadata
-  # records the original RDF subject. It did not fire in the first test run,
-  # but leaving it here is harmless and useful if AG exposes this metadata.
-  OPTIONAL { ?vdbId vdbprop:id ?vdbDomainObject . }
+  # Trace the vector citation directly back to the RDF subject that was embedded.
+  # Keep this mandatory so we do not accidentally range over unrelated VDB objects.
+  ?vdbId vdbprop:id ?domainObject .
 
-  # Prefer vector-store predicate/text metadata when available.
-  OPTIONAL { ?vdbId vdbprop:pred ?vdbPredicate . }
-  OPTIONAL { ?vdbId vdbprop:text ?embeddedText . }
+  # Vector metadata. The embedded text is stored at vdb:text,
+  # i.e., http://franz.com/vdb/gen/text.
+  OPTIONAL { ?vdbId vdbprop:pred ?matchedPredicate . }
+  OPTIONAL { ?vdbId vdb:text ?embeddedText . }
 
-  # Main StreamForge trace. Do NOT use ?domainObject in this pattern before it is
-  # bound; otherwise the fallback accidentally asks whether the vdb citation IRI
-  # itself has docs:chunk_text or dp:embedding_note. Instead, find the graph
-  # subject whose embedded literal matches the cited text, then bind that subject
-  # as the domain object.
-  OPTIONAL {
-    VALUES ?graphPredicate { docs:chunk_text dp:embedding_note }
-    ?graphDomainObject ?graphPredicate ?textFromGraph .
-    FILTER(
-      STR(?textFromGraph) = STR(?citedText) ||
-      CONTAINS(STR(?textFromGraph), STR(?citedText)) ||
-      CONTAINS(STR(?citedText), STR(?textFromGraph))
-    )
-  }
-
-  BIND(COALESCE(?vdbDomainObject, ?graphDomainObject, ?vdbId) AS ?domainObject)
-  BIND(COALESCE(?vdbPredicate, ?graphPredicate) AS ?matchedPredicate)
-  BIND(COALESCE(?embeddedText, ?textFromGraph, ?citedText) AS ?displayEmbeddedText)
+  BIND(COALESCE(?embeddedText, ?citedText) AS ?displayEmbeddedText)
 
   # Useful labels and types for the trace table.
   OPTIONAL {
@@ -120,6 +115,16 @@ def clean_question(text: str) -> str:
     """Normalize whitespace in user input."""
     return text.replace("\n", " ").replace("\r", " ").replace("\t", " ").strip()
 
+def build_streamforge_prompt(user_question: str) -> str:
+    """Wrap the user's question with StreamForge assistant instructions."""
+    question = clean_question(user_question)
+
+    return f"""\
+{STREAMFORGE_ASSISTANT_INSTRUCTIONS}
+
+User question:
+{question}
+"""
 
 def sparql_string_literal(text: str) -> str:
     """Return a SPARQL-safe string literal."""
@@ -133,6 +138,17 @@ def sparql_string_literal(text: str) -> str:
     )
     return f'"{escaped}"'
 
+REDACTED_OPENAI_PREFIX = """\
+# OpenAI API key removed for security.
+# To run this query manually, replace the masked value below with your actual key,
+# or delete this PREFIX if your AllegroGraph repository already has the key configured.
+PREFIX franzOption_openaiApiKey: <franz:REPLACE_WITH_OPENAI_API_KEY>
+"""
+
+def redact_openai_key(query_string: str) -> str:
+    """Return a display-safe version of a SPARQL query with the OpenAI key removed."""
+    pattern = r"(?m)^PREFIX\s+franzOption_openaiApiKey:\s+<franz:[^>\r\n]+>\s*$"
+    return re.sub(pattern, REDACTED_OPENAI_PREFIX.rstrip(), query_string)
 
 def franz_option_openai_key_prefix() -> str:
     """
@@ -177,10 +193,12 @@ def build_query(
     if not question:
         return ""
 
+    prompt = build_streamforge_prompt(question)
+
     return ASK_MY_DOCUMENTS_QUERY_TEMPLATE.substitute(
         openai_prefix=franz_option_openai_key_prefix(),
         prefixes=PREFIXES,
-        question=sparql_string_literal(question),
+        question=sparql_string_literal(prompt),
         vector_repo=sparql_string_literal(vector_repo),
         num_vector_results=int(num_vector_results),
         vector_threshold=float(vector_threshold),
@@ -264,15 +282,16 @@ def build_gruff_exploration_query(trace_rows: List[Dict[str, str]]) -> str:
         vdb_id = sparql_iri(row.get("Vector ID", ""))
         domain_object = sparql_iri(row.get("Domain Object", ""))
 
-        # The first query uses the vector IRI as a last-resort fallback when it
-        # cannot resolve the original RDF subject. Do not expose those vector
-        # objects in the user-facing Gruff graph.
+        # Safety check: do not expose vector objects in the user-facing Gruff graph.
         if not domain_object or domain_object == vdb_id:
             continue
 
         if domain_object not in seen_objects:
             domain_objects.append(domain_object)
             seen_objects.add(domain_object)
+
+        if len(domain_objects) >= MAX_GRUFF_DOMAIN_OBJECTS:
+            break
 
     if not domain_objects:
         return ""
@@ -379,13 +398,12 @@ def copy_to_clipboard(text: str) -> None:
         # displayed in the UI for manual copying.
         pass
 
-
-def do_query(query_string: str) -> Tuple[str, List[Dict[str, str]]]:
+def do_query(query_string: str, clipboard_text: str = "") -> Tuple[str, List[Dict[str, str]]]:
     """Run the SPARQL query and return the answer plus trace rows."""
     if not query_string:
         return "", []
 
-    copy_to_clipboard(query_string)
+    copy_to_clipboard(clipboard_text or redact_openai_key(query_string))
 
     tuple_query = conn.prepareTupleQuery(QueryLanguage.SPARQL, query_string)
     result = tuple_query.evaluate()
@@ -438,7 +456,7 @@ def init_state() -> None:
 init_state()
 
 st.title(APP_TITLE)
-st.caption("Graph RAG with one-time LLM retrieval plus deterministic Gruff exploration (v4)")
+st.caption("Graph RAG with one-time LLM retrieval plus deterministic Gruff exploration")
 
 col1, col2 = st.columns(2)
 
@@ -481,9 +499,11 @@ with col1:
             num_vector_results,
             vector_threshold,
         )
-        st.session_state.last_query = query_string
+        safe_query_string = redact_openai_key(query_string)
+
+        st.session_state.last_query = safe_query_string
         st.session_state.gruff_query = ""
-        answer, trace_rows = do_query(query_string)
+        answer, trace_rows = do_query(query_string, clipboard_text=safe_query_string)
         st.session_state.answer = answer
         st.session_state.trace_rows = trace_rows
 
@@ -505,9 +525,10 @@ with col1:
 
 with col2:
     st.subheader("SPARQL Sent to AllegroGraph")
+    st.caption("The OpenAI key is used only for execution. The displayed query redacts the key for safe copy/paste.")
 
     st.text_area(
-        "The LLM/vector query is copied to the clipboard after each Ask:",
+        label="The redacted LLM/vector query is copied to the clipboard after each Ask:",
         value=st.session_state.last_query,
         height=330,
         placeholder="The generated llm:askMyDocuments query will appear here.",

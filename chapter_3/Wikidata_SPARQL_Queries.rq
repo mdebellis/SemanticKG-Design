@@ -7,7 +7,7 @@ PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX schema: <http://schema.org/>
 
 # Listing 3-15. SPARQL Query to Find People in Wikidata Who Were Born in NY City
-#Humans born in New York City
+# Humans born in New York City
 SELECT DISTINCT ?item ?itemLabel ?itemDescription ?sitelinks
 WHERE {?item wdt:P31 wd:Q5;            # Any instance of a human
              wdt:P19/wdt:P131* wd:Q60; # Who was born in any value (eg. a hospital)

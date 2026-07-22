@@ -1,3 +1,4 @@
+# Listing 3-23 The Employee and Employee Contact SHACL Shape.
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh:    <http://www.w3.org/ns/shacl#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -45,6 +46,12 @@
         sh:minCount 1 ;
         sh:message "Each employee must have either an email or a phone number." ;] ] ) ;
   sh:message "Each employee must have either an email or a phone number." .
+
+# Listing 3-24 SPARQL Code to Match the Graph of the Employee Shape.
+PREFIX : <https://michaeldebellis.com/people/> 
+SELECT *
+WHERE {:Employee_Shape ?p ?o.
+?o ?p1 ?o2.}
 
 
 

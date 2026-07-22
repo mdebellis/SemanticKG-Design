@@ -65,3 +65,15 @@ SELECT ?item ?itemLabel ?itemImage ?value ?valueLabel ?valueImage ?edgeLabel WHE
 # with: 
 # BIND(wd:QXXXXXX AS ?item)  # Your new item here
 # 5. Run the revised query, and view the graph.
+
+# Listing 3-21. SPARQL Query to Retrieve Any Person with No Social Relations
+SELECT ?person 
+WHERE {?person rdf:type :Person.
+FILTER NOT EXISTS {?person :has_social_relationship ?otherPerson.}}
+
+# Listing 3-22. SPARQL Query to Retrieve Each Person, Count and List their Number of Social Relations
+SELECT ?person (COUNT(?other) AS ?numRelationships)
+WHERE {?person a :Person .
+  OPTIONAL {?person :has_social_relationship ?other.}}
+GROUP BY ?person
+ORDER BY  ?numRelationships

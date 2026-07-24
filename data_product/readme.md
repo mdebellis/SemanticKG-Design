@@ -6,6 +6,8 @@ The example is is based on a hypothetical video streaming company called StreamF
 
 The Semantic Knowledge Graph is here: https://github.com/mdebellis/SemanticKG-Design/blob/main/data_product/knowledge_graph/streamforge_data_catalog_V1.ttl
 
+For these chapters I created a small demo data catalog using DCAT. I also modeled concepts from Domain Driven Design and Data Mesh such as Bounded Contexts and Context Maps. Finally, I created around 40 example documents for a fictitious company called StreamForge that is an online platform for people to host videos. Similar to Dehgani's Daff example but for video rather than audio. There is also a readme file for most of the top level directories. Finally, there is a Wiki for this repository that has additional exercises, a glossary, and other useful info: [Semantic Knowledge Graph Wiki](https://github.com/mdebellis/SemanticKG-Design/wiki)
+
 ---
 
 ## Ontologies Used

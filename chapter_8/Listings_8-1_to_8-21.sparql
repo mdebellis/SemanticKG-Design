@@ -34,7 +34,7 @@ TO   GRAPH <https://example.com/graphs/Published_Graph>
 ADD GRAPH <https://example.com/graphs/Source_A_Graph>
 TO  GRAPH <https://example.com/graphs/Integrated_View>
 
-#Listing 8-6 Move only selected triples (pattern-based)
+# Listing 8-6 Move only selected triples (pattern-based)
 INSERT {GRAPH <https://example.com/graphs/Validated_Graph> 
    { ?observation a :Climate_Observation ;
                  :has_measurement_value ?value .}}
@@ -131,7 +131,7 @@ WHERE {
 CONSTRUCT {:Albert_Einstein ?p ?o .}
 WHERE {:Albert_Einstein ?p ?o .}
 
-$ Listing 8-15. Using CONSTRUCT returns triples rather than tables
+# Listing 8-15. Using CONSTRUCT returns triples rather than tables
 CONSTRUCT { :Albert_Einstein ?p ?o .
   	      ?s ?p2 :Albert_Einstein .}
 WHERE {

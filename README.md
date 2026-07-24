@@ -3,7 +3,9 @@ For ontology, code and other supporting examples and tools for the book: Designi
 # Ontologies
 Ontologies can be stored in two types of directories:
 1. In a special directory. There are two of these: [Ontologies](https://github.com/mdebellis/SemanticKG-Design/tree/main/ontologies) and [data_product/knowledge_graph](https://github.com/mdebellis/SemanticKG-Design/tree/main/data_product/knowledge_graph) The ontologies directory is for ontologies such as the people_ontology that are used in many chapters. The data_product/knowledge_graph contains the Data Product Knowledge graph which is referenced in chapters 12 and 14.
-2. In specific chapter directories. To make thing easier for users I sometimes have duplicates of an ontlogy stored both in the specific directory for the chapter as well as in one of the directories above. This is also true for a small number of SPARQL files. The idea is that the user will already have navigated to that directory when reading the chapter so that when they go to open a new file, chances are good they will be in that directory so having a copy there makes it easier for them to find the file. 
+2. In specific chapter directories. To make thing easier for users I sometimes have duplicates of an ontlogy stored both in the specific directory for the chapter as well as in one of the directories above. This is also true for a small number of SPARQL files. The idea is that the user will already have navigated to that directory when reading the chapter so that when they go to open a new file, chances are good they will be in that directory so having a copy there makes it easier for them to find the file.
+# Wiki
+there is a Wiki for this repository that has additional exercises, a glossary, and other useful info: [Semantic Knowledge Graph Wiki](https://github.com/mdebellis/SemanticKG-Design/wiki)
 
 ## License
 This work is licensed under the [Creative Commons Attribution 4.0 International (CC-BY-4.0)](https://creativecommons.org/licenses/by/4.0/) license. 

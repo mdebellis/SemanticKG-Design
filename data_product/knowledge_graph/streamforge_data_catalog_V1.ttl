@@ -23,7 +23,7 @@
 @prefix keyword: <http://franz.com/ns/keyword#> .
 @prefix vdbprop: <http://franz.com/vdb/prop/> .
 @prefix vdbcluster: <http://franz.com/vdb/cluster/> .
-@base <https://www.michaeldebellis.com/streamforge> .
+@base <https://www.michaeldebellis.com/streamforge#> .
 
 <https://www.michaeldebellis.com/streamforge> rdf:type owl:Ontology ;
                                                dcterms:created "2025-12-01T00:00:00Z"^^xsd:dateTime ;
@@ -1660,6 +1660,11 @@ dp:related_policy rdf:type owl:ObjectProperty ;
                   rdfs:domain dp:Governance_Annotation ;
                   rdfs:range <http://www.w3.org/ns/odrl/2/Policy> ;
                   rdfs:label "related policy"@en .
+
+
+###  https://www.michaeldebellis.com/dp/requires
+dp:requires rdf:type owl:ObjectProperty ;
+            rdfs:label "requires"@en .
 
 
 ###  https://www.michaeldebellis.com/dp/requires_review_by
@@ -5127,7 +5132,6 @@ dp:attr_sf_engagement_owner rdf:type owl:NamedIndividual ;
                                                                                        <http://www.w3.org/ns/prov#Activity> ;
                                                                               <http://www.w3.org/ns/prov#wasAssociatedWith> <https://www.michaeldebellis.com/streamforge/Security_Engineer_1> ;
                                                                               dp:is_upstream_of <https://www.michaeldebellis.com/streamforge/Risk_Annotation_1001> ;
-                                                                              dp:uses_dataset <https://www.michaeldebellis.com/streamforge/Risk_Annotation_1001> ;
                                                                               rdfs:label "Create Annotation 1001 Activity"@en ;
                                                                               <http://www.w3.org/ns/prov#endedAtTime> "2026-04-21T10:15:00"^^xsd:dateTime .
 
@@ -5900,6 +5904,7 @@ In StreamForge documentation, Maya is referenced in examples that explain metric
                                                                    dp:has_status dp:Active ;
                                                                    dp:is_downstream_of <https://www.michaeldebellis.com/streamforge/Create_Annotation_1001_Activity> ;
                                                                    dp:related_policy <https://www.michaeldebellis.com/streamforge/GDPR_Review_Policy> ;
+                                                                   dp:requires dp:GDPR_Skill ;
                                                                    dp:requires_review_by <https://www.michaeldebellis.com/streamforge/Security_Team> ;
                                                                    <http://www.w3.org/ns/prov#generatedAtTime> "2026-04-21T10:15:00"^^xsd:dateTime ;
                                                                    rdfs:label "GDPR Risk Flag for Customer Profile Data Product"@en ;

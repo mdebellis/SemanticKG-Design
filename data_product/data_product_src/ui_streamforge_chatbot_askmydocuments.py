@@ -318,6 +318,11 @@ CONSTRUCT {{
   # This preserves relationships such as is_downstream_of or applies_to_activity.
   ?selectedObject ?connectingPredicate ?connectedSelectedObject .
 
+  # Additional high-value relationships when present.
+  ?selectedObject ?explorationPredicate ?explorationObject .
+  ?explorationObject ?explorationLabelPredicate ?explorationLabel .
+  ?explorationObject rdf:type ?explorationType .
+
   # One-hop downstream neighborhood.
   ?selectedObject dp:is_downstream_of ?downstreamObject .
   ?downstreamObject ?downstreamLabelPredicate ?downstreamLabel .
@@ -341,6 +346,29 @@ WHERE {{
   OPTIONAL {{
     ?selectedObject rdf:type ?selectedType .
     FILTER(?selectedType NOT IN (owl:NamedIndividual))
+  }}
+
+  # These predicates are alternatives. A selected object may have any number
+  # of them, including none, without causing the query to fail.
+  OPTIONAL {{
+    VALUES ?explorationPredicate {{
+      dp:geo_contains
+      dp:changes
+      dp:has_access_type
+      dp:has_port
+      dp:in_bounded_context
+    }}
+    ?selectedObject ?explorationPredicate ?explorationObject .
+
+    OPTIONAL {{
+      VALUES ?explorationLabelPredicate {{ rdfs:label skos:prefLabel dcterms:title }}
+      ?explorationObject ?explorationLabelPredicate ?explorationLabel .
+    }}
+
+    OPTIONAL {{
+      ?explorationObject rdf:type ?explorationType .
+      FILTER(?explorationType NOT IN (owl:NamedIndividual))
+    }}
   }}
 
   # Explicitly include links among the objects returned by the vector search.

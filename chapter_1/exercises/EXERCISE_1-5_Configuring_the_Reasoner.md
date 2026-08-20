@@ -84,7 +84,7 @@ The View below the class hierarchy should display several individuals that are i
 
 Your Protégé interface should look similar to the following:
 
-*[Screenshot: People Ontology with Mary Doe selected in the Individuals by class Tab]*
+<img width="2006" height="1778" alt="Chapter1_People_Ontology" src="https://github.com/user-attachments/assets/504309fc-e074-473b-be35-fa588887c2f7" />
 
 Notice that several values are highlighted in yellow.
 

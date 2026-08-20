@@ -53,25 +53,24 @@ Move the blue outline around within the `DL Query` tab.
 
 As you move it, Protégé changes the outline to show where the new view will be placed.
 
-I recommend positioning `Snap SPARQL Query` so that it appears alongside the existing `DL Query` view.
+I recommend positioning `Snap SPARQL Query` so that it appears alongside the existing `DL Query` view like this:
 
-Your screen should look similar to the following:
-
-*[Screenshot: DL Query tab with Snap SPARQL Query view]*
+<img width="1919" height="1019" alt="PositionSnapSPARQL" src="https://github.com/user-attachments/assets/c5dbeb5b-610c-413a-9428-64dfe298b0c2" />
 
 **When the blue outline is positioned where you want the new view, click the mouse.**
+The Snap SPARQL view should now appear as part of the `DL Query` tab:
 
-The Snap SPARQL view should now appear as part of the `DL Query` tab.
+<img width="3838" height="1402" alt="SnapSPARQLPlugin" src="https://github.com/user-attachments/assets/3fce743b-f6dc-4a53-aba7-ba70e66c40fc" />
 
 > 💡 **Tip:** Positioning a new view can be slightly confusing the first time. If it ends up in the wrong place, simply remove it and try again.
 
 ## Step 5: Remove a View if Necessary
 
-If you add a view in the wrong location:
+When you first position a new view it can be a bit tricky, the blue outline responds to fairly small mouse movements so that you can add the view precisely where you want to. But the first time you use it you may inadvertently click before you mean to. If that happens (or in general if you ever want to remove a view):
 
 **Click the `X` in the upper-right corner of that view.**
 
-You can then repeat the previous steps and add it again.
+You can then repeat the previous steps and add it again. After a couple tries it is easy to position the blue outline where you want it. 
 
 ## Restoring a Tab to Its Default Layout
 

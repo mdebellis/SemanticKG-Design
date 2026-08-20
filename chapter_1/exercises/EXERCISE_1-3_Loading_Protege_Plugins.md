@@ -23,10 +23,6 @@ If the plugin window does not appear:
 
 Protégé should display a window listing installed and available plugins.
 
-Your screen should look similar to the following:
-
-<img width="609" height="528" alt="Figure_1-2" src="https://github.com/user-attachments/assets/03be0fcd-55c9-4c81-8fde-55adcafc4594" />
-
 ## Step 2: Select the Required Plugins
 
 In the plugin window, locate the following plugins:
@@ -38,7 +34,9 @@ In the plugin window, locate the following plugins:
 
 **Select the checkbox next to `Snap SPARQL`.**
 
-The plugin window should now show both plugins selected for installation.
+Your screen should look similar to the following:
+
+<img width="609" height="528" alt="Figure_1-2" src="https://github.com/user-attachments/assets/03be0fcd-55c9-4c81-8fde-55adcafc4594" />
 
 ## Step 3: Install the Plugins
 

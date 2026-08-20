@@ -20,7 +20,7 @@ For this exercise, however, you will create a new repository for the People Onto
 
 ## Step 2: Create the People Repository
 
-Locate the large button in the upper-right area of the page.
+Locate the large button in the upper-right area of the page labelled **+ CREATE REPOSITORY**
 
 **Click `+ CREATE REPOSITORY`.**
 
@@ -50,7 +50,10 @@ The page should now display a heading similar to:
 
 `Choose action`
 
-with several available operations.
+with several available operations. It should look similar to the screen print below.
+
+<img width="1124" height="773" alt="Add_Data_Agraph" src="https://github.com/user-attachments/assets/7a55f43f-b3ee-4237-8981-141004203b20" />
+
 
 ## Step 4: Select RDF File Import
 

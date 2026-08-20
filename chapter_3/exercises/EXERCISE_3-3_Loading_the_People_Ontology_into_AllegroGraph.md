@@ -14,7 +14,7 @@ If you have not already downloaded it, you can get it from the book's GitHub rep
 
 You should arrive at the main AllegroGraph page. Depending on the environment you are using, you may see several example repositories that are already available.
 
-The AllegroGraph Documentation includes additional exercises that use these example repositories and are worth exploring separately.
+The [AllegroGraph Documentation](https://franz.com/agraph/support/documentation/index.html) includes additional exercises that use these example repositories and are worth exploring separately.
 
 For this exercise, however, you will create a new repository for the People Ontology.
 

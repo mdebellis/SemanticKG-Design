@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from typing import Dict, List, Optional, Set
-
 from rdflib import Graph, Namespace, URIRef, Literal
 from rdflib.namespace import RDF, RDFS, OWL
 

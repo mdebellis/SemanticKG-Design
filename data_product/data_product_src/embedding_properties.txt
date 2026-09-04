@@ -56,7 +56,7 @@ dp:uses_technology
 dp:workload_ratio
 odrl:assignee
 odrl:assigner
-odrl:hasPermission
+odrl:permission
 odrl:prohibition
 odrl:target
 prov:generated

@@ -63,14 +63,14 @@ label[data-testid="stWidgetLabel"] p {
 }
 
 /* The question entry area. */
-textarea[aria-label="Enter question here:"] {
+textarea[aria-label="Enter prompt here:"] {
     font-size: 22px !important;
     line-height: 1.4 !important;
 }
 
 /* SPARQL/code areas: large enough to read while retaining useful context. */
 textarea[aria-label="The redacted LLM/vector query is copied to the clipboard after each Ask:"],
-textarea[aria-label="Paste this deterministic CONSTRUCT query into Gruff:"] {
+textarea[aria-label="Paste this CONSTRUCT query into Gruff:"] {
     font-size: 19px !important;
     line-height: 1.35 !important;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
@@ -398,44 +398,27 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 # domain objects; only those objects and a small deterministic neighborhood are
 # returned to Gruff.
 CONSTRUCT {{
-  # Labels and types of the selected domain objects.
-  ?selectedObject ?selectedLabelPredicate ?selectedLabel .
+  # Types of the selected domain objects.
   ?selectedObject rdf:type ?selectedType .
-
   # Any direct RDF relationship between two objects selected by the vector search.
   # This preserves relationships such as is_downstream_of or applies_to_activity.
   ?selectedObject ?connectingPredicate ?connectedSelectedObject .
-
   # Additional high-value relationships when present.
-  ?selectedObject ?explorationPredicate ?explorationObject .
-  ?explorationObject ?explorationLabelPredicate ?explorationLabel .
   ?explorationObject rdf:type ?explorationType .
-
   # One-hop downstream neighborhood.
   ?selectedObject dp:is_downstream_of ?downstreamObject .
-  ?downstreamObject ?downstreamLabelPredicate ?downstreamLabel .
   ?downstreamObject rdf:type ?downstreamType .
-
   # One-hop upstream neighborhood.
   ?upstreamObject dp:is_downstream_of ?selectedObject .
-  ?upstreamObject ?upstreamLabelPredicate ?upstreamLabel .
-  ?upstreamObject rdf:type ?upstreamType .
-}}
+  ?upstreamObject rdf:type ?upstreamType .}}
 WHERE {{
   VALUES ?selectedObject {{
 {values_block}
   }}
-
-  OPTIONAL {{
-    VALUES ?selectedLabelPredicate {{ rdfs:label skos:prefLabel dcterms:title }}
-    ?selectedObject ?selectedLabelPredicate ?selectedLabel .
-  }}
-
   OPTIONAL {{
     ?selectedObject rdf:type ?selectedType .
     FILTER(?selectedType NOT IN (owl:NamedIndividual))
   }}
-
   # These predicates are alternatives. A selected object may have any number
   # of them, including none, without causing the query to fail.
   OPTIONAL {{
@@ -447,12 +430,6 @@ WHERE {{
       dp:in_bounded_context
     }}
     ?selectedObject ?explorationPredicate ?explorationObject .
-
-    OPTIONAL {{
-      VALUES ?explorationLabelPredicate {{ rdfs:label skos:prefLabel dcterms:title }}
-      ?explorationObject ?explorationLabelPredicate ?explorationLabel .
-    }}
-
     OPTIONAL {{
       ?explorationObject rdf:type ?explorationType .
       FILTER(?explorationType NOT IN (owl:NamedIndividual))
@@ -466,21 +443,11 @@ WHERE {{
 {values_block}
     }}
     ?selectedObject ?connectingPredicate ?connectedSelectedObject .
-    FILTER(?connectingPredicate NOT IN (
-      rdf:type,
-      rdfs:label,
-      skos:prefLabel,
-      dcterms:title
-    ))
+    FILTER(?connectingPredicate NOT IN (rdf:type))
   }}
 
   OPTIONAL {{
     ?selectedObject dp:is_downstream_of ?downstreamObject .
-
-    OPTIONAL {{
-      VALUES ?downstreamLabelPredicate {{ rdfs:label skos:prefLabel dcterms:title }}
-      ?downstreamObject ?downstreamLabelPredicate ?downstreamLabel .
-    }}
 
     OPTIONAL {{
       ?downstreamObject rdf:type ?downstreamType .
@@ -490,11 +457,6 @@ WHERE {{
 
   OPTIONAL {{
     ?upstreamObject dp:is_downstream_of ?selectedObject .
-
-    OPTIONAL {{
-      VALUES ?upstreamLabelPredicate {{ rdfs:label skos:prefLabel dcterms:title }}
-      ?upstreamObject ?upstreamLabelPredicate ?upstreamLabel .
-    }}
 
     OPTIONAL {{
       ?upstreamObject rdf:type ?upstreamType .
@@ -573,7 +535,7 @@ def init_state() -> None:
 init_state()
 
 st.title(APP_TITLE)
-st.caption("Graph RAG with one-time LLM retrieval plus deterministic Gruff exploration")
+st.caption("Graph RAG LLM exploration of Data Catalog with optional additional Gruff exploration")
 
 col1, col2 = st.columns(2)
 
@@ -603,7 +565,7 @@ with col1:
     )
 
     question = st.text_area(
-        "Enter question here:",
+        "Enter prompt here:",
         value="",
         placeholder="Type question here. Press Ctrl-Enter when done.",
         height=100,
@@ -668,7 +630,7 @@ with col2:
             copy_to_clipboard(gruff_query)
 
     st.text_area(
-        "Paste this deterministic CONSTRUCT query into Gruff:",
+        "Paste this CONSTRUCT query into Gruff:",
         value=st.session_state.gruff_query,
         height=390,
         placeholder="Ask a question, then select Generate and Copy Gruff Query.",

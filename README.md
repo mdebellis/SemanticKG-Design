@@ -1,4 +1,4 @@
-# Semantic Knowledge Graph Design
+# Semantic Knowledge Graph Design Book
 For ontology, code and other supporting examples and tools for the book: Designing Semantic Knowledge Graphs: A Guide to Utilizing Semantic Web Technologies for Agile Data Management. This doesn't follow typical standards where all code is under an src directory. The book has several examples of OWL, SHACL, SPARQL, SWRL, and Python. I decided to create a directory for each chapter that has code in it and place the code from that chapter into the corresponding directory. I also have an ontologies directory and a data_product directory. Note that many of the sub-directories also have their own README file, with specific details about the files in that directory. For example: [Verify Directory README](https://github.com/mdebellis/SemanticKG-Design/blob/main/tests/verify/README.md)
 # Ontologies
 Ontologies can be stored in two types of directories:

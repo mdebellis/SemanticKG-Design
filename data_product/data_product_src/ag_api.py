@@ -3,6 +3,8 @@ from franz.openrdf.vocabulary import RDF
 import os
 
 # Utilities to make and query AllegroGraph objects
+# This simplifies getting and setting data in the graph for developers who don't know Graph databases
+# It also significantly reduces the effort to port from one graph database vendor to another as all the vendor specific code is in this one file
 # Note that functions to retrieve values need to be sent a complete IRI
 # because we may be retrieving values from SKOS, Gist, or other properties
 # However functions to create objects and set values assume all new objects go in

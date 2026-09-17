@@ -1,0 +1,183 @@
+PREFIX sf:   <https://www.michaeldebellis.com/streamforge/>
+PREFIX odrl: <http://www.w3.org/ns/odrl/2/>
+
+ASK {
+    sf:Customer_Profile_Access_Policy
+        odrl:permission ?permission .
+
+    ?permission
+        odrl:assignee sf:Maya_Patel ;
+        odrl:action odrl:use ;
+        odrl:target sf:Customer_Profile_Data_Product .
+}
+
+PREFIX sf:   <https://www.michaeldebellis.com/streamforge/>
+PREFIX odrl: <http://www.w3.org/ns/odrl/2/>
+
+ASK {
+    sf:Customer_Profile_Access_Policy
+        odrl:prohibition ?prohibition .
+
+    ?prohibition
+        odrl:assignee sf:External_Data_Consultant_1 ;
+        odrl:action odrl:use ;
+        odrl:target sf:Customer_Profile_Data_Product .
+}
+
+PREFIX sf:   <https://www.michaeldebellis.com/streamforge/>
+PREFIX odrl: <http://www.w3.org/ns/odrl/2/>
+
+SELECT ?subject ?predicate ?object ?permitted
+WHERE {
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:permission ?permission .
+
+        BIND(sf:Customer_Profile_Access_Policy AS ?subject)
+        BIND(odrl:permission AS ?predicate)
+        BIND(?permission AS ?object)
+    }
+
+    UNION
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:permission ?permission .
+
+        ?permission odrl:assignee ?assignee .
+
+        BIND(?permission AS ?subject)
+        BIND(odrl:assignee AS ?predicate)
+        BIND(?assignee AS ?object)
+    }
+
+    UNION
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:permission ?permission .
+
+        ?permission odrl:action ?action .
+
+        BIND(?permission AS ?subject)
+        BIND(odrl:action AS ?predicate)
+        BIND(?action AS ?object)
+    }
+
+    UNION
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:permission ?permission .
+
+        ?permission odrl:target ?target .
+
+        BIND(?permission AS ?subject)
+        BIND(odrl:target AS ?predicate)
+        BIND(?target AS ?object)
+    }
+
+    UNION
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:permission ?permission .
+
+        ?permission odrl:assigner ?assigner .
+
+        BIND(?permission AS ?subject)
+        BIND(odrl:assigner AS ?predicate)
+        BIND(?assigner AS ?object)
+    }
+
+    BIND(
+        EXISTS {
+            ?permission
+                odrl:assignee sf:Maya_Patel ;
+                odrl:action odrl:use ;
+                odrl:target sf:Customer_Profile_Data_Product .
+        }
+        AS ?permitted
+    )
+}
+ORDER BY ?subject ?predicate
+
+PREFIX sf:   <https://www.michaeldebellis.com/streamforge/>
+PREFIX odrl: <http://www.w3.org/ns/odrl/2/>
+
+SELECT ?subject ?predicate ?object ?prohibited
+WHERE {
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:prohibition ?prohibition .
+
+        BIND(sf:Customer_Profile_Access_Policy AS ?subject)
+        BIND(odrl:prohibition AS ?predicate)
+        BIND(?prohibition AS ?object)
+    }
+
+    UNION
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:prohibition ?prohibition .
+
+        ?prohibition odrl:assignee ?assignee .
+
+        BIND(?prohibition AS ?subject)
+        BIND(odrl:assignee AS ?predicate)
+        BIND(?assignee AS ?object)
+    }
+
+    UNION
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:prohibition ?prohibition .
+
+        ?prohibition odrl:action ?action .
+
+        BIND(?prohibition AS ?subject)
+        BIND(odrl:action AS ?predicate)
+        BIND(?action AS ?object)
+    }
+
+    UNION
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:prohibition ?prohibition .
+
+        ?prohibition odrl:target ?target .
+
+        BIND(?prohibition AS ?subject)
+        BIND(odrl:target AS ?predicate)
+        BIND(?target AS ?object)
+    }
+
+    UNION
+
+    {
+        sf:Customer_Profile_Access_Policy
+            odrl:prohibition ?prohibition .
+
+        ?prohibition odrl:assigner ?assigner .
+
+        BIND(?prohibition AS ?subject)
+        BIND(odrl:assigner AS ?predicate)
+        BIND(?assigner AS ?object)
+    }
+
+    BIND(
+        EXISTS {
+            ?prohibition
+                odrl:assignee sf:External_Data_Consultant_1 ;
+                odrl:action odrl:use ;
+                odrl:target sf:Customer_Profile_Data_Product .
+        }
+        AS ?prohibited
+    )
+}
+ORDER BY ?subject ?predicate

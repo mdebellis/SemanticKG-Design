@@ -61,7 +61,8 @@ WHERE {{ :Acme_KYC_Modernization  skos:narrower ?part . BIND(:Acme_KYC_Moderniza
   {:Northwind_Claims_RAG    skos:narrower ?part . BIND(:Northwind_Claims_RAG    AS ?engagement)}}
   
 
-# Listing 12-7. Some narrower links don’t directly transform to a simple OWL relation
+# Additional query
+# Some narrower links don’t directly transform to a simple OWL relation
 # Final graph for Gruff:
 # - skos:narrower only from :Consulting_Firm
 # - everywhere else show only rdf:type, sulo:hasDirectPart, rdfs:subClassOf

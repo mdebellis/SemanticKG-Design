@@ -21,7 +21,7 @@ WHERE {?bcs dp:is_source_context_for ?sc.
         ?sc dp:has_relationship_type ?rt;
          dp:has_target_context ?bct.}
 		 
-# Listing 13-3. Intent is operationalized through products, ports, and interfaces
+# Additional query. Intent is operationalized through products, ports, and interfaces
 PREFIX dp:   <https://www.michaeldebellis.com/dp/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 # Context-map relationship as first-class object

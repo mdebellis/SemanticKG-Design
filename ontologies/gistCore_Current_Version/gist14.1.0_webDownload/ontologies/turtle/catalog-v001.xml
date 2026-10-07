@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://www.w3.org/2006/time#2016" uri="file:/C:/Users/mdebe/Documents/GitHub/Time-Ontology-With-SWRL-Rules/W3C%20Time%20With%20SWRL%20Rules%20V1.ttl"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public"/>
+</catalog>

@@ -68,36 +68,83 @@ WHERE {{ :Acme_KYC_Modernization  skos:narrower ?part . BIND(:Acme_KYC_Moderniza
 # - skos:narrower only from :Consulting_Firm
 # - everywhere else show only rdf:type, sulo:hasDirectPart, rdfs:subClassOf
 # - suppress non-: nodes (e.g., sulo classes like Collection/OrderedCollection)
-SELECT DISTINCT ?parent ?predicate ?child
+PREFIX :     <https://michaeldebellis.com/consulting_taxonomy/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX sulo: <https://w3id.org/sulo/>
+SELECT DISTINCT ?subject ?predicate ?object
 WHERE {
   {
-    :Consulting_Firm skos:narrower ?child .
-    BIND(:Consulting_Firm AS ?parent)
-    BIND(skos:narrower AS ?predicate)
+    # Consulting Firm -> top-level concepts
+    {
+      BIND(:Consulting_Firm AS ?subject)
+      BIND(skos:narrower AS ?predicate)
+    }
+    UNION
+    # Deliverable subclasses -> Deliverable
+    {
+      BIND(:Deliverable AS ?object)
+      BIND(rdfs:subClassOf AS ?predicate)
+    }
+    UNION
+    # Client instances -> Client
+    {
+      BIND(:Client AS ?object)
+      BIND(rdf:type AS ?predicate)
+    }
+    UNION
+    # Engagement instances -> Engagement
+    {
+      BIND(:Engagement AS ?object)
+      BIND(rdf:type AS ?predicate)
+    }
+    UNION
+    # Offering subclasses -> Offering
+    {
+      BIND(:Offering AS ?object)
+      BIND(rdfs:subClassOf AS ?predicate)
+    }
+    UNION
+    # Industry instances -> Industry
+    {
+      BIND(:Industry AS ?object)
+      BIND(rdf:type AS ?predicate)
+    }
+    UNION
+    # Service Line subclasses -> Service Line
+    {
+      BIND(:Service_Line AS ?object)
+      BIND(rdfs:subClassOf AS ?predicate)
+    }
+    UNION
+    # Team subclasses -> Team
+    {
+      BIND(:Team AS ?object)
+      BIND(rdfs:subClassOf AS ?predicate)
+    }
+    UNION
+    # Individual engagements -> their direct parts
+    {
+      ?subject rdf:type :Engagement .
+      BIND(sulo:hasDirectPart AS ?predicate)
+    }
   }
-  UNION
-  # superclass -> subclass
-  {
-    ?child rdfs:subClassOf ?parent .
-    BIND(rdfs:subClassOf AS ?predicate)
-  }
-  UNION
-  # engagement -> parts
-  {
-    ?parent sulo:hasDirectPart ?child .
-    BIND(sulo:hasDirectPart AS ?predicate)
-  }
-  UNION
-  # class -> instance (restrict to the instance classes used in this example)
-  {
-    ?child rdf:type ?parent .
-    FILTER (?parent IN (:Client, :Engagement))
-    BIND(rdf:type AS ?predicate)
-  }
-  # Keep only edges whose endpoints are in the consulting taxonomy namespace
-  FILTER(STRSTARTS(STR(?parent), STR(:)) && STRSTARTS(STR(?child), STR(:)))
+
+  # Retrieve the triples selected by the bindings above
+  ?subject ?predicate ?object .
+
+  # Exclude owl:Nothing
+  FILTER(?subject != owl:Nothing && ?object != owl:Nothing)
+
+  # Keep both endpoints in the consulting taxonomy namespace
+  FILTER(
+    STRSTARTS(STR(?subject), STR(:)) &&
+    STRSTARTS(STR(?object), STR(:))
+  )
 }
-ORDER BY ?predicate ?parent ?child
+ORDER BY ?predicate ?subject ?object
 
 # Additional queries, not in book for the book glossary knowledge graph
 PREFIX :     <https://www.michaeldebellis.com/glossary/>

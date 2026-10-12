@@ -134,15 +134,17 @@ WHERE {
 
   # Retrieve the triples selected by the bindings above
   ?subject ?predicate ?object .
-
-  # Exclude owl:Nothing
-  FILTER(?subject != owl:Nothing && ?object != owl:Nothing)
-
   # Keep both endpoints in the consulting taxonomy namespace
   FILTER(
+  IF(
+    isIRI(?subject) && isIRI(?object),
+    ?subject != owl:Nothing &&
+    ?object != owl:Nothing &&
     STRSTARTS(STR(?subject), STR(:)) &&
-    STRSTARTS(STR(?object), STR(:))
+    STRSTARTS(STR(?object), STR(:)),
+    false
   )
+)
 }
 ORDER BY ?predicate ?subject ?object
 

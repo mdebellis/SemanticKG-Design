@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SemanticKG-Design.iml" filepath="$PROJECT_DIR$/.idea/SemanticKG-Design.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/agraph-python.iml" filepath="$PROJECT_DIR$/.idea/agraph-python.iml" />
     </modules>
   </component>
 </project>

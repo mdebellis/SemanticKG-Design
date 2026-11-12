@@ -42,5 +42,9 @@ WHERE {?property rdfs:domain :Employee.
        ?property ?p ?o.
 FILTER(isIri(?o) && !isBlank(?o))}
 
+#This finds all the geographic containment relations
+SELECT *
+WHERE {?place1 :contains ?place2.}
+
 
 	   

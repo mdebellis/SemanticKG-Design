@@ -36,14 +36,14 @@ OPTIONAL {?person :has_age ?age}} ORDER BY ?person_label
 	
 # Listing 3-12. SPARQL Query to Retrieve People With Known Birthdays (exclude people with no birthdate)
 SELECT *
-WHERE {?person :birth_Date ?birth_day} ORDER BY ?birth_day
+WHERE {?person :birth_date ?birth_day} ORDER BY ?birth_day
 
 # Listing 3-13. List all the instances of Person. Include their age and birth day if available. 
 SELECT ?person_label ?age ?birth_day
 WHERE {?person rdf:type :Person;
                rdfs:label ?person_label.
 OPTIONAL {?person :has_age ?age}
-OPTIONAL {?person :birth_Date ?birth_day}} ORDER BY ?person_label
+OPTIONAL {?person :birth_date ?birth_day}} ORDER BY ?person_label
 
 
 
